@@ -1,0 +1,16 @@
+{
+  "files": [],
+  "compilerOptions": {
+    "outDir": "/tmp",
+    "typeRoots": ["node_modules/@types"],
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "references": [
+    { "path": "apps/mobile" },
+    { "path": "apps/web" },
+    { "path": "packages/app" },
+    { "path": "packages/ui" }
+  ]
+}
