@@ -114,20 +114,6 @@ To run a [native build](https://docs.expo.dev/develop/development-builds/introdu
 - in `apps/mobile/package.json` update script `"start": "TAMAGUI_ENV=dev expo start --dev-client"`
 - `yarn ios` or `yarn android`
 
-## Expo EAS Update
-
-[EAS update](https://docs.expo.dev/eas-update/getting-started) makes updating and publishing your app's runtime js easy.
-
-We use `expo-router` for the native side, so simply create `_layout.tsx` files inside `apps/mobile` like you would normally do with an `expo-router` project.
-
-- create an expo account and create an expo project.
-
-- add your project id to `apps/mobile/app.json` where it says `your-project-id`
-
-- ensure that the `projectId`, `slug`, and `owner` values in `apps/mobile/app.json` all have the same value as the name of your project, ie the name in `apps/mobile/package.json`
-
-![expo project id](https://github.com/tamagui/unistack/assets/2502947/8a4d3663-9eb2-4cb1-926f-0476a00ab078)
-
 ### Protecting Pages on Web
 
 We use middlewares to protect routes on the web. See `apps/web/middleware.ts`.
@@ -135,10 +121,6 @@ We use middlewares to protect routes on the web. See `apps/web/middleware.ts`.
 ### Protecting Screens on Native
 
 We use a hook to check for auth and then redirect the user to auth pages, and also not let the authenticated users see auth pages. See `apps/mobile/app/provider/auth/AuthProvider.native.ts`.
-
-## How Authorization is Handled
-
-You can use Supabase's [Row-Level Security (RLS)](https://supabase.com/docs/guides/auth/row-level-security) to handle authorization of users.
 
 ## Environment Convention
 
