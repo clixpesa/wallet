@@ -1,6 +1,8 @@
 import {
   AddressField,
   AddressSchema,
+  PhoneNumberSchema,
+  PhoneNumberField,
   BooleanCheckboxField,
   BooleanField,
   BooleanSwitchField,
@@ -46,6 +48,7 @@ export const formFields = {
    * example of how to handle more complex fields
    */
   address: createUniqueFieldSchema(AddressSchema, 'address'),
+  phone_number: createUniqueFieldSchema(PhoneNumberSchema, 'phone_number'),
 }
 
 // function createFormSchema<T extends ZodRawShape>(getData: (fields: typeof formFields) => T) {
@@ -61,6 +64,7 @@ const mapping = [
   [formFields.boolean_checkbox, BooleanCheckboxField] as const,
   [formFields.select, SelectField] as const,
   [formFields.address, AddressField] as const,
+  [formFields.phone_number, PhoneNumberField] as const,
 ] as const
 
 const FormComponent = (props: FormProps) => {

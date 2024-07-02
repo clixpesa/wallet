@@ -1,24 +1,38 @@
 import { Globe2, Search, X } from '@tamagui/lucide-icons'
 import { RovingFocusGroup } from '@tamagui/roving-focus'
+import { useTsController } from '@ts-react/form'
 import {
   getSupportedRegionCodes,
   parsePhoneNumber,
   getCountryCodeForRegionCode,
 } from 'awesome-phonenumber'
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo, useEffect, useId } from 'react'
 import type { SizeTokens } from 'tamagui'
-import { Adapt, Avatar, Image, Popover, ScrollView, Spinner, Text, View, isWeb } from 'tamagui'
+import {
+  Adapt,
+  Avatar,
+  Image,
+  Popover,
+  ScrollView,
+  Spinner,
+  Text,
+  View,
+  isWeb,
+  Theme,
+} from 'tamagui'
+import { z } from 'zod'
 
-import { Input } from './PhoneInputParts'
+import { FieldError } from '../FieldError'
+import { Input } from '../PhoneInputParts'
+import { Shake } from '../Shake'
 
-/**
- *  integrate it with zod validation
- *
- *   const isPhoneNumber = (ph: string) => parsePhoneNumber(ph)?.valid;
- *   const phoneNumberSchema = z.string().refine(isPhoneNumber, (val) => ({message: `${val} is not a valid phone number`}));
- *   const MySchema = z.object({ phone_number: phoneNumberSchema })
- *
- **/
+const isPhoneNumber = (ph: string) => parsePhoneNumber(ph)?.valid
+
+export const PhoneNumberSchema = z.object({
+  phone_number: z
+    .string()
+    .refine(isPhoneNumber, (val) => ({ message: `${val} is not a valid phone number` })),
+})
 
 interface PhoneCode {
   name: string
@@ -101,7 +115,10 @@ function RegionFilterInput(props: RegionFilterInputProps) {
       </Input>
 
       {open && (
-        <ScrollView height="100%" justifyContent={loaded ? 'flex-start' : 'center'}>
+        <ScrollView
+          height="100%"
+          contentContainerStyle={{ justifyContent: loaded ? 'flex-start' : 'center' }}
+        >
           {loaded ? (
             <>
               {phoneCodesFiltered.map((item) => {
@@ -122,7 +139,7 @@ function RegionFilterInput(props: RegionFilterInputProps) {
                     }}
                   >
                     <View
-                      group="item"
+                      group
                       flexDirection="row"
                       alignItems="center"
                       gap="$3"
@@ -219,7 +236,7 @@ function RegionSelectBox(props: RegionSelectBoxProps) {
             <Adapt.Contents />
           </Popover.Sheet.Frame>
           <Popover.Sheet.Overlay
-            animation="lazy"
+            animation="quick"
             enterStyle={{ opacity: 0 }}
             exitStyle={{ opacity: 0 }}
           />
@@ -250,9 +267,17 @@ function RegionSelectBox(props: RegionSelectBoxProps) {
   )
 }
 
-export const PhoneInput = ({ size }: { size?: SizeTokens }) => {
+export const PhoneNumberField = ({ size }: { size?: SizeTokens }) => {
+  const {
+    field,
+    error,
+    formState: { isSubmitting },
+  } = useTsController<z.infer<typeof PhoneNumberSchema>>()
+  const id = useId()
+  const disabled = isSubmitting
+
   const [regionCode, setRegionCode] = useState('KE')
-  const [phoneNumber, setPhoneNumber] = useState('+254')
+  const [phoneNumber, setPhoneNumber] = useState(field.value?.phone_number)
   const [isValid, setIsValid] = useState(false)
   const [containerWidth, setContainerWidth] = useState<number>()
 
@@ -271,36 +296,45 @@ export const PhoneInput = ({ size }: { size?: SizeTokens }) => {
     } else {
       setRegionCode('')
     }
-    setPhoneNumber(parsed.number?.international || text)
+    const newPhoneNumber = parsed.number?.international || text
+    setPhoneNumber(newPhoneNumber)
     setIsValid(parsed.valid)
+
+    field.onChange({ ...field.value, phone_number: newPhoneNumber })
   }
   return (
-    <View fd="column" h={100}>
-      <Input size={size} gapScale={0.5}>
-        <Input.Box
-          onLayout={(e) => {
-            setContainerWidth(e.nativeEvent.layout.width)
-          }}
-          als="center"
-          theme={isValid ? 'green' : undefined}
-        >
-          <Input.Section>
-            <RegionSelectBox
-              containerWidth={containerWidth}
-              regionCode={regionCode}
-              setRegionCode={setRegionCode}
-            />
-          </Input.Section>
-          <Input.Section>
-            <Input.Area
-              keyboardType="numeric"
-              value={phoneNumber}
-              onChangeText={handlePhoneNumberChange}
-              placeholder="Phone Number"
-            />
-          </Input.Section>
-        </Input.Box>
-      </Input>
-    </View>
+    <Theme name={error?.phone_number ? 'red' : null} forceClassName>
+      <View flexDirection="column" height={100}>
+        <Shake shakeKey={error?.phone_number?.errorMessage}>
+          <Input size={size} gapScale={0.5}>
+            <Input.Box
+              onLayout={(e) => {
+                setContainerWidth(e.nativeEvent.layout.width)
+              }}
+              alignSelf="center"
+              theme={isValid ? 'green' : undefined}
+            >
+              <Input.Section>
+                <RegionSelectBox
+                  containerWidth={containerWidth}
+                  regionCode={regionCode}
+                  setRegionCode={setRegionCode}
+                />
+              </Input.Section>
+              <Input.Section>
+                <Input.Area
+                  id={id}
+                  disabled={disabled}
+                  keyboardType="numeric"
+                  value={phoneNumber}
+                  onChangeText={handlePhoneNumberChange}
+                />
+              </Input.Section>
+            </Input.Box>
+          </Input>
+        </Shake>
+        <FieldError message={error?.phone_number?.errorMessage} />
+      </View>
+    </Theme>
   )
 }
