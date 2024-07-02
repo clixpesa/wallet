@@ -2,9 +2,7 @@ import {
   Button,
   FormWrapper,
   H2,
-  Input,
   Paragraph,
-  PhoneInput,
   SubmitButton,
   Text,
   Theme,
@@ -13,40 +11,20 @@ import {
 } from '@my/ui'
 import { ChevronLeft } from '@tamagui/lucide-icons'
 import { SchemaForm, formFields } from 'app/utils/SchemaForm'
-import { parsePhoneNumber } from 'awesome-phonenumber'
-import { useEffect } from 'react'
 import { FormProvider, useForm, useFormContext, useWatch } from 'react-hook-form'
-import { createParam } from 'solito'
 import { Link } from 'solito/link'
 import { z } from 'zod'
 
 import { SocialLogin } from './components/SocialLogin'
 
-const { useParams, useUpdateParams } = createParam<{ email?: string }>()
-
-const isPhoneNumber = (ph: string) => parsePhoneNumber(ph)?.valid
-const phoneNumberSchema = z
-  .string()
-  .refine(isPhoneNumber, (val) => ({ message: `${val} is not a valid phone number` }))
-
 const SignUpSchema = z.object({
-  phone_number: phoneNumberSchema,
+  phone_number: formFields.phone_number,
 })
 
 export const SignUpScreen = () => {
-  const updateParams = useUpdateParams()
-  const { params } = useParams()
-
-  useEffect(() => {
-    if (params?.email) {
-      updateParams({ email: undefined }, { web: { replace: true } })
-    }
-  }, [params?.email, updateParams])
-
-  // const form = useForm<z.infer<typeof SignUpSchema>>()
+  const form = useForm<z.infer<typeof SignUpSchema>>()
 
   async function signUpWithPhoneNumber({ phone_number }: z.infer<typeof SignUpSchema>) {
-    console.log('phoneNumber', phone_number)
     // const { error } = await supabase.auth.signUp({
     //   email,
     //   password,
@@ -72,6 +50,7 @@ export const SignUpScreen = () => {
 
   return (
     <SchemaForm
+      form={form}
       schema={SignUpSchema}
       onSubmit={signUpWithPhoneNumber}
       renderAfter={({ submit }) => (
@@ -98,7 +77,6 @@ export const SignUpScreen = () => {
           {Object.values(fields)}
           {!isWeb && (
             <YStack mt="$4">
-              <PhoneInput />
               <SocialLogin />
             </YStack>
           )}
@@ -109,10 +87,8 @@ export const SignUpScreen = () => {
 }
 
 const SignInLink = () => {
-  const email = useWatch<z.infer<typeof SignUpSchema>>({ name: 'email' })
-
   return (
-    <Link href={`/sign-in?${new URLSearchParams(email ? { email } : undefined).toString()}`}>
+    <Link href="/sign-in">
       <Paragraph ta="center" theme="alt1" mt="$2">
         Already signed up? <Text textDecorationLine="underline">Sign in</Text>
       </Paragraph>
@@ -121,7 +97,7 @@ const SignInLink = () => {
 }
 
 const CheckYourEmail = () => {
-  const email = useWatch<z.infer<typeof SignUpSchema>>({ name: 'email' })
+  // const email = useWatch<z.infer<typeof SignUpSchema>>({ name: 'email' })
   const { reset } = useFormContext()
 
   return (
@@ -130,8 +106,8 @@ const CheckYourEmail = () => {
         <YStack gap="$3">
           <H2>Check Your Email</H2>
           <Paragraph theme="alt1">
-            We&apos;ve sent you a confirmation link. Please check your email ({email}) and confirm
-            it.
+            {/* We&apos;ve sent you a confirmation link. Please check your email ({email}) and confirm
+            it. */}
           </Paragraph>
         </YStack>
       </FormWrapper.Body>
