@@ -2,6 +2,7 @@ import {
   Button,
   FormWrapper,
   H2,
+  Input,
   Paragraph,
   PhoneInput,
   SubmitButton,
@@ -12,6 +13,7 @@ import {
 } from '@my/ui'
 import { ChevronLeft } from '@tamagui/lucide-icons'
 import { SchemaForm, formFields } from 'app/utils/SchemaForm'
+import { parsePhoneNumber } from 'awesome-phonenumber'
 import { useEffect } from 'react'
 import { FormProvider, useForm, useFormContext, useWatch } from 'react-hook-form'
 import { createParam } from 'solito'
@@ -22,9 +24,13 @@ import { SocialLogin } from './components/SocialLogin'
 
 const { useParams, useUpdateParams } = createParam<{ email?: string }>()
 
+const isPhoneNumber = (ph: string) => parsePhoneNumber(ph)?.valid
+const phoneNumberSchema = z
+  .string()
+  .refine(isPhoneNumber, (val) => ({ message: `${val} is not a valid phone number` }))
+
 const SignUpSchema = z.object({
-  email: formFields.text.email().describe('Email // your@email.acme'),
-  password: formFields.text.min(6).describe('Password // Choose a password'),
+  phone_number: phoneNumberSchema,
 })
 
 export const SignUpScreen = () => {
@@ -37,9 +43,10 @@ export const SignUpScreen = () => {
     }
   }, [params?.email, updateParams])
 
-  const form = useForm<z.infer<typeof SignUpSchema>>()
+  // const form = useForm<z.infer<typeof SignUpSchema>>()
 
-  async function signUpWithEmail({ email, password }: z.infer<typeof SignUpSchema>) {
+  async function signUpWithPhoneNumber({ phone_number }: z.infer<typeof SignUpSchema>) {
+    console.log('phoneNumber', phone_number)
     // const { error } = await supabase.auth.signUp({
     //   email,
     //   password,
@@ -64,53 +71,40 @@ export const SignUpScreen = () => {
   }
 
   return (
-    <FormProvider {...form}>
-      {form.formState.isSubmitSuccessful ? (
-        <CheckYourEmail />
-      ) : (
-        <SchemaForm
-          form={form}
-          schema={SignUpSchema}
-          defaultValues={{
-            email: params?.email || '',
-            password: '',
-          }}
-          props={{
-            password: {
-              secureTextEntry: true,
-            },
-          }}
-          onSubmit={signUpWithEmail}
-          renderAfter={({ submit }) => (
-            <>
-              <Theme inverse>
-                <SubmitButton onPress={() => submit()} br="$10">
-                  Sign Up
-                </SubmitButton>
-              </Theme>
-              <SignInLink />
-              {isWeb && <SocialLogin />}
-            </>
-          )}
-        >
-          {(fields) => (
-            <>
-              <YStack gap="$3" mb="$4">
-                <H2 $sm={{ size: '$8' }}>Let&apos;s get started</H2>
-                <Paragraph theme="alt2">Enter your phone number to get started</Paragraph>
-              </YStack>
-              {Object.values(fields)}
-              {!isWeb && (
-                <YStack mt="$4">
-                  <PhoneInput />
-                  <SocialLogin />
-                </YStack>
-              )}
-            </>
-          )}
-        </SchemaForm>
+    <SchemaForm
+      schema={SignUpSchema}
+      onSubmit={signUpWithPhoneNumber}
+      renderAfter={({ submit }) => (
+        <>
+          <Button br="$10" bordered theme="green">
+            I already have an account
+          </Button>
+          <Theme inverse>
+            <SubmitButton onPress={() => submit()} br="$10">
+              Continue
+            </SubmitButton>
+          </Theme>
+          <SignInLink />
+          {isWeb && <SocialLogin />}
+        </>
       )}
-    </FormProvider>
+    >
+      {(fields) => (
+        <>
+          <YStack gap="$3" mb="$4">
+            <H2 $sm={{ size: '$8' }}>Let&apos;s get started</H2>
+            <Paragraph theme="alt2">Enter your phone number to get started</Paragraph>
+          </YStack>
+          {Object.values(fields)}
+          {!isWeb && (
+            <YStack mt="$4">
+              <PhoneInput />
+              <SocialLogin />
+            </YStack>
+          )}
+        </>
+      )}
+    </SchemaForm>
   )
 }
 
