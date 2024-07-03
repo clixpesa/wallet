@@ -56,9 +56,9 @@ function RegionFilterInput(props: RegionFilterInputProps) {
   const { setRegionCode, setOpen, open } = props
   const [filter, setFilter] = useState('')
   const [reset, setReset] = useState(0)
-
   const [loaded, setLoaded] = useState(false)
 
+  // TODO: Fix Maximum update depth exceeded
   useEffect(() => {
     let timeoutId
     if (open) {

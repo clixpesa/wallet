@@ -1,6 +1,5 @@
 import { Separator, SizableText, YStack, isWeb } from '@my/ui'
 
-import { AppleSignIn } from './AppleSignIn'
 import { GoogleSignIn } from './GoogleSignIn'
 
 export function SocialLogin() {
@@ -8,7 +7,7 @@ export function SocialLogin() {
     <YStack gap="$5">
       <OrSeparator />
       <YStack gap="$3">
-        <AppleSignIn />
+        {/* <AppleSignIn /> */}
 
         <GoogleSignIn />
       </YStack>
