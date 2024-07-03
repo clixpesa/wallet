@@ -21,6 +21,14 @@ const getBundleId = () => {
   return APP_ID_PREFIX
 }
 
+const googleServices = () => {
+  if (IS_DEV) {
+    return './google/google-services-test.json'
+  }
+
+  return './google/google-services-prod.json'
+}
+
 export default {
   expo: {
     name: getName(),
@@ -53,7 +61,7 @@ export default {
       },
       package: getBundleId(),
       permissions: ['android.permission.RECORD_AUDIO'],
-      googleServicesFile: './google-services.json',
+      googleServicesFile: googleServices(),
     },
     web: {
       favicon: './assets/favicon.png',

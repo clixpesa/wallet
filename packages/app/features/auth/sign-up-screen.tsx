@@ -11,7 +11,7 @@ import {
 } from '@my/ui'
 import { ChevronLeft } from '@tamagui/lucide-icons'
 import { SchemaForm, formFields } from 'app/utils/SchemaForm'
-import { FormProvider, useForm, useFormContext, useWatch } from 'react-hook-form'
+import { useForm, useFormContext } from 'react-hook-form'
 import { Link } from 'solito/link'
 import { z } from 'zod'
 
@@ -25,27 +25,8 @@ export const SignUpScreen = () => {
   const form = useForm<z.infer<typeof SignUpSchema>>()
 
   async function signUpWithPhoneNumber({ phone_number }: z.infer<typeof SignUpSchema>) {
-    // const { error } = await supabase.auth.signUp({
-    //   email,
-    //   password,
-    //   options: {
-    //     // To take user's name other info
-    //     data: {
-    //       // first_name: firstName, // coming from state
-    //       // last_name: lastName,
-    //     },
-    //   },
-    // })
-    // if (error) {
-    //   const errorMessage = error?.message.toLowerCase()
-    //   if (errorMessage.includes('email')) {
-    //     form.setError('email', { type: 'custom', message: errorMessage })
-    //   } else if (errorMessage.includes('password')) {
-    //     form.setError('password', { type: 'custom', message: errorMessage })
-    //   } else {
-    //     form.setError('password', { type: 'custom', message: errorMessage })
-    //   }
-    // }
+    // TODO: Add firebase signIn with phoneNumber
+    console.log('hey')
   }
 
   return (
@@ -55,9 +36,9 @@ export const SignUpScreen = () => {
       onSubmit={signUpWithPhoneNumber}
       renderAfter={({ submit }) => (
         <>
-          <Button br="$10" bordered theme="green">
+          {/* <Button br="$10" bordered theme="green">
             I already have an account
-          </Button>
+          </Button> */}
           <Theme inverse>
             <SubmitButton onPress={() => submit()} br="$10">
               Continue
