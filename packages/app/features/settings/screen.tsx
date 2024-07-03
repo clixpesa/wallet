@@ -1,12 +1,10 @@
 import { Paragraph, ScrollView, Separator, Settings, YStack, isWeb, useMedia } from '@my/ui'
-import { Book, Cog, Info, Lock, LogOut, Mail, Moon, Twitter } from '@tamagui/lucide-icons'
+import { Book, Cog, Info, Lock, LogOut, Mail, Moon, Twitter, BookKey } from '@tamagui/lucide-icons'
 import { useThemeSetting } from 'app/provider/theme'
 import { redirect } from 'app/utils/redirect'
 import { usePathname } from 'app/utils/usePathname'
+import * as Application from 'expo-application'
 import { useLink } from 'solito/link'
-
-import rootPackageJson from '../../../../package.json'
-import packageJson from '../../package.json'
 
 export const SettingsScreen = () => {
   const media = useMedia()
@@ -27,12 +25,21 @@ export const SettingsScreen = () => {
                 General
               </Settings.Item>
               <Settings.Item
+                icon={BookKey}
+                isActive={pathname === 'settings/general'}
+                {...useLink({ href: media.sm ? '/settings/general' : '/settings' })}
+                accentTheme="green"
+              >
+                Recovery Phrase
+              </Settings.Item>
+
+              <Settings.Item
                 icon={Lock}
                 isActive={pathname === '/settings/change-password'}
                 {...useLink({ href: '/settings/change-password' })}
                 accentTheme="green"
               >
-                Change Password
+                Change PIN
               </Settings.Item>
               <Settings.Item
                 icon={Mail}
@@ -52,6 +59,14 @@ export const SettingsScreen = () => {
                 accentTheme="purple"
               >
                 Privacy Policy
+              </Settings.Item>
+              <Settings.Item
+                icon={Cog}
+                isActive={pathname === 'settings/general'}
+                {...useLink({ href: media.sm ? '/settings/general' : '/settings' })}
+                accentTheme="green"
+              >
+                Recovery Phrase
               </Settings.Item>
               <Settings.Item
                 icon={Book}
@@ -74,7 +89,7 @@ export const SettingsScreen = () => {
             <Settings.Group>
               <Settings.Item
                 icon={Twitter}
-                onPress={() => redirect('https://twitter.com/tamagui_js')}
+                onPress={() => redirect('https://x.com/clixpesa')}
                 accentTheme="blue"
               >
                 Our Twitter
@@ -88,12 +103,9 @@ export const SettingsScreen = () => {
           </Settings.Items>
         </Settings>
       </ScrollView>
-      {/*
-      NOTE: you should probably get the actual native version here using https://www.npmjs.com/package/react-native-version-info
-      we just did a simple package.json read since we want to keep things simple for the starter
-       */}
+
       <Paragraph py="$2" ta="center" theme="alt2">
-        {rootPackageJson.name} {packageJson.version}
+        Clixpesa v{Application.nativeApplicationVersion} ({Application.nativeBuildVersion})
       </Paragraph>
     </YStack>
   )

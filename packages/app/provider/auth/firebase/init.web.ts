@@ -4,6 +4,7 @@ import {
   browserLocalPersistence,
   signInAnonymously as signInAnonymouslyFirebase,
   onAuthStateChanged as onAuthStateChangedFirebase,
+  signInWithPhoneNumber as signInWithPhoneNumberFirebase,
 } from 'firebase/auth'
 
 import { Firebase } from './types'
@@ -33,10 +34,21 @@ const signInAnonymously: Firebase['signInAnonymously'] = async () => {
   return (await signInAnonymouslyFirebase(auth)).user
 }
 
+const signInWithPhoneNumber = async (phoneNumber, recaptchaVerifier) => {
+  return await signInWithPhoneNumberFirebase(auth, phoneNumber, recaptchaVerifier)
+}
+
 const onAuthStateChanged: Firebase['onAuthStateChanged'] = (callback) => {
   return onAuthStateChangedFirebase(auth, callback)
 }
 
 const getCurrentUser: Firebase['getCurrentUser'] = () => auth.currentUser
 
-export { getIsSignedIn, signInAnonymously, signOut, onAuthStateChanged, getCurrentUser }
+export {
+  getIsSignedIn,
+  signInAnonymously,
+  signOut,
+  onAuthStateChanged,
+  getCurrentUser,
+  signInWithPhoneNumber,
+}

@@ -43,7 +43,7 @@ export const GeneralSettingsScreen = () => {
                 <SizableText fow="900">Email</SizableText>
               </KVTable.Key>
               <KVTable.Value gap="$4">
-                <SizableText>{user?.email}</SizableText>
+                {/* <SizableText>{user?.email}</SizableText> */}
                 <Link href="/settings/change-email">
                   <SizableText textDecorationLine="underline">Change</SizableText>
                 </Link>
@@ -54,9 +54,7 @@ export const GeneralSettingsScreen = () => {
               <KVTable.Key>
                 <SizableText fow="900">User ID</SizableText>
               </KVTable.Key>
-              <KVTable.Value>
-                <SizableText>{user?.id}</SizableText>
-              </KVTable.Value>
+              <KVTable.Value>{/* <SizableText>{user?.id}</SizableText> */}</KVTable.Value>
             </KVTable.Row>
           </KVTable>
         </Section>
