@@ -1,22 +1,18 @@
-import { useEffect, useState } from 'react'
-import type { Control, UseFormRegister, UseFormSetValue } from 'react-hook-form'
-import { Controller, useForm, useFormState } from 'react-hook-form'
-import type { SizeTokens } from 'tamagui'
-import { AnimatePresence, Form, Input, Paragraph, Spinner, View, Button, XStack } from 'tamagui'
-
 import {
   CheckCircle2,
-  ChevronLeft,
   KeySquare,
   LockKeyhole,
-  Mail,
   Smartphone,
+  MessageSquareCode,
 } from '@tamagui/lucide-icons'
-// import { InputWithLabelDemo } from './InputWithLabel'
+import { useEffect, useState } from 'react'
+import type { Control, UseFormRegister, UseFormSetValue } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
+import type { SizeTokens } from 'tamagui'
+import { AnimatePresence, Form, Input, Paragraph, Spinner, View, Button } from 'tamagui'
 
 interface CodeConfirmationInputProps {
   id: number
-  size?: SizeTokens
   codeSize: number
   secureTextEntry?: boolean
   control: Control<FormFields, any>
@@ -28,7 +24,6 @@ interface CodeConfirmationInputProps {
 
 function CodeConfirmationInput({
   id,
-  size,
   codeSize,
   secureTextEntry,
   control,
@@ -37,7 +32,6 @@ function CodeConfirmationInput({
   switchInputPlace,
   onSubmit,
 }: CodeConfirmationInputProps) {
-  useFormState
   return (
     <Controller
       name={`code${id}`}
@@ -49,8 +43,7 @@ function CodeConfirmationInput({
           {...register(`code${id}`)}
           value={value}
           maxLength={codeSize}
-          // uncomment this for autofocus
-          // autoFocus={id === 0}
+          autoFocus={id === 0}
           selectTextOnFocus
           onChangeText={(code: string) => {
             // Max length is disabled to enable multiple digit paste
@@ -103,9 +96,9 @@ function CodeConfirmationInput({
           secureTextEntry={secureTextEntry}
           enterKeyHint={id === codeSize - 1 ? 'done' : 'next'}
           textAlign="center"
-          width="$5"
-          fontSize="$7"
-          height="$5"
+          width="$4"
+          fontSize="$5"
+          height="$4"
           borderRadius="$5"
           theme="active"
           backgroundColor={invalid ? '$red7' : value ? '$color1' : '$color5'}
@@ -122,7 +115,6 @@ function CodeConfirmationInput({
 }
 
 interface CodeConfirmationProps {
-  size?: SizeTokens
   codeSize: number
   secureText?: boolean
   onEnter: (code: number) => void
@@ -132,7 +124,7 @@ interface FormFields {
   [key: string]: string
 }
 
-function CodeConfirmation({ size, codeSize, secureText, onEnter }: CodeConfirmationProps) {
+function CodeConfirmation({ codeSize, secureText, onEnter }: CodeConfirmationProps) {
   const defaultValues = Array.from({ length: codeSize }, (_, i) => `code${i}`).reduce(
     (acc, key) => ({ ...acc, [key]: '' }),
     {}
@@ -205,7 +197,6 @@ function CodeConfirmation({ size, codeSize, secureText, onEnter }: CodeConfirmat
               <CodeConfirmationInput
                 key={`code${id}`}
                 id={id}
-                size={size}
                 codeSize={codeSize}
                 secureTextEntry={secureText}
                 control={control}
@@ -222,8 +213,7 @@ function CodeConfirmation({ size, codeSize, secureText, onEnter }: CodeConfirmat
 }
 
 export function OneTimeCodeInput({
-  size = '$5',
-  codeSize = 4,
+  codeSize = 6,
   secureText = false,
 }: {
   size?: SizeTokens
@@ -233,8 +223,6 @@ export function OneTimeCodeInput({
   const [code, setCode] = useState<number>()
   const [codeEntered, setCodeEntered] = useState(false)
   const [verified, setVerified] = useState(true)
-  const [email, setEmail] = useState<string | null>(null)
-  const [activeInterface, setActiveInterface] = useState<'email' | 'code'>('code')
 
   const handleEnter = (code: number) => {
     setCode(code)
@@ -268,7 +256,7 @@ export function OneTimeCodeInput({
       <View
         minWidth={300}
         $platform-native={{ minWidth: '100%' }}
-        height={codeEntered ? 175 : activeInterface === 'email' ? 190 : 240}
+        height={codeEntered ? 175 : 240}
         alignItems="center"
         justifyContent="center"
         width="auto"
@@ -287,7 +275,6 @@ export function OneTimeCodeInput({
                     color="$green10"
                     enterStyle={{ opacity: 0, x: 15 }}
                     exitStyle={{ opacity: 0, x: 15 }}
-                    animation="200ms"
                   >
                     Success!
                   </Paragraph>
@@ -306,46 +293,7 @@ export function OneTimeCodeInput({
           )}
         </View>
 
-        {activeInterface === 'email' ? (
-          <View
-            height="100%"
-            key="email"
-            gap="$5"
-            animation="200ms"
-            minWidth="100%"
-            enterStyle={{ opacity: 0, y: 10 }}
-            justifyContent="center"
-            paddingVertical="$6"
-            paddingHorizontal="$4"
-          >
-            <XStack gap="$4" justifyContent="flex-start" maxWidth={'75%'} alignItems="flex-end">
-              {/* <InputWithLabelDemo
-                focusOnMount
-                size="$4"
-                labelText="Email Address"
-                onChangeText={setEmail}
-              /> */}
-              <Button themeInverse onPress={() => setActiveInterface('code')}>
-                Send
-              </Button>
-            </XStack>
-
-            <View
-              position="relative"
-              flexDirection="row"
-              alignItems="center"
-              marginTop="auto"
-              hoverStyle={{ x: -5, cursor: 'pointer' }}
-              animation="200ms"
-              onPress={() => setActiveInterface('code')}
-            >
-              <ChevronLeft size="$1" color="$white9" />
-              <Paragraph size="$4" color="$white9">
-                Back
-              </Paragraph>
-            </View>
-          </View>
-        ) : code ? (
+        {code ? (
           <View
             key="code"
             gap="$3"
@@ -371,76 +319,47 @@ export function OneTimeCodeInput({
                 <View flexGrow={1} justifyContent="center" alignItems="center" minWidth="100%">
                   <Paragraph size="$4">Code verified</Paragraph>
                 </View>
-                <Button minWidth="100%" themeInverse>
-                  Continue
-                </Button>
               </View>
             ) : (
               <Paragraph size="$4">Verifying</Paragraph>
             )}
           </View>
         ) : (
-          activeInterface === 'code' && (
-            <View
-              key="codeEntered"
-              animation="200ms"
-              enterStyle={{ opacity: 0, y: 10 }}
-              justifyContent="space-between"
-              height="100%"
-              paddingVertical="$4"
-            >
-              <View alignItems="center" gap="$1.5">
-                <Paragraph size="$4">Enter the code sent to</Paragraph>
-                {email ? (
-                  <View
-                    flexDirection="row"
-                    alignItems="center"
-                    justifyContent="center"
-                    gap="$2"
-                    w="100%"
-                  >
-                    <Mail size="$1" />
-                    <Paragraph size="$4" fontWeight="bold">
-                      {email}
-                    </Paragraph>
-                  </View>
-                ) : (
-                  <View
-                    flexDirection="row"
-                    alignItems="center"
-                    justifyContent="center"
-                    gap="$2"
-                    w="100%"
-                  >
-                    <Smartphone size="$1" />
-                    <Paragraph size="$4" fontWeight="bold">
-                      (•••) ••• ••73
-                    </Paragraph>
-                  </View>
-                )}
+          <View
+            key="codeEntered"
+            animation="200ms"
+            enterStyle={{ opacity: 0, y: 10 }}
+            justifyContent="space-between"
+            height="100%"
+            paddingVertical="$4"
+          >
+            <View alignItems="center" gap="$1.5">
+              <Paragraph size="$4">Enter the code sent to</Paragraph>
+              <View
+                flexDirection="row"
+                alignItems="center"
+                justifyContent="center"
+                gap="$2"
+                w="100%"
+              >
+                <Smartphone size="$1" />
+                <Paragraph size="$4" fontWeight="bold">
+                  (•••) ••• ••73
+                </Paragraph>
               </View>
-
-              <CodeConfirmation
-                size={size}
-                codeSize={codeSize}
-                secureText={secureText}
-                onEnter={handleEnter}
-              />
-
-              {!email ? (
-                <Button
-                  onPress={() => setActiveInterface('email')}
-                  icon={Mail}
-                  // variant="outlined"
-                  color="$color11"
-                  backgroundColor="transparent"
-                  borderBottomWidth="$0.5"
-                >
-                  <Paragraph color="$color11">Send code to email instead</Paragraph>
-                </Button>
-              ) : null}
             </View>
-          )
+
+            <CodeConfirmation codeSize={codeSize} secureText={secureText} onEnter={handleEnter} />
+
+            <Button
+              icon={MessageSquareCode}
+              color="$color11"
+              backgroundColor="transparent"
+              borderBottomWidth="$0.5"
+            >
+              <Paragraph color="$color11">Resend code</Paragraph>
+            </Button>
+          </View>
         )}
       </View>
 

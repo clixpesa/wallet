@@ -1,7 +1,7 @@
 import {
-  Button,
   FormWrapper,
   H2,
+  H3,
   OneTimeCodeInput,
   Paragraph,
   SubmitButton,
@@ -10,7 +10,6 @@ import {
   YStack,
   isWeb,
 } from '@my/ui'
-import { ChevronLeft } from '@tamagui/lucide-icons'
 import { signInWithPhoneNumber } from 'app/provider/auth/firebase/init.native'
 import { SchemaForm, formFields } from 'app/utils/SchemaForm'
 import { FormProvider, useForm, useFormContext, useWatch } from 'react-hook-form'
@@ -98,19 +97,13 @@ const CheckYourEmail = () => {
     <FormWrapper>
       <FormWrapper.Body>
         <YStack gap="$3">
-          <H2>Verify Phone Number</H2>
-          <Paragraph theme="alt1">
-            We&apos;ve sent you a confirmation link. Please check your email ({phoneNumber}) and
-            confirm it.
-          </Paragraph>
-          <OneTimeCodeInput codeSize={4} />
+          <H3>Verify Phone Number</H3>
+          {/* <Paragraph theme="alt1">
+            We&apos;ve sent you a confirmation code to ({phoneNumber}).
+          </Paragraph> */}
+          <OneTimeCodeInput />
         </YStack>
       </FormWrapper.Body>
-      <FormWrapper.Footer>
-        <Button themeInverse icon={ChevronLeft} br="$10" onPress={() => reset()}>
-          Back
-        </Button>
-      </FormWrapper.Footer>
     </FormWrapper>
   )
 }
