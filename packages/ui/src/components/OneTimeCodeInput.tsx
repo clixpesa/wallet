@@ -117,14 +117,14 @@ function CodeConfirmationInput({
 interface CodeConfirmationProps {
   codeSize: number
   secureText?: boolean
-  onEnter: (code: number) => void
+  onEnter: (code: string) => void
 }
 
 interface FormFields {
   [key: string]: string
 }
 
-function CodeConfirmation({ codeSize, secureText, onEnter }: CodeConfirmationProps) {
+export function CodeConfirmation({ codeSize, secureText, onEnter }: CodeConfirmationProps) {
   const defaultValues = Array.from({ length: codeSize }, (_, i) => `code${i}`).reduce(
     (acc, key) => ({ ...acc, [key]: '' }),
     {}
@@ -222,7 +222,9 @@ export function OneTimeCodeInput({
 }) {
   const [code, setCode] = useState<number>()
   const [codeEntered, setCodeEntered] = useState(false)
-  const [verified, setVerified] = useState(true)
+  const [verified, setVerified] = useState(false)
+
+  console.log('code', code?.toString())
 
   const handleEnter = (code: number) => {
     setCode(code)
@@ -239,7 +241,7 @@ export function OneTimeCodeInput({
     return () => clearTimeout(timer)
   }, [code])
 
-  //NOTE: for testing purposes
+  // NOTE: for testing purposes
   useEffect(() => {
     let timer: NodeJS.Timeout
     if (codeEntered === true) {

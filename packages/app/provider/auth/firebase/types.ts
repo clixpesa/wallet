@@ -1,6 +1,6 @@
-import type * as firebase from 'firebase/auth'
+import { FirebaseAuthTypes } from '@react-native-firebase/auth'
 
-type User = Pick<firebase.User, 'uid'>
+type User = Pick<FirebaseAuthTypes.User, 'uid'>
 
 export type Firebase = {
   getIsSignedIn: () => boolean
@@ -8,5 +8,5 @@ export type Firebase = {
   signOut: () => Promise<void>
   onAuthStateChanged: (callback: (user: { uid: string } | null) => void) => () => void
   getCurrentUser: () => User | null
-  // signInWithPhoneNumber: (phoneNumber: string) => Promise<firebase.ConfirmationResult>
+  ConfirmationResult: FirebaseAuthTypes.ConfirmationResult
 }
