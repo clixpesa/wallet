@@ -61,14 +61,6 @@ export const SettingsScreen = () => {
                 Privacy Policy
               </Settings.Item>
               <Settings.Item
-                icon={Cog}
-                isActive={pathname === 'settings/general'}
-                {...useLink({ href: media.sm ? '/settings/general' : '/settings' })}
-                accentTheme="green"
-              >
-                Recovery Phrase
-              </Settings.Item>
-              <Settings.Item
                 icon={Book}
                 isActive={pathname === '/terms-of-service'}
                 {...useLink({ href: '/terms-of-service' })}

@@ -1,31 +1,21 @@
 import {
   FormWrapper,
-  Spinner,
   H2,
   H3,
   CodeConfirmation,
   Paragraph,
   View,
   SubmitButton,
-  Text,
   Theme,
   YStack,
   isWeb,
-  AnimatePresence,
-  Button,
 } from '@my/ui'
-import {
-  CheckCircle2,
-  KeySquare,
-  LockKeyhole,
-  Smartphone,
-  MessageSquareCode,
-} from '@tamagui/lucide-icons'
 import { signInWithPhoneNumber } from 'app/provider/auth/firebase/init.native'
 import { Firebase } from 'app/provider/auth/firebase/types'
 import { SchemaForm, formFields } from 'app/utils/SchemaForm'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { FormProvider, useForm, useWatch } from 'react-hook-form'
+import { useRouter } from 'solito/router'
 // import { Link } from 'solito/link'
 import { z } from 'zod'
 
@@ -52,7 +42,7 @@ export const SignUpScreen = () => {
 
   return (
     <FormProvider {...form}>
-      {form.formState.isSubmitSuccessful ? (
+      {form.formState.isSubmitSuccessful && confirm ? (
         <VerifyPhoneNumber confirm={confirm} />
       ) : (
         <SchemaForm
@@ -102,6 +92,7 @@ export const SignUpScreen = () => {
 // }
 
 const VerifyPhoneNumber = ({ confirm }: { confirm: Firebase['ConfirmationResult'] }) => {
+  const router = useRouter()
   const phoneNumber = useWatch<z.infer<typeof SignUpSchema>>({
     name: 'phoneNumber.phone_number',
   })
@@ -125,6 +116,7 @@ const VerifyPhoneNumber = ({ confirm }: { confirm: Firebase['ConfirmationResult'
       await confirm.confirm(code)
       setCodeEntered(true)
       setVerified(true)
+      router.push('/home')
     } catch (error) {
       console.log(error, 'Invalid code.')
       setCodeEntered(true)
@@ -137,11 +129,8 @@ const VerifyPhoneNumber = ({ confirm }: { confirm: Firebase['ConfirmationResult'
     <FormWrapper>
       <FormWrapper.Body>
         <YStack gap="$3">
-          <H3>Verify Phone Number</H3>
-          <Paragraph theme="alt1">
-            We&apos;ve sent you a confirmation code to ({phoneNumber}).
-          </Paragraph>
-
+          <H3>Enter Code</H3>
+          <Paragraph theme="alt1">A code has been sent to {phoneNumber}.</Paragraph>
           <View
             minWidth={300}
             $platform-native={{ minWidth: '100%' }}
@@ -153,14 +142,7 @@ const VerifyPhoneNumber = ({ confirm }: { confirm: Firebase['ConfirmationResult'
             borderRadius="$6"
             animation="200ms"
           >
-            <View
-              key="codeEntered"
-              animation="200ms"
-              enterStyle={{ opacity: 0, y: 10 }}
-              justifyContent="space-between"
-              height="100%"
-              paddingVertical="$4"
-            >
+            <View animation="200ms" enterStyle={{ opacity: 0, y: 10 }} paddingVertical="$4">
               <CodeConfirmation codeSize={6} onEnter={handleEnter} />
             </View>
           </View>

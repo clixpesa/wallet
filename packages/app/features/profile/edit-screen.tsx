@@ -1,5 +1,6 @@
 import { Avatar, FullscreenSpinner, SubmitButton, Theme, YStack, useToastController } from '@my/ui'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { getCurrentUser } from 'app/provider/auth/firebase/init.native'
+import { User } from 'app/provider/auth/firebase/types'
 import { SchemaForm, formFields } from 'app/utils/SchemaForm'
 import { createParam } from 'solito'
 import { SolitoImage } from 'solito/image'
@@ -8,48 +9,38 @@ import { z } from 'zod'
 
 import { UploadAvatar } from '../settings/components/upload-avatar'
 
-const { useParams } = createParam<{ edit_name?: '1'; edit_about?: '1' }>()
+const { useParams } = createParam<{ edit_name?: '1' }>()
+
 export const EditProfileScreen = () => {
-  // const { profile, user } = useUser()
-  // if (!profile || !user?.id) {
-  //   return <FullscreenSpinner />
-  // }
-  // return <EditProfileForm userId={user.id} initial={{ name: profile.name, about: profile.about }} />
+  const user = getCurrentUser()
+
+  if (!user) {
+    return <FullscreenSpinner />
+  }
+  return <EditProfileForm user={user} initial={{ name: user.displayName }} />
 }
 
 const ProfileSchema = z.object({
   name: formFields.text.describe('Name // John Doe'),
-  about: formFields.textarea.describe('About // Tell us a bit about yourself'),
 })
 
-const EditProfileForm = ({
-  initial,
-  userId,
-}: {
-  initial: { name: string | null; about: string | null }
-  userId: string
-}) => {
-  // const { params } = useParams()
-  // const supabase = useSupabase()
-  // const toast = useToastController()
-  // const queryClient = useQueryClient()
-  // const router = useRouter()
-  // const apiUtils = api.useUtils()
-  // const mutation = useMutation({
-  //   async mutationFn(data: z.infer<typeof ProfileSchema>) {
-  //     await supabase
-  //       .from('profiles')
-  //       .update({ name: data.name, about: data.about })
-  //       .eq('id', userId)
-  //   },
+const EditProfileForm = ({ initial, user }: { initial: { name: string | null }; user: User }) => {
+  const { params } = useParams()
+  const toast = useToastController()
+  const router = useRouter()
 
-  //   async onSuccess() {
-  //     toast.show('Successfully updated!')
-  //     await queryClient.invalidateQueries(['profile', userId])
-  //     await apiUtils.greeting.invalidate()
-  //     router.back()
-  //   },
-  // })
+  const handleSubmit = async (data: z.infer<typeof ProfileSchema>) => {
+    try {
+      await user.updateProfile({
+        displayName: data.name,
+      })
+      toast.show('Successfully updated!')
+      router.back()
+    } catch (error) {
+      console.error('Error updating profile', error)
+      toast.show('Failed to update profile')
+    }
+  }
 
   return (
     <SchemaForm
@@ -58,15 +49,11 @@ const EditProfileForm = ({
         name: {
           autoFocus: !!params?.edit_name,
         },
-        about: {
-          autoFocus: !!params?.edit_about,
-        },
       }}
       defaultValues={{
         name: initial.name ?? '',
-        about: initial.about ?? '',
       }}
-      onSubmit={(values) => mutation.mutate(values)}
+      onSubmit={handleSubmit}
       renderAfter={({ submit }) => (
         <Theme inverse>
           <SubmitButton onPress={() => submit()}>Update Profile</SubmitButton>
@@ -75,7 +62,7 @@ const EditProfileForm = ({
     >
       {(fields) => (
         <>
-          <YStack mb="$10">
+          <YStack mb="$4">
             <UploadAvatar>
               <UserAvatar />
             </UploadAvatar>
@@ -88,10 +75,17 @@ const EditProfileForm = ({
 }
 
 const UserAvatar = () => {
-  // const { avatarUrl } = useUser()
+  const user = getCurrentUser()
+  console.log('photoUrl', user?.photoURL)
   return (
     <Avatar circular size={128}>
-      <SolitoImage src={avatarUrl} alt="your avatar" width={128} height={128} />
+      <SolitoImage
+        src={user?.photoURL}
+        // src="https://media.istockphoto.com/id/1411772543/photo/side-profile-of-african-woman-with-afro-isolated-against-a-white-background-in-a-studio.webp?b=1&s=170667a&w=0&k=20&c=AXoZk6bD-xbU4AQ66k4AKpWBRuDgHufmP4A1_Gn_5zg="
+        alt="your avatar"
+        width={128}
+        height={128}
+      />
     </Avatar>
   )
 }

@@ -212,6 +212,7 @@ export function CodeConfirmation({ codeSize, secureText, onEnter }: CodeConfirma
   )
 }
 
+// Example usage to be customized further
 export function OneTimeCodeInput({
   codeSize = 6,
   secureText = false,
