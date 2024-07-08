@@ -1,16 +1,16 @@
 import { router, useSegments } from 'expo-router'
-import { User } from 'firebase/auth'
 import { createContext, useEffect, useState, useSyncExternalStore } from 'react'
 import { Platform } from 'react-native'
 
 import { AuthProviderProps } from './AuthProvider'
 import { AuthStateChangeHandler } from './AuthStateChangeHandler'
 import { onAuthStateChanged, getCurrentUser } from './firebase'
+import { User } from './firebase/types'
 
-export const AuthContext = createContext<null | { uid: string }>(null)
+export const AuthContext = createContext<null | User>(null)
 
 export const AuthProvider = ({ children, ...props }: AuthProviderProps) => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState<null | User>(null)
 
   useProtectedRoute(user)
   const store = useSyncExternalStore(
@@ -18,6 +18,7 @@ export const AuthProvider = ({ children, ...props }: AuthProviderProps) => {
       const unsubscribe = onAuthStateChanged((user) => {
         callback()
         props.onAuthStateChanged?.(user)
+        setUser(user)
       })
 
       return () => unsubscribe()

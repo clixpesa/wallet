@@ -9,13 +9,13 @@ export const UploadAvatar = ({ children }: { children: React.ReactNode }) => {
   // const supabase = useSupabase()
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
-    // const result = await ImagePicker.launchImageLibraryAsync({
-    //   mediaTypes: ImagePicker.MediaTypeOptions.Images,
-    //   allowsEditing: true,
-    //   aspect: [1, 1],
-    //   quality: 1,
-    //   base64: true,
-    // })
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+      base64: true,
+    })
     // uploadImage(result)
   }
 

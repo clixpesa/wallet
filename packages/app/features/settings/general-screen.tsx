@@ -1,8 +1,9 @@
 import { FormWrapper, H2, H4, KVTable, Separator, SizableText, YStack, isWeb, styled } from '@my/ui'
+import { getCurrentUser } from 'app/provider/auth/firebase/init.native'
 import { Link } from 'solito/link'
 
 export const GeneralSettingsScreen = () => {
-  // const { user, profile } = useUser()
+  const user = getCurrentUser()
 
   return (
     <FormWrapper>
@@ -23,7 +24,7 @@ export const GeneralSettingsScreen = () => {
                 <SizableText fow="900">Name</SizableText>
               </KVTable.Key>
               <KVTable.Value gap="$4">
-                {/* <SizableText>{profile?.name}</SizableText> */}
+                <SizableText>{user?.displayName}</SizableText>
                 <Link href="/profile/edit">
                   <SizableText textDecorationLine="underline">Change</SizableText>
                 </Link>
@@ -43,7 +44,7 @@ export const GeneralSettingsScreen = () => {
                 <SizableText fow="900">Email</SizableText>
               </KVTable.Key>
               <KVTable.Value gap="$4">
-                {/* <SizableText>{user?.email}</SizableText> */}
+                <SizableText>{user?.email}</SizableText>
                 <Link href="/settings/change-email">
                   <SizableText textDecorationLine="underline">Change</SizableText>
                 </Link>
@@ -54,7 +55,9 @@ export const GeneralSettingsScreen = () => {
               <KVTable.Key>
                 <SizableText fow="900">User ID</SizableText>
               </KVTable.Key>
-              <KVTable.Value>{/* <SizableText>{user?.id}</SizableText> */}</KVTable.Value>
+              <KVTable.Value>
+                <SizableText>{user?.uid}</SizableText>
+              </KVTable.Value>
             </KVTable.Row>
           </KVTable>
         </Section>
