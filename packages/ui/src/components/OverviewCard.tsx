@@ -1,47 +1,44 @@
-import { CardProps, Card, H6, H2, Paragraph, Button, XStack, Theme } from 'tamagui'
+import { Plus, Send, Minus, ArrowLeftRight } from '@tamagui/lucide-icons'
+import { CardProps, Card, H6, H2 } from 'tamagui'
+
+import { RoundedButton } from './RoundedButton'
 
 export type OverviewCardTypes = {
   title: string
-  value: string
-  badgeText?: string
-  badgeAfter?: string
-  badgeState?: 'success' | 'failure' | 'indifferent'
+  balance: string
 } & CardProps
 
-export const OverviewCard = ({
-  title,
-  value,
-  badgeText,
-  badgeState,
-  badgeAfter,
-  ...props
-}: OverviewCardTypes) => {
+export const OverviewCard = ({ title, balance, ...props }: OverviewCardTypes) => {
   return (
     <Card br="$0" bg="transparent" miw={200} $gtMd={{ miw: 220, f: 1, fb: 0 }} {...props}>
       <Card.Header f={1} jc="space-between">
         <H6 size="$4" fow="$1" theme="alt2">
           {title}
         </H6>
-        <H2 mt="$2">{value}</H2>
-        <XStack mt="$4">
-          {!!badgeText && (
-            <Theme
-              name={
-                badgeState === 'success'
-                  ? 'green_alt1'
-                  : badgeState === 'failure'
-                  ? 'red_alt1'
-                  : undefined
-              }
-            >
-              <Button size="$2" disabled>
-                {badgeText}
-              </Button>
-            </Theme>
-          )}
-          {badgeAfter && <Paragraph>{badgeAfter}</Paragraph>}
-        </XStack>
+        <H2 mt="$2">{balance}</H2>
       </Card.Header>
+      <Card.Footer padded gap="$6">
+        <RoundedButton
+          buttonText="Add"
+          icon={Plus}
+          action={() => console.log('Navigate to add screen')}
+        />
+        <RoundedButton
+          buttonText="Withdraw"
+          icon={Minus}
+          action={() => console.log('Navigate to withdraw screen')}
+        />
+        <RoundedButton
+          buttonText="Send"
+          icon={Send}
+          action={() => console.log('Navigate to Sendscreen')}
+        />
+        <RoundedButton
+          buttonText="Swap"
+          icon={ArrowLeftRight}
+          action={() => console.log('Navigate to Swap screen')}
+        />
+      </Card.Footer>
     </Card>
   )
 }
