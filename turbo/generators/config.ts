@@ -141,46 +141,4 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
       return actions
     },
   })
-  plop.setGenerator('router', {
-    description: 'Generates a tRPC router and registers it',
-    prompts: async (inquirer) => {
-      const { name } = await inquirer.prompt({
-        type: 'input',
-        name: 'name',
-        message: "What's the name of the new router to create? (e.g. user, post, comment)",
-        validate: (input: string) => {
-          if (!input) {
-            return 'name is required'
-          }
-          return true
-        },
-      })
-
-      return {
-        name,
-      }
-    },
-    actions: (prompts) => {
-      const actions: PlopTypes.ActionType[] = [
-        {
-          type: 'add',
-          path: `{{ turbo.paths.root }}/packages/api/src/routers/{{ camelCase name }}.ts`,
-          templateFile: 'templates/trpc-router.hbs',
-        },
-        {
-          type: 'append',
-          path: `{{ turbo.paths.root }}/packages/api/src/routers/_app.ts`,
-          pattern: "import { createTRPCRouter } from '../trpc'",
-          template: "import { {{ camelCase name }}Router } from './{{ camelCase name }}'",
-        },
-        {
-          type: 'append',
-          path: `{{ turbo.paths.root }}/packages/api/src/routers/_app.ts`,
-          pattern: 'createTRPCRouter({',
-          template: '  {{ camelCase name }}: {{ camelCase name }}Router,',
-        },
-      ]
-      return actions
-    },
-  })
 }

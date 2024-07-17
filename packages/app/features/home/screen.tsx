@@ -24,7 +24,7 @@ const TransactionsSection = () => {
   return (
     <YStack gap="$4">
       <XStack px="$4.5" ai="center" gap="$2" jc="space-between" mb="$4">
-        <H4 fow="400">Transactions</H4>
+        <H4 fow="400">Recent Transactions</H4>
         <Theme name="alt2">
           <Button size="$2" chromeless {...useLink({ href: '/' })} iconAfter={ArrowRight}>
             See all
