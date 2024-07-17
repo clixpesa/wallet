@@ -8376,109 +8376,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/auth-helpers-nextjs@npm:^0.9.0":
-  version: 0.9.0
-  resolution: "@supabase/auth-helpers-nextjs@npm:0.9.0"
-  dependencies:
-    "@supabase/auth-helpers-shared": "npm:0.6.3"
-    set-cookie-parser: "npm:^2.6.0"
-  peerDependencies:
-    "@supabase/supabase-js": ^2.19.0
-  checksum: 10/7fa5f2ffc8bf2c4208abaeb0f640cd5dabb1aede2b1d6b72b871b58f2c3ea5b3fbe02ef6562247c9e9c533b1fc116bc87e6b6a0feaea62a0f0478f20df5c6830
-  languageName: node
-  linkType: hard
-
-"@supabase/auth-helpers-react@npm:^0.4.2":
-  version: 0.4.2
-  resolution: "@supabase/auth-helpers-react@npm:0.4.2"
-  peerDependencies:
-    "@supabase/supabase-js": ^2.19.0
-  checksum: 10/0ecbb74db94ab9c8ab34e4d19969c44e06fa3ab7dd5db59e85416f07af54527972d75068990ffce50e658f12ae178fcfe8b5c760aac1d847bbdb34a3ead9e723
-  languageName: node
-  linkType: hard
-
-"@supabase/auth-helpers-shared@npm:0.6.3":
-  version: 0.6.3
-  resolution: "@supabase/auth-helpers-shared@npm:0.6.3"
-  dependencies:
-    jose: "npm:^4.14.4"
-  peerDependencies:
-    "@supabase/supabase-js": ^2.19.0
-  checksum: 10/f3333fa7b67898c013bf059a0129ee198a971fe68d3f59ad453abe4f6cf542f736ff86a02612d01f9afca43530bda42b3145aa0eacf0548e3424cb4f46b9a522
-  languageName: node
-  linkType: hard
-
-"@supabase/auth-js@npm:2.64.2":
-  version: 2.64.2
-  resolution: "@supabase/auth-js@npm:2.64.2"
-  dependencies:
-    "@supabase/node-fetch": "npm:^2.6.14"
-  checksum: 10/41ca58a34a68a983a3178f5ab38d5f56a3cbf08c271fe6c3a7c1c0d3794869ff93a05822668047b80ef1f49f36e03928f9aa73efe813378bbdc594853aac2cbb
-  languageName: node
-  linkType: hard
-
-"@supabase/functions-js@npm:2.4.1":
-  version: 2.4.1
-  resolution: "@supabase/functions-js@npm:2.4.1"
-  dependencies:
-    "@supabase/node-fetch": "npm:^2.6.14"
-  checksum: 10/5514f5d7d597a0003c5425b61e3e40bf866eadce364fd88eb4f5b25ceef2141e74453cdc9f3dfe02833e6e9dbac85d09f2298088889f1b74187c644e09025426
-  languageName: node
-  linkType: hard
-
-"@supabase/node-fetch@npm:2.6.15, @supabase/node-fetch@npm:^2.6.14":
-  version: 2.6.15
-  resolution: "@supabase/node-fetch@npm:2.6.15"
-  dependencies:
-    whatwg-url: "npm:^5.0.0"
-  checksum: 10/ba6149b2fb3e3826f596b38e92db94fe8193fe061e02bb55af6f475d3a892041ac61d89a47fc2a926a48a57789dfd2129d01a17a76318ef3c47b3321711b2e26
-  languageName: node
-  linkType: hard
-
-"@supabase/postgrest-js@npm:1.15.5":
-  version: 1.15.5
-  resolution: "@supabase/postgrest-js@npm:1.15.5"
-  dependencies:
-    "@supabase/node-fetch": "npm:^2.6.14"
-  checksum: 10/86f2d17b04e28cf325798118ef029577e40ccb3d14ec4a23f93a25ea4a95acf6d6a92ae9423609e59d98674fc4acee6a426ec9cb32ae910502aee67b7baa7fba
-  languageName: node
-  linkType: hard
-
-"@supabase/realtime-js@npm:2.9.5":
-  version: 2.9.5
-  resolution: "@supabase/realtime-js@npm:2.9.5"
-  dependencies:
-    "@supabase/node-fetch": "npm:^2.6.14"
-    "@types/phoenix": "npm:^1.5.4"
-    "@types/ws": "npm:^8.5.10"
-    ws: "npm:^8.14.2"
-  checksum: 10/0bfae2a7848fd59ec948a7ab1df803c90dd510b51dee3e20317bad896d728d1f816140c2bf75bb6e52cc006d61a53f3be25ae09b84bdb53d33bffa7aabefa4eb
-  languageName: node
-  linkType: hard
-
-"@supabase/storage-js@npm:2.6.0":
-  version: 2.6.0
-  resolution: "@supabase/storage-js@npm:2.6.0"
-  dependencies:
-    "@supabase/node-fetch": "npm:^2.6.14"
-  checksum: 10/ce777266cecbaecb4340340054615be765f4dfa255ef76d77dc6e3fa95d8cd0e5334e1baaee80b6c83e0cf0178b0d7ae4067ae0c0122dadd40465ced4e595e33
-  languageName: node
-  linkType: hard
-
-"@supabase/supabase-js@npm:^2.39.3":
-  version: 2.43.5
-  resolution: "@supabase/supabase-js@npm:2.43.5"
-  dependencies:
-    "@supabase/auth-js": "npm:2.64.2"
-    "@supabase/functions-js": "npm:2.4.1"
-    "@supabase/node-fetch": "npm:2.6.15"
-    "@supabase/postgrest-js": "npm:1.15.5"
-    "@supabase/realtime-js": "npm:2.9.5"
-    "@supabase/storage-js": "npm:2.6.0"
-  checksum: 10/7eb6f57feaefa697f25a12e1dd3e00d1a5e104cc775cdc7d136e6356991d056d1f84edf09b4fe9c0d8cdbdc38fe5f3c7256d1879bcc7e230f13011235bd66076
-  languageName: node
-  linkType: hard
-
 "@svgr/babel-plugin-add-jsx-attribute@npm:8.0.0":
   version: 8.0.0
   resolution: "@svgr/babel-plugin-add-jsx-attribute@npm:8.0.0"
@@ -10528,13 +10425,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@trpc/server@npm:^10.45.1":
-  version: 10.45.2
-  resolution: "@trpc/server@npm:10.45.2"
-  checksum: 10/0f3fdb5cd505c9f6947e00d67d61663cf87c51c9a591e5f3443f62b37b7d78e1f729cc6784090ec46e4a3c38e73277170590be8eeb8c4ee3dffcc80a3557c1a4
-  languageName: node
-  linkType: hard
-
 "@trysound/sax@npm:0.2.0":
   version: 0.2.0
   resolution: "@trysound/sax@npm:0.2.0"
@@ -11090,13 +10980,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/phoenix@npm:^1.5.4":
-  version: 1.6.5
-  resolution: "@types/phoenix@npm:1.6.5"
-  checksum: 10/b87416393159f0ba2812875fc2721914a3284cde8b1f263dfcd46f4149dae7f4efc2bfa062d558c8bbfb7ae2a9d802487b0dd4744ff08799386cbc49c19368f0
-  languageName: node
-  linkType: hard
-
 "@types/pretty-hrtime@npm:^1.0.0":
   version: 1.0.3
   resolution: "@types/pretty-hrtime@npm:1.0.3"
@@ -11227,15 +11110,6 @@ __metadata:
   version: 0.0.20
   resolution: "@types/web-bluetooth@npm:0.0.20"
   checksum: 10/2faa323e5c994e9468fff4675e3b6d35f3730eb4dc7c761d02267fb6246dbfd659fd8f3583db0872aae05b3ee139799c25655bbe79bf1b56c08c06e665db814b
-  languageName: node
-  linkType: hard
-
-"@types/ws@npm:^8.5.10":
-  version: 8.5.10
-  resolution: "@types/ws@npm:8.5.10"
-  dependencies:
-    "@types/node": "npm:*"
-  checksum: 10/9b414dc5e0b6c6f1ea4b1635b3568c58707357f68076df9e7cd33194747b7d1716d5189c0dbdd68c8d2521b148e88184cf881bac7429eb0e5c989b001539ed31
   languageName: node
   linkType: hard
 
@@ -20617,13 +20491,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jose@npm:^4.14.4":
-  version: 4.15.7
-  resolution: "jose@npm:4.15.7"
-  checksum: 10/7453aad039da7f0174352d4be416a8688c3cd339b332d23af84fbce1b8b907387dd70aaa02ebbadbc59cdb66efdc30f3b5a0c067da137324ac655db227ac90f3
-  languageName: node
-  linkType: hard
-
 "js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -22529,14 +22396,10 @@ __metadata:
   dependencies:
     "@next/bundle-analyzer": "npm:^13.5.6"
     "@next/eslint-plugin-next": "npm:^14.0.4"
-    "@supabase/auth-helpers-nextjs": "npm:^0.9.0"
-    "@supabase/auth-helpers-react": "npm:^0.4.2"
-    "@supabase/supabase-js": "npm:^2.39.3"
     "@tamagui/next-plugin": "npm:^1.102.0"
     "@tamagui/next-theme": "npm:^1.102.0"
     "@tamagui/react-native-svg": "npm:^1.102.0"
     "@tanstack/react-query": "npm:4.18.0"
-    "@trpc/server": "npm:^10.45.1"
     "@types/node": "npm:^18.6.4"
     app: "npm:*"
     dotenv-cli: "npm:^6.0.0"
@@ -26108,7 +25971,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"set-cookie-parser@npm:^2.4.8, set-cookie-parser@npm:^2.6.0":
+"set-cookie-parser@npm:^2.4.8":
   version: 2.6.0
   resolution: "set-cookie-parser@npm:2.6.0"
   checksum: 10/8d451ebadb760989f93b634942c79de3c925ca7a986d133d08a80c40b5ae713ce12e354f0d5245c49f288c52daa7bd6554d5dc52f8a4eecaaf5e192881cf2b1f
@@ -29630,7 +29493,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^8.12.1, ws@npm:^8.14.2, ws@npm:^8.2.3":
+"ws@npm:^8.12.1, ws@npm:^8.2.3":
   version: 8.17.1
   resolution: "ws@npm:8.17.1"
   peerDependencies:
