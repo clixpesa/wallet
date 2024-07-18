@@ -1,4 +1,4 @@
-import { Provider, loadThemePromise } from 'app/provider'
+import { Provider } from 'app/provider'
 import { useFonts } from 'expo-font'
 import { SplashScreen, Stack } from 'expo-router'
 import { useCallback, useEffect, useState } from 'react'
@@ -16,23 +16,8 @@ export default function HomeLayout() {
 
   const [themeLoaded, setThemeLoaded] = useState(false)
 
-  // useEffect(() => {
-  //   supabase.auth
-  //     .getSession()
-  //     .then(({ data }) => {
-  //       if (data) {
-  //         setInitialSession(data.session)
-  //       }
-  //     })
-  //     .finally(() => {
-  //       setSessionLoadAttempted(true)
-  //     })
-  // }, [])
-
   useEffect(() => {
-    loadThemePromise.then(() => {
-      setThemeLoaded(true)
-    })
+    setThemeLoaded(true)
   }, [])
 
   const onLayoutRootView = useCallback(async () => {

@@ -1,6 +1,6 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native'
 import { ThemeProviderProps, useThemeSetting as next_useThemeSetting } from '@tamagui/next-theme'
+import { mmkvStorage } from 'app/store/mmkvStorage'
 import { StatusBar } from 'expo-status-bar'
 import { createContext, useContext, useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import { Appearance, useColorScheme } from 'react-native'
@@ -12,26 +12,20 @@ type ThemeName = 'light' | 'dark' | 'system'
 
 // start early
 let persistedTheme: ThemeName | null = null
-export const loadThemePromise = AsyncStorage.getItem('@preferred_theme')
-loadThemePromise.then((val) => {
-  persistedTheme = val as ThemeName
-})
+export const loadTheme = mmkvStorage.getItem('@preferred_theme')
+persistedTheme = loadTheme as ThemeName
 
 export const UniversalThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [current, setCurrent] = useState<ThemeName>(persistedTheme ?? 'system')
   const systemTheme = useColorScheme() || 'system'
 
   useLayoutEffect(() => {
-    async function main() {
-      await loadThemePromise
-      setCurrent(persistedTheme as ThemeName)
-    }
-    main()
+    setCurrent(persistedTheme as ThemeName)
   }, [])
 
   useEffect(() => {
     if (current) {
-      AsyncStorage.setItem('@preferred_theme', current)
+      mmkvStorage.setItem('@preferred_theme', current)
     }
   }, [current])
 
