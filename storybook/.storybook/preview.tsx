@@ -80,9 +80,7 @@ const preview: Preview = {
     //   },
     // },
   },
-
   decorators: [StorybookDecorator],
-  tags: ['autodocs', 'autodocs', 'autodocs']
 }
 
 export default preview

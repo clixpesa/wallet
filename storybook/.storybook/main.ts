@@ -1,14 +1,14 @@
-import { dirname, join } from 'path'
 import { StorybookConfig } from '@storybook/nextjs'
 
 const config: StorybookConfig = {
-  stories: ['../../../packages/ui/**/*.@(mdx|stories.@(ts|tsx))'],
-  features: {},
-
+  stories: ['../../packages/ui/**/*.stories.@(ts|tsx|mdx)'],
+  features: {
+    storyStoreV7: false,
+  },
   addons: [
-    getAbsolutePath('@storybook/addon-links'),
-    getAbsolutePath('@storybook/addon-essentials'),
-    getAbsolutePath('@storybook/addon-interactions'),
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-interactions',
     {
       name: '@storybook/addon-react-native-web',
       options: {
@@ -28,25 +28,26 @@ const config: StorybookConfig = {
         ],
       },
     },
-    getAbsolutePath('@chromatic-com/storybook'),
   ],
-
   framework: {
-    name: getAbsolutePath('@storybook/nextjs'),
+    name: '@storybook/nextjs',
     options: {
       builder: {
+        useSWC: true,
+      },
+    },
+  },
+  core: {
+    builder: {
+      name: '@storybook/builder-webpack5',
+      options: {
         fsCache: true,
         lazyCompilation: true,
       },
     },
   },
-
-  typescript: {
-    reactDocgen: 'react-docgen-typescript',
+  docs: {
+    autodocs: true,
   },
 }
 export default config
-
-function getAbsolutePath(value: string): any {
-  return dirname(require.resolve(join(value, 'package.json')))
-}

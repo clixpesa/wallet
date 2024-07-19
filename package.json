@@ -3,7 +3,9 @@
   "private": true,
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/*",
+    "storybook",
+    "storybook-rn"
   ],
   "scripts": {
     "_with-env": "dotenv -e .env -c -- ",
