@@ -11,12 +11,12 @@
   },
   "dependencies": {
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
-    "ui": "*",
     "app": "*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-native": "0.74.1",
-    "react-native-web": "~0.19.10"
+    "react-native-web": "~0.19.10",
+    "ui": "*"
   },
   "devDependencies": {
     "@babel/runtime": "^7.18.9",
