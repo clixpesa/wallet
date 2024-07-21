@@ -1,5 +1,5 @@
-import { H2, Paragraph, SubmitButton, Theme, YStack, isWeb } from '@my/ui'
 import { SchemaForm, formFields } from 'app/utils/SchemaForm'
+import { H2, Paragraph, SubmitButton, Theme, YStack, isWeb } from 'ui'
 import { z } from 'zod'
 
 export const CreateScreen = () => {

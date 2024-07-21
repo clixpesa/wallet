@@ -9,7 +9,7 @@ import {
   Theme,
   YStack,
   isWeb,
-} from '@my/ui'
+} from 'ui'
 import { signInWithPhoneNumber } from 'app/provider/auth/firebase/init.native'
 import { Firebase } from 'app/provider/auth/firebase/types'
 import { SchemaForm, formFields } from 'app/utils/SchemaForm'

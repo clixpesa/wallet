@@ -151,7 +151,7 @@ The package is included in the `packages` workspace in this repo. You can tweak 
 
 Note we're following the [design systems guide](https://tamagui.dev/docs/guides/design-systems) and creating our own package for components.
 
-See `packages/ui` named `@my/ui` for how this works.
+See `packages/ui` named `ui` for how this works.
 
 ## Adding new dependencies
 

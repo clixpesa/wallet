@@ -1,4 +1,4 @@
-import { H1, Paragraph, YStack, isWeb } from '@my/ui'
+import { H1, Paragraph, YStack, isWeb } from 'ui'
 
 export const TermsOfServiceScreen = () => {
   return (

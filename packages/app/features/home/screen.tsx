@@ -1,6 +1,6 @@
-import { Button, H4, OverviewCard, ScrollView, Theme, XStack, YStack } from '@my/ui'
 import { ArrowRight } from '@tamagui/lucide-icons'
 import { useLink } from 'solito/link'
+import { Button, H4, OverviewCard, ScrollView, Theme, XStack, YStack } from 'ui'
 
 export function HomeScreen() {
   return (

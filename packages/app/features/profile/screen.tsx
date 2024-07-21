@@ -9,7 +9,7 @@ import {
   XStack,
   YStack,
   getTokens,
-} from '@my/ui'
+} from 'ui'
 import { Cog, HelpCircle, Users } from '@tamagui/lucide-icons'
 import { getCurrentUser } from 'app/provider/auth/firebase/init.native'
 import { useSafeAreaInsets } from 'app/utils/useSafeAreaInsets'

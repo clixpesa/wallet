@@ -1,4 +1,4 @@
-import { CustomToast, ToastProvider as ToastProviderOG } from '@my/ui'
+import { CustomToast, ToastProvider as ToastProviderOG } from 'ui'
 
 import { ToastViewport, ToastViewportProps } from './ToastViewport'
 

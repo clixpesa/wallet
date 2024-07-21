@@ -1,4 +1,4 @@
-import { Avatar, FullscreenSpinner, SubmitButton, Theme, YStack, useToastController } from '@my/ui'
+import { Avatar, FullscreenSpinner, SubmitButton, Theme, YStack, useToastController } from 'ui'
 import { getCurrentUser } from 'app/provider/auth/firebase/init.native'
 import { User } from 'app/provider/auth/firebase/types'
 import { SchemaForm, formFields } from 'app/utils/SchemaForm'

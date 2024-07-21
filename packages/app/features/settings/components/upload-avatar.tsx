@@ -1,4 +1,4 @@
-import { YStack } from '@my/ui'
+import { YStack } from 'ui'
 import { Upload } from '@tamagui/lucide-icons'
 import { decode } from 'base64-arraybuffer'
 import * as ImagePicker from 'expo-image-picker'

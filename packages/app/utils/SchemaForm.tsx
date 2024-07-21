@@ -15,7 +15,7 @@ import {
   TextAreaField,
   TextField,
   Theme,
-} from '@my/ui'
+} from 'ui'
 import { createTsForm, createUniqueFieldSchema } from '@ts-react/form'
 import { ComponentProps } from 'react'
 import { useFormContext } from 'react-hook-form'

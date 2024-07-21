@@ -1,6 +1,6 @@
-import { Onboarding, OnboardingStepInfo, StepContent } from '@my/ui'
 import { PiggyBank, Coins, PersonStanding } from '@tamagui/lucide-icons'
 import { useRouter } from 'solito/router'
+import { Onboarding, OnboardingStepInfo, StepContent } from 'ui'
 
 const steps: OnboardingStepInfo[] = [
   {

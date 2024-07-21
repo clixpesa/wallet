@@ -1,7 +1,7 @@
-import { Button, H4, ScrollView, Theme, XStack, YStack, H2, H6, Card, RoundedButton } from '@my/ui'
 import { ArrowRight, Bell, Plus, Minus, Send, ArrowLeftRight, Scan } from '@tamagui/lucide-icons'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useLink } from 'solito/link'
+import { Button, H4, ScrollView, Theme, XStack, YStack, H2, H6, Card, RoundedButton } from 'ui'
 
 export default function Home() {
   return (

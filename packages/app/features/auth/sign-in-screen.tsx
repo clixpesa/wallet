@@ -1,4 +1,4 @@
-import { H2, LoadingOverlay, Paragraph, SubmitButton, Text, Theme, YStack, isWeb } from '@my/ui'
+import { H2, LoadingOverlay, Paragraph, SubmitButton, Text, Theme, YStack, isWeb } from 'ui'
 import { SchemaForm, formFields } from 'app/utils/SchemaForm'
 import { useEffect } from 'react'
 import { FormProvider, useForm, useWatch } from 'react-hook-form'

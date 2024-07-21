@@ -7,19 +7,16 @@ module.exports = function (api) {
       ...(process.env.EAS_BUILD_PLATFORM === 'android'
         ? []
         : [
-          [
-            '@tamagui/babel-plugin',
-            {
-              components: ['@my/ui', 'tamagui'],
-              config: '../../packages/ui/src/tamagui.config.ts',
-              disable: true
-            },
-          ],
-        ]),
-      [
-        'transform-inline-environment-variables',
-        {},
-      ],
+            [
+              '@tamagui/babel-plugin',
+              {
+                components: ['ui', 'tamagui'],
+                config: '../../packages/ui/src/tamagui.config.ts',
+                disable: true,
+              },
+            ],
+          ]),
+      ['transform-inline-environment-variables', {}],
     ],
   }
 }

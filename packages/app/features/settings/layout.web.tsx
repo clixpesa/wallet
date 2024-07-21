@@ -1,4 +1,4 @@
-import { FullscreenSpinner, Separator, XStack, YStack } from '@my/ui'
+import { FullscreenSpinner, Separator, XStack, YStack } from 'ui'
 
 import { SettingsScreen } from './screen'
 
