@@ -4,8 +4,8 @@
   "workspaces": [
     "apps/*",
     "packages/*",
-    "storybook",
-    "storybook-rn"
+    "storybook/*",
+    "storybook-rn/*"
   ],
   "scripts": {
     "_with-env": "dotenv -e .env -c -- ",
