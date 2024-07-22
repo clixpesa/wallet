@@ -1,23 +1,9 @@
-import { Button } from '@my/ui'
-import { useRouter } from 'solito/router'
+import { Button } from 'ui'
 
 import { IconGoogle } from './IconGoogle'
 
 export function GoogleSignIn() {
-  const router = useRouter()
-  const supabase = useSupabase()
-  const handleOAuthSignIn = async () => {
-    // const { error } = await supabase.auth.signInWithOAuth({
-    //   provider: 'google',
-    //   options: {
-    //     // your options
-    //   },
-    // })
-    // if (error) {
-    //   // handle error
-    // }
-    // router.replace('/')
-  }
+  const handleOAuthSignIn = async () => {}
 
   return (
     <Button br="$10" onPress={() => handleOAuthSignIn()} icon={IconGoogle}>

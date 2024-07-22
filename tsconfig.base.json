@@ -3,7 +3,7 @@
     "baseUrl": ".",
     "rootDir": ".",
     "paths": {
-      "@my/*": ["packages/*"],
+      "@clixpesa/*": ["packages/*"],
       "app/*": ["packages/app/*"],
       "ui/*": ["packages/ui/*"]
     },

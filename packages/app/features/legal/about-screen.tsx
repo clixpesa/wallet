@@ -1,4 +1,4 @@
-import { Paragraph, YStack } from '@my/ui'
+import { Paragraph, YStack } from 'ui'
 
 export const AboutScreen = () => {
   return (

@@ -1,4 +1,4 @@
-import { Avatar, Circle, ColorTokens, Theme, YStack, validToken } from '@my/ui'
+import { Avatar, Circle, ColorTokens, Theme, YStack, validToken } from 'ui'
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
 import { LinearGradient } from '@tamagui/linear-gradient'
 import { Home, Plus } from '@tamagui/lucide-icons'

@@ -1,4 +1,4 @@
-import { config, isWeb, TamaguiProvider as TamaguiProviderOG, useDidFinishSSR } from '@my/ui'
+import { config, isWeb, TamaguiProvider as TamaguiProviderOG, useDidFinishSSR } from 'ui'
 
 import { useRootTheme, useThemeSetting } from '../theme/UniversalThemeProvider'
 

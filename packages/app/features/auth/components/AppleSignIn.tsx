@@ -1,4 +1,4 @@
-import { Button } from '@my/ui'
+import { Button } from 'ui'
 import { useRouter } from 'solito/router'
 
 import { IconApple } from './IconApple'

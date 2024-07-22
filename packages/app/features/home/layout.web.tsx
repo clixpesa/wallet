@@ -13,7 +13,7 @@ import {
   getTokens,
   useThemeName,
   validToken,
-} from '@my/ui'
+} from 'ui'
 import { Menu, Plus } from '@tamagui/lucide-icons'
 import { useRouter as useNextRouter } from 'next/router'
 import { useEffect, useState } from 'react'

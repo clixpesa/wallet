@@ -1,4 +1,4 @@
-import { Button } from '@my/ui'
+import { Button } from 'ui'
 import * as WebBrowser from 'expo-web-browser'
 import { useRouter } from 'solito/router'
 

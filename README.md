@@ -29,12 +29,17 @@ In the apps/mobile folder you can use EAS and a few helpful scripts:
 
 Add `--local` to build locally.
 
+### Storybook
+
+- `storybook` (Web Storybook)
+- `storybook-rn` (Native Storybook)
+
 ### Storybook scripts
 
 - Storybook Web: `yarn storybook:web`
 - Storybook iOS: `yarn storybook:ios`
 - Storybook Android: `yarn storybook:android`
-- Publish to Chromatic: `yarn chromatic` (Need to set your token first in `apps/storybook/package.json -> scripts -> chromatic`)
+- Publish to Chromatic: `yarn chromatic` (Need to set your token first in `storybook/package.json -> scripts -> chromatic`)
 
 ### Code generation script
 
@@ -46,10 +51,8 @@ Add `--local` to build locally.
 The main apps are:
 
 - `apps`
-  - `expo` (Native)
-  - `next` (Web)
-  - `storybook` (Web Storybook)
-  - `storybook-rn` (Native Storybook)
+  - `mobile` (Native)
+  - `web(next)` (Web)
 - `packages` Shared packages across apps
   - `ui` Includes your custom UI kit that will be optimized by Tamagui
   - `app` You'll be importing most files from `app/`
@@ -148,7 +151,7 @@ The package is included in the `packages` workspace in this repo. You can tweak 
 
 Note we're following the [design systems guide](https://tamagui.dev/docs/guides/design-systems) and creating our own package for components.
 
-See `packages/ui` named `@my/ui` for how this works.
+See `packages/ui` named `ui` for how this works.
 
 ## Adding new dependencies
 

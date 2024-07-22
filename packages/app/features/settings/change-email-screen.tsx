@@ -1,3 +1,5 @@
+import { SchemaForm, formFields } from 'app/utils/SchemaForm'
+import { useRouter } from 'solito/router'
 import {
   Fieldset,
   H2,
@@ -9,9 +11,7 @@ import {
   isWeb,
   useToastController,
   validToken,
-} from '@my/ui'
-import { SchemaForm, formFields } from 'app/utils/SchemaForm'
-import { useRouter } from 'solito/router'
+} from 'ui'
 import { z } from 'zod'
 
 const ChangeEmailSchema = z.object({

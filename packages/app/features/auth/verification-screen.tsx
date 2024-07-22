@@ -1,4 +1,4 @@
-import { YStack } from '@my/ui'
+import { YStack } from 'ui'
 
 export const VerificationScreen = () => {
   return <YStack>{/*  */}</YStack>

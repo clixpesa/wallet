@@ -1,4 +1,4 @@
-import { themes } from '@my/ui/src/themes/theme'
+import { themes } from 'ui/src/themes/theme'
 import { Preview } from '@storybook/react'
 import '@tamagui/core/reset.css'
 import '@tamagui/font-inter/css/400.css'
@@ -80,9 +80,7 @@ const preview: Preview = {
     //   },
     // },
   },
-
   decorators: [StorybookDecorator],
-  tags: ['autodocs', 'autodocs', 'autodocs']
 }
 
 export default preview
