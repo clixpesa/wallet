@@ -1,10 +1,10 @@
-import { Avatar, Circle, ColorTokens, Theme, YStack, validToken } from 'ui'
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
 import { LinearGradient } from '@tamagui/linear-gradient'
 import { Home, Plus } from '@tamagui/lucide-icons'
 import { Stack, Tabs } from 'expo-router'
 import { SolitoImage } from 'solito/image'
 import { useRouter } from 'solito/router'
+import { Avatar, Circle, ColorTokens, Theme, YStack, validToken } from 'ui'
 
 export default function Layout() {
   return (
