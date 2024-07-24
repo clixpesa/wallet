@@ -253,7 +253,27 @@ function DatePickerBody() {
 }
 
 /** ------ EXAMPLE ------ */
-export function DatePickerExample() {
+export function DatePickerExample({
+  disabled,
+  placeholderTextColor,
+  value,
+  onChangeText,
+  onBlur,
+  ref,
+  placeholder,
+  id,
+  ...props
+}: {
+  disabled: boolean
+  placeholderTextColor?: string
+  value: string | undefined
+  onChangeText: (dateValue: string) => void
+  onBlur: () => void
+  ref: React.RefObject<HTMLInputElement>
+  placeholder?: string
+  id: string
+  [key: string]: any
+}) {
   const [selectedDates, onDatesChange] = useState<Date[]>([])
   const [open, setOpen] = useState(false)
 
@@ -268,7 +288,10 @@ export function DatePickerExample() {
       onOpenChange={setOpen}
       config={{
         selectedDates,
-        onDatesChange,
+        onDatesChange: (dates) => {
+          onDatesChange(dates)
+          onChangeText(dates[0]?.toISOString().split('T')[0] || '')
+        },
         calendar: {
           startDay: 1,
         },
