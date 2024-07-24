@@ -1,21 +1,11 @@
-import {
-  FormWrapper,
-  H2,
-  H3,
-  CodeConfirmation,
-  Paragraph,
-  View,
-  SubmitButton,
-  Theme,
-  YStack,
-  isWeb,
-} from 'ui'
 import { signInWithPhoneNumber } from 'app/provider/auth/firebase/init.native'
 import { Firebase } from 'app/provider/auth/firebase/types'
 import { SchemaForm, formFields } from 'app/utils/SchemaForm'
 import { useState } from 'react'
 import { FormProvider, useForm, useWatch } from 'react-hook-form'
 import { useRouter } from 'solito/router'
+import { FormWrapper, H2, H3, Paragraph, View, SubmitButton, Theme, YStack, isWeb } from 'ui'
+import { CodeConfirmation } from 'ui/src/components/forms/inputs/OneTimeCodeInput'
 // import { Link } from 'solito/link'
 import { z } from 'zod'
 
