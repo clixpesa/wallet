@@ -9794,6 +9794,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:5.51.9":
+  version: 5.51.9
+  resolution: "@tanstack/query-core@npm:5.51.9"
+  checksum: 10/263f64a2e9448cc412fa9f29b0b77af1a5eeb66ecba6965548d4be97b7e99cca0dd194992b686426745030240764846d9d7e39e43d3ed64b97afb47f3a9661d7
+  languageName: node
+  linkType: hard
+
 "@tanstack/react-query@npm:4.18.0":
   version: 4.18.0
   resolution: "@tanstack/react-query@npm:4.18.0"
@@ -9810,6 +9817,17 @@ __metadata:
     react-native:
       optional: true
   checksum: 10/fd2f3a95474752d65289f98750343224eef98706f3ecc484beb0f67a64df0961479652b420504429da3cac86441d23d19f716f84bcce7d5614993ebe8a6bb20a
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.51.11":
+  version: 5.51.11
+  resolution: "@tanstack/react-query@npm:5.51.11"
+  dependencies:
+    "@tanstack/query-core": "npm:5.51.9"
+  peerDependencies:
+    react: ^18.0.0
+  checksum: 10/e840eb5f90fb6ec1693f98be651c5fa55a2885930015a2bf1f8699def596293eac79df8b3335e31b87af0a189d40597d35986379c930faf3496fc5061861d988
   languageName: node
   linkType: hard
 
@@ -11858,7 +11876,7 @@ __metadata:
     "@tamagui/lucide-icons": "npm:^1.104.2"
     "@tamagui/shorthands": "npm:^1.104.2"
     "@tamagui/themes": "npm:^1.104.2"
-    "@tanstack/react-query": "npm:4.18.0"
+    "@tanstack/react-query": "npm:^5.51.11"
     "@types/react": "npm:^18.0.27"
     base64-arraybuffer: "npm:^1.0.2"
     burnt: "npm:^0.12.1"
@@ -11876,6 +11894,7 @@ __metadata:
     typescript: "npm:^5.3.3"
     ui: "npm:*"
     zod: "npm:^3.22.2"
+    zustand: "npm:^4.5.4"
   languageName: unknown
   linkType: soft
 
@@ -29648,5 +29667,25 @@ __metadata:
     react:
       optional: true
   checksum: 10/9e9e92ce7378c5de1d7682f4f10340a1c07a81b673ad0a125b59883a6ade3f2bf39eac6ccc5b05630f9df6ed925291f681592db59ccd3815685c2e83f67c8525
+  languageName: node
+  linkType: hard
+
+"zustand@npm:^4.5.4":
+  version: 4.5.4
+  resolution: "zustand@npm:4.5.4"
+  dependencies:
+    use-sync-external-store: "npm:1.2.0"
+  peerDependencies:
+    "@types/react": ">=16.8"
+    immer: ">=9.0.6"
+    react: ">=16.8"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    immer:
+      optional: true
+    react:
+      optional: true
+  checksum: 10/44431b75f055c5440f47f448124f86230e1612bca8b09527890ec67a10b55f7ef9c288301f89346630552357627380c28222d933accdb55c119cf05e15f9e6cc
   languageName: node
   linkType: hard
