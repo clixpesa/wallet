@@ -1,7 +1,7 @@
 import { OnboardingScreen } from 'app/features/auth/onboarding-screen'
 import { Stack } from 'expo-router'
 
-export default function Screen() {
+export default function OnbordingScreen() {
   return (
     <>
       <Stack.Screen
