@@ -1,6 +1,6 @@
-import { FormWrapper, H2, H4, KVTable, Separator, SizableText, YStack, isWeb, styled } from 'ui'
 import { getCurrentUser } from 'app/provider/auth/firebase/init.native'
 import { Link } from 'solito/link'
+import { FormWrapper, H2, H4, KVTable, Separator, SizableText, YStack, isWeb, styled } from 'ui'
 
 export const GeneralSettingsScreen = () => {
   const user = getCurrentUser()

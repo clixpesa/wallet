@@ -50,13 +50,6 @@ export const ChangePasswordScreen = () => {
           secureTextEntry: true,
         },
       }}
-      renderBefore={() =>
-        isWeb && (
-          <YStack px="$4" py="$4" pb="$2">
-            <H2>Change Password</H2>
-          </YStack>
-        )
-      }
       renderAfter={({ submit }) => (
         <Theme inverse>
           <SubmitButton onPress={() => submit()}>Update Password</SubmitButton>

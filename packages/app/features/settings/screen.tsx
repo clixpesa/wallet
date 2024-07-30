@@ -1,10 +1,10 @@
-import { Paragraph, ScrollView, Separator, Settings, YStack, isWeb, useMedia } from 'ui'
 import { Book, Cog, Info, Lock, LogOut, Mail, Moon, Twitter, BookKey } from '@tamagui/lucide-icons'
 import { useThemeSetting } from 'app/provider/theme'
 import { redirect } from 'app/utils/redirect'
 import { usePathname } from 'app/utils/usePathname'
 import * as Application from 'expo-application'
 import { useLink } from 'solito/link'
+import { Paragraph, ScrollView, Separator, Settings, YStack, isWeb, useMedia } from 'ui'
 
 export const SettingsScreen = () => {
   const media = useMedia()
@@ -114,9 +114,7 @@ const SettingsThemeAction = () => {
 }
 
 const SettingsItemLogoutAction = () => {
-  // const supabase = useSupabase()
-
-  // onPress={() => supabase.auth.signOut()
+  // onPress={() => auth.signOut()
   return (
     <Settings.Item icon={LogOut} accentTheme="red">
       Log Out
