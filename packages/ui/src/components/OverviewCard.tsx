@@ -1,8 +1,6 @@
 import { Plus, Send, Minus, ArrowLeftRight } from '@tamagui/lucide-icons'
 import { CardProps, Card, H6, H2 } from 'tamagui'
 
-import { RoundedButton } from './RoundedButton'
-
 export type OverviewCardTypes = {
   title: string
   balance: string
@@ -17,28 +15,7 @@ export const OverviewCard = ({ title, balance, ...props }: OverviewCardTypes) =>
         </H6>
         <H2 mt="$2">{balance}</H2>
       </Card.Header>
-      <Card.Footer padded gap="$6">
-        <RoundedButton
-          buttonText="Add"
-          icon={Plus}
-          action={() => console.log('Navigate to add screen')}
-        />
-        <RoundedButton
-          buttonText="Withdraw"
-          icon={Minus}
-          action={() => console.log('Navigate to withdraw screen')}
-        />
-        <RoundedButton
-          buttonText="Send"
-          icon={Send}
-          action={() => console.log('Navigate to Sendscreen')}
-        />
-        <RoundedButton
-          buttonText="Swap"
-          icon={ArrowLeftRight}
-          action={() => console.log('Navigate to Swap screen')}
-        />
-      </Card.Footer>
+      <Card.Footer padded gap="$6"></Card.Footer>
     </Card>
   )
 }

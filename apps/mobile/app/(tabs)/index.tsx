@@ -1,27 +1,21 @@
-import {
-  ArrowRight,
-  Bell,
-  Plus,
-  Minus,
-  Send,
-  ArrowLeftRight,
-  Scan,
-  Currency,
-} from '@tamagui/lucide-icons'
+import { ArrowRight, Bell, Plus, MoreHorizontal, Currency } from '@tamagui/lucide-icons'
+import { Platform } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useLink } from 'solito/link'
 import {
   Button,
-  H4,
+  SizableText,
   ScrollView,
+  SpaceCard,
   Theme,
   XStack,
   YStack,
   H2,
   H6,
+  ActionButton,
   Card,
-  RoundedButton,
   Transactions,
+  validToken,
+  useMedia,
 } from 'ui'
 
 export const transactionData = [
@@ -44,6 +38,19 @@ export const transactionData = [
   },
 ]
 
+const defaultAuthors = [
+  {
+    id: 1,
+    name: 'John Doe',
+    avatar: 'https://i.pravatar.cc/150?img=67/32/32?ca=1',
+  },
+  {
+    id: 2,
+    name: 'Jane Doe',
+    avatar: 'https://i.pravatar.cc/150?img=30/32/32?ca=1',
+  },
+]
+
 export default function Home() {
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['left', 'right', 'top']}>
@@ -51,9 +58,11 @@ export default function Home() {
         <ScrollView f={3} fb={0}>
           <YStack gap="$3" pt="$5" pb="$8">
             <Header />
-            <YStack gap="$6">
+            <YStack>
               <AccountBalanceSection />
               <TransactionsSection />
+              <NuggetsSection />
+              <SpacesSection />
             </YStack>
           </YStack>
         </ScrollView>
@@ -62,36 +71,41 @@ export default function Home() {
   )
 }
 
+const Header = () => {
+  return (
+    <XStack ai="center" jc="space-between">
+      <H2 px="$4" my="$2">
+        Home
+      </H2>
+      <XStack mx="$5" gap="$4">
+        <Bell />
+      </XStack>
+    </XStack>
+  )
+}
+
 const AccountBalanceSection = () => {
   return (
     <Card br="$0" bg="transparent" miw={200} $gtMd={{ miw: 220, f: 1, fb: 0 }}>
-      <Card.Header f={1} jc="space-between">
+      <Card.Header f={1}>
         <H6 size="$4" fow="$1" theme="alt2">
-          current balance
+          Actual Balance (KES)
         </H6>
-        <H2 mt="$2">$18,908</H2>
+        <H2 mt="$2">$23,300.89</H2>
+        <SizableText mt="$2">≈ 200.70 cUSD</SizableText>
       </Card.Header>
-      <Card.Footer padded gap="$6">
-        <RoundedButton
-          buttonText="Add"
+      <Card.Footer padded jc="space-between">
+        <ActionButton
+          buttonText="Deposit"
           icon={Plus}
           action={() => console.log('Navigate to add screen')}
         />
-        <RoundedButton
-          buttonText="Withdraw"
-          icon={Minus}
+        <ActionButton
+          buttonText="Transfer"
+          icon={ArrowRight}
           action={() => console.log('Navigate to withdraw screen')}
         />
-        <RoundedButton
-          buttonText="Send"
-          icon={Send}
-          action={() => console.log('Navigate to Sendscreen')}
-        />
-        <RoundedButton
-          buttonText="Swap"
-          icon={ArrowLeftRight}
-          action={() => console.log('Navigate to Swap screen')}
-        />
+        <ActionButton icon={MoreHorizontal} action={() => console.log('Navigate to Sendscreen')} />
       </Card.Footer>
     </Card>
   )
@@ -100,10 +114,10 @@ const AccountBalanceSection = () => {
 const TransactionsSection = () => {
   return (
     <YStack>
-      <XStack px="$4.5" ai="center" gap="$2" jc="space-between" mb="$2">
-        <H4 fow="400">Transactions</H4>
+      <XStack px="$4.5" ai="center" gap="$2" jc="space-between">
+        <SizableText fow="400">Transactions</SizableText>
         <Theme name="alt2">
-          <Button size="$2" chromeless {...useLink({ href: '/' })} iconAfter={ArrowRight}>
+          <Button size="$2" chromeless iconAfter={ArrowRight}>
             See all
           </Button>
         </Theme>
@@ -115,9 +129,6 @@ const TransactionsSection = () => {
             <Transactions.Item icon={Currency} accentTheme="green" transactionId="1">
               Bought BTC with cKES
             </Transactions.Item>
-            <Transactions.Item icon={Currency} accentTheme="orange" transactionId="2">
-              Money added via MPES
-            </Transactions.Item>
           </Transactions.Group>
         </Transactions.Items>
       </Transactions>
@@ -125,16 +136,70 @@ const TransactionsSection = () => {
   )
 }
 
-const Header = () => {
+const NuggetsSection = () => {
   return (
-    <XStack ai="center" jc="space-between">
-      <H2 px="$4" my="$2">
-        Home
-      </H2>
-      <XStack mx="$5" gap="$4">
-        <Scan />
-        <Bell />
+    <YStack>
+      <XStack px="$4.5" ai="center" gap="$2" jc="space-between" mb="$2">
+        <SizableText fow="400">Nuggets</SizableText>
+        <Theme name="alt2">
+          <Button size="$2" chromeless iconAfter={ArrowRight}>
+            Customize
+          </Button>
+        </Theme>
       </XStack>
-    </XStack>
+    </YStack>
+  )
+}
+
+const spaceCardWidthMd = validToken(
+  Platform.select({
+    native: '32%',
+  })
+)
+const SpacesSection = () => {
+  return (
+    <YStack gap="$4">
+      <XStack px="$4.5" ai="center" gap="$2" jc="space-between" mb="$4">
+        <SizableText fow="400">Spaces</SizableText>
+        <Theme name="alt2">
+          <Button size="$2" chromeless iconAfter={ArrowRight}>
+            Create a Space
+          </Button>
+        </Theme>
+      </XStack>
+      <ScrollAdapt>
+        <XStack px="$4" gap="$4" mb="$4" jc="flex-start" fw="wrap">
+          <SpaceCard
+            withImages
+            w={300}
+            $gtMd={{ w: spaceCardWidthMd }}
+            title="Join Thousands"
+            description="Saving today"
+            authors={defaultAuthors}
+          />
+
+          <SpaceCard
+            withImages
+            w={200}
+            $gtMd={{ w: spaceCardWidthMd }}
+            title="Different React paradigms"
+            description="We're gonna talk about different react paradigm and jargons..."
+            tag="React"
+            authors={defaultAuthors}
+          />
+        </XStack>
+      </ScrollAdapt>
+    </YStack>
+  )
+}
+
+function ScrollAdapt({ children }: { children: React.ReactNode }) {
+  const { md } = useMedia()
+  return md ? (
+    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+      {children}
+    </ScrollView>
+  ) : (
+    <>{children}</>
   )
 }
