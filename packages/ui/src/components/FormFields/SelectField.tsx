@@ -56,7 +56,7 @@ export const SelectField = ({
             onValueChange={field.onChange}
             {...props}
           >
-            <Select.Trigger w={180} iconAfter={ChevronDown}>
+            <Select.Trigger iconAfter={ChevronDown}>
               <Select.Value placeholder="Something" />
             </Select.Trigger>
 
@@ -87,7 +87,7 @@ export const SelectField = ({
 
               <Select.Viewport miw={200}>
                 <XStack als="flex-start">
-                  <Select.Group disabled={disabled} space="$0">
+                  <Select.Group disabled={disabled} gap="$0">
                     {/* <Select.Label>{label}</Select.Label> */}
                     {options.map((item, i) => {
                       return (
