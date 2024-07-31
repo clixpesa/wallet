@@ -9,8 +9,6 @@ import {
   BooleanCheckboxField,
   BooleanField,
   BooleanSwitchField,
-  DateField,
-  DateSchema,
   FieldError,
   Form,
   type FormProps,
@@ -51,7 +49,6 @@ export const formFields = {
    */
   address: createUniqueFieldSchema(AddressSchema, 'address'),
   phone_number: createUniqueFieldSchema(PhoneNumberSchema, 'phone_number'),
-  date: createUniqueFieldSchema(DateSchema, 'date'),
 }
 
 // function createFormSchema<T extends ZodRawShape>(getData: (fields: typeof formFields) => T) {
@@ -68,7 +65,6 @@ const mapping = [
   [formFields.select, SelectField] as const,
   [formFields.address, AddressField] as const,
   [formFields.phone_number, PhoneNumberField] as const,
-  [formFields.date, DateField] as const,
 ] as const
 
 const FormComponent = (props: FormProps) => {
