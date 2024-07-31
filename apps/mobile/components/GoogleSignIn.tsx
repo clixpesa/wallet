@@ -1,11 +1,10 @@
-import { Button } from 'ui'
+import { useRouter } from 'expo-router'
 import * as WebBrowser from 'expo-web-browser'
-import { useRouter } from 'solito/router'
+import { Button } from 'ui'
 
 import { IconGoogle } from './IconGoogle'
 
 export function GoogleSignIn() {
-  // const supabase = useSupabase()
   const router = useRouter()
 
   async function signInWithGoogle() {
@@ -23,7 +22,7 @@ export function GoogleSignIn() {
     });
     const token = userInfo?.idToken;
     if (!token) throw new Error("No id token");
-    const { error } = await supabase.auth.signInWithIdToken({
+    const { error } = await auth.signInWithIdToken({
       provider: "google",
       token: token,
       nonce: rawNonce,
@@ -34,11 +33,11 @@ export function GoogleSignIn() {
     Platform.OS === "ios";
   */
     try {
-      // whatever route you want to deeplink to; make sure to configure in Supabase dashboard
+      // whatever route you want to deeplink to; make sure to configure in dashboard
       const redirectUri = 'myapp://'
       const provider = 'google'
       const response = await WebBrowser.openAuthSessionAsync(
-        `${process.env.EXPO_PUBLIC_SUPABASE_URL}/auth/v1/authorize?${new URLSearchParams({
+        `${process.env.EXPO_PUBLIC_FIREBASE_URL}/auth/v1/authorize?${new URLSearchParams({
           provider,
           redirect_to: redirectUri,
         })}`,
@@ -55,7 +54,7 @@ export function GoogleSignIn() {
 
         // if (accessToken && refreshToken) {
         //   // handle error
-        //   const { error } = await supabase.auth.setSession({
+        //   const { error } = await auth.setSession({
         //     access_token: accessToken,
         //     refresh_token: refreshToken,
         //   })

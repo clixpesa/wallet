@@ -1,12 +1,14 @@
-import { YStack } from 'ui'
 import { Upload } from '@tamagui/lucide-icons'
+import { getCurrentUser } from 'app/provider/auth/firebase'
 import { decode } from 'base64-arraybuffer'
 import * as ImagePicker from 'expo-image-picker'
 import React from 'react'
+import { YStack } from 'ui'
 
 export const UploadAvatar = ({ children }: { children: React.ReactNode }) => {
   // const { user, updateProfile } = useUser()
-  // const supabase = useSupabase()
+  const user = getCurrentUser()
+
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     const result = await ImagePicker.launchImageLibraryAsync({
