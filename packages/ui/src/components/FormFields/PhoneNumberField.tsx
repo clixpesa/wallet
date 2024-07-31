@@ -23,8 +23,8 @@ import {
 import { z } from 'zod'
 
 import { FieldError } from '../FieldError'
-import { Input } from '../PhoneInputParts'
 import { Shake } from '../Shake'
+import { Input } from '../forms/inputs/components/inputsParts'
 
 const isPhoneNumber = (ph: string) => parsePhoneNumber(ph)?.valid
 

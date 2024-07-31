@@ -1,7 +1,48 @@
-import { ArrowRight, Bell, Plus, Minus, Send, ArrowLeftRight, Scan } from '@tamagui/lucide-icons'
+import {
+  ArrowRight,
+  Bell,
+  Plus,
+  Minus,
+  Send,
+  ArrowLeftRight,
+  Scan,
+  Currency,
+} from '@tamagui/lucide-icons'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useLink } from 'solito/link'
-import { Button, H4, ScrollView, Theme, XStack, YStack, H2, H6, Card, RoundedButton } from 'ui'
+import {
+  Button,
+  H4,
+  ScrollView,
+  Theme,
+  XStack,
+  YStack,
+  H2,
+  H6,
+  Card,
+  RoundedButton,
+  Transactions,
+} from 'ui'
+
+export const transactionData = [
+  {
+    id: '0',
+    title: 'Bought BTC with cKES',
+    credited: false,
+    amount: '100.00',
+    token: 'KES',
+    date: '20 Mar 2020, 11:59',
+  },
+  {
+    id: '1',
+    title: 'Money added via M-Pesa',
+    type: 'deposit',
+    credited: true,
+    token: 'KES',
+    amount: '130.0',
+    date: '20 Mar 2020, 11:59',
+  },
+]
 
 export default function Home() {
   return (
@@ -58,8 +99,8 @@ const AccountBalanceSection = () => {
 
 const TransactionsSection = () => {
   return (
-    <YStack gap="$4">
-      <XStack px="$4.5" ai="center" gap="$2" jc="space-between" mb="$4">
+    <YStack>
+      <XStack px="$4.5" ai="center" gap="$2" jc="space-between" mb="$2">
         <H4 fow="400">Transactions</H4>
         <Theme name="alt2">
           <Button size="$2" chromeless {...useLink({ href: '/' })} iconAfter={ArrowRight}>
@@ -67,6 +108,19 @@ const TransactionsSection = () => {
           </Button>
         </Theme>
       </XStack>
+
+      <Transactions>
+        <Transactions.Items>
+          <Transactions.Group $gtSm={{ space: '$2' }}>
+            <Transactions.Item icon={Currency} accentTheme="green" transactionId="1">
+              Bought BTC with cKES
+            </Transactions.Item>
+            <Transactions.Item icon={Currency} accentTheme="orange" transactionId="2">
+              Money added via MPES
+            </Transactions.Item>
+          </Transactions.Group>
+        </Transactions.Items>
+      </Transactions>
     </YStack>
   )
 }

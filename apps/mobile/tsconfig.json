@@ -1,10 +1,22 @@
 {
   "extends": "../../tsconfig.base",
-  "include": ["app", "types.d.ts", "../../packages/ui", "../../packages/api", "../../packages/app"],
+  "include": [
+    "app",
+    "components",
+    "features",
+    "types.d.ts",
+    "../../packages/ui",
+    "../../packages/api",
+    "../../packages/app"
+  ],
   "compilerOptions": {
     "noEmit": true,
     "composite": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "references": []
 }

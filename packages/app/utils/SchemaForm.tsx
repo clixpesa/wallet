@@ -1,3 +1,6 @@
+import { createTsForm, createUniqueFieldSchema } from '@ts-react/form'
+import { ComponentProps } from 'react'
+import { useFormContext } from 'react-hook-form'
 import {
   AddressField,
   AddressSchema,
@@ -8,7 +11,7 @@ import {
   BooleanSwitchField,
   FieldError,
   Form,
-  FormProps,
+  type FormProps,
   FormWrapper,
   NumberField,
   SelectField,
@@ -16,9 +19,6 @@ import {
   TextField,
   Theme,
 } from 'ui'
-import { createTsForm, createUniqueFieldSchema } from '@ts-react/form'
-import { ComponentProps } from 'react'
-import { useFormContext } from 'react-hook-form'
 import { z } from 'zod'
 
 export const formFields = {
