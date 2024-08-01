@@ -1,4 +1,12 @@
-import { ArrowRight, Bell, Plus, MoreHorizontal, Currency } from '@tamagui/lucide-icons'
+import {
+  ArrowRight,
+  Bell,
+  Plus,
+  MoreHorizontal,
+  Currency,
+  Smartphone,
+  Receipt,
+} from '@tamagui/lucide-icons'
 import { Platform } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {
@@ -6,6 +14,7 @@ import {
   SizableText,
   ScrollView,
   SpaceCard,
+  NuggetCard,
   Theme,
   XStack,
   YStack,
@@ -136,10 +145,21 @@ const TransactionsSection = () => {
   )
 }
 
+const halfMinusSpace = validToken(
+  Platform.select({
+    native: '53%',
+  })
+)
+
+const quarterMinusSpace = validToken(
+  Platform.select({
+    native: '21%',
+  })
+)
 const NuggetsSection = () => {
   return (
     <YStack>
-      <XStack px="$4.5" ai="center" gap="$2" jc="space-between" mb="$2">
+      <XStack px="$4.5" ai="center" gap="$2" jc="space-between" mb="$4">
         <SizableText fow="400">Nuggets</SizableText>
         <Theme name="alt2">
           <Button size="$2" chromeless iconAfter={ArrowRight}>
@@ -147,6 +167,67 @@ const NuggetsSection = () => {
           </Button>
         </Theme>
       </XStack>
+
+      <ScrollAdapt>
+        <XStack px="$4" fw="wrap" f={1} gap="$3" mb="$4">
+          <NuggetCard
+            w={120}
+            $gtMd={{
+              w: halfMinusSpace,
+            }}
+            $gtLg={{
+              w: quarterMinusSpace,
+            }}
+            icon={Smartphone}
+            title="Top up airtime"
+          />
+
+          <NuggetCard
+            w={120}
+            $gtMd={{
+              w: halfMinusSpace,
+            }}
+            $gtLg={{
+              w: quarterMinusSpace,
+            }}
+            icon={Smartphone}
+            title="Split the bill"
+            action={{
+              text: 'Boost your sales',
+            }}
+          />
+
+          <NuggetCard
+            w={120}
+            $gtMd={{
+              w: halfMinusSpace,
+            }}
+            $gtLg={{
+              w: quarterMinusSpace,
+            }}
+            icon={Smartphone}
+            title="Pay bills"
+            action={{
+              text: 'Boost your sales',
+            }}
+          />
+
+          <NuggetCard
+            w={120}
+            $gtMd={{
+              w: halfMinusSpace,
+            }}
+            $gtLg={{
+              w: quarterMinusSpace,
+            }}
+            icon={Smartphone}
+            title="Manage subscriptions"
+            action={{
+              text: 'Boost your sales',
+            }}
+          />
+        </XStack>
+      </ScrollAdapt>
     </YStack>
   )
 }
@@ -158,7 +239,7 @@ const spaceCardWidthMd = validToken(
 )
 const SpacesSection = () => {
   return (
-    <YStack gap="$4">
+    <YStack>
       <XStack px="$4.5" ai="center" gap="$2" jc="space-between" mb="$4">
         <SizableText fow="400">Spaces</SizableText>
         <Theme name="alt2">
@@ -168,10 +249,10 @@ const SpacesSection = () => {
         </Theme>
       </XStack>
       <ScrollAdapt>
-        <XStack px="$4" gap="$4" mb="$4" jc="flex-start" fw="wrap">
+        <XStack px="$4" gap="$4" mb="$4" fw="wrap">
           <SpaceCard
             withImages
-            w={300}
+            w={230}
             $gtMd={{ w: spaceCardWidthMd }}
             title="Join Thousands"
             description="Saving today"
@@ -180,10 +261,10 @@ const SpacesSection = () => {
 
           <SpaceCard
             withImages
-            w={200}
+            w={230}
             $gtMd={{ w: spaceCardWidthMd }}
-            title="Different React paradigms"
-            description="We're gonna talk about different react paradigm and jargons..."
+            title="Start a Personal"
+            description="Savings Space"
             tag="React"
             authors={defaultAuthors}
           />

@@ -34,13 +34,13 @@ export const SpaceCard = ({
             }}
             h={150}
             $sm={{
-              h: 150,
+              h: 100,
             }}
           />
         )}
 
-        <XStack jc="space-between" ai="center">
-          <YStack pt="$4" gap="$2">
+        <XStack pt="$2" ai="center" jc="space-between">
+          <YStack gap="$1">
             <H4 size="$5" tt="capitalize">
               {title}
             </H4>
@@ -55,7 +55,7 @@ export const SpaceCard = ({
             <XStack>
               {authors.map((author) => (
                 <TooltipSimple key={author.id} label={author.name}>
-                  <Avatar circular size={34} mr="$-2">
+                  <Avatar circular size={34} ml="$-3">
                     <Avatar.Image
                       source={{
                         uri: author.avatar,
@@ -70,7 +70,6 @@ export const SpaceCard = ({
           )}
         </XStack>
       </Card.Header>
-
       <Card.Background>
         <LinearGradient
           // br="$4"
