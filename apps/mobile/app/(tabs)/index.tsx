@@ -9,7 +9,7 @@ import {
   Coins,
   ScrollText,
 } from '@tamagui/lucide-icons'
-import { router, useNavigation } from 'expo-router'
+import { router } from 'expo-router'
 import { Platform } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {
