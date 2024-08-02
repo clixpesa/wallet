@@ -3,6 +3,7 @@ import { useFonts } from 'expo-font'
 import { SplashScreen, Stack } from 'expo-router'
 import { useCallback, useEffect, useState } from 'react'
 import { LogBox, View } from 'react-native'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -31,10 +32,12 @@ export default function HomeLayout() {
   }
 
   return (
-    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      <Provider>
-        <Stack />
-      </Provider>
-    </View>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+        <Provider>
+          <Stack />
+        </Provider>
+      </View>
+    </GestureHandlerRootView>
   )
 }

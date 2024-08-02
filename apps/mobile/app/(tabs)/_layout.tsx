@@ -78,7 +78,7 @@ const PlusButton = ({ size }: TabBarIconProps) => {
         h={size + 34}
       />
       <LinearGradient
-        onPress={() => router.push('/create')}
+        onPress={() => router.push('/modal')}
         colors={['$gray6', '$gray7']}
         start={[1, 1]}
         end={[0.8, 0]}
