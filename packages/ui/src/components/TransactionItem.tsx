@@ -24,7 +24,7 @@ export const TransactionItem = ({
   return (
     <YGroup.Item>
       <TransactionItemFrame isActive={!!isActive} {...props} onPress={handlePress}>
-        <YStack theme={accentTheme} bg="$background" p="$1.5" br="$6">
+        <YStack theme={accentTheme} bg="$background" p="$1.5" br="$8">
           <Icon o={0.6} size={32} />
         </YStack>
 

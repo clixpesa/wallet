@@ -3,10 +3,13 @@ import {
   Bell,
   Plus,
   MoreHorizontal,
-  Currency,
   Smartphone,
   Receipt,
+  Bitcoin,
+  Coins,
+  ScrollText,
 } from '@tamagui/lucide-icons'
+import { router, useNavigation } from 'expo-router'
 import { Platform } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {
@@ -135,7 +138,7 @@ const TransactionsSection = () => {
       <Transactions>
         <Transactions.Items>
           <Transactions.Group $gtSm={{ space: '$2' }}>
-            <Transactions.Item icon={Currency} accentTheme="green" transactionId="1">
+            <Transactions.Item icon={Bitcoin} accentTheme="green" transactionId="1">
               Bought BTC with cKES
             </Transactions.Item>
           </Transactions.Group>
@@ -190,11 +193,8 @@ const NuggetsSection = () => {
             $gtLg={{
               w: quarterMinusSpace,
             }}
-            icon={Smartphone}
+            icon={Coins}
             title="Split the bill"
-            action={{
-              text: 'Boost your sales',
-            }}
           />
 
           <NuggetCard
@@ -205,11 +205,8 @@ const NuggetsSection = () => {
             $gtLg={{
               w: quarterMinusSpace,
             }}
-            icon={Smartphone}
+            icon={ScrollText}
             title="Pay bills"
-            action={{
-              text: 'Boost your sales',
-            }}
           />
 
           <NuggetCard
@@ -220,11 +217,8 @@ const NuggetsSection = () => {
             $gtLg={{
               w: quarterMinusSpace,
             }}
-            icon={Smartphone}
+            icon={Receipt}
             title="Manage subscriptions"
-            action={{
-              text: 'Boost your sales',
-            }}
           />
         </XStack>
       </ScrollAdapt>
@@ -243,7 +237,12 @@ const SpacesSection = () => {
       <XStack px="$4.5" ai="center" gap="$2" jc="space-between" mb="$4">
         <SizableText fow="400">Spaces</SizableText>
         <Theme name="alt2">
-          <Button size="$2" chromeless iconAfter={ArrowRight}>
+          <Button
+            size="$2"
+            chromeless
+            iconAfter={ArrowRight}
+            onPress={() => router.push('/spaces/create')}
+          >
             Create a Space
           </Button>
         </Theme>
