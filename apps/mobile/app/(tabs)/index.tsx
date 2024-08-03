@@ -9,7 +9,7 @@ import {
   Currency,
 } from '@tamagui/lucide-icons'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useLink } from 'solito/link'
+import { Link } from 'expo-router'
 import {
   Button,
   H4,
@@ -103,7 +103,7 @@ const TransactionsSection = () => {
       <XStack px="$4.5" ai="center" gap="$2" jc="space-between" mb="$2">
         <H4 fow="400">Transactions</H4>
         <Theme name="alt2">
-          <Button size="$2" chromeless {...useLink({ href: '/' })} iconAfter={ArrowRight}>
+          <Button size="$2" chromeless iconAfter={ArrowRight}>
             See all
           </Button>
         </Theme>
@@ -133,7 +133,9 @@ const Header = () => {
       </H2>
       <XStack mx="$5" gap="$4">
         <Scan />
-        <Bell />
+        <Link href="/notifications">
+          <Bell />
+        </Link>
       </XStack>
     </XStack>
   )

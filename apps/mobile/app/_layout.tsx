@@ -1,5 +1,6 @@
 import { Provider } from 'app/provider'
 import { useFonts } from 'expo-font'
+import * as Notifications from 'expo-notifications'
 import { SplashScreen, Stack } from 'expo-router'
 import { useCallback, useEffect, useState } from 'react'
 import { LogBox, View } from 'react-native'
@@ -7,6 +8,15 @@ import { LogBox, View } from 'react-native'
 SplashScreen.preventAutoHideAsync()
 
 LogBox.ignoreLogs(['Cannot update a component', 'You are setting the style'])
+
+Notifications.setNotificationHandler({
+  /** Additional Configuration */
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+})
 
 export default function HomeLayout() {
   const [fontLoaded] = useFonts({
