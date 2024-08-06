@@ -2,9 +2,19 @@ import { Cog, HelpCircle, Users } from '@tamagui/lucide-icons'
 import { getCurrentUser } from 'app/provider/auth/firebase/init.native'
 import { useSafeAreaInsets } from 'app/utils/useSafeAreaInsets'
 import { Stack } from 'expo-router'
-import { SolitoImage } from 'solito/image'
 import { Link, useLink } from 'solito/link'
-import { Avatar, Button, H2, Paragraph, ScrollView, Settings, XStack, YStack, getTokens } from 'ui'
+import {
+  Avatar,
+  Button,
+  H2,
+  Paragraph,
+  ScrollView,
+  Settings,
+  XStack,
+  YStack,
+  getTokens,
+  Image,
+} from 'ui'
 
 export default function ProfileScreen() {
   const user = getCurrentUser()
@@ -34,9 +44,9 @@ export default function ProfileScreen() {
           <YStack gap="$8" jc="flex-start">
             <XStack gap="$2" jc="center" $sm={{ mt: '$8' }}>
               <Avatar circular size="$14" bg="$accentColor">
-                <SolitoImage
+                <Image
                   // placeholder={Cog}
-                  // src={avatarUrl}
+                  src="https://picsum.photos/id/237/200/300"
                   alt="your avatar"
                   width={getTokens().size['14'].val}
                   height={getTokens().size['14'].val}

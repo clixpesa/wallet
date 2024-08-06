@@ -1,37 +1,47 @@
+import useSpaceStore from 'app/store/spaceStore'
 import { SchemaForm, formFields } from 'app/utils/SchemaForm'
-import { Stack } from 'expo-router'
+import { Stack, useRouter } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Paragraph, SubmitButton, Theme, YStack } from 'ui'
 import { z } from 'zod'
 
 export default function CreateSpaceScreen() {
+  const { spaceData, setSpaceData } = useSpaceStore()
+  const router = useRouter()
+
+  const handleSubmit = (data) => {
+    console.log('data', data)
+    router.push('/next-screen')
+  }
+
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right']}>
       <Stack.Screen
         options={{
-          title: 'New Space',
+          title: 'Create New Space',
         }}
       />
       <SchemaForm
-        onSubmit={console.log}
+        onSubmit={handleSubmit}
         schema={z.object({
-          title: formFields.text.min(10).describe("Name // Your group's name"),
+          title: formFields.text.min(10).describe('Name // Name your space'),
           type: formFields.select.describe('Space Type'),
         })}
-        defaultValues={{
-          title: '',
-          type: 'ROSCA/Chamma group',
-        }}
+        defaultValues={spaceData}
         props={{
           type: {
             options: [
               {
-                name: 'ROSCA/Chamma group',
-                value: 'ROSCA/Chamma group',
+                name: 'Chamaa (ROSCA) Group',
+                value: 'rosca',
               },
               {
                 name: 'Personal Space',
-                value: 'personal space',
+                value: 'personal',
+              },
+              {
+                name: 'Contribution Group',
+                value: 'mchango',
               },
             ],
           },
