@@ -7,7 +7,6 @@ This monorepo houses clixpesa apps, packages and configs
 ## 📦 Included packages
 
 - [Tamagui](https://tamagui.dev) 🪄
-- [solito](https://solito.dev) for cross-platform navigation
 - [Expo SDK](https://expo.dev)
 - [Next.js](https://nextjs.org)
 - [Expo Router](https://docs.expo.dev/router/introduction/)

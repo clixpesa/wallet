@@ -13,12 +13,14 @@ let auth: ReturnType<typeof initializeAuth>
 
 if (typeof window !== 'undefined') {
   const firebaseApp = initializeApp({
-    apiKey: 'AIzaSyAQZ1A-bJMQqjdzNQhRPkbA7swEFnwUS_w',
-    authDomain: 'solito-example.firebaseapp.com',
-    projectId: 'solito-example',
-    storageBucket: 'solito-example.appspot.com',
-    messagingSenderId: '960783729432',
-    appId: '1:960783729432:web:f2052cb298f0fc7bb3146d',
+    apiKey: 'AIzaSyAj7ZQUD9mfmBen8IEfvifnRjAXSE4StmY',
+    authDomain: 'clixpesa-test.firebaseapp.com',
+    databaseURL: 'https://clixpesa-test-default-rtdb.europe-west1.firebasedatabase.app',
+    projectId: 'clixpesa-test',
+    storageBucket: 'clixpesa-test.appspot.com',
+    messagingSenderId: '609904908445',
+    appId: '1:609904908445:web:7d6624636e8cae1d551c74',
+    measurementId: 'G-SHLR0VGXWH',
   })
 
   auth = initializeAuth(firebaseApp, {

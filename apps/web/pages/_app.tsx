@@ -9,7 +9,6 @@ import { NextPage } from 'next'
 import Head from 'next/head'
 import 'raf/polyfill'
 import { ReactElement, ReactNode } from 'react'
-import type { SolitoAppProps } from 'solito'
 
 if (process.env.NODE_ENV === 'production') {
   require('../public/tamagui.css')
@@ -19,10 +18,7 @@ export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
 }
 
-function MyApp({
-  Component,
-  pageProps,
-}: SolitoAppProps<{ initialSession: AuthProviderProps['initialSession'] }>) {
+function MyApp({ Component, pageProps }) {
   // reference: https://nextjs.org/docs/pages/building-your-application/routing/pages-and-layouts
   const getLayout = Component.getLayout || ((page) => page)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -40,9 +36,7 @@ function MyApp({
           setTheme(next as ColorScheme)
         }}
       >
-        <Provider initialSession={pageProps.initialSession}>
-          {getLayout(<Component {...pageProps} />)}
-        </Provider>
+        <Provider>{getLayout(<Component {...pageProps} />)}</Provider>
       </NextThemeProvider>
     </>
   )

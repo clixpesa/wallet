@@ -1,7 +1,6 @@
 import { getCurrentUser } from 'app/provider/auth/firebase/init.native'
-import { Stack } from 'expo-router'
+import { Stack, Link } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Link } from 'solito/link'
 import { FormWrapper, H4, KVTable, Separator, SizableText, YStack, styled } from 'ui'
 
 export default function GeneralSetttingsScreen() {

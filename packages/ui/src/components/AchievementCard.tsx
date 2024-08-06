@@ -1,8 +1,8 @@
 import { IconProps } from '@tamagui/helpers-icon'
 import { LinearGradient } from '@tamagui/linear-gradient'
 import { ChevronRight } from '@tamagui/lucide-icons'
+import { Link } from 'expo-router'
 import React from 'react'
-import { useLink } from 'solito/link'
 import { Button, Card, CardProps, H4, Progress, SizableText, XStack, YStack } from 'tamagui'
 
 export type AchievementCardProps = {
@@ -14,7 +14,7 @@ export type AchievementCardProps = {
     label?: string
   }
   action?: {
-    props: ReturnType<typeof useLink>
+    props: ReturnType<typeof Link>
     text: string
   }
 } & CardProps

@@ -1,9 +1,8 @@
 import { ChevronLeft } from '@tamagui/lucide-icons'
 import { SchemaForm, formFields } from 'app/utils/SchemaForm'
-import { Stack } from 'expo-router'
+import { Stack, Link } from 'expo-router'
 import { FormProvider, useForm, useFormContext, useWatch } from 'react-hook-form'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Link } from 'solito/link'
 import { Button, FormWrapper, H2, Paragraph, SubmitButton, Text, Theme, YStack } from 'ui'
 import { z } from 'zod'
 

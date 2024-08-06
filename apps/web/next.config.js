@@ -85,7 +85,6 @@ module.exports = () => {
     },
 
     transpilePackages: [
-      'solito',
       'react-native-web',
       'expo-linking',
       'expo-constants',
@@ -98,7 +97,6 @@ module.exports = () => {
        A few notes before enabling app directory:
 
        - Usage of app directory for production apps is discouraged.
-       - Solito doesn't support app dir at the moment - You'll have to remove Solito.
        - The `/app` in this starter has the same routes as the `/pages` directory. You should probably remove `/pages` after enabling this.
       */
     experimental: {
