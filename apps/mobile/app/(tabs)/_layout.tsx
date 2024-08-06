@@ -1,9 +1,8 @@
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
 import { LinearGradient } from '@tamagui/linear-gradient'
 import { Home, Plus } from '@tamagui/lucide-icons'
-import { Stack, Tabs } from 'expo-router'
-import { useRouter } from 'solito/router'
-import { Avatar, Circle, ColorTokens, Theme, YStack, validToken } from 'ui'
+import { Stack, Tabs, useRouter } from 'expo-router'
+import { Avatar, Image, Circle, ColorTokens, Theme, YStack, validToken } from 'ui'
 
 export default function Layout() {
   return (
@@ -49,11 +48,16 @@ export default function Layout() {
 type TabBarIconProps = Parameters<Exclude<BottomTabNavigationOptions['tabBarIcon'], undefined>>[0]
 
 const ProfileTabIcon = ({ color, size }: TabBarIconProps) => {
-  // const { avatarUrl } = useUser()
   return (
     <YStack bw="$1" boc={validToken(color)} br="$10">
       <Avatar circular p="$1" size={size}>
-        {/* <SolitoImage src="" alt="your avatar" width={size} height={size} /> */}
+        {/* TODO: use avatarUrl for firebase if uploaded by user */}
+        <Image
+          src="https://picsum.photos/id/237/200/300"
+          alt="your avatar"
+          width={size}
+          height={size}
+        />
       </Avatar>
     </YStack>
   )
@@ -78,7 +82,7 @@ const PlusButton = ({ size }: TabBarIconProps) => {
         h={size + 34}
       />
       <LinearGradient
-        onPress={() => router.push('/modal')}
+        onPress={() => router.push('/create')}
         colors={['$gray6', '$gray7']}
         start={[1, 1]}
         end={[0.8, 0]}
