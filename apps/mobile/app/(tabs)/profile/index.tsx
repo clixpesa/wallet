@@ -1,8 +1,7 @@
 import { Cog, HelpCircle, Users } from '@tamagui/lucide-icons'
 import { getCurrentUser } from 'app/provider/auth/firebase/init.native'
 import { useSafeAreaInsets } from 'app/utils/useSafeAreaInsets'
-import { Stack } from 'expo-router'
-import { Link, useLink } from 'solito/link'
+import { Stack, Link, router } from 'expo-router'
 import {
   Avatar,
   Button,
@@ -69,7 +68,7 @@ export default function ProfileScreen() {
               )}
             </YStack>
           </YStack>
-          <Button mx="$4" {...useLink({ href: '/profile/edit' })} themeInverse>
+          <Button mx="$4" onPress={() => router.push('/profile/edit')} themeInverse>
             Edit Profile
           </Button>
 
@@ -80,7 +79,11 @@ export default function ProfileScreen() {
                 <Settings.Item icon={Users} accentTheme="orange">
                   Refer Your Friends
                 </Settings.Item>
-                <Settings.Item {...useLink({ href: '/settings' })} icon={Cog} accentTheme="green">
+                <Settings.Item
+                  onPress={() => router.push('/settings')}
+                  icon={Cog}
+                  accentTheme="teal"
+                >
                   Settings
                 </Settings.Item>
                 {/* dummy item - doesn't lead anywhere */}

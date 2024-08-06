@@ -13,7 +13,6 @@ const config: StorybookConfig = {
       name: '@storybook/addon-react-native-web',
       options: {
         modulesToTranspile: [
-          'solito',
           'expo-linking',
           'expo-constants',
           'expo-modules-core',

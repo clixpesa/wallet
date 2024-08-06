@@ -23,7 +23,7 @@ export const Basic: Story = {
     },
     action: {
       text: 'Boost your community',
-      props: { href: '#', accessibilityRole: 'link', onPress: () => {} }, // comes from solito's useLink
+      props: { href: '#', accessibilityRole: 'link', onPress: () => {} },
     },
   },
 }

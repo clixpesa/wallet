@@ -99,8 +99,8 @@ const themeBuilder = createThemeBuilder()
       palette: 'yellow',
       template: 'base',
     },
-    green: {
-      palette: 'green',
+    teal: {
+      palette: 'teal',
       template: 'base',
     },
     blue: {

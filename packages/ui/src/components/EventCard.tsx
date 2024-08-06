@@ -1,12 +1,12 @@
 import { ArrowUpRight } from '@tamagui/lucide-icons'
-import { useLink } from 'solito/link'
+import { Link } from 'expo-router'
 import { Button, Card, CardProps, H6, Paragraph, Theme, ThemeName, XStack } from 'tamagui'
 
 export type EventCardTypes = {
   title?: string
   description?: string
   action?: {
-    props: ReturnType<typeof useLink>
+    props: ReturnType<typeof Link>
     text: string
   }
   tags?: { text: string; theme: ThemeName }[]

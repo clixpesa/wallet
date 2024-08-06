@@ -1,7 +1,7 @@
 import { initiateAppleSignIn } from 'app/utils/auth/initiateAppleSignIn'
 import * as AppleAuthentication from 'expo-apple-authentication'
 import { Platform } from 'react-native'
-import { useRouter } from 'solito/router'
+import { useRouter } from 'expo-router'
 
 export function AppleSignIn() {
   const router = useRouter()

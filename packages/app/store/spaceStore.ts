@@ -1,8 +1,8 @@
 import { create } from 'zustand'
 
-type BookmarkState = {
-  bookmarks: { sessionId: string; notificationId?: string }[]
-  toggleBookmarked: (sessionId: string, notificationId?: string) => void
+type SpaceState = {
+  spaceDate: { title?: string; type?: string }[]
+  setSpaceDate: (sessionId: string, notificationId?: string) => void
 }
 
 const useSpaceStore = create((set) => ({
