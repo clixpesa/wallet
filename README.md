@@ -134,15 +134,6 @@ Follows [how Next.js handles env variables](https://nextjs.org/docs/pages/buildi
 
 > Good to know: .env, .env.development, and .env.production files should be included in your repository as they define defaults. .env\*.local should be added to .gitignore, as those files are intended to be ignored. .env.local is where secrets can be stored.
 
-## Installing icons and fonts
-
-To add an icon or font, use:
-
-```sh
-yarn add:font
-yarn add:icon
-```
-
 The package is included in the `packages` workspace in this repo. You can tweak and adjust the icon and font usage and logic to your linking.
 
 ## UI Kit
