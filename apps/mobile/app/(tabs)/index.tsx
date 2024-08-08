@@ -1,14 +1,4 @@
-import {
-  ArrowRight,
-  Bell,
-  Plus,
-  MoreHorizontal,
-  Smartphone,
-  Receipt,
-  Bitcoin,
-  Coins,
-  ScrollText,
-} from '@tamagui/lucide-icons'
+import { ArrowRight, Bell, Plus, MoreHorizontal, Bitcoin } from '@tamagui/lucide-icons'
 import { router } from 'expo-router'
 import { Platform } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -17,7 +7,6 @@ import {
   SizableText,
   ScrollView,
   SpaceCard,
-  NuggetCard,
   Theme,
   XStack,
   YStack,
@@ -27,8 +16,10 @@ import {
   Card,
   Transactions,
   validToken,
-  useMedia,
 } from 'ui'
+
+import { NuggetsSection } from '@/components/home/NuggetsSection'
+import { ScrollAdapt } from '@/components/home/ScrollAdapt'
 
 export const transactionData = [
   {
@@ -68,15 +59,15 @@ export default function Home() {
     <SafeAreaView style={{ flex: 1 }} edges={['left', 'right', 'top']}>
       <XStack maw={1480} als="center" f={1}>
         <ScrollView f={3} fb={0}>
-          <YStack gap="$3" pt="$5" pb="$8">
-            <Header />
-            <YStack>
-              <AccountBalanceSection />
-              <TransactionsSection />
-              <NuggetsSection />
-              <SpacesSection />
-            </YStack>
+          {/* <YStack gap="$3" pt="$5" pb="$8"> */}
+          <Header />
+          <YStack>
+            <AccountBalanceSection />
+            <TransactionsSection />
+            <NuggetsSection />
+            <SpacesSection />
           </YStack>
+          {/* </YStack> */}
         </ScrollView>
       </XStack>
     </SafeAreaView>
@@ -138,90 +129,12 @@ const TransactionsSection = () => {
       <Transactions>
         <Transactions.Items>
           <Transactions.Group $gtSm={{ space: '$2' }}>
-            <Transactions.Item icon={Bitcoin} accentTheme="green" transactionId="1">
+            <Transactions.Item icon={Bitcoin} accentTheme="teal" transactionId="1">
               Bought BTC with cKES
             </Transactions.Item>
           </Transactions.Group>
         </Transactions.Items>
       </Transactions>
-    </YStack>
-  )
-}
-
-const halfMinusSpace = validToken(
-  Platform.select({
-    native: '53%',
-  })
-)
-
-const quarterMinusSpace = validToken(
-  Platform.select({
-    native: '21%',
-  })
-)
-const NuggetsSection = () => {
-  return (
-    <YStack>
-      <XStack px="$4.5" ai="center" gap="$2" jc="space-between" mb="$4">
-        <SizableText fow="400">Nuggets</SizableText>
-        <Theme name="alt2">
-          <Button size="$2" chromeless iconAfter={ArrowRight}>
-            Customize
-          </Button>
-        </Theme>
-      </XStack>
-
-      <ScrollAdapt>
-        <XStack px="$4" fw="wrap" f={1} gap="$3" mb="$4">
-          <NuggetCard
-            w={120}
-            $gtMd={{
-              w: halfMinusSpace,
-            }}
-            $gtLg={{
-              w: quarterMinusSpace,
-            }}
-            icon={Smartphone}
-            title="Top up airtime"
-          />
-
-          <NuggetCard
-            w={120}
-            $gtMd={{
-              w: halfMinusSpace,
-            }}
-            $gtLg={{
-              w: quarterMinusSpace,
-            }}
-            icon={Coins}
-            title="Split the bill"
-          />
-
-          <NuggetCard
-            w={120}
-            $gtMd={{
-              w: halfMinusSpace,
-            }}
-            $gtLg={{
-              w: quarterMinusSpace,
-            }}
-            icon={ScrollText}
-            title="Pay bills"
-          />
-
-          <NuggetCard
-            w={120}
-            $gtMd={{
-              w: halfMinusSpace,
-            }}
-            $gtLg={{
-              w: quarterMinusSpace,
-            }}
-            icon={Receipt}
-            title="Manage subscriptions"
-          />
-        </XStack>
-      </ScrollAdapt>
     </YStack>
   )
 }
@@ -270,16 +183,5 @@ const SpacesSection = () => {
         </XStack>
       </ScrollAdapt>
     </YStack>
-  )
-}
-
-function ScrollAdapt({ children }: { children: React.ReactNode }) {
-  const { md } = useMedia()
-  return md ? (
-    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-      {children}
-    </ScrollView>
-  ) : (
-    <>{children}</>
   )
 }

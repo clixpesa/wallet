@@ -40,8 +40,6 @@
     "lint-sherif": "npx --yes sherif@latest",
     "generate": "turbo gen",
     "gen": "yarn generate",
-    "add:font": "yarn workspace tamagui-fonts-and-icons run add:font",
-    "add:icon": "yarn workspace tamagui-fonts-and-icons run add:icon",
     "prepare": "husky"
   },
   "resolutions": {

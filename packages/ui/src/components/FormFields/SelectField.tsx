@@ -26,10 +26,12 @@ type SelectItem = {
 
 export const SelectField = ({
   options,
+  placeholder = 'Choose an option',
   native = true,
   ...props
 }: {
   options: SelectItem[]
+  placeholder?: string
 } & Pick<SelectProps, 'size' | 'native'>) => {
   const {
     field,
@@ -57,7 +59,7 @@ export const SelectField = ({
             {...props}
           >
             <Select.Trigger iconAfter={ChevronDown}>
-              <Select.Value placeholder="Something" />
+              <Select.Value placeholder={placeholder} />
             </Select.Trigger>
 
             <Adapt when="sm" platform="touch">
