@@ -6,7 +6,7 @@ import { Paragraph, SubmitButton, Theme, YStack } from 'ui'
 import { z } from 'zod'
 
 export default function CreateSpaceScreen() {
-  const { spaceData, setSpaceData } = useSpaceStore()
+  const { spaceInfo, setSpaceInfo } = useSpaceStore()
   const router = useRouter()
 
   const handleSubmit = (data) => {
@@ -27,7 +27,7 @@ export default function CreateSpaceScreen() {
           title: formFields.text.min(10).describe('Name // Name your space'),
           type: formFields.select.describe('Space Type'),
         })}
-        defaultValues={spaceData}
+        defaultValues={spaceInfo}
         props={{
           type: {
             options: [
@@ -48,7 +48,7 @@ export default function CreateSpaceScreen() {
         }}
         renderAfter={({ submit }) => (
           <Theme inverse>
-            <SubmitButton onPress={() => submit()}>Create Space</SubmitButton>
+            <SubmitButton onPress={() => submit()}>Continue</SubmitButton>
           </Theme>
         )}
       >
