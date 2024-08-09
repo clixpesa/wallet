@@ -1802,6 +1802,7 @@ __metadata:
     expo-apple-authentication: "npm:~6.4.2"
     expo-build-properties: "npm:~0.12.4"
     expo-constants: "npm:~16.0.1"
+    expo-contacts: "npm:~13.0.5"
     expo-crypto: "npm:~13.0.2"
     expo-dev-client: "npm:~4.0.21"
     expo-device: "npm:~6.0.2"
@@ -16447,6 +16448,15 @@ __metadata:
   peerDependencies:
     expo: "*"
   checksum: 10/f2f8b15932ab2f805544fd96c6740d2354c6409706eee2664be1703c3480c7531a709112af811dc22f05c164c06501aec20f81617675e87b5a3b66ab5b8d7611
+  languageName: node
+  linkType: hard
+
+"expo-contacts@npm:~13.0.5":
+  version: 13.0.5
+  resolution: "expo-contacts@npm:13.0.5"
+  peerDependencies:
+    expo: "*"
+  checksum: 10/80e23640a3fab358c730958f591801387ed781ff8a80ef5200223f2bdcdb834fb0a750f49fe4ff8c3727886788ff2797cfcb09c12d6d834cc858d902f83d045a
   languageName: node
   linkType: hard
 
