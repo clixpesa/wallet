@@ -123,6 +123,10 @@ const themeBuilder = createThemeBuilder()
       palette: 'gray',
       template: 'base',
     },
+    green: {
+      palette: 'green',
+      template: 'base',
+    },
   })
   .addChildThemes({
     alt1: {
