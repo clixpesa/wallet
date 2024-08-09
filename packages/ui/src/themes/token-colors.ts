@@ -13,6 +13,8 @@ import {
   purpleDark,
   red,
   redDark,
+  teal,
+  tealDark,
   yellow,
   yellowDark,
 } from './colors'
@@ -35,6 +37,7 @@ export const colorTokens = {
     pink,
     purple,
     red,
+    teal,
     yellow,
   },
   dark: {
@@ -45,6 +48,7 @@ export const colorTokens = {
     pink: pinkDark,
     purple: purpleDark,
     red: redDark,
+    teal: tealDark,
     yellow: yellowDark,
   },
 }
@@ -57,6 +61,7 @@ export const darkColors = {
   ...colorTokens.dark.pink,
   ...colorTokens.dark.purple,
   ...colorTokens.dark.red,
+  ...colorTokens.dark.teal,
   ...colorTokens.dark.yellow,
 }
 
@@ -68,6 +73,7 @@ export const lightColors = {
   ...colorTokens.light.pink,
   ...colorTokens.light.purple,
   ...colorTokens.light.red,
+  ...colorTokens.dark.teal,
   ...colorTokens.light.yellow,
 }
 
