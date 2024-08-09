@@ -18,32 +18,8 @@ export const SubmitButton = (props: ButtonProps) => {
   const isSubmitting = useIsSubmitting()
 
   return (
-    // <Button {...props} disabled={isSubmitting}>
-    //   <View
-    //     animation="bouncy"
-    //     flexDirection="row"
-    //     x={isSubmitting ? 0 : -15}
-    //     gap="$3"
-    //     alignItems="center"
-    //     justifyContent="center"
-    //   >
-    //     <Button.Icon>
-    //       <Spinner
-    //         animation="slow"
-    //         enterStyle={{
-    //           scale: 0,
-    //         }}
-    //         exitStyle={{
-    //           scale: 0,
-    //         }}
-    //         opacity={isSubmitting ? 1 : 0}
-    //       />
-    //     </Button.Icon>
-    //     <Button.Text>Continue</Button.Text>
-    //   </View>
-    // </Button>
-
     <Button
+      theme='teal'
       iconAfter={
         <AnimatePresence>
           {isSubmitting && (

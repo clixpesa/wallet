@@ -1,8 +1,8 @@
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
 import { LinearGradient } from '@tamagui/linear-gradient'
-import { Home, Plus } from '@tamagui/lucide-icons'
+import { Home, Plus, User } from '@tamagui/lucide-icons'
 import { Stack, Tabs, useRouter } from 'expo-router'
-import { Avatar, Image, Circle, ColorTokens, Theme, YStack, validToken } from 'ui'
+import { Circle, Theme, YStack } from 'ui'
 
 export default function Layout() {
   return (
@@ -17,7 +17,9 @@ export default function Layout() {
           name="index"
           options={{
             title: 'Home',
-            tabBarIcon: ({ size, color }) => <Home col={color as ColorTokens} size={size} />,
+            tabBarIcon: ({ size, color, focused }) => (
+              <Home color={focused ? '$teal10' : '$teal8'} size={size} strokeWidth={2} />
+            ),
           }}
         />
         <Tabs.Screen
@@ -37,7 +39,9 @@ export default function Layout() {
           name="profile"
           options={{
             title: 'Profile',
-            tabBarIcon: ProfileTabIcon,
+            tabBarIcon: ({ size, color, focused }) => (
+              <User color={focused ? '$teal10' : '$teal8'} size={size} strokeWidth={2} />
+            ),
           }}
         />
       </Tabs>
@@ -46,22 +50,6 @@ export default function Layout() {
 }
 
 type TabBarIconProps = Parameters<Exclude<BottomTabNavigationOptions['tabBarIcon'], undefined>>[0]
-
-const ProfileTabIcon = ({ color, size }: TabBarIconProps) => {
-  return (
-    <YStack bw="$1" boc={validToken(color)} br="$10">
-      <Avatar circular p="$1" size={size}>
-        {/* TODO: use avatarUrl for firebase if uploaded by user */}
-        <Image
-          src="https://picsum.photos/id/237/200/300"
-          alt="your avatar"
-          width={size}
-          height={size}
-        />
-      </Avatar>
-    </YStack>
-  )
-}
 
 const PlusButton = ({ size }: TabBarIconProps) => {
   const router = useRouter()
@@ -83,7 +71,7 @@ const PlusButton = ({ size }: TabBarIconProps) => {
       />
       <LinearGradient
         onPress={() => router.push('/create')}
-        colors={['$gray6', '$gray7']}
+        colors={['$teal7', '$teal8']}
         start={[1, 1]}
         end={[0.8, 0]}
         w={size + 34}
@@ -104,7 +92,7 @@ const PlusButton = ({ size }: TabBarIconProps) => {
         pe="none"
         h={size + 34}
       >
-        <Plus col="$color" size={size + 20} />
+        <Plus col="$teal12" size={size + 20} />
       </YStack>
     </Theme>
   )
