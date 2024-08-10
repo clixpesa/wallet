@@ -59,7 +59,7 @@ const PlusButton = ({ size }: TabBarIconProps) => {
       <Circle
         pos="absolute"
         b={5}
-        bg="$color1"
+        bg="$teal1"
         shac="$shadowColor"
         shar={10}
         shof={{
