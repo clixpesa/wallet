@@ -1807,6 +1807,7 @@ __metadata:
     expo-crypto: "npm:~13.0.2"
     expo-dev-client: "npm:~4.0.21"
     expo-device: "npm:~6.0.2"
+    expo-document-picker: "npm:~12.0.2"
     expo-font: "npm:~12.0.9"
     expo-image-picker: "npm:~15.0.7"
     expo-linear-gradient: "npm:~13.0.2"
@@ -16545,6 +16546,15 @@ __metadata:
   peerDependencies:
     expo: "*"
   checksum: 10/ba2300590e761aa86f2fcebae2f907121f164ed44dd8c48cd9ad5dbdfd793d8a227eb30994e41795191e2a45cd15b4ec9b24e51f8b49ce5e5d3e547bf42cb44c
+  languageName: node
+  linkType: hard
+
+"expo-document-picker@npm:~12.0.2":
+  version: 12.0.2
+  resolution: "expo-document-picker@npm:12.0.2"
+  peerDependencies:
+    expo: "*"
+  checksum: 10/4eb929c6751ed6f82f2f521a4c8a9e10fdfe6f3e9fd44c4f18c6103db09a84697fb923993d3d658b6560ba20ffac276a166d59822575d70d4706057c0d0a291f
   languageName: node
   linkType: hard
 

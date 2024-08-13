@@ -20,6 +20,7 @@ export const SubmitButton = (props: ButtonProps) => {
   return (
     <Button
       theme="teal"
+      br="$10"
       iconAfter={
         <AnimatePresence>
           {isSubmitting && (

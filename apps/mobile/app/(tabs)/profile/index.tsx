@@ -68,7 +68,13 @@ export default function ProfileScreen() {
               )}
             </YStack>
           </YStack>
-          <Button mx="$4" onPress={() => router.push('/profile/edit')} theme="teal" themeInverse>
+          <Button
+            br="$10"
+            mx="$4"
+            onPress={() => router.push('/profile/edit')}
+            theme="teal"
+            themeInverse
+          >
             Edit Profile
           </Button>
 
