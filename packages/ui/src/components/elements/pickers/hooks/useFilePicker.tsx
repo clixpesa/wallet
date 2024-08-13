@@ -1,10 +1,15 @@
 import type * as DocumentPicker from 'expo-document-picker'
 import type * as ImagePicker from 'expo-image-picker/src/ImagePicker'
+import type { DropzoneInputProps, DropzoneRootProps } from 'react-dropzone'
 import { useEvent } from 'tamagui'
+
+import { useDropZone } from './useDropZone'
 
 export type MediaTypeOptions = 'All' | 'Videos' | 'Images' | 'Audios'
 export type UseFilePickerControl = {
   open: () => void
+  getInputProps: <T extends DropzoneInputProps>(props?: T | undefined) => T
+  getRootProps: <T extends DropzoneRootProps>(props?: T | undefined) => T
   dragStatus?: {
     isDragAccept: boolean
     isDragActive: boolean
@@ -43,8 +48,27 @@ export function useFilePicker<MT extends MediaTypeOptions>(props?: UseFilePicker
     }
   })
 
+  const { open, getInputProps, getRootProps, isDragAccept, isDragActive, isDragReject } =
+    useDropZone({
+      // this is web only, it triggers both on drop and open
+      onDrop: _onDrop,
+      // this is native only
+      onOpen,
+      // @ts-ignore
+      mediaTypes,
+      noClick: true,
+      ...rest,
+    })
+
   const control = {
     open,
+    getInputProps,
+    getRootProps,
+    dragStatus: {
+      isDragAccept,
+      isDragActive,
+      isDragReject,
+    },
   }
 
   return { control, ...control }

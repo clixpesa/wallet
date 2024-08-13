@@ -3,12 +3,11 @@ import { useId, useState } from 'react'
 import { Button, Label, Text, View } from 'tamagui'
 
 import { useFilePicker } from './hooks/useFilePicker'
-// import { MediaTypeOptions } from './types'
 
 export function UploadFile() {
   const id = useId()
   const [file, setFile] = useState<File>()
-  const { open } = useFilePicker({
+  const { open, getInputProps, getRootProps, dragStatus } = useFilePicker({
     typeOfPicker: 'file',
     mediaTypes: ['All'],
     multiple: false, // Added as per requirement
@@ -21,65 +20,54 @@ export function UploadFile() {
     },
   })
 
+  const { isDragActive } = dragStatus
+
   return (
+    // @ts-ignore reason: getRootProps() which is web specific return some react-native incompatible props, but it's fine
     <View
       flexDirection="column"
+      {...getRootProps()}
       bs="dashed"
       width={400}
       maxWidth="100%"
-      height={250}
+      height={180}
       justifyContent="center"
       alignItems="center"
-      gap="$6"
-      padding="$4"
-      borderRadius="$3"
+      borderWidth={isDragActive ? 2 : 1}
+      borderColor={isDragActive ? '$gray11' : '$gray9'}
     >
-      <View flexDirection="column" gap="$3">
-        <View>
-          <Button onPress={open} size="$3">
-            <Button.Icon>
-              <Upload y={-1} />
-            </Button.Icon>
-            <Button.Text size="$2">Choose File here</Button.Text>
-          </Button>
-          {!file && (
-            <View
-              width="100%"
-              alignItems="center"
-              justifyContent="center"
-              $platform-native={{
-                display: 'none',
-              }}
-            >
-              <Label
-                t="$1"
-                pos="absolute"
-                size="$3"
-                htmlFor={id}
-                color="$color9"
-                whiteSpace="nowrap"
-              >
-                Drag a file into this area
-              </Label>
-            </View>
-          )}
+      <View alignItems="center">
+        <Button onPress={open} size="$4" boc="$color8">
+          <Button.Icon>
+            <Upload />
+          </Button.Icon>
+        </Button>
 
-          <View id={id} tag="input" width={0} height={0} />
+        {!file && (
+          <View width="100%">
+            <Label htmlFor={id} color="$color9" whiteSpace="nowrap">
+              Click to upload statement
+            </Label>
+          </View>
+        )}
+        {/* @ts-ignore */}
+        <View id={id} tag="input" width={0} height={0} {...getInputProps()} />
 
-          {file && (
-            <View width="100%" alignItems="center" justifyContent="center" t="$4.5">
-              <View flexDirection="row" theme="alt1" gap="$2" ai="center" pos="absolute">
-                <View flexShrink={0}>
-                  <File color="$color" size="$1" />
-                </View>
-                <Text t="$1" ellipsizeMode="head" fontSize="$3" whiteSpace="nowrap">
-                  {file.name}
-                </Text>
+        {file && (
+          <View width="100%" alignItems="center" justifyContent="center" t="$4.5">
+            <View flexDirection="row" theme="alt1" gap="$2" ai="center" pos="absolute">
+              <View flexShrink={0}>
+                <File color="$color" size="$1" />
               </View>
+              <Text t="$1" ellipsizeMode="head" fontSize="$3" whiteSpace="nowrap">
+                {file.name}
+              </Text>
             </View>
-          )}
-        </View>
+          </View>
+        )}
       </View>
+      {/* need an empty input div just have image drop feature in the web */}
+      {/*  @ts-ignore */}
     </View>
   )
 }
