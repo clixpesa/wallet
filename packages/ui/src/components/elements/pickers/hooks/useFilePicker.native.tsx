@@ -1,10 +1,15 @@
 import * as DocumentPicker from 'expo-document-picker'
 import * as ImagePicker from 'expo-image-picker'
+import type { DropzoneInputProps, DropzoneRootProps } from 'react-dropzone'
 import { useEvent } from 'tamagui'
+
+import { useDropZone } from './useDropZone'
 
 export type MediaTypeOptions = 'All' | 'Videos' | 'Images' | 'Audios'
 export type UseFilePickerControl = {
   open: () => void
+  getInputProps: <T extends DropzoneInputProps>(props?: T | undefined) => T
+  getRootProps: <T extends DropzoneRootProps>(props?: T | undefined) => T
   dragStatus?: {
     isDragAccept: boolean
     isDragActive: boolean
@@ -47,12 +52,20 @@ export function useFilePicker<MT extends MediaTypeOptions>(props?: UseFilePicker
   //   if (result.type === 'success') {
   //     onPick({ webFiles: null, nativeFiles: result.uri })
   //   }
-  })
+  // })
 
   const _onOpenNative = useEvent((nativeFiles) => {
     if (onPick) {
       onPick({ webFiles: null, nativeFiles })
     }
+  })
+
+  const { getRootProps, isDragAccept, isDragActive, isDragReject } = useDropZone({
+    onOpen: _onOpenNative,
+    // @ts-ignore
+    mediaTypes,
+    noClick: true,
+    ...rest,
   })
 
   const _handleOpenNative = async () => {
@@ -65,11 +78,17 @@ export function useFilePicker<MT extends MediaTypeOptions>(props?: UseFilePicker
       _onOpenNative(result.assets)
     } else {
       const result = await DocumentPicker.getDocumentAsync()
+      console.log('assets', result.assets)
       _onOpenNative(result.assets)
     }
   }
 
   const control = {
+    dragStatus: {
+      isDragAccept,
+      isDragActive,
+      isDragReject,
+    },
     getInputProps: () => null,
     getRootProps: () => null,
     open: _handleOpenNative,
