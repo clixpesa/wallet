@@ -57,17 +57,12 @@ const defaultAuthors = [
   },
 ]
 
-const Loans = () => <Text>Loans</Text>
-const Offers = () => <Text>Offers</Text>
-const Requests = () => <Text>Requests</Text>
-
 export default function Home() {
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['left', 'right', 'top']}>
       <XStack maw={1480} als="center" f={1}>
         <ScrollView f={3} fb={0}>
           <Header />
-          <TabBarSwippable LoansView={Loans} OffersView={Offers} RequestsView={Requests} />
           <YStack>
             <AccountBalanceSection />
             <TransactionsSection />
