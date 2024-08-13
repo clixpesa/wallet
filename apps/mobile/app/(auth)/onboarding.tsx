@@ -22,7 +22,7 @@ const OnboardingScreen = () => {
 
 const steps: OnboardingStepInfo[] = [
   {
-    theme: 'orange',
+    theme: 'teal',
     Content: () => (
       <StepContent
         title="Chamaa Groups"
@@ -32,7 +32,7 @@ const steps: OnboardingStepInfo[] = [
     ),
   },
   {
-    theme: 'green',
+    theme: 'orange',
     Content: () => (
       <StepContent
         title="Loans"

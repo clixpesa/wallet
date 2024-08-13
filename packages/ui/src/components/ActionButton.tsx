@@ -9,7 +9,7 @@ export type ActionButtonProps = {
 
 export const ActionButton = ({ buttonText, action, icon: Icon }: ActionButtonProps) => {
   return (
-    <Button  onPress={action} theme="teal" >
+    <Button  onPress={action} theme="teal" br='$10'>
       <Button.Icon >
         <Icon />
       </Button.Icon>

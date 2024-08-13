@@ -16,13 +16,11 @@ import {
   Card,
   Transactions,
   validToken,
-  Text,
 } from 'ui'
+import { UploadFile } from 'ui/src/components/elements/pickers/UploadFile'
 
 import { NuggetsSection } from '@/components/home/NuggetsSection'
 import { ScrollAdapt } from '@/components/home/ScrollAdapt'
-
-import { TabBarSwippable } from 'ui/src/components/SwippableTabBar'
 
 export const transactionData = [
   {
@@ -62,6 +60,7 @@ export default function Home() {
     <SafeAreaView style={{ flex: 1 }} edges={['left', 'right', 'top']}>
       <XStack maw={1480} als="center" f={1}>
         <ScrollView f={3} fb={0}>
+          {/* <UploadFile /> */}
           <Header />
           <YStack>
             <AccountBalanceSection />
@@ -95,7 +94,7 @@ const AccountBalanceSection = () => {
         <H6 size="$4" fow="$1" theme="alt2">
           Actual Balance (KES)
         </H6>
-        <H2 mt="$2">$23,300.89</H2>
+        <H2 mt="$2">Ksh 23,300.89</H2>
         <SizableText mt="$2">≈ 200.70 cUSD</SizableText>
       </Card.Header>
       <Card.Footer padded jc="space-between">
