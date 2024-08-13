@@ -60,7 +60,7 @@ export function useFilePicker<MT extends MediaTypeOptions>(props?: UseFilePicker
     }
   })
 
-  const { getRootProps, isDragAccept, isDragActive, isDragReject } = useDropZone({
+  const { isDragAccept, isDragActive, isDragReject } = useDropZone({
     onOpen: _onOpenNative,
     // @ts-ignore
     mediaTypes,
