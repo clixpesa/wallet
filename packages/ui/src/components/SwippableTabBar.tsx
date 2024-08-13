@@ -1,20 +1,18 @@
 import React, { useEffect, useRef } from 'react'
-// import { Animated, PanResponder } from 'react-native'
 import type { TabsContentProps } from 'tamagui'
 import { Separator, Tabs, View, useEvent, SizableText } from 'tamagui'
 
 const tabs = ['Loans', 'Offers', 'Requests']
 
 export const TabBarSwippable = ({
-  LoansView,
-  OffersView,
-  RequestsView,
+  InitialView,
+  SecondView,
+  ThirdView,
 }: {
-  LoansView: React.ComponentType<unknown>
-  OffersView: React.ComponentType<unknown>
-  RequestsView: React.ComponentType<unknown>
+  InitialView: React.ComponentType<unknown>
+  SecondView: React.ComponentType<unknown>
+  ThirdView: React.ComponentType<unknown>
 }) => {
-  // const boxHPosition = useRef(new Animated.Value(0)).current
   const [activeTabIndex, _setActiveTabIndex] = React.useState(0)
   const activeTabRef = useRef(activeTabIndex)
   activeTabRef.current = activeTabIndex
@@ -34,6 +32,7 @@ export const TabBarSwippable = ({
       borderBottomWidth={1}
       borderBottomColor="$color1"
       defaultValue={tabs[0]}
+      paddingHorizontal="$2"
       flex={1}
       value={tabs[activeTabIndex]}
       alignItems="center"
@@ -58,23 +57,27 @@ export const TabBarSwippable = ({
           userSelect="none"
           flexDirection="row"
           alignItems="center"
+          backgroundColor="$background"
           justifyContent="space-between"
-          paddingVertical="$2"
-          height="$4"
         >
           {tabs.map((tab, index) => (
             <Tabs.Tab
               unstyled
               key={index}
               value={tab}
+              alignItems="center"
               flex={1}
+              flexBasis={0}
+              flexShrink={1}
+              height="$4"
+              pe={activeTabIndex === index ? 'none' : 'auto'}
               onPress={() => {
                 changeActiveTab(index)
               }}
               pressStyle={{ opacity: 0.5 }}
             >
               <SizableText
-                theme={index !== activeTabIndex ? 'alt1' : undefined}
+                color={index !== activeTabIndex ? '$color10' : '$teal10'}
                 fontWeight={index !== activeTabIndex ? undefined : '700'}
               >
                 {tab}
@@ -85,13 +88,13 @@ export const TabBarSwippable = ({
       </View>
       <Separator />
       <TabsContent value="Loans">
-        <LoansView />
+        <InitialView />
       </TabsContent>
       <TabsContent value="Offers">
-        <OffersView />
+        <SecondView />
       </TabsContent>
       <TabsContent value="Requests">
-        <RequestsView />
+        <ThirdView />
       </TabsContent>
     </Tabs>
   )
@@ -105,8 +108,10 @@ const TabsContent = (props: TabsContentProps) => {
       justifyContent="center"
       flex={1}
       borderColor="$background"
+      backgroundColor="$background"
       height={600}
       width="100%"
+      minWidth="$100%"
       {...props}
     >
       {props.children}
