@@ -2,7 +2,7 @@ import useSpaceStore from 'app/store/spaceStore'
 import { SchemaForm, formFields } from 'app/utils/SchemaForm'
 import { Stack, useRouter } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Paragraph, SubmitButton, Theme, YStack } from 'ui'
+import { Paragraph, SubmitButton, Theme, YStack, XStack, Button } from 'ui'
 import { z } from 'zod'
 
 export default function CreateSpaceScreen() {
@@ -47,8 +47,21 @@ export default function CreateSpaceScreen() {
           },
         }}
         renderAfter={({ submit }) => (
-          <Theme inverse>
-            <SubmitButton onPress={() => submit()}>Continue</SubmitButton>
+          <Theme>
+            <XStack jc="space-between" gap="$5">
+              <Button
+                pressStyle={{
+                  bg: '$color6',
+                }}
+                br="$10"
+                onPress={() => console.log('Save')}
+              >
+                <Button.Text col="$color">Save</Button.Text>
+              </Button>
+              <SubmitButton f={1} onPress={() => submit()}>
+                Continue
+              </SubmitButton>
+            </XStack>
           </Theme>
         )}
       >
