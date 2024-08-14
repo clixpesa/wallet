@@ -1,4 +1,4 @@
-import { ArrowRight, Bell, Plus, MoreHorizontal, Bitcoin } from '@tamagui/lucide-icons'
+import { ArrowRight, Bell, Plus, MoreHorizontal, Bitcoin, Clock4 } from '@tamagui/lucide-icons'
 import { router } from 'expo-router'
 import {
   Button,
@@ -12,28 +12,12 @@ import {
   ActionButton,
   Card,
   Transactions,
-  EventCard,
+  View,
+  Avatar,
+  Text,
 } from 'ui'
 
-const eventDummyData = [
-  {
-    id: 1,
-    name: 'Event 1',
-    description: 'Lorem ipsum dolor sit, amet.',
-    start_time: new Date('2023-05-01T00:00:00.000Z'),
-    end_time: new Date('2023-05-01T00:00:00.000Z'),
-    status: 'Upcoming',
-  },
-  {
-    id: 2,
-    name: 'Event 2',
-    description: 'Lorem ipsum dolor sit, amet.',
-    start_time: new Date('2023-05-01T00:00:00.000Z'),
-    end_time: new Date('2023-05-01T00:00:00.000Z'),
-    status: 'Upcoming',
-  },
-]
-
+const isPendingApproval = true
 export const transactionDummyData = [
   {
     id: '0',
@@ -58,7 +42,7 @@ export function LoansView() {
   return (
     <XStack maw={1480} als="center" f={1}>
       <ScrollView f={3} fb={0}>
-        <YStack>
+        <YStack gap="$4" pb="$10">
           <AccountBalanceSection />
           <LoanOverviewSection />
           <LoanTransactionsSection />
@@ -107,26 +91,62 @@ const LoanOverviewSection = () => {
         </Theme>
       </XStack>
 
-      <EventCard
-        key={eventDummyData[0].id}
-        title={eventDummyData[0].name}
-        description={eventDummyData[0].description}
-        action={{
-          text: 'Show Event',
-          props: {
-            // href: `/event/${eventDummyData[0].id}`,
-            // accessibilityRole: 'link',
-            // onPress: () => undefined,
-          },
-        }}
-        tags={[
-          { text: eventDummyData[0].status, theme: 'green_alt2' },
-          {
-            text: `${new Date(eventDummyData[0].end_time).toLocaleDateString()} Remaining`,
-            theme: 'orange',
-          },
-        ]}
-      />
+      <XStack padding="$4" alignItems="center" justifyContent="space-between">
+        <XStack gap="$3">
+          <Avatar circular size="$4">
+            <Avatar.Image objectFit="cover" bg="orange" />
+            <Avatar.Fallback backgroundColor="orange" />
+          </Avatar>
+          <YStack gap="$2.5">
+            <SizableText size="$4" y={2}>
+              Haraka
+            </SizableText>
+            <SizableText color="$color9" size="$2" y={-2}>
+              Institution
+            </SizableText>
+          </YStack>
+        </XStack>
+
+        <YStack gap="$2" alignItems="center">
+          <Text color="$color12" fontSize="$5" fontWeight="700">
+            10,000 cKES
+          </Text>
+          <View
+            backgroundColor="$color2"
+            borderRadius={100}
+            paddingHorizontal="$2"
+            paddingVertical={6}
+            paddingRight={10}
+            flexDirection="row"
+            marginLeft="auto"
+            justifyContent="center"
+            alignItems="center"
+            gap="$1.5"
+            theme={isPendingApproval ? 'orange' : 'teal'}
+          >
+            <Theme name="alt2">
+              <Clock4 size={14} />
+              <SizableText size="$2">
+                {isPendingApproval ? 'Pending approval' : 'Due in 30 days'}
+              </SizableText>
+            </Theme>
+          </View>
+        </YStack>
+      </XStack>
+      <View px="$4" flexDirection="row" theme="alt2" gap="$2">
+        {isPendingApproval ? (
+          <>
+            <SizableText>7.5% interest</SizableText>
+            <SizableText>1 month</SizableText>
+          </>
+        ) : (
+          <ActionButton
+            w="100%"
+            buttonText="Repay"
+            action={() => console.log('Navigate to withdraw screen')}
+          />
+        )}
+      </View>
     </YStack>
   )
 }
@@ -135,7 +155,7 @@ const LoanTransactionsSection = () => {
   return (
     <YStack>
       <XStack px="$4.5" ai="center" gap="$2" jc="space-between">
-        <SizableText fow="400">Loans</SizableText>
+        <SizableText fow="400">Transactions</SizableText>
         <Theme name="alt2">
           <Button size="$2" chromeless iconAfter={ArrowRight}>
             See all
