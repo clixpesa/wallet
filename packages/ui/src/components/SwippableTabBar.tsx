@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import type { TabsContentProps } from 'tamagui'
 import { Separator, Tabs, View, useEvent, SizableText } from 'tamagui'
 
-const tabs = ['Loans', 'Offers', 'Requests']
+const tabs = ['Your loans', 'Offers', 'Requests']
 
 export const TabBarSwippable = ({
   InitialView,
@@ -87,7 +87,7 @@ export const TabBarSwippable = ({
         </Tabs.List>
       </View>
       <Separator />
-      <TabsContent value="Loans">
+      <TabsContent value="Your loans">
         <InitialView />
       </TabsContent>
       <TabsContent value="Offers">
