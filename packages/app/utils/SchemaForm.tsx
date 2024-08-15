@@ -17,6 +17,8 @@ import {
   SelectField,
   TextAreaField,
   TextField,
+  UploadField,
+  UploadSchema,
   Theme,
 } from 'ui'
 import { z } from 'zod'
@@ -49,6 +51,7 @@ export const formFields = {
    */
   address: createUniqueFieldSchema(AddressSchema, 'address'),
   phone_number: createUniqueFieldSchema(PhoneNumberSchema, 'phone_number'),
+  upload: createUniqueFieldSchema(UploadSchema, 'upload'),
 }
 
 // function createFormSchema<T extends ZodRawShape>(getData: (fields: typeof formFields) => T) {
@@ -65,6 +68,7 @@ const mapping = [
   [formFields.select, SelectField] as const,
   [formFields.address, AddressField] as const,
   [formFields.phone_number, PhoneNumberField] as const,
+  [formFields.upload, UploadField] as const,
 ] as const
 
 const FormComponent = (props: FormProps) => {
@@ -78,6 +82,11 @@ const FormComponent = (props: FormProps) => {
 const _SchemaForm = createTsForm(mapping, {
   FormComponent,
 })
+
+// SchemaForm is a higher-order component that wraps around the _SchemaForm component.
+// It provides additional functionality for rendering a form with custom fields and a footer.
+// The renderAfter prop allows for custom content to be rendered in the form's footer.
+// The children prop can be used to customize the rendering of form fields.
 
 export const SchemaForm: typeof _SchemaForm = ({ ...props }) => {
   const renderAfter: ComponentProps<typeof _SchemaForm>['renderAfter'] = props.renderAfter

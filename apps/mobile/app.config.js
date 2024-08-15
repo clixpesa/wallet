@@ -35,7 +35,7 @@ export default {
     slug: 'clixpesa-app',
     jsEngine: 'hermes',
     scheme: 'clixpesa',
-    version: '1.0.0',
+    version: '1.0.10',
     orientation: 'portrait',
     icon: './assets/icon.png',
     userInterfaceStyle: 'automatic',

@@ -11,7 +11,6 @@ import {
   YStack,
   useToastController,
   Image,
-  Button,
 } from 'ui'
 import { z } from 'zod'
 
