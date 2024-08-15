@@ -28,7 +28,7 @@ export const TabBarSwippable = ({
   return (
     <Tabs
       flexDirection="column"
-      backgroundColor="$background"
+      // backgroundColor="$background"
       borderBottomWidth={1}
       borderBottomColor="$color1"
       defaultValue={tabs[0]}
@@ -107,8 +107,6 @@ const TabsContent = (props: TabsContentProps) => {
       alignItems="center"
       justifyContent="center"
       flex={1}
-      borderColor="$background"
-      backgroundColor="$background"
       height={600}
       width="100%"
       minWidth="$100%"

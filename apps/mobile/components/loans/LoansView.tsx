@@ -1,4 +1,4 @@
-import { ArrowRight, Bell, Plus, MoreHorizontal, Bitcoin, Clock4 } from '@tamagui/lucide-icons'
+import { ArrowRight, Plus, MoreHorizontal, Bitcoin, Clock4 } from '@tamagui/lucide-icons'
 import { router } from 'expo-router'
 import {
   Button,
@@ -16,6 +16,8 @@ import {
   Avatar,
   Text,
 } from 'ui'
+
+import { HarakaLogo } from '@/components/haraka/HarakaLogo'
 
 const isPendingApproval = true
 export const transactionDummyData = [
@@ -94,8 +96,7 @@ const LoanOverviewSection = () => {
       <XStack padding="$4" alignItems="center" justifyContent="space-between">
         <XStack gap="$3">
           <Avatar circular size="$4">
-            <Avatar.Image objectFit="cover" bg="orange" />
-            <Avatar.Fallback backgroundColor="orange" />
+            <HarakaLogo />
           </Avatar>
           <YStack gap="$2.5">
             <SizableText size="$4" y={2}>
@@ -133,7 +134,7 @@ const LoanOverviewSection = () => {
           </View>
         </YStack>
       </XStack>
-      <View px="$4" flexDirection="row" theme="alt2" gap="$2">
+      <View px="$4" flexDirection="row" theme="alt1" gap="$2">
         {isPendingApproval ? (
           <>
             <SizableText>7.5% interest</SizableText>

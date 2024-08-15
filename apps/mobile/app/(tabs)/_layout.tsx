@@ -1,8 +1,8 @@
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
 import { LinearGradient } from '@tamagui/linear-gradient'
 import { Home, Plus, User, Coins } from '@tamagui/lucide-icons'
-import { Stack, Tabs, useRouter } from 'expo-router'
-import { Circle, Theme, YStack, Button, Input, Label, Popover, XStack, type PopoverProps } from 'ui'
+import { Stack, Tabs } from 'expo-router'
+import { Circle, Theme, YStack, Button, Label, Popover, XStack, type PopoverProps } from 'ui'
 
 export default function Layout() {
   return (
