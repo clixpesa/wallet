@@ -4,6 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { Paragraph, SubmitButton, YStack, XStack, Button } from 'ui'
 import { z } from 'zod'
 
+import { UploadFile } from 'ui/src/components/elements/pickers/UploadFile'
+
 export default function UploadStatementScreen() {
   const router = useRouter()
 
@@ -16,7 +18,7 @@ export default function UploadStatementScreen() {
       <SchemaForm
         onSubmit={handleSubmit}
         schema={z.object({
-          statement: formFields.upload,
+          statement: formFields.number,
         })}
         renderAfter={({ submit }) => (
           <XStack jc="space-between" gap="$4">
@@ -40,6 +42,7 @@ export default function UploadStatementScreen() {
           <>
             <YStack gap="$2" py="$4" pb="$8">
               <Paragraph ta="center">Upload Statement</Paragraph>
+              <UploadFile />
             </YStack>
             {Object.values(fields)}
           </>

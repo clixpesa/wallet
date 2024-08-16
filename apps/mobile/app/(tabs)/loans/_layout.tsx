@@ -9,14 +9,12 @@ export default function Layout() {
         options={{
           title: 'Get a loan',
           // headerShown: false,
-          animation: 'slide_from_right',
         }}
       />
       <Stack.Screen
         name="business"
         options={{
           title: 'Type of business',
-          animation: 'slide_from_right',
         }}
       />
 
@@ -24,7 +22,6 @@ export default function Layout() {
         name="business-length"
         options={{
           title: 'Business length',
-          animation: 'slide_from_right',
         }}
       />
 
@@ -32,7 +29,6 @@ export default function Layout() {
         name="daily-income"
         options={{
           title: 'Daily Income',
-          animation: 'slide_from_right',
         }}
       />
 
@@ -40,7 +36,6 @@ export default function Layout() {
         name="business-rent"
         options={{
           title: 'Business rent',
-          animation: 'slide_from_right',
         }}
       />
 
@@ -48,7 +43,6 @@ export default function Layout() {
         name="house-rent"
         options={{
           title: 'House rent',
-          animation: 'slide_from_right',
         }}
       />
 
@@ -56,7 +50,6 @@ export default function Layout() {
         name="dependants"
         options={{
           title: 'Dependants',
-          animation: 'slide_from_right',
         }}
       />
 
@@ -64,7 +57,13 @@ export default function Layout() {
         name="upload-statement"
         options={{
           title: 'Upload statement',
-          animation: 'slide_from_right',
+        }}
+      />
+
+      <Stack.Screen
+        name="guarantors"
+        options={{
+          title: 'Choose guarantors',
         }}
       />
     </Stack>
