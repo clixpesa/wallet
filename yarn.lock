@@ -13354,7 +13354,6 @@ __metadata:
     "@nderscore/tamagui-typescript-plugin": "npm:^0.6.0"
     "@tamagui/cli": "npm:^1.108.3"
     "@turbo/gen": "npm:^1.10.12"
-    change-case: "npm:^4.1.2"
     check-dependency-version-consistency: "npm:^3.0.3"
     dotenv: "npm:^16.0.3"
     dotenv-cli: "npm:^6.0.0"

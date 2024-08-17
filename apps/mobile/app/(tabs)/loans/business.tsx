@@ -1,5 +1,5 @@
 import { SchemaForm, formFields } from 'app/utils/SchemaForm'
-import { Stack, useRouter } from 'expo-router'
+import { useRouter } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Paragraph, SubmitButton, YStack, XStack, Button } from 'ui'
 import { z } from 'zod'
