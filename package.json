@@ -59,7 +59,6 @@
     "@nderscore/tamagui-typescript-plugin": "^0.6.0",
     "@tamagui/cli": "^1.108.3",
     "@turbo/gen": "^1.10.12",
-    "change-case": "^4.1.2",
     "check-dependency-version-consistency": "^3.0.3",
     "dotenv": "^16.0.3",
     "dotenv-cli": "^6.0.0",

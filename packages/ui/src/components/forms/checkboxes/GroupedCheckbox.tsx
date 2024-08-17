@@ -124,7 +124,7 @@ function Item({ item, checked }: { item: Item; checked: boolean }) {
               </Checkboxes.Checkbox.Indicator>
             </Checkboxes.Checkbox>
           </View>
-          <Text numberOfLines={2} fontSize="$3" lineHeight="$3" fontWeight="300" col="$gray9">
+          <Text fontSize="$3" lineHeight="$3" fontWeight="300" col="$gray9">
             +254-1234-5678
           </Text>
         </View>
