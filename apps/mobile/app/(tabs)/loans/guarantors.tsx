@@ -17,7 +17,8 @@ export default function GuarantorsScreen() {
       <SchemaForm
         onSubmit={handleSubmit}
         schema={z.object({
-          check: formFields.boolean_checkbox,
+          guarantor1: formFields.number.describe('Guarantor 1'),
+          guarantor2: formFields.number.describe('Guarantor 2'),
         })}
         renderAfter={({ submit }) => (
           <XStack jc="space-between" gap="$4">
@@ -42,9 +43,8 @@ export default function GuarantorsScreen() {
             <YStack gap="$2" py="$4" pb="$8">
               <Paragraph ta="center">Choose your guarantors</Paragraph>
             </YStack>
-            <GroupedCheckbox />
-
-            {/* {Object.values(fields)} */}
+            {/* <GroupedCheckbox /> */}
+            {Object.values(fields)}
           </>
         )}
       </SchemaForm>

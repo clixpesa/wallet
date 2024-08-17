@@ -4,7 +4,6 @@ import { Avatar, Text, View, XStack, YStack, YGroup, debounce } from 'tamagui'
 
 import { Checkboxes } from './common/checkboxParts'
 
-/** ------ EXAMPLE ------ */
 const items = [
   {
     title: 'PayPal',
@@ -51,8 +50,6 @@ export function GroupedCheckbox() {
       <Checkboxes.FocusGroup
         minWidth="100%"
         loop
-        // paddingHorizontal="$4"
-        // paddingVertical="$6"
         $group-window-gtXs={{
           alignSelf: 'center',
           minWidth: 'unset',
@@ -62,7 +59,7 @@ export function GroupedCheckbox() {
         <Checkboxes.Group orientation="vertical" flexShrink={1} minWidth="100%">
           {items.map((item) => (
             <Checkboxes.FocusGroup.Item value={item.id} key={item.id}>
-              <Item checked={values[item.id]} key={item.id} item={item} />
+              <CheckboxItem checked={values[item.id]} key={item.id} item={item} />
             </Checkboxes.FocusGroup.Item>
           ))}
         </Checkboxes.Group>
@@ -71,7 +68,7 @@ export function GroupedCheckbox() {
   )
 }
 
-function Item({ item, checked }: { item: Item; checked: boolean }) {
+function CheckboxItem({ item, checked }: { item: Item; checked: boolean }) {
   const { id, image } = item
 
   return (
@@ -96,38 +93,35 @@ function Item({ item, checked }: { item: Item; checked: boolean }) {
           <Avatar.Image src={image} />
           <Avatar.Fallback borderColor="$background" />
         </Avatar>
-        <View flexDirection="column" flex={1} bg="blue">
-          <View flexDirection="row" gap="$3" bg="green">
-            <Checkboxes.Checkbox.Label size="$5" htmlFor={id} bg="teal" lh="$6">
-              Rizamoyiii
+        <View flexDirection="column" gap="$2" f={1}>
+          {/* TODO: Style better */}
+          <View flexDirection="row" gap="$2">
+            <Checkboxes.Checkbox.Label size="$4" lh="$5" htmlFor={id} f={1}>
+              Abedy
             </Checkboxes.Checkbox.Label>
-
             <View
               backgroundColor="$color6"
               borderRadius={100_000}
               marginRight="auto"
               paddingHorizontal="$2"
               paddingVertical="$0.5"
+              height="$1"
               theme="teal"
-              height="$2"
-              alignItems="center"
-              justifyContent="center"
             >
               <Text color="$color9" fontSize="$1" fontWeight="$1">
                 Chamaa
               </Text>
             </View>
-
-            <Checkboxes.Checkbox marginLeft="auto" id={id} alignSelf="flex-start">
-              <Checkboxes.Checkbox.Indicator>
-                <Check />
-              </Checkboxes.Checkbox.Indicator>
-            </Checkboxes.Checkbox>
           </View>
           <Text fontSize="$3" lineHeight="$3" fontWeight="300" col="$gray9">
             +254-1234-5678
           </Text>
         </View>
+        <Checkboxes.Checkbox marginLeft="auto" id={id} theme="orange">
+          <Checkboxes.Checkbox.Indicator>
+            <Check />
+          </Checkboxes.Checkbox.Indicator>
+        </Checkboxes.Checkbox>
       </Checkboxes.Card>
     </YGroup.Item>
   )

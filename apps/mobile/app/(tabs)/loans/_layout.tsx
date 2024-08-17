@@ -2,7 +2,7 @@ import { Stack } from 'expo-router'
 
 export default function Layout() {
   return (
-    <Stack>
+    <Stack screenOptions={{ headerShadowVisible: false }}>
       <Stack.Screen name="index" options={{ title: 'Loans', headerShadowVisible: false }} />
       <Stack.Screen
         name="get-loan"
@@ -64,6 +64,20 @@ export default function Layout() {
         name="guarantors"
         options={{
           title: 'Choose guarantors',
+        }}
+      />
+
+      <Stack.Screen
+        name="frequency"
+        options={{
+          title: 'Repayment frequency',
+        }}
+      />
+
+      <Stack.Screen
+        name="review"
+        options={{
+          title: 'Review application',
         }}
       />
     </Stack>
