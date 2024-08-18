@@ -18,12 +18,7 @@ export const BooleanCheckboxField = (props: Pick<CheckboxProps, 'size' | 'native
   return (
     <Theme name={error ? 'red' : null} forceClassName>
       <Fieldset>
-        <XStack gap="$4">
-          {!!label && (
-            <Label theme="alt1" size={props.size || '$3'} htmlFor={id}>
-              {label} {isOptional && `(Optional)`}
-            </Label>
-          )}
+        <XStack gap="$2" ai="flex-start">
           <Checkbox
             disabled={disabled}
             native
@@ -31,12 +26,19 @@ export const BooleanCheckboxField = (props: Pick<CheckboxProps, 'size' | 'native
             onCheckedChange={(checked) => field.onChange(checked)}
             ref={field.ref}
             id={id}
+            theme="orange"
             {...props}
           >
             <Checkbox.Indicator>
               <Check />
             </Checkbox.Indicator>
           </Checkbox>
+
+          {!!label && (
+            <Label lh="$6" htmlFor={id} size={props.size} f={1}>
+              {label} {isOptional && `(Optional)`}
+            </Label>
+          )}
         </XStack>
         <FieldError message={error?.errorMessage} />
       </Fieldset>

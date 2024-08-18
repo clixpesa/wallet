@@ -1,7 +1,7 @@
 import { SchemaForm, formFields } from 'app/utils/SchemaForm'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import { router } from 'expo-router'
-import { Paragraph, SubmitButton, YStack, XStack, Button } from 'ui'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { H3, SubmitButton, YStack, XStack, Button, Text } from 'ui'
 import { z } from 'zod'
 
 export default function GetLoanScreen() {
@@ -10,14 +10,13 @@ export default function GetLoanScreen() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right']}>
+    <SafeAreaView style={{ flex: 1 }} edges={['top', 'bottom', 'left', 'right']}>
       <SchemaForm
         onSubmit={handleSubmit}
         schema={z.object({
-          number: formFields.number.min(10).describe('Loan amount // Name your space'),
+          number: formFields.number.max(10000).describe('Loan amount'),
           text: formFields.text.describe('Duration // 1 month (7.5% interest)'),
         })}
-        // defaultValues={spaceInfo}
         renderAfter={({ submit }) => (
           <XStack jc="space-between" gap="$4">
             <Button
@@ -38,8 +37,9 @@ export default function GetLoanScreen() {
       >
         {(fields) => (
           <>
-            <YStack gap="$2" py="$4" pb="$8" bg="red">
-              <Paragraph ta="center">Get a loan</Paragraph>
+            <YStack mb="$2" bg="red">
+              <Text>Steppwr</Text>
+              <H3 ta="left">Get a loan</H3>
             </YStack>
             {Object.values(fields)}
           </>

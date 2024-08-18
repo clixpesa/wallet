@@ -145,6 +145,7 @@ const InputImpl = InputFrame.styleable((props, ref) => {
   return (
     <View f={1}>
       <InputFrame
+        col="$color12"
         ref={ref}
         onFocus={() => {
           setFocused(true)
@@ -273,14 +274,12 @@ export const InputInfo = styled(Text, {
       '...fontSize': (val, { font }) => {
         if (!font) return
         const fontSize = font.size[val].val * 0.8
-        const lineHeight = font.lineHeight?.[val].val * 0.8
         const fontWeight = font.weight?.['$2']
         const letterSpacing = font.letterSpacing?.[val]
         const textTransform = font.transform?.[val]
         const fontStyle = font.style?.[val]
         return {
           fontSize,
-          lineHeight,
           fontWeight,
           letterSpacing,
           textTransform,

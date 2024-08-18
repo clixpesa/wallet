@@ -1,9 +1,10 @@
 import { useNumberFieldInfo, useTsController } from '@ts-react/form'
 import { useId } from 'react'
-import { Fieldset, Input, InputProps, Label, Theme } from 'tamagui'
+import { Fieldset, InputProps, Label, Theme, Text, View } from 'tamagui'
 
 import { FieldError } from '../FieldError'
 import { Shake } from '../Shake'
+import { Input } from '../forms/inputs/components/inputsParts'
 
 export const NumberField = (props: Pick<InputProps, 'size' | 'autoFocus'>) => {
   const {
@@ -18,41 +19,52 @@ export const NumberField = (props: Pick<InputProps, 'size' | 'autoFocus'>) => {
   return (
     <Theme name={error ? 'red' : null} forceClassName>
       <Fieldset>
-        {!!label && (
-          <Label theme="alt1" size={props.size || '$3'} htmlFor={id}>
-            {label} {isOptional && `(Optional)`}
-          </Label>
-        )}
+        <View flexDirection="row" ai="center" jc="space-between">
+          {!!label && (
+            <Label theme="alt1" size={props.size || '$3'} htmlFor={id}>
+              {label} {isOptional && `(Optional)`}
+            </Label>
+          )}
+          <Text>Limit: 10 - 10,000 cKES </Text>
+        </View>
+
         <Shake shakeKey={error?.errorMessage}>
-          <Input
-            disabled={disabled}
-            placeholderTextColor="$color10"
-            inputMode="numeric"
-            value={field.value?.toString() || '0'}
-            onChangeText={(text) => {
-              const num = Number(text)
-              if (isNaN(num)) {
-                if (!field.value) {
-                  field.onChange(defaultValue || 0)
-                }
-                return
-              }
-              if (typeof maxValue !== 'undefined' && num > maxValue) {
-                field.onChange(maxValue)
-                return
-              }
-              if (typeof minValue !== 'undefined' && num < minValue) {
-                field.onChange(minValue)
-                return
-              }
-              field.onChange(num)
-            }}
-            onBlur={field.onBlur}
-            ref={field.ref}
-            placeholder={placeholder}
-            id={id}
-            {...props}
-          />
+          <Input>
+            <Input.Box>
+              <Input.Info als="center" mx="$3" size="$7">
+                cKES
+              </Input.Info>
+              <Input.Area
+                disabled={disabled}
+                placeholderTextColor="$color10"
+                inputMode="numeric"
+                value={field.value?.toString() || '0'}
+                onChangeText={(text) => {
+                  const num = Number(text)
+                  if (isNaN(num)) {
+                    if (!field.value) {
+                      field.onChange(defaultValue || 0)
+                    }
+                    return
+                  }
+                  if (typeof maxValue !== 'undefined' && num > maxValue) {
+                    field.onChange(maxValue)
+                    return
+                  }
+                  if (typeof minValue !== 'undefined' && num < minValue) {
+                    field.onChange(minValue)
+                    return
+                  }
+                  field.onChange(num)
+                }}
+                onBlur={field.onBlur}
+                ref={field.ref}
+                placeholder={placeholder}
+                id={id}
+                {...props}
+              />
+            </Input.Box>
+          </Input>
         </Shake>
         <FieldError message={error?.errorMessage} />
       </Fieldset>

@@ -1,14 +1,21 @@
 import { Stack } from 'expo-router'
+import { Text, View } from 'ui'
+
+import { HarakaLogo } from '@/components/haraka/HarakaLogo'
 
 export default function Layout() {
   return (
     <Stack screenOptions={{ headerShadowVisible: false }}>
-      <Stack.Screen name="index" options={{ title: 'Loans', headerShadowVisible: false }} />
+      <Stack.Screen name="index" options={{ title: 'Loans' }} />
       <Stack.Screen
         name="get-loan"
         options={{
-          title: 'Get a loan',
-          // headerShown: false,
+          headerBackground: () => (
+            <View bg="$orange8" height="$4">
+              <HarakaLogo />
+            </View>
+          ),
+          headerLeft: () => <Text>Heyy</Text>,
         }}
       />
       <Stack.Screen
@@ -78,6 +85,13 @@ export default function Layout() {
         name="review"
         options={{
           title: 'Review application',
+        }}
+      />
+
+      <Stack.Screen
+        name="loan-terms"
+        options={{
+          title: 'Accept loan terms',
         }}
       />
     </Stack>
