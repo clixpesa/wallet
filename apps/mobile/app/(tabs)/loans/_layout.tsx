@@ -1,5 +1,5 @@
 import { Stack } from 'expo-router'
-import { Text, View } from 'ui'
+import { View, Text } from 'ui'
 
 import { HarakaLogo } from '@/components/haraka/HarakaLogo'
 
@@ -11,11 +11,17 @@ export default function Layout() {
         name="get-loan"
         options={{
           headerBackground: () => (
-            <View bg="$orange8" height="$4">
+            <View bg="$orange6" h="100%">
               <HarakaLogo />
             </View>
           ),
-          headerLeft: () => <Text>Heyy</Text>,
+          // header: () => (
+          //   <View style={{ height: 100 }} bg="$orange6" borderTopLeftRadius="$4">
+          //     <Text>Hello</Text>
+          //   </View>
+          // ),
+          // header
+          headerTitle: '',
         }}
       />
       <Stack.Screen

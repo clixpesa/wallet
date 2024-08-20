@@ -1,11 +1,14 @@
 import { SchemaForm, formFields } from 'app/utils/SchemaForm'
-import { useRouter } from 'expo-router'
+import { useRouter, useLocalSearchParams } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Paragraph, SubmitButton, YStack, XStack, Button } from 'ui'
+import { H3, SubmitButton, YStack, XStack, Button, StepControl } from 'ui'
 import { z } from 'zod'
 
 export default function BusinessScreen() {
   const router = useRouter()
+  const params = useLocalSearchParams()
+
+  const obj = JSON.parse(params.visitedIndices)
 
   const handleSubmit = () => {
     router.push('/loans/business-length')
@@ -67,8 +70,12 @@ export default function BusinessScreen() {
       >
         {(fields) => (
           <>
-            <YStack gap="$2" py="$4" pb="$8">
-              <Paragraph ta="center">Type of Business</Paragraph>
+            <YStack gap="$8">
+              <StepControl
+                initialIndex={Number(initialIndex)}
+                visitedIndices={visitedIndices.map(Number)}
+              />
+              <H3 ta="left">Get a loan</H3>
             </YStack>
             {Object.values(fields)}
           </>
