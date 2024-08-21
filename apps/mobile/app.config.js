@@ -81,6 +81,14 @@ export default {
           photosPermission: 'The app accesses your photos to let you share them with your friends.',
         },
       ],
+      [
+        '@sentry/react-native/expo',
+        {
+          url: 'https://sentry.io/',
+          project: 'clixpesa-mobile-app',
+          organization: 'sam-5w',
+        },
+      ],
       'expo-apple-authentication',
       'expo-router',
       'expo-build-properties',
