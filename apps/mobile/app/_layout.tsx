@@ -2,7 +2,7 @@ import * as Sentry from '@sentry/react-native'
 import { Provider } from 'app/provider'
 import { isRunningInExpoGo } from 'expo'
 import { useFonts } from 'expo-font'
-import { SplashScreen, Stack, Slot, useNavigationContainerRef } from 'expo-router'
+import { SplashScreen, Stack, useNavigationContainerRef } from 'expo-router'
 import { useCallback, useEffect, useState } from 'react'
 import { LogBox, View } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
@@ -62,7 +62,7 @@ function HomeLayout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
         <Provider>
-          <Slot />
+          {/* <Slot /> */}
           <Stack />
         </Provider>
       </View>

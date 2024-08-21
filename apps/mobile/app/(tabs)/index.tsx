@@ -111,7 +111,7 @@ const AccountBalanceSection = () => {
         <Button
           // title="Press me"
           onPress={() => {
-            throw new Error('Hello, again, Sentry!')
+            throw new Error('Hello, again, Sentry!, another test!')
           }}
         />
       </Card.Footer>
