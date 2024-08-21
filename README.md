@@ -125,16 +125,9 @@ We use a hook to check for auth and then redirect the user to auth pages, and al
 
 ## Environment Convention
 
-Follows [how Next.js handles env variables](https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables) - In general only a `.env.local` file is needed.
+For simplicities sake we recommend one `.env` file on your local machine for your entire project, in the root directory.
 
-- `.env.local` is where secrets can be safely stored since this file isn't committed to git
-- Do NOT put your sensitive environment variables inside `.env` as it will get committed to git
-
-[Next Environment Defaults](https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables#default-environment-variables)
-
-> Good to know: .env, .env.development, and .env.production files should be included in your repository as they define defaults. .env\*.local should be added to .gitignore, as those files are intended to be ignored. .env.local is where secrets can be stored.
-
-The package is included in the `packages` workspace in this repo. You can tweak and adjust the icon and font usage and logic to your linking.
+Each app in apps can use `with-env` to load the `.env` file.
 
 ## UI Kit
 
