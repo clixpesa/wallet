@@ -4,9 +4,14 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { H3, SubmitButton, YStack, XStack, Button, StepControl } from 'ui'
 import { z } from 'zod'
 
+type Params = {
+  initialIndex?: number
+  visitedIndices?: number[]
+}
+
 export default function BusinessScreen() {
   const router = useRouter()
-  const params = useLocalSearchParams()
+  const params = useLocalSearchParams<Params>()
 
   const obj = JSON.parse(params.visitedIndices)
 
