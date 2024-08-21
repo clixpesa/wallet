@@ -27,7 +27,7 @@ SplashScreen.preventAutoHideAsync()
 
 LogBox.ignoreLogs(['Cannot update a component', 'You are setting the style'])
 
-function HomeLayout() {
+function RootLayout() {
   // Capture the NavigationContainer ref and register it with the instrumentation.
   const ref = useNavigationContainerRef()
 
@@ -62,7 +62,6 @@ function HomeLayout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
         <Provider>
-          {/* <Slot /> */}
           <Stack />
         </Provider>
       </View>
@@ -71,4 +70,4 @@ function HomeLayout() {
 }
 
 // Wrap the Root Layout route component with `Sentry.wrap` to capture gesture info and profiling data.
-export default Sentry.wrap(HomeLayout)
+export default Sentry.wrap(RootLayout)

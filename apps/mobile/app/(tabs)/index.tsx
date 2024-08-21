@@ -107,13 +107,6 @@ const AccountBalanceSection = () => {
           action={() => console.log('Navigate to withdraw screen')}
         />
         <ActionButton icon={MoreHorizontal} action={() => console.log('Navigate to Sendscreen')} />
-
-        <Button
-          // title="Press me"
-          onPress={() => {
-            throw new Error('Hello, again, Sentry!, another test!')
-          }}
-        />
       </Card.Footer>
     </Card>
   )
