@@ -1,6 +1,5 @@
 import * as Sentry from '@sentry/react-native'
 import { Provider } from 'app/provider'
-import { isRunningInExpoGo } from 'expo'
 import { useFonts } from 'expo-font'
 import { SplashScreen, Stack, useNavigationContainerRef } from 'expo-router'
 import { useCallback, useEffect, useState } from 'react'
@@ -10,18 +9,23 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 // Construct a new instrumentation instance. This is needed to communicate between the integration and React
 const routingInstrumentation = new Sentry.ReactNavigationInstrumentation()
 
-Sentry.init({
-  dsn: 'https://8036b3186d7444fa8c8e04efccb7c40a@o376684.ingest.us.sentry.io/5210682',
-  debug: true, // If `true`, Sentry will try to print out useful debugging information if something goes wrong with sending the event. Set it to `false` in production
-  integrations: [
-    new Sentry.ReactNativeTracing({
-      // Pass instrumentation to be used as `routingInstrumentation`
-      routingInstrumentation,
-      enableNativeFramesTracking: !isRunningInExpoGo(),
-      // ...
-    }),
-  ],
-})
+if (!__DEV__) {
+  Sentry.init({
+    dsn: 'https://8036b3186d7444fa8c8e04efccb7c40a@o376684.ingest.us.sentry.io/5210682',
+    // Set tracesSampleRate to 1.0 to capture 100% of transactions for tracing.
+    // We recommend adjusting this value in production.
+    tracesSampleRate: 1.0,
+    integrations: [
+      new Sentry.ReactNativeTracing({
+        enableUserInteractionTracing: true,
+        enableNativeFramesTracking: true,
+        enableStallTracking: true,
+        // Pass instrumentation to be used as `routingInstrumentation`
+        routingInstrumentation,
+      }),
+    ],
+  })
+}
 
 SplashScreen.preventAutoHideAsync()
 
@@ -69,5 +73,9 @@ function RootLayout() {
   )
 }
 
-// Wrap the Root Layout route component with `Sentry.wrap` to capture gesture info and profiling data.
-export default Sentry.wrap(RootLayout)
+function getRootLayout() {
+  // Wrap the Root Layout route component with `Sentry.wrap` to capture gesture info and profiling data.
+  return __DEV__ ? RootLayout : Sentry.wrap(RootLayout)
+}
+
+export default getRootLayout()
