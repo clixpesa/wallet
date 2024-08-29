@@ -101,7 +101,7 @@ export default function SettingsScreen() {
         </ScrollView>
 
         <Paragraph py="$2" ta="center" theme="alt2">
-          Clixpesa v{Application.nativeApplicationVersion} ({Application.nativeBuildVersion})
+          v{Application.nativeApplicationVersion} ({Application.nativeBuildVersion})
         </Paragraph>
       </YStack>
     </SafeAreaView>
