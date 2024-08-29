@@ -1,6 +1,7 @@
 import { useNetInfo } from '@react-native-community/netinfo'
+import { getFontSized } from '@tamagui/get-font-sized'
+import { Info } from '@tamagui/lucide-icons'
 import { useEffect } from 'react'
-import { StyleSheet } from 'react-native'
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -8,6 +9,7 @@ import Animated, {
   interpolate,
 } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { Banner, Text, View, getTokenValue, styled, useTheme } from 'ui'
 
 const minHeight = 0
 
@@ -29,40 +31,31 @@ export function OfflineBanner() {
 
   const animatedStyle = useAnimatedStyle(() => ({
     height: height.value,
-    marginTop: interpolate(
-      height.value,
-      [minHeight, maxHeight],
-      [minHeight, -insets.bottom + theme.space4]
-    ),
+    // marginTop: interpolate(height.value, [minHeight, maxHeight], [minHeight, -insets.bottom + 1]),
   }))
+
+  console.log('height', height)
 
   return (
     <Animated.View style={animatedStyle}>
-      <ThemedView
-        lightColor={theme.colorWhite}
-        darkColor={theme.colorDarkBlue}
-        style={styles.container}
-      >
-        <ThemedView lightColor={theme.colorThemeGrey} darkColor="#000" style={styles.textContainer}>
-          <ThemedText fontWeight="bold" fontSize={14}>
-            App is offline
-          </ThemedText>
-        </ThemedView>
-      </ThemedView>
+      <View height="100%" position="absolute" bottom={0} right={0} left={0}>
+        <SizableText size="$3">App is offline</SizableText>
+      </View>
     </Animated.View>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    height: '100%',
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-    left: 0,
-  },
-  textContainer: {
-    alignItems: 'center',
-    paddingVertical: theme.space4,
+const SizableText = styled(Text, {
+  name: 'SizableText',
+  fontFamily: '$body',
+
+  variants: {
+    size: {
+      '...fontSize': getFontSized,
+    },
+  } as const,
+
+  defaultVariants: {
+    size: '$true',
   },
 })
