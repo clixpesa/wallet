@@ -6,6 +6,8 @@ import { useCallback, useEffect, useState } from 'react'
 import { LogBox, View } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
+import { OfflineBanner } from '@/components/OfflineBanner'
+
 // Construct a new instrumentation instance. This is needed to communicate between the integration and React
 const routingInstrumentation = new Sentry.ReactNavigationInstrumentation()
 
@@ -67,6 +69,7 @@ function RootLayout() {
       <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
         <Provider>
           <Stack />
+          <OfflineBanner />
         </Provider>
       </View>
     </GestureHandlerRootView>

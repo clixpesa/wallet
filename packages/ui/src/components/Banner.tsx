@@ -1,53 +1,46 @@
-import { LinearGradient } from '@tamagui/linear-gradient'
-import { ChevronRight } from '@tamagui/lucide-icons'
-import { useState } from 'react'
-import { AnimatePresence, Card, CardProps, ColorTokens, YStack } from 'tamagui'
+import { getFontSized } from '@tamagui/get-font-sized'
+import { Info } from '@tamagui/lucide-icons'
+import type { FontSizeTokens } from 'tamagui'
+import { View, getTokenValue, styled, Text } from 'tamagui'
 
 export const Banner = ({
+  size = '$3',
   children,
-  colors = ['$color4', '$color4', '$color6'],
-  ...props
 }: {
-  colors?: ColorTokens[]
-} & CardProps) => {
-  const [hover, setHover] = useState(false)
+  size?: FontSizeTokens
+  children?: React.ReactNode
+}) => {
   return (
-    <Card {...props} br="$4" onHoverIn={() => setHover(true)} onHoverOut={() => setHover(false)}>
-      <Card.Header padded scale={hover ? 1.01 : 1} animation="bouncy" gap="$2">
-        {children}
-      </Card.Header>
-      <Card.Background>
-        <Card.Background br="$4">
-          <LinearGradient
-            scale={4}
-            x={hover ? -300 : 50}
-            animation="bouncy"
-            br="$2"
-            w="100%"
-            h="100%"
-            colors={colors}
-            start={[0, 0]}
-            end={[1, 1]}
-          />
-        </Card.Background>
-      </Card.Background>
-      <Card.Background ai="flex-end">
-        <AnimatePresence>
-          {hover && (
-            <YStack
-              pr="$5"
-              pt="$3.5"
-              animation="bouncy"
-              enterStyle={{ x: -6, o: 0 }}
-              exitStyle={{ x: -6, o: 0 }}
-              x={0}
-              o={0.9}
-            >
-              <ChevronRight size={20} />
-            </YStack>
-          )}
-        </AnimatePresence>
-      </Card.Background>
-    </Card>
+    <View height="100%" position="absolute" bottom={0} right={0} left={0}>
+      <View
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="center"
+        // padding={size}
+        // paddingVertical={size}
+        gap={size}
+
+        // borderRadius="$4"
+        // margin="$5"
+      >
+        <Info size={getTokenValue(size as any, 'size') * 0.5} />
+        <SizableText size={size}>{children}</SizableText>
+      </View>
+    </View>
   )
 }
+
+const SizableText = styled(Text, {
+  name: 'SizableText',
+  fontFamily: '$body',
+
+  variants: {
+    size: {
+      '...fontSize': getFontSized,
+    },
+  } as const,
+
+  defaultVariants: {
+    size: '$true',
+  },
+})
