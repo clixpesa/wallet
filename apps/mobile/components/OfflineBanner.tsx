@@ -31,7 +31,11 @@ export function OfflineBanner() {
 
   const animatedStyle = useAnimatedStyle(() => ({
     height: height.value,
-    // marginTop: interpolate(height.value, [minHeight, maxHeight], [minHeight, -insets.bottom + 1]),
+    marginBottom: interpolate(
+      height.value,
+      [minHeight, maxHeight],
+      [minHeight, -insets.bottom + 4]
+    ),
   }))
 
   console.log('height', height)
