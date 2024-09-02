@@ -1,10 +1,10 @@
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
 import { LinearGradient } from '@tamagui/linear-gradient'
-import { Home, Plus, User, Coins } from '@tamagui/lucide-icons'
+import { Home, Plus, User, Coins, Wallet2 } from '@tamagui/lucide-icons'
 import { Stack, Tabs } from 'expo-router'
 import { Circle, Theme, YStack, Button, Label, Popover, XStack, type PopoverProps } from 'ui'
 
-export default function Layout() {
+export default function TabLayout() {
   return (
     <>
       <Stack.Screen
@@ -12,7 +12,12 @@ export default function Layout() {
           headerShown: false,
         }}
       />
-      <Tabs screenOptions={{ headerShown: false, tabBarShowLabel: false }}>
+      <Tabs
+        screenOptions={{
+          headerShown: false,
+          tabBarShowLabel: false,
+        }}
+      >
         <Tabs.Screen
           name="index"
           options={{
@@ -23,16 +28,12 @@ export default function Layout() {
           }}
         />
         <Tabs.Screen
-          name="_create"
-          listeners={({ navigation }: any) => ({
-            tabPress: (event: any) => {
-              event.preventDefault()
-              // navigation.navigate('create')
-            },
-          })}
+          name="wallet"
           options={{
-            title: 'New',
-            tabBarIcon: () => <PopoverMenu placement="top" Name="top-popover" />,
+            title: 'Wallet',
+            tabBarIcon: ({ size, color, focused }) => (
+              <Wallet2 color={focused ? '$teal10' : '$teal8'} size={size} strokeWidth={2} />
+            ),
           }}
         />
         <Tabs.Screen
@@ -60,7 +61,8 @@ export default function Layout() {
 
 type TabBarIconProps = Parameters<Exclude<BottomTabNavigationOptions['tabBarIcon'], undefined>>[0]
 
-const PlusButton = ({ size }: TabBarIconProps) => {
+// TODO: To Be Added Later
+const QuickActionButtonWithLogo = ({ size }: TabBarIconProps) => {
   return (
     <Theme inverse>
       <Circle
