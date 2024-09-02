@@ -1,7 +1,6 @@
 import { useNetInfo } from '@react-native-community/netinfo'
-import { getFontSized } from '@tamagui/get-font-sized'
-import { Info } from '@tamagui/lucide-icons'
 import { useEffect } from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -9,17 +8,18 @@ import Animated, {
   interpolate,
 } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { Banner, Text, View, getTokenValue, styled, useTheme } from 'ui'
+import { useTheme, Theme } from 'ui'
 
 const minHeight = 0
 
 export function OfflineBanner() {
+  const theme = useTheme()
   const netinfo = useNetInfo()
   const insets = useSafeAreaInsets()
   const height = useSharedValue(0)
 
-  const isOffline = netinfo.isInternetReachable === false
-  const maxHeight = 28 + insets.bottom / 2
+  const isOffline = netinfo.isInternetReachable === true
+  const maxHeight = 28 + insets.bottom / 1
 
   useEffect(() => {
     if (isOffline) {
@@ -31,35 +31,39 @@ export function OfflineBanner() {
 
   const animatedStyle = useAnimatedStyle(() => ({
     height: height.value,
-    marginBottom: interpolate(
-      height.value,
-      [minHeight, maxHeight],
-      [minHeight, -insets.bottom + 4]
-    ),
+    backgroundColor: 'green',
   }))
-
-  console.log('height', height)
 
   return (
     <Animated.View style={animatedStyle}>
-      <View height="100%" position="absolute" bottom={0} right={0} left={0}>
-        <SizableText size="$3">App is offline</SizableText>
+      <View
+        style={{
+          height: '100%',
+          position: 'absolute',
+          bottom: 0,
+          right: 0,
+          left: 0,
+          backgroundColor: theme.background.val,
+        }}
+      >
+        <View
+          style={{
+            alignItems: 'center',
+            paddingVertical: 4,
+            backgroundColor: theme.color5.val,
+          }}
+        >
+          <Text
+            style={{
+              fontWeight: 'bold',
+              fontSize: 14,
+              color: theme.color1.val,
+            }}
+          >
+            App is offline
+          </Text>
+        </View>
       </View>
     </Animated.View>
   )
 }
-
-const SizableText = styled(Text, {
-  name: 'SizableText',
-  fontFamily: '$body',
-
-  variants: {
-    size: {
-      '...fontSize': getFontSized,
-    },
-  } as const,
-
-  defaultVariants: {
-    size: '$true',
-  },
-})
