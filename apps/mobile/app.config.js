@@ -3,6 +3,10 @@ const EAS_UPDATE_URL = 'https://u.expo.dev/e3d38825-e3c6-4435-a9a3-2322cf8cb517'
 const EAS_PROJECT_ID = 'e3d38825-e3c6-4435-a9a3-2322cf8cb517'
 const EAS_APP_OWNER = 'clixpesa'
 
+// If you change this value, run `npx expo prebuild --clean` afterwards if you
+// are building the project locally.
+const IS_NEW_ARCH_ENABLED = true
+
 const IS_DEV = process.env.APP_ENV === 'development'
 
 const getName = () => {
@@ -69,6 +73,17 @@ export default {
     },
     plugins: [
       [
+        'expo-build-properties',
+        {
+          ios: {
+            newArchEnabled: IS_NEW_ARCH_ENABLED,
+          },
+          android: {
+            newArchEnabled: IS_NEW_ARCH_ENABLED,
+          },
+        },
+      ],
+      [
         'expo-notifications',
         {
           icon: './assets/icon.png',
@@ -91,7 +106,6 @@ export default {
       ],
       'expo-apple-authentication',
       'expo-router',
-      'expo-build-properties',
       'expo-font',
       '@react-native-firebase/app',
       '@react-native-firebase/auth',
