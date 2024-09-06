@@ -1,19 +1,12 @@
 import { useNetInfo } from '@react-native-community/netinfo'
 import { useEffect } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-  interpolate,
-} from 'react-native-reanimated'
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { useTheme, Theme } from 'ui'
+import { Text, View } from 'ui'
 
 const minHeight = 0
 
 export function OfflineBanner() {
-  const theme = useTheme()
   const netinfo = useNetInfo()
   const insets = useSafeAreaInsets()
   const height = useSharedValue(0)
@@ -31,37 +24,13 @@ export function OfflineBanner() {
 
   const animatedStyle = useAnimatedStyle(() => ({
     height: height.value,
-    backgroundColor: 'green',
   }))
 
   return (
     <Animated.View style={animatedStyle}>
-      <View
-        style={{
-          height: '100%',
-          position: 'absolute',
-          bottom: 0,
-          right: 0,
-          left: 0,
-          backgroundColor: theme.background.val,
-        }}
-      >
-        <View
-          style={{
-            alignItems: 'center',
-            paddingVertical: 4,
-            backgroundColor: theme.color5.val,
-          }}
-        >
-          <Text
-            style={{
-              fontWeight: 'bold',
-              fontSize: 14,
-              color: theme.color1.val,
-            }}
-          >
-            App is offline
-          </Text>
+      <View bg="$background" h="100%" position="absolute" bottom={0} right={0} left={0}>
+        <View ai="center" paddingVertical={4} bg="$color5">
+          <Text fow="bold">App is offline</Text>
         </View>
       </View>
     </Animated.View>
