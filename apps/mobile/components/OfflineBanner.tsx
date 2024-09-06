@@ -11,7 +11,7 @@ export function OfflineBanner() {
   const insets = useSafeAreaInsets()
   const height = useSharedValue(0)
 
-  const isOffline = netinfo.isInternetReachable === true
+  const isOffline = netinfo.isInternetReachable === false
   const maxHeight = 28 + insets.bottom / 1
 
   useEffect(() => {
