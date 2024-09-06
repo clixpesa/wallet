@@ -1,7 +1,6 @@
 import { registerRootComponent } from 'expo'
 import { ExpoRoot } from 'expo-router'
 import 'react-native-url-polyfill/auto'
-import 'pollyfills'
 import React from 'react'
 
 //NOTE: do not remove. this is a workaround for build to work with expo v51.0.0
