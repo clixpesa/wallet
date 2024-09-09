@@ -1,6 +1,7 @@
 import * as Sentry from '@sentry/react-native'
 import { Component, ErrorInfo, ReactNode } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
+import { H3, View, Button, Text, YStack } from 'ui'
 
 interface ErrorBoundaryProps {
   children: ReactNode
@@ -13,7 +14,7 @@ interface ErrorBoundaryState {
 export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props)
-    this.state = { hasError: false }
+    this.state = { hasError: true }
   }
 
   static getDerivedStateFromError(_: Error): ErrorBoundaryState {
@@ -30,10 +31,22 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     if (this.state.hasError) {
       // TODO: add expo-updates and force app to start button
       return (
-        <View style={styles.errorContainer}>
-          <Text>Something went wrong.</Text>
-          <Text>Please try again later.</Text>
+        <View>
+          {/* <H3>Something went wrong.</H3> */}
+          <Text style={styles.errorText}>Something went wrong.</Text>
+          <Text style={styles.errorSubtext}>Please try again later.</Text>
         </View>
+        // <YStack gap="$4" f={1} justifyContent="center" alignItems="center">
+        //   <View>
+        //     <Text fontSize={28}>Oops!</Text>
+        //     <H3>Something went wrong</H3>
+        //     <Text>Try again later</Text>
+        //   </View>
+
+        //   <Button borderRadius="$10" width={300}>
+        //     Try Again
+        //   </Button>
+        // </YStack>
       )
     }
 
@@ -46,7 +59,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f8f8f8',
+    backgroundColor: '#4e3e',
   },
   errorText: {
     fontSize: 18,
