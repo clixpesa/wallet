@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { LogBox, View } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
+import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { OfflineBanner } from '@/components/OfflineBanner'
 
 // Construct a new instrumentation instance. This is needed to communicate between the integration and React
@@ -65,14 +66,16 @@ function RootLayout() {
   }
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-        <Provider>
-          <Stack />
-          <OfflineBanner />
-        </Provider>
-      </View>
-    </GestureHandlerRootView>
+    <ErrorBoundary>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+          <Provider>
+            <Stack />
+            <OfflineBanner />
+          </Provider>
+        </View>
+      </GestureHandlerRootView>
+    </ErrorBoundary>
   )
 }
 
