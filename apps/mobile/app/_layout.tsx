@@ -66,16 +66,16 @@ function RootLayout() {
   }
 
   return (
-    <ErrorBoundary>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-          <Provider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+        <Provider>
+          <ErrorBoundary>
             <Stack />
-            <OfflineBanner />
-          </Provider>
-        </View>
-      </GestureHandlerRootView>
-    </ErrorBoundary>
+          </ErrorBoundary>
+          <OfflineBanner />
+        </Provider>
+      </View>
+    </GestureHandlerRootView>
   )
 }
 

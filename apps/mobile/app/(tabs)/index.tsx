@@ -18,8 +18,6 @@ import {
   validToken,
 } from 'ui'
 
-import { ErrorBoundary } from '@/components/ErrorBoundary'
-
 import { NuggetsSection } from '@/components/home/NuggetsSection'
 import { ScrollAdapt } from '@/components/home/ScrollAdapt'
 
@@ -61,7 +59,6 @@ export default function Home() {
     <SafeAreaView style={{ flex: 1 }} edges={['left', 'right', 'top']}>
       <XStack maw={1480} als="center" f={1}>
         <ScrollView f={3} fb={0}>
-          <ErrorBoundary />
           <Header />
           <YStack>
             <AccountBalanceSection />
