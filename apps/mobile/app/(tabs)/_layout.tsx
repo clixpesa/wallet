@@ -2,9 +2,22 @@ import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
 import { LinearGradient } from '@tamagui/linear-gradient'
 import { Home, Plus, User, Coins, Wallet2 } from '@tamagui/lucide-icons'
 import { Stack, Tabs } from 'expo-router'
-import { Circle, Theme, YStack, Button, Label, Popover, XStack, type PopoverProps } from 'ui'
+import {
+  Circle,
+  Theme,
+  YStack,
+  Button,
+  Label,
+  Popover,
+  XStack,
+  type PopoverProps,
+  useTheme,
+} from 'ui'
+
+// TODO: add active and inactive tint colors to the root to avoid repetition
 
 export default function TabLayout() {
+  const theme = useTheme()
   return (
     <>
       <Stack.Screen
@@ -16,42 +29,36 @@ export default function TabLayout() {
         screenOptions={{
           headerShown: false,
           tabBarShowLabel: false,
+          tabBarActiveTintColor: '$teal10',
+          tabBarInactiveTintColor: '$teal8',
         }}
       >
         <Tabs.Screen
           name="index"
           options={{
             title: 'Home',
-            tabBarIcon: ({ size, color, focused }) => (
-              <Home color={focused ? '$teal10' : '$teal8'} size={size} strokeWidth={2} />
-            ),
+            tabBarIcon: ({ color, size }) => <Home color={color} size={size} strokeWidth={2} />,
           }}
         />
         <Tabs.Screen
           name="wallet"
           options={{
             title: 'Wallet',
-            tabBarIcon: ({ size, color, focused }) => (
-              <Wallet2 color={focused ? '$teal10' : '$teal8'} size={size} strokeWidth={2} />
-            ),
+            tabBarIcon: ({ color, size }) => <Wallet2 color={color} size={size} strokeWidth={2} />,
           }}
         />
         <Tabs.Screen
           name="loans"
           options={{
             title: 'Loans',
-            tabBarIcon: ({ size, color, focused }) => (
-              <Coins color={focused ? '$teal10' : '$teal8'} size={size} strokeWidth={2} />
-            ),
+            tabBarIcon: ({ color, size }) => <Coins color={color} size={size} strokeWidth={2} />,
           }}
         />
         <Tabs.Screen
           name="profile"
           options={{
             title: 'Profile',
-            tabBarIcon: ({ size, color, focused }) => (
-              <User color={focused ? '$teal10' : '$teal8'} size={size} strokeWidth={2} />
-            ),
+            tabBarIcon: ({ color, size }) => <User color={color} size={size} strokeWidth={2} />,
           }}
         />
       </Tabs>
