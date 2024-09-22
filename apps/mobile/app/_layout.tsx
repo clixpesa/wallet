@@ -70,7 +70,15 @@ function RootLayout() {
       <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
         <Provider>
           <ErrorBoundary>
-            <Stack />
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen
+                name="settings/index"
+                options={{
+                  title: 'Settings',
+                }}
+              />
+            </Stack>
           </ErrorBoundary>
           <OfflineBanner />
         </Provider>

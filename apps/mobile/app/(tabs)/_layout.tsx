@@ -1,7 +1,7 @@
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
 import { LinearGradient } from '@tamagui/linear-gradient'
-import { Home, Plus, User, Coins, Wallet2 } from '@tamagui/lucide-icons'
-import { Stack, Tabs } from 'expo-router'
+import { Home, Plus, User, Coins, Wallet2, Bell } from '@tamagui/lucide-icons'
+import { Tabs, router } from 'expo-router'
 import {
   Circle,
   Theme,
@@ -14,55 +14,72 @@ import {
   useTheme,
 } from 'ui'
 
-// TODO: add active and inactive tint colors to the root to avoid repetition
+import { TabBarButton } from '@/components/TabBarButton'
 
 export default function TabLayout() {
-  const theme = useTheme()
+  const { teal10, teal8 } = useTheme()
+
   return (
-    <>
-      <Stack.Screen
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: teal10.val,
+        tabBarInactiveTintColor: teal8.val,
+        tabBarStyle: {
+          height: 60,
+        },
+        tabBarItemStyle: {
+          padding: 6,
+        },
+        tabBarLabelStyle: {
+          fontWeight: '500',
+          fontSize: 14,
+        },
+      }}
+    >
+      <Tabs.Screen
+        name="index"
         options={{
-          headerShown: false,
+          title: 'Home',
+          headerShown: true,
+          headerRight: () => (
+            <Button
+              borderStyle="unset"
+              borderWidth={0}
+              backgroundColor="transparent"
+              borderRadius={50}
+              onPress={() => {
+                router.navigate('notifications')
+              }}
+            >
+              <Bell size={24} />
+            </Button>
+          ),
+          tabBarIcon: ({ color, size }) => <Home color={color} size={size} strokeWidth={2} />,
         }}
       />
-      <Tabs
-        screenOptions={{
-          headerShown: false,
-          tabBarShowLabel: false,
-          tabBarActiveTintColor: '$teal10',
-          tabBarInactiveTintColor: '$teal8',
+      <Tabs.Screen
+        name="wallet"
+        options={{
+          title: 'Wallet',
+          tabBarIcon: ({ color, size }) => <Wallet2 color={color} size={size} strokeWidth={2} />,
         }}
-      >
-        <Tabs.Screen
-          name="index"
-          options={{
-            title: 'Home',
-            tabBarIcon: ({ color, size }) => <Home color={color} size={size} strokeWidth={2} />,
-          }}
-        />
-        <Tabs.Screen
-          name="wallet"
-          options={{
-            title: 'Wallet',
-            tabBarIcon: ({ color, size }) => <Wallet2 color={color} size={size} strokeWidth={2} />,
-          }}
-        />
-        <Tabs.Screen
-          name="loans"
-          options={{
-            title: 'Loans',
-            tabBarIcon: ({ color, size }) => <Coins color={color} size={size} strokeWidth={2} />,
-          }}
-        />
-        <Tabs.Screen
-          name="profile"
-          options={{
-            title: 'Profile',
-            tabBarIcon: ({ color, size }) => <User color={color} size={size} strokeWidth={2} />,
-          }}
-        />
-      </Tabs>
-    </>
+      />
+      <Tabs.Screen
+        name="loans"
+        options={{
+          title: 'Loans',
+          tabBarIcon: ({ color, size }) => <Coins color={color} size={size} strokeWidth={2} />,
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ color, size }) => <User color={color} size={size} strokeWidth={2} />,
+        }}
+      />
+    </Tabs>
   )
 }
 

@@ -3,7 +3,7 @@ import { useThemeSetting } from 'app/provider/theme'
 import { redirect } from 'app/utils/redirect'
 import { usePathname } from 'app/utils/usePathname'
 import * as Application from 'expo-application'
-import { Stack, useRouter } from 'expo-router'
+import { useRouter } from 'expo-router'
 import { openBrowserAsync } from 'expo-web-browser'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Paragraph, ScrollView, Settings, YStack } from 'ui'
@@ -14,11 +14,6 @@ export default function SettingsScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right']}>
-      <Stack.Screen
-        options={{
-          title: 'Settings',
-        }}
-      />
       <YStack f={1} gap="$2" jc="space-between">
         <ScrollView>
           <Settings mt="$6">
