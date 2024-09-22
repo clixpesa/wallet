@@ -1,4 +1,4 @@
-import { ArrowRight, Bell, Plus, MoreHorizontal, Bitcoin } from '@tamagui/lucide-icons'
+import { ArrowRight, Plus, MoreHorizontal, Bitcoin } from '@tamagui/lucide-icons'
 import { router } from 'expo-router'
 import { Platform } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -56,10 +56,9 @@ const defaultAuthors = [
 
 export default function Home() {
   return (
-    <SafeAreaView style={{ flex: 1 }} edges={['left', 'right', 'top']}>
+    <SafeAreaView style={{ flex: 1 }} edges={['left', 'right']}>
       <XStack maw={1480} als="center" f={1}>
         <ScrollView f={3} fb={0}>
-          <Header />
           <YStack>
             <AccountBalanceSection />
             <TransactionsSection />
@@ -69,19 +68,6 @@ export default function Home() {
         </ScrollView>
       </XStack>
     </SafeAreaView>
-  )
-}
-
-const Header = () => {
-  return (
-    <XStack ai="center" jc="space-between">
-      <H2 px="$4" my="$2">
-        Home
-      </H2>
-      <XStack mx="$5" gap="$4">
-        <Bell />
-      </XStack>
-    </XStack>
   )
 }
 

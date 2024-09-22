@@ -1,6 +1,6 @@
 {
   "name": "@clixpesa/mobile",
-  "version": "1.0.10",
+  "version": "1.0.23",
   "main": "index.js",
   "private": true,
   "scripts": {
