@@ -12,17 +12,17 @@ import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-na
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
 
 interface TabBarButtonProps {
-  icon: React.FC<{ size: number; color: string; focused: boolean }>
+  icon: React.FC<{ color: string }>
   onPress?: (event: GestureResponderEvent) => void
   accessibilityState?: AccessibilityState
   activeTintColor: string
   inactiveTintColor: string
-  label: string
+  tabBarLabel: string
 }
 
 export function TabBarButton({
   icon,
-  label,
+  tabBarLabel,
   onPress,
   accessibilityState,
   activeTintColor,
@@ -52,8 +52,8 @@ export function TabBarButton({
       }}
       style={[styles.pressable, animatedStyle]}
     >
-      {icon({ size: 28, color, focused })}
-      <Text style={{ color, fontSize: 14, fontWeight: '700' }}>{label}</Text>
+      {icon({ color })}
+      <Text style={{ color, fontWeight: '700', letterSpacing: 0.8 }}>{tabBarLabel}</Text>
     </AnimatedPressable>
   )
 }
@@ -63,5 +63,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    gap: 4,
   },
 })
