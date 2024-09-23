@@ -32,7 +32,7 @@ if (!__DEV__) {
 
 SplashScreen.preventAutoHideAsync()
 
-LogBox.ignoreLogs(['Cannot update a component', 'You are setting the style'])
+LogBox.ignoreLogs(['Cannot update a component', 'You are setting the style', 'duplicate ID'])
 
 function RootLayout() {
   // Capture the NavigationContainer ref and register it with the instrumentation.
