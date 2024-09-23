@@ -40,7 +40,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: 'ClixPesa',
           headerShown: true,
           headerRight: () => (
             <Button
@@ -55,6 +55,7 @@ export default function TabLayout() {
               <Bell size={24} />
             </Button>
           ),
+          tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => <Home color={color} size={size} strokeWidth={2} />,
         }}
       />
