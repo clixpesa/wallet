@@ -40,7 +40,7 @@ export default function TabLayout() {
               tabBarLabel="Home"
               activeTintColor={teal10.val}
               inactiveTintColor={teal8.val}
-              icon={({ color }) => <Home strokeWidth={2} color={color} />}
+              icon={({ color }) => <Home color={color} />}
             />
           ),
         }}
@@ -55,7 +55,7 @@ export default function TabLayout() {
               tabBarLabel="Wallet"
               activeTintColor={teal10.val}
               inactiveTintColor={teal8.val}
-              icon={({ color }) => <Wallet2 strokeWidth={2} color={color} />}
+              icon={({ color }) => <Wallet2 color={color} />}
             />
           ),
         }}
@@ -70,7 +70,7 @@ export default function TabLayout() {
               tabBarLabel="Loans"
               activeTintColor={teal10.val}
               inactiveTintColor={teal8.val}
-              icon={({ color }) => <Coins strokeWidth={2} color={color} />}
+              icon={({ color }) => <Coins color={color} />}
             />
           ),
         }}
@@ -85,7 +85,7 @@ export default function TabLayout() {
               tabBarLabel="Profile"
               activeTintColor={teal10.val}
               inactiveTintColor={teal8.val}
-              icon={({ color, focused }) => <User color={color} />}
+              icon={({ color }) => <User color={color} />}
             />
           ),
         }}
