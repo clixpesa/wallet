@@ -1,5 +1,5 @@
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Text, ChipsWithIcon } from 'ui'
+import { ChipsWithIcon } from 'ui'
 
 export default function WalletScreen() {
   return (
