@@ -4,7 +4,7 @@ import { View } from 'tamagui'
 
 import { Chip } from './components/chipsParts'
 
-const colors = ['teal', 'pink', 'orange']
+const colors = ['teal']
 
 function ChipsItem({ color, size }: { color: string; size: SizeTokens }) {
   return (
