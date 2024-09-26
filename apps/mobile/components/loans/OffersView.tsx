@@ -13,7 +13,7 @@ import {
   Card,
 } from 'ui'
 
-import { HarakaLogo } from '@/components/haraka/HarakaLogo'
+import { HarakaLogoSvg } from '@/components/haraka/HarakaLogoSvg'
 
 export function OffersView() {
   return (
@@ -38,7 +38,7 @@ const LoanOverviewSection = () => {
         <Card.Header fd="row" jc="space-between">
           <XStack gap="$3">
             <Avatar circular size="$4">
-              <HarakaLogo />
+              <HarakaLogoSvg />
             </Avatar>
             <YStack gap="$2.5">
               <SizableText size="$4" y={2}>
