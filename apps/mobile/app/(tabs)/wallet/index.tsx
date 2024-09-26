@@ -2,39 +2,62 @@ import { getFontSized } from '@tamagui/get-font-sized'
 import { User2 } from '@tamagui/lucide-icons'
 import { FlatList } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import type { SizeTokens, ThemeName } from 'ui'
-import { ChipsWithIcon, Avatar, View, styled, Text } from 'ui'
+import type { SizeTokens } from 'ui'
+import { ChipsWithIcon, Avatar, View, styled, Text, H3, ActionButton } from 'ui'
+
+import { NewGroupSvg } from '@/components/NewGroupSvg'
 
 const data = [
-  {
-    title: 'Blessed Chama Masomo Group',
-    date: '8:00 - 8:45 AM (UTC)',
-    type: 'Chama (ROSCA)',
-    department: 'Marketing',
-    participants: '6/8',
-    theme: 'teal' as ThemeName,
-  },
-  {
-    title: 'Ondisore Chamma',
-    date: '7:00 - 8:00 PM (UTC)',
-    type: 'Contribution',
-    participants: '12/15',
-  },
-  {
-    title: 'Blessed Chamma',
-    date: '7:00 - 8:00 PM (UTC)',
-    type: 'Regular',
-    participants: '8/10',
-  },
+  // {
+  //   title: 'Blessed Chama Masomo Group',
+  //   date: '8:00 - 8:45 AM (UTC)',
+  //   type: 'Chama (ROSCA)',
+  //   department: 'Marketing',
+  //   participants: '6/8',
+  //   theme: 'teal' as ThemeName,
+  // },
+  // {
+  //   title: 'Ondisore Chamma',
+  //   date: '7:00 - 8:00 PM (UTC)',
+  //   type: 'Contribution',
+  //   participants: '12/15',
+  // },
+  // {
+  //   title: 'Blessed Chamma',
+  //   date: '7:00 - 8:00 PM (UTC)',
+  //   type: 'Regular',
+  //   participants: '8/10',
+  // },
 ]
+
+function GroupEmpty() {
+  return (
+    <View gap="$4" alignItems="center" height="100%">
+      <NewGroupSvg />
+      <H3>Create a new group space</H3>
+      <SizableText theme="alt1" textAlign="center">
+        Make money moves with your family and friends, you can either create a new group or join a
+        group and start saving with family and friends.
+      </SizableText>
+      <View flex={1} />
+      <View w="100%" gap="$4">
+        <ActionButton
+          buttonText="Create New Group"
+          action={() => console.log('create space screen')}
+        />
+        <ActionButton buttonText="Join a Group" action={() => console.log('join space screen')} />
+      </View>
+    </View>
+  )
+}
 
 export default function WalletScreen() {
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['left', 'right']}>
-      <ChipsWithIcon />
+      {data && <ChipsWithIcon />}
       <GroupList
         data={data}
-        ListEmptyComponent={<Text>Add or Join Group</Text>}
+        ListEmptyComponent={GroupEmpty}
         renderItem={({ item }) => <GroupCard item={item} />}
       />
     </SafeAreaView>
@@ -49,6 +72,8 @@ const GroupList = styled(FlatList<Group>, {
   contentContainerStyle: {
     paddingHorizontal: 18,
     paddingVertical: 18,
+    // backgroundColor: 'green',
+    height: '100%',
   },
 })
 
