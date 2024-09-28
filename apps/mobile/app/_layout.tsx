@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/react-native'
 import { Provider } from 'app/provider'
 import { useFonts } from 'expo-font'
-import { Slot, SplashScreen, Stack, useNavigationContainerRef } from 'expo-router'
+import { SplashScreen, Stack, useNavigationContainerRef } from 'expo-router'
 import { useCallback, useEffect, useState } from 'react'
 import { LogBox, View } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'

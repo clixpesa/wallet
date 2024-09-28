@@ -5,27 +5,29 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { Paragraph, SubmitButton, Theme, YStack, XStack, Button } from 'ui'
 import { z } from 'zod'
 
+import { NewGroupSvg } from '@/components/NewGroupSvg'
+
 export default function CreateSpaceScreen() {
   const { spaceInfo, setSpaceInfo } = useSpaceStore()
   const router = useRouter()
 
   const handleSubmit = (data) => {
     console.log('data', data)
-    router.push('/next-screen')
+    router.navigate('spaces/contacts')
   }
 
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right']}>
       <Stack.Screen
         options={{
-          title: 'Create New Space',
+          title: 'New space',
         }}
       />
       <SchemaForm
         onSubmit={handleSubmit}
         schema={z.object({
-          title: formFields.text.min(10).describe('Name // Name your space'),
-          type: formFields.select.describe('Space Type'),
+          title: formFields.text.min(10).describe('Name // Space name'),
+          type: formFields.select.describe('Space type'),
         })}
         defaultValues={spaceInfo}
         props={{
@@ -46,29 +48,12 @@ export default function CreateSpaceScreen() {
             ],
           },
         }}
-        renderAfter={({ submit }) => (
-          <Theme>
-            <XStack jc="space-between" gap="$5">
-              <Button
-                pressStyle={{
-                  bg: '$color6',
-                }}
-                br="$10"
-                onPress={() => console.log('Save')}
-              >
-                <Button.Text col="$color">Save</Button.Text>
-              </Button>
-              <SubmitButton f={1} onPress={() => submit()}>
-                Continue
-              </SubmitButton>
-            </XStack>
-          </Theme>
-        )}
+        renderAfter={({ submit }) => <SubmitButton onPress={() => submit()}>Continue</SubmitButton>}
       >
         {(fields) => (
           <>
-            <YStack gap="$2" py="$4" pb="$8">
-              <Paragraph ta="center">Create New Space</Paragraph>
+            <YStack ai="center">
+              <NewGroupSvg />
             </YStack>
             {Object.values(fields)}
           </>
