@@ -4,35 +4,36 @@ import { FlatList } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import type { SizeTokens } from 'ui'
 import { ChipsWithIcon, Avatar, View, styled, Text, H3, ActionButton } from 'ui'
+import { router } from 'expo-router'
 
 import { NewGroupSvg } from '@/components/NewGroupSvg'
 
 const data = [
-  {
-    title: 'Blessed Chama Masomo Group',
-    date: '8:00 - 8:45 AM (UTC)',
-    type: 'Chama (ROSCA)',
-    department: 'Marketing',
-    participants: '6/8',
-  },
-  {
-    title: 'Ondisore Chamma',
-    date: '7:00 - 8:00 PM (UTC)',
-    type: 'Contribution',
-    participants: '12/15',
-  },
-  {
-    title: 'Blessed Chamma',
-    date: '7:00 - 8:00 PM (UTC)',
-    type: 'Regular',
-    participants: '8/10',
-  },
-  {
-    title: 'Blessed Chamma',
-    date: '7:00 - 8:00 PM (UTC)',
-    type: 'Regular',
-    participants: '8/10',
-  },
+  // {
+  //   title: 'Blessed Chama Masomo Group',
+  //   date: '8:00 - 8:45 AM (UTC)',
+  //   type: 'Chama (ROSCA)',
+  //   department: 'Marketing',
+  //   participants: '6/8',
+  // },
+  // {
+  //   title: 'Ondisore Chamma',
+  //   date: '7:00 - 8:00 PM (UTC)',
+  //   type: 'Contribution',
+  //   participants: '12/15',
+  // },
+  // {
+  //   title: 'Blessed Chamma',
+  //   date: '7:00 - 8:00 PM (UTC)',
+  //   type: 'Regular',
+  //   participants: '8/10',
+  // },
+  // {
+  //   title: 'Blessed Chamma',
+  //   date: '7:00 - 8:00 PM (UTC)',
+  //   type: 'Regular',
+  //   participants: '8/10',
+  // },
 ]
 
 function GroupEmpty() {
@@ -48,7 +49,7 @@ function GroupEmpty() {
       <View w="100%" gap="$4">
         <ActionButton
           buttonText="Create New Group"
-          action={() => console.log('create space screen')}
+          action={() => router.navigate('/spaces/create')}
         />
         <ActionButton buttonText="Join a Group" action={() => console.log('join space screen')} />
       </View>
@@ -61,7 +62,7 @@ export default function WalletScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['left', 'right']}>
-      {!isEmpty ? <ChipsWithIcon /> : null}
+      <ChipsWithIcon />
       <GroupList
         data={data}
         empty={isEmpty}
