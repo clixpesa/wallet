@@ -1,51 +1,33 @@
-import { Stack, useRouter } from 'expo-router'
+import { randAvatar, randFullName, randUuid, randPhoneNumber } from '@ngneat/falso'
+import { Stack } from 'expo-router'
 import { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Paragraph, SubmitButton, Theme, YStack, XStack, Button } from 'ui'
+// import * as Contacts from 'expo-contacts'
+import { Avatar, Circle, Separator, Text, View, YGroup } from 'ui'
+import type { ColorTokens } from 'ui'
 
 export default function AddContactsScreen() {
-  const [selectedContacts, setSelectedContacts] = useState([])
-  const [contactList, setContactList] = useState()
-  const router = useRouter()
+  const [personsList, setPersonsList] = useState<PersonList>([])
 
   useEffect(() => {
-    ;(async () => {
-      const { status } = await Contacts.requestPermissionsAsync()
-      console.log(status)
-      if (status === 'granted') {
-        const { data } = await Contacts.getContactsAsync({
-          Fields: [Contacts.Fields.Name, Contacts.Fields.PhoneNumbers],
-        })
-        if (data.length > 0) {
-          setContactList(data)
-        } else {
-          console.log('No Contacts')
-        }
-      }
-    })()
+    setPersonsList(getPersonList())
   }, [])
 
-  const handleSelected = (selected) => {
-    const selectedInfo = {
-      id: selected.lookupKey,
-      name: selected.name,
-      phoneNo: selected.phoneNumbers
-        ? parsePhoneNumber(getContactData(selected.phoneNumbers, 'number')[0], 'KE').number
-        : 'No Number',
-    }
-    const selectedList = [...selectedContacts, selectedInfo]
-    setSelectedContacts(selectedList)
-  }
+  // useEffect(() => {
+  //   ;(async () => {
+  //     const { status } = await Contacts.requestPermissionsAsync()
+  //     if (status === 'granted') {
+  //       const { data } = await Contacts.getContactsAsync({
+  //         fields: [Contacts.Fields.Name, Contacts.Fields.PhoneNumbers],
+  //       })
 
-  const handleDeselect = (deselected) => {
-    const filtredList = selectedContacts.filter((el) => el.id !== deselected.id)
-    setSelectedContacts(filtredList)
-  }
-
-  const handleSubmit = (data) => {
-    console.log('data', data)
-    router.push('/pots')
-  }
+  //       if (data.length > 0) {
+  //         const contact = data[0]
+  //         console.log(contact)
+  //       }
+  //     }
+  //   })()
+  // }, [])
 
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right']}>
@@ -54,102 +36,115 @@ export default function AddContactsScreen() {
           title: 'Add contacts',
         }}
       />
-
-      <Box flex={1} bg="muted.50" alignItems="flex-start">
-        <VStack width="full">
-          {selectedContacts.length > 0 ? (
-            <HStack space={3} p={2} borderBottomWidth="1" borderColor="muted.200">
-              {selectedContacts.map((item, index) => {
-                return (
-                  <TouchableOpacity
-                    key={index}
-                    onPress={() => {
-                      handleDeselect(item)
-                    }}
-                  >
-                    <SelectedContact
-                      nameInitials={item.name[0].toUpperCase()}
-                      fullName={item.name}
-                    />
-                  </TouchableOpacity>
-                )
-              })}
-            </HStack>
-          ) : (
-            <Box alignItems="center" m={3} ml={8} w="60%">
-              <Text>Please select some members to add to your space</Text>
-            </Box>
-          )}
-          <FlatList
-            showsVerticalScrollIndicator={false}
-            data={contactList}
-            keyExtractor={(item) => item.lookupKey}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                onPress={() => {
-                  handleSelected(item)
-                }}
-              >
-                <ContactItem
-                  nameInitials={item.name[0].toUpperCase()}
-                  fullName={item.name}
-                  phoneNo={
-                    item.phoneNumbers ? getContactData(item.phoneNumbers, 'number')[0] : 'No Number'
-                  }
-                />
-              </TouchableOpacity>
-            )}
-          />
-        </VStack>
-        <Button
-          position="absolute"
-          variant="subtle"
-          bg="primary.100"
-          bottom={6}
-          left="20%"
-          rounded="3xl"
-          w="60%"
-          _text={{ color: 'primary.600', fontWeight: 'semibold', mb: '0.5' }}
-          onPress={() => {
-            dispatch(setSelectedMembers(selectedContacts))
-            navigation.navigate('setSpaceGoal')
-          }}
-        >
-          Next
-        </Button>
-      </Box>
+      <YGroup width="100%" justifyContent="center" alignItems="center" padded>
+        <View gap="$1.5" minWidth="100%">
+          {personsList.map((person, i) => (
+            <View key={person.id}>
+              <Item person={person} />
+              {i < personsList.length - 1 && <Separator />}
+            </View>
+          ))}
+        </View>
+      </YGroup>
     </SafeAreaView>
   )
 }
 
-//TODO! Maintain unique selctions
-//TODO! Handle submissions.
+// Define more descriptive status options
+const statusOptions = [
+  {
+    status: 'Available',
+    color: 'green',
+  },
+  {
+    status: 'clixpesa',
+    color: 'teal',
+  },
+  {
+    status: 'In a Meeting',
+    color: 'orange',
+  },
+  {
+    status: 'On Vacation',
+    color: 'pink',
+  },
+  {
+    status: 'Do Not Disturb',
+    color: 'red',
+  },
+  {
+    status: 'Working Remotely',
+    color: 'purple',
+  },
+  {
+    status: 'Out for Lunch',
+    color: 'blue',
+  },
+  {
+    status: 'Away from Desk',
+    color: 'gray',
+  },
+  {
+    status: 'On a Call',
+    color: 'blue',
+  },
+  {
+    status: 'Taking a Break',
+    color: 'yellow',
+  },
+]
 
-function ContactItem(props) {
-  return (
-    <HStack w="75%" space={3} ml={8} my={1.5}>
-      <Avatar>{props.nameInitials}</Avatar>
-      <VStack>
-        <Text>{props.fullName}</Text>
-        <Text>{props.phoneNo}</Text>
-      </VStack>
-    </HStack>
-  )
+// Function to generate a person with a random descriptive status
+const getPersonList = () => {
+  const personsList = Array.from({ length: 10 }, () => ({
+    id: randUuid(),
+    name: randFullName(),
+    phoneNumber: randPhoneNumber(),
+    //To check if the user is available on the clixpesa wallet
+    status: statusOptions[Math.floor(Math.random() * statusOptions.length)],
+    image: `${randAvatar()}?id=${randUuid()}`,
+  }))
+  return personsList
 }
 
-function SelectedContact(props) {
-  return (
-    <VStack alignItems="center">
-      <Avatar>{props.nameInitials}</Avatar>
-      <Text fontSize="xs">{props.fullName}</Text>
-    </VStack>
-  )
-}
+type PersonList = ReturnType<typeof getPersonList>
 
-const getContactData = (data, property) => {
-  if (data) {
-    return data.map((data, index) => {
-      return data[property]
-    })
-  }
+function Item({ person }: { person: PersonList[number] }) {
+  return (
+    <YGroup.Item>
+      <View
+        flexDirection="row"
+        paddingVertical="$2"
+        paddingHorizontal="$2"
+        gap="$4"
+        backgroundColor="$color1"
+        alignItems="center"
+      >
+        <View>
+          <Avatar circular size="$4">
+            <Avatar.Image objectFit="cover" src={person.image} />
+            <Avatar.Fallback backgroundColor="$background" />
+          </Avatar>
+          {person.status.status === 'clixpesa' && (
+            <Circle
+              borderWidth={1}
+              borderColor="$borderColor"
+              right="3%"
+              bottom="3%"
+              zIndex={1}
+              size={12}
+              position="absolute"
+              backgroundColor={`$${person.status.color}10` as ColorTokens}
+            />
+          )}
+        </View>
+        <View gap="$1.5" flexDirection="column" flexShrink={1} justifyContent="center">
+          <Text fow="700">{person.name}</Text>
+          <Text fontSize="$2" lineHeight="$2" fontWeight="$2" theme="alt1">
+            {person.phoneNumber}
+          </Text>
+        </View>
+      </View>
+    </YGroup.Item>
+  )
 }
