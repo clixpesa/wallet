@@ -30,6 +30,7 @@
   "dependencies": {
     "@babel/runtime": "^7.18.9",
     "@gorhom/bottom-sheet": "4.6.4",
+    "@ngneat/falso": "^7.2.0",
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-native-community/netinfo": "11.3.1",
     "@react-native-firebase/app": "^20.1.0",
@@ -78,7 +79,7 @@
   "devDependencies": {
     "@babel/core": "^7.24",
     "@expo/metro-config": "~0.18.11",
-    "@tamagui/babel-plugin": "^1.112.3",
+    "@tamagui/babel-plugin": "^1.112.9",
     "babel-plugin-transform-inline-environment-variables": "^0.4.4",
     "babel-preset-expo": "~11.0.0",
     "cross-env": "^7.0.3",
