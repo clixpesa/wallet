@@ -1,16 +1,17 @@
 import { randAvatar, randFullName, randUuid, randPhoneNumber } from '@ngneat/falso'
+import { FlashList } from '@shopify/flash-list'
 import { Stack } from 'expo-router'
 import { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 // import * as Contacts from 'expo-contacts'
-import { Avatar, Circle, Separator, Text, View, YGroup } from 'ui'
+import { CAvatar, Circle, Separator, Text, View, styled } from 'ui'
 import type { ColorTokens } from 'ui'
 
 export default function AddContactsScreen() {
-  const [personsList, setPersonsList] = useState<PersonList>([])
+  const [contactList, setContactList] = useState<ContactList>([])
 
   useEffect(() => {
-    setPersonsList(getPersonList())
+    setContactList(getContactList())
   }, [])
 
   // useEffect(() => {
@@ -36,16 +37,19 @@ export default function AddContactsScreen() {
           title: 'Add contacts',
         }}
       />
-      <YGroup width="100%" justifyContent="center" alignItems="center" padded>
-        <View gap="$1.5" minWidth="100%">
-          {personsList.map((person, i) => (
-            <View key={person.id}>
-              <Item person={person} />
-              {i < personsList.length - 1 && <Separator />}
+      <SelectedContact />
+      <View flex={1} padding="$4">
+        <FlashList
+          data={contactList}
+          renderItem={({ item, index }) => (
+            <View gap="$1.5">
+              <Item contact={item} />
+              {index < contactList.length - 1 && <Separator />}
             </View>
-          ))}
-        </View>
-      </YGroup>
+          )}
+          estimatedItemSize={200}
+        />
+      </View>
     </SafeAreaView>
   )
 }
@@ -95,8 +99,8 @@ const statusOptions = [
 ]
 
 // Function to generate a person with a random descriptive status
-const getPersonList = () => {
-  const personsList = Array.from({ length: 10 }, () => ({
+const getContactList = () => {
+  const contactList = Array.from({ length: 180 }, () => ({
     id: randUuid(),
     name: randFullName(),
     phoneNumber: randPhoneNumber(),
@@ -104,47 +108,130 @@ const getPersonList = () => {
     status: statusOptions[Math.floor(Math.random() * statusOptions.length)],
     image: `${randAvatar()}?id=${randUuid()}`,
   }))
-  return personsList
+  return contactList
 }
 
-type PersonList = ReturnType<typeof getPersonList>
+type ContactList = ReturnType<typeof getContactList>
 
-function Item({ person }: { person: PersonList[number] }) {
+function Item({ contact }: { contact: ContactList[number] }) {
   return (
-    <YGroup.Item>
-      <View
-        flexDirection="row"
-        paddingVertical="$2"
-        paddingHorizontal="$2"
-        gap="$4"
-        backgroundColor="$color1"
-        alignItems="center"
-      >
-        <View>
-          <Avatar circular size="$4">
-            <Avatar.Image objectFit="cover" src={person.image} />
-            <Avatar.Fallback backgroundColor="$background" />
-          </Avatar>
-          {person.status.status === 'clixpesa' && (
-            <Circle
-              borderWidth={1}
-              borderColor="$borderColor"
-              right="3%"
-              bottom="3%"
-              zIndex={1}
-              size={12}
-              position="absolute"
-              backgroundColor={`$${person.status.color}10` as ColorTokens}
-            />
-          )}
-        </View>
-        <View gap="$1.5" flexDirection="column" flexShrink={1} justifyContent="center">
-          <Text fow="700">{person.name}</Text>
-          <Text fontSize="$2" lineHeight="$2" fontWeight="$2" theme="alt1">
-            {person.phoneNumber}
-          </Text>
-        </View>
+    <ContactItemFrame>
+      <View>
+        <CAvatar.Content>
+          <CAvatar.Image objectFit="cover" src={contact.image} />
+          <CAvatar.Fallback backgroundColor="$background" />
+        </CAvatar.Content>
+
+        {contact.status.status === 'clixpesa' && (
+          <Circle
+            borderWidth={1}
+            borderColor="$borderColor"
+            right="3%"
+            bottom="3%"
+            zIndex={1}
+            size={12}
+            position="absolute"
+            backgroundColor={`$${contact.status.color}10` as ColorTokens}
+          />
+        )}
       </View>
-    </YGroup.Item>
+      <View gap="$1.5" flexDirection="column" flexShrink={1} justifyContent="center">
+        <Text fow="700">{contact.name}</Text>
+        <Text fontSize="$2" lineHeight="$2" fontWeight="$2" theme="alt1">
+          {contact.phoneNumber}
+        </Text>
+      </View>
+    </ContactItemFrame>
+  )
+}
+const ContactItemFrame = styled(View, {
+  flexDirection: 'row',
+  paddingVertical: '$2',
+  paddingHorizontal: '$2',
+  gap: '$4',
+  borderRadius: '$4',
+  backgroundColor: '$color1',
+  alignItems: 'center',
+  pressStyle: {
+    bg: '$backgroundPress',
+  },
+})
+
+export function SelectedContact() {
+  return (
+    <View backgroundColor="palegoldenrod" flexDirection="row" gap="$2" padding="$4">
+      <CAvatar size="$6" alignItems="center" backgroundColor="red">
+        <CAvatar.Content id="avatar-joseph">
+          <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
+          <CAvatar.Fallback backgroundColor="$gray6" />
+        </CAvatar.Content>
+        <Text htmlFor="avatar-joseph" theme="alt1" numberOfLines={1} maxWidth="$6">
+          Josephrrgrgrgrgrgggrgcdcdcdcddvfedefefefefefefefefefefefefef
+        </Text>
+      </CAvatar>
+      <CAvatar size="$6" alignItems="center" backgroundColor="red">
+        <CAvatar.Content id="avatar-joseph">
+          <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
+          <CAvatar.Fallback backgroundColor="$gray6" />
+        </CAvatar.Content>
+        <Text htmlFor="avatar-joseph" theme="alt1" maxWidth="$6" numberOfLines={1}>
+          Joseph Nam
+        </Text>
+      </CAvatar>
+      <CAvatar size="$6" alignItems="center" backgroundColor="red">
+        <CAvatar.Content id="avatar-joseph">
+          <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
+          <CAvatar.Fallback backgroundColor="$gray6" />
+        </CAvatar.Content>
+        <Text htmlFor="avatar-joseph" theme="alt1" maxWidth="$6" numberOfLines={1}>
+          Joseph London
+        </Text>
+      </CAvatar>
+      <CAvatar size="$6" alignItems="center" backgroundColor="red">
+        <CAvatar.Content id="avatar-joseph">
+          <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
+          <CAvatar.Fallback backgroundColor="$gray6" />
+        </CAvatar.Content>
+        <Text htmlFor="avatar-joseph" theme="alt1" maxWidth="$6" numberOfLines={1}>
+          Joseph London
+        </Text>
+      </CAvatar>
+      <CAvatar size="$6" alignItems="center" backgroundColor="red">
+        <CAvatar.Content id="avatar-joseph">
+          <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
+          <CAvatar.Fallback backgroundColor="$gray6" />
+        </CAvatar.Content>
+        <Text htmlFor="avatar-joseph" theme="alt1" maxWidth="$6" numberOfLines={1}>
+          Joseph London
+        </Text>
+      </CAvatar>
+      <CAvatar size="$6" alignItems="center" backgroundColor="red">
+        <CAvatar.Content id="avatar-joseph">
+          <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
+          <CAvatar.Fallback backgroundColor="$gray6" />
+        </CAvatar.Content>
+        <Text htmlFor="avatar-joseph" theme="alt1" maxWidth="$6" numberOfLines={1}>
+          Joseph London
+        </Text>
+      </CAvatar>
+      <CAvatar size="$6" alignItems="center" backgroundColor="red">
+        <CAvatar.Content id="avatar-joseph">
+          <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
+          <CAvatar.Fallback backgroundColor="$gray6" />
+        </CAvatar.Content>
+        <Text htmlFor="avatar-joseph" theme="alt1" maxWidth="$6" numberOfLines={1}>
+          Joseph London
+        </Text>
+      </CAvatar>
+      <CAvatar size="$6" alignItems="center" backgroundColor="red">
+        <CAvatar.Content id="avatar-joseph">
+          <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
+          <CAvatar.Fallback backgroundColor="$gray6" />
+        </CAvatar.Content>
+        <Text htmlFor="avatar-joseph" theme="alt1" maxWidth="$6" numberOfLines={1}>
+          Joseph London
+        </Text>
+      </CAvatar>
+    </View>
   )
 }
