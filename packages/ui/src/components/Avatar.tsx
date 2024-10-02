@@ -44,7 +44,7 @@ const AvatarIconFrame = styled(View, {
         left: 0,
       },
       'bottom-right': {
-        bottom: 0,
+        bottom: 14,
         right: 0,
       },
       'bottom-left': {

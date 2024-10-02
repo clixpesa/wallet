@@ -1,10 +1,11 @@
 import { randAvatar, randFullName, randUuid, randPhoneNumber } from '@ngneat/falso'
 import { FlashList } from '@shopify/flash-list'
+import { X } from '@tamagui/lucide-icons'
 import { Stack } from 'expo-router'
 import { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 // import * as Contacts from 'expo-contacts'
-import { CAvatar, Circle, Separator, Text, View, styled } from 'ui'
+import { CAvatar, Circle, Separator, Text, View, styled, ScrollView } from 'ui'
 import type { ColorTokens } from 'ui'
 
 export default function AddContactsScreen() {
@@ -37,7 +38,9 @@ export default function AddContactsScreen() {
           title: 'Add contacts',
         }}
       />
-      <SelectedContact />
+      <View>
+        <SelectedContact />
+      </View>
       <View flex={1} padding="$4">
         <FlashList
           data={contactList}
@@ -159,79 +162,84 @@ const ContactItemFrame = styled(View, {
 
 export function SelectedContact() {
   return (
-    <View backgroundColor="palegoldenrod" flexDirection="row" gap="$2" padding="$4">
-      <CAvatar size="$6" alignItems="center" backgroundColor="red">
-        <CAvatar.Content id="avatar-joseph">
-          <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
-          <CAvatar.Fallback backgroundColor="$gray6" />
-        </CAvatar.Content>
-        <Text htmlFor="avatar-joseph" theme="alt1" numberOfLines={1} maxWidth="$6">
-          Josephrrgrgrgrgrgggrgcdcdcdcddvfedefefefefefefefefefefefefef
-        </Text>
-      </CAvatar>
-      <CAvatar size="$6" alignItems="center" backgroundColor="red">
-        <CAvatar.Content id="avatar-joseph">
-          <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
-          <CAvatar.Fallback backgroundColor="$gray6" />
-        </CAvatar.Content>
-        <Text htmlFor="avatar-joseph" theme="alt1" maxWidth="$6" numberOfLines={1}>
-          Joseph Nam
-        </Text>
-      </CAvatar>
-      <CAvatar size="$6" alignItems="center" backgroundColor="red">
-        <CAvatar.Content id="avatar-joseph">
-          <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
-          <CAvatar.Fallback backgroundColor="$gray6" />
-        </CAvatar.Content>
-        <Text htmlFor="avatar-joseph" theme="alt1" maxWidth="$6" numberOfLines={1}>
-          Joseph London
-        </Text>
-      </CAvatar>
-      <CAvatar size="$6" alignItems="center" backgroundColor="red">
-        <CAvatar.Content id="avatar-joseph">
-          <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
-          <CAvatar.Fallback backgroundColor="$gray6" />
-        </CAvatar.Content>
-        <Text htmlFor="avatar-joseph" theme="alt1" maxWidth="$6" numberOfLines={1}>
-          Joseph London
-        </Text>
-      </CAvatar>
-      <CAvatar size="$6" alignItems="center" backgroundColor="red">
-        <CAvatar.Content id="avatar-joseph">
-          <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
-          <CAvatar.Fallback backgroundColor="$gray6" />
-        </CAvatar.Content>
-        <Text htmlFor="avatar-joseph" theme="alt1" maxWidth="$6" numberOfLines={1}>
-          Joseph London
-        </Text>
-      </CAvatar>
-      <CAvatar size="$6" alignItems="center" backgroundColor="red">
-        <CAvatar.Content id="avatar-joseph">
-          <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
-          <CAvatar.Fallback backgroundColor="$gray6" />
-        </CAvatar.Content>
-        <Text htmlFor="avatar-joseph" theme="alt1" maxWidth="$6" numberOfLines={1}>
-          Joseph London
-        </Text>
-      </CAvatar>
-      <CAvatar size="$6" alignItems="center" backgroundColor="red">
-        <CAvatar.Content id="avatar-joseph">
-          <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
-          <CAvatar.Fallback backgroundColor="$gray6" />
-        </CAvatar.Content>
-        <Text htmlFor="avatar-joseph" theme="alt1" maxWidth="$6" numberOfLines={1}>
-          Joseph London
-        </Text>
-      </CAvatar>
-      <CAvatar size="$6" alignItems="center" backgroundColor="red">
-        <CAvatar.Content id="avatar-joseph">
-          <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
-          <CAvatar.Fallback backgroundColor="$gray6" />
-        </CAvatar.Content>
-        <Text htmlFor="avatar-joseph" theme="alt1" maxWidth="$6" numberOfLines={1}>
-          Joseph London
-        </Text>
-      </CAvatar>
-    </View>
+    <ScrollView horizontal>
+      <View flexDirection="row" gap="$4" paddingHorizontal="$4" paddingVertical="$2">
+        <CAvatar size="$6" alignItems="center" justifyContent="center">
+          <CAvatar.Icon placement="bottom-right">
+            <X color="$color11" />
+          </CAvatar.Icon>
+          <CAvatar.Content id="avatar-joseph">
+            <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
+            <CAvatar.Fallback backgroundColor="$gray6" />
+          </CAvatar.Content>
+          <Text theme="alt1" numberOfLines={1} maxWidth="$6">
+            Joseph
+          </Text>
+        </CAvatar>
+        <CAvatar size="$6" alignItems="center" justifyContent="center">
+          <CAvatar.Content id="avatar-joseph">
+            <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
+            <CAvatar.Fallback backgroundColor="$gray6" />
+          </CAvatar.Content>
+          <Text theme="alt1" maxWidth="$6" numberOfLines={1}>
+            Joseph Nam
+          </Text>
+        </CAvatar>
+        <CAvatar size="$6" alignItems="center" justifyContent="center">
+          <CAvatar.Content id="avatar-joseph">
+            <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
+            <CAvatar.Fallback backgroundColor="$gray6" />
+          </CAvatar.Content>
+          <Text theme="alt1" maxWidth="$6" numberOfLines={1}>
+            Joseph
+          </Text>
+        </CAvatar>
+        <CAvatar size="$6" alignItems="center" justifyContent="center">
+          <CAvatar.Content id="avatar-joseph">
+            <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
+            <CAvatar.Fallback backgroundColor="$gray6" />
+          </CAvatar.Content>
+          <Text theme="alt1" maxWidth="$6" numberOfLines={1}>
+            Joseph London
+          </Text>
+        </CAvatar>
+        <CAvatar size="$6" alignItems="center" justifyContent="center">
+          <CAvatar.Content id="avatar-joseph">
+            <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
+            <CAvatar.Fallback backgroundColor="$gray6" />
+          </CAvatar.Content>
+          <Text theme="alt1" maxWidth="$6" numberOfLines={1}>
+            Joseph London
+          </Text>
+        </CAvatar>
+        <CAvatar size="$6" alignItems="center" justifyContent="center">
+          <CAvatar.Content id="avatar-joseph">
+            <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
+            <CAvatar.Fallback backgroundColor="$gray6" />
+          </CAvatar.Content>
+          <Text theme="alt1" maxWidth="$6" numberOfLines={1}>
+            Joseph London
+          </Text>
+        </CAvatar>
+        <CAvatar size="$6" alignItems="center" justifyContent="center">
+          <CAvatar.Content id="avatar-joseph">
+            <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
+            <CAvatar.Fallback backgroundColor="$gray6" />
+          </CAvatar.Content>
+          <Text theme="alt1" maxWidth="$6" numberOfLines={1}>
+            Joseph London
+          </Text>
+        </CAvatar>
+        <CAvatar size="$6" alignItems="center" justifyContent="center">
+          <CAvatar.Content id="avatar-joseph">
+            <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
+            <CAvatar.Fallback backgroundColor="$gray6" />
+          </CAvatar.Content>
+          <Text theme="alt1" maxWidth="$6" numberOfLines={1}>
+            Joseph London
+          </Text>
+        </CAvatar>
+      </View>
+    </ScrollView>
   )
 }
