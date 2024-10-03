@@ -132,8 +132,9 @@ const AvatarContent = forwardRef<GetProps<typeof TAvatar>, any>((props, ref) => 
   const { size } = AvatarContext.useStyledContext()
   return (
     <TAvatar
+      backgroundColor="$background"
       borderWidth="$1"
-      borderColor="$color1"
+      borderColor="$color2"
       elevation={5}
       size={size}
       ref={ref}
