@@ -2,7 +2,8 @@ import { FlashList } from '@shopify/flash-list'
 import { X, Check } from '@tamagui/lucide-icons'
 import * as Contacts from 'expo-contacts'
 import { Stack } from 'expo-router'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { LayoutAnimation } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { CAvatar, Separator, Text, View, styled, ScrollView, XStack } from 'ui'
 
@@ -39,6 +40,8 @@ export default function AddContactsScreen() {
   const [contactList, setContactList] = useState<ContactList>([])
   const [selectedContacts, setSelectedContacts] = useState<ContactList>([])
 
+  const scrollViewRef = useRef<ScrollView>(null) // Create a ref for ScrollView
+
   useEffect(() => {
     // Call the fetchContacts function and set the contactList
     const loadContacts = async () => {
@@ -54,7 +57,7 @@ export default function AddContactsScreen() {
     const updatedContactList = contactList.map((c) =>
       c.id === contact.id ? { ...c, selected: !c.selected } : c
     )
-    console.log('updatedList', updatedContactList)
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
     setContactList(updatedContactList)
 
     // Add or remove from selectedContacts based on selection
@@ -63,6 +66,11 @@ export default function AddContactsScreen() {
         ? selectedContacts.filter((selected) => selected.id !== contact.id) // Remove if deselected
         : [...selectedContacts, { ...contact, selected: true }] // Add if selected
     )
+
+    // Auto-scroll to the end after adding a contact
+    setTimeout(() => {
+      scrollViewRef.current?.scrollToEnd({ animated: true })
+    }, 100)
   }
 
   console.log('Selected Contacts', selectedContacts)
@@ -70,12 +78,19 @@ export default function AddContactsScreen() {
   const handleRemoveSelectedContact = (contact: ContactList[number]) => {
     // Remove from selectedContacts
     setSelectedContacts((prev) => prev.filter((selected) => selected.id !== contact.id))
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
 
     // Unselect the contact in the main contact list
     const updatedContactList = contactList.map((c) =>
       c.id === contact.id ? { ...c, selected: false } : c
     )
+
     setContactList(updatedContactList)
+
+    // Scroll to the end after removing a contact (optional)
+    setTimeout(() => {
+      scrollViewRef.current?.scrollToEnd({ animated: true })
+    }, 100)
   }
 
   return (
@@ -86,7 +101,7 @@ export default function AddContactsScreen() {
         }}
       />
       <View>
-        <ScrollView horizontal>
+        <ScrollView horizontal ref={scrollViewRef}>
           <SelectedContact
             selectedContacts={selectedContacts}
             onRemoveContact={handleRemoveSelectedContact}
