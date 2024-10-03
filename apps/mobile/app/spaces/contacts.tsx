@@ -1,20 +1,10 @@
-import { randAvatar, randUuid } from '@ngneat/falso'
 import { FlashList } from '@shopify/flash-list'
 import { X, Check } from '@tamagui/lucide-icons'
 import * as Contacts from 'expo-contacts'
-import { Contact as ExpoContact } from 'expo-contacts'
 import { Stack } from 'expo-router'
 import { useState, useEffect } from 'react'
-import { TouchableOpacity } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { CAvatar, Separator, Text, View, styled, ScrollView, XStack } from 'ui'
-
-type Contact = {
-  id: string
-  name: string
-  phoneNumber: string
-  image: string
-}
 
 async function fetchContacts() {
   const { status } = await Contacts.requestPermissionsAsync()
@@ -24,14 +14,18 @@ async function fetchContacts() {
       fields: [Contacts.Fields.Name, Contacts.Fields.PhoneNumbers],
     })
 
-    console.log('data', JSON.stringify(data, null, 4))
+    const filteredData = data.filter(
+      (contact) => contact && contact.phoneNumbers && contact.phoneNumbers.length > 0
+    )
 
     // Map the data to the format you want
-    const contactList = data.map((contact) => ({
-      id: contact.id || randUuid(),
+    const contactList = filteredData.map((contact) => ({
+      id: contact.id,
       name: contact.name || 'Unknown Name', // Fall back if name is missing
       phoneNumber: contact.phoneNumbers?.[0]?.number || 'No Number', // First available phone number
-      image: contact.image || `${randAvatar()}?id=${contact.id || randUuid()}`, // Using a random avatar for each contact if not available
+      image: contact.imageAvailable ? contact.image?.uri : undefined,
+      initials: contact.name ? contact.name[0].toUpperCase() : '?',
+      selected: false,
     }))
 
     return contactList
@@ -39,13 +33,11 @@ async function fetchContacts() {
   return []
 }
 
-export default function AddContactsScreen() {
-  const [contactList, setContactList] = useState<Contact[]>([])
-  const [selectedContacts, setSelectedContacts] = useState<Contact[]>([])
+type ContactList = Awaited<ReturnType<typeof fetchContacts>>
 
-  // useEffect(() => {
-  //   setContactList(getContactList())
-  // }, [])
+export default function AddContactsScreen() {
+  const [contactList, setContactList] = useState<ContactList>([])
+  const [selectedContacts, setSelectedContacts] = useState<ContactList>([])
 
   useEffect(() => {
     // Call the fetchContacts function and set the contactList
@@ -56,6 +48,17 @@ export default function AddContactsScreen() {
 
     loadContacts()
   }, [])
+
+  const handleSelectContact = (contact: ContactList[number]) => {
+    setSelectedContacts(
+      (prev) =>
+        prev.find((selected) => selected.id === contact.id)
+          ? prev.filter((selected) => selected.id !== contact.id) // Deselect if already selected
+          : [...prev, contact] // Select if not already selected
+    )
+  }
+
+  console.log('Selected Contacts', selectedContacts)
 
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right']}>
@@ -74,7 +77,7 @@ export default function AddContactsScreen() {
           data={contactList}
           renderItem={({ item, index }) => (
             <View gap="$1.5">
-              <Item contact={item} />
+              <Item contact={item} onPress={() => handleSelectContact(item)} />
               {index < contactList.length - 1 && <Separator />}
             </View>
           )}
@@ -85,35 +88,24 @@ export default function AddContactsScreen() {
   )
 }
 
-// Function to generate a person with a random descriptive status
-// const getContactList = () => {
-//   const contactList = Array.from({ length: 180 }, () => ({
-//     id: randUuid(),
-//     name: randFullName(),
-//     phoneNumber: randPhoneNumber(),
-//     //To check if the user is available on the clixpesa wallet
-//     // status: statusOptions[Math.floor(Math.random() * statusOptions.length)],
-//     image: `${randAvatar()}?id=${randUuid()}`,
-//   }))
-//   return contactList
-// }
-
-// type ContactList = ReturnType<typeof getContactList>
-
-function Item({ contact, isSelected }: { contact: Contact; isSelected: boolean }) {
+function Item({ contact, onPress }: { contact: ContactList[number]; onPress: () => void }) {
   return (
-    <ContactItemFrame>
+    <ContactItemFrame onPress={onPress}>
       <View>
         <CAvatar>
           <CAvatar.Content>
-            <CAvatar.Image objectFit="cover" src={contact.image} />
-            <CAvatar.Fallback backgroundColor="$background" />
+            {contact.image ? (
+              <CAvatar.Image objectFit="cover" src={contact.image} />
+            ) : (
+              // Fallback to initials if image is not available
+              <Text fontSize="$4" fontWeight="bold" color="$color12">
+                {contact.initials}
+              </Text>
+            )}
           </CAvatar.Content>
-          {isSelected && (
-            <CAvatar.Icon placement="bottom-right" backgroundColor="$green10">
-              <Check color="$color12" />
-            </CAvatar.Icon>
-          )}
+          <CAvatar.Icon placement="bottom-right" backgroundColor="$green10">
+            <Check color="$color12" />
+          </CAvatar.Icon>
         </CAvatar>
       </View>
       <View gap="$1.5" flexDirection="column" flexShrink={1} justifyContent="center">
@@ -142,7 +134,7 @@ export function SelectedContact({ selectedContacts }: { selectedContacts: Contac
   return (
     <XStack gap="$4" paddingHorizontal="$4" paddingVertical="$2">
       {selectedContacts.map((contact) => (
-        <View alignItems="center">
+        <View alignItems="center" key={contact.id}>
           <CAvatar size="$6">
             <CAvatar.Icon placement="bottom-right">
               <X color="$color11" />
@@ -153,7 +145,7 @@ export function SelectedContact({ selectedContacts }: { selectedContacts: Contac
             </CAvatar.Content>
           </CAvatar>
           <Text theme="alt1" maxWidth="$6" numberOfLines={1}>
-            Joseph bu Same
+            {contact.name}
           </Text>
         </View>
       ))}
