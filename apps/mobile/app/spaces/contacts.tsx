@@ -50,15 +50,33 @@ export default function AddContactsScreen() {
   }, [])
 
   const handleSelectContact = (contact: ContactList[number]) => {
+    // Toggle selection status in the main contact list
+    const updatedContactList = contactList.map((c) =>
+      c.id === contact.id ? { ...c, selected: !c.selected } : c
+    )
+    console.log('updatedList', updatedContactList)
+    setContactList(updatedContactList)
+
+    // Add or remove from selectedContacts based on selection
     setSelectedContacts(
-      (prev) =>
-        prev.find((selected) => selected.id === contact.id)
-          ? prev.filter((selected) => selected.id !== contact.id) // Deselect if already selected
-          : [...prev, contact] // Select if not already selected
+      contact.selected
+        ? selectedContacts.filter((selected) => selected.id !== contact.id) // Remove if deselected
+        : [...selectedContacts, { ...contact, selected: true }] // Add if selected
     )
   }
 
   console.log('Selected Contacts', selectedContacts)
+
+  const handleRemoveSelectedContact = (contact: ContactList[number]) => {
+    // Remove from selectedContacts
+    setSelectedContacts((prev) => prev.filter((selected) => selected.id !== contact.id))
+
+    // Unselect the contact in the main contact list
+    const updatedContactList = contactList.map((c) =>
+      c.id === contact.id ? { ...c, selected: false } : c
+    )
+    setContactList(updatedContactList)
+  }
 
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right']}>
@@ -69,7 +87,10 @@ export default function AddContactsScreen() {
       />
       <View>
         <ScrollView horizontal>
-          <SelectedContact selectedContacts={selectedContacts} />
+          <SelectedContact
+            selectedContacts={selectedContacts}
+            onRemoveContact={handleRemoveSelectedContact}
+          />
         </ScrollView>
       </View>
       <View flex={1} paddingHorizontal="$4" paddingVertical="$2">
@@ -103,9 +124,11 @@ function Item({ contact, onPress }: { contact: ContactList[number]; onPress: () 
               </Text>
             )}
           </CAvatar.Content>
-          <CAvatar.Icon placement="bottom-right" backgroundColor="$green10">
-            <Check color="$color12" />
-          </CAvatar.Icon>
+          {contact.selected && (
+            <CAvatar.Icon placement="bottom-right" backgroundColor="$green10">
+              <Check color="$color12" />
+            </CAvatar.Icon>
+          )}
         </CAvatar>
       </View>
       <View gap="$1.5" flexDirection="column" flexShrink={1} justifyContent="center">
@@ -130,18 +153,30 @@ const ContactItemFrame = styled(View, {
   },
 })
 
-export function SelectedContact({ selectedContacts }: { selectedContacts: ContactList }) {
+export function SelectedContact({
+  selectedContacts,
+  onRemoveContact,
+}: {
+  selectedContacts: ContactList
+  onRemoveContact: (contact: ContactList[number]) => void
+}) {
   return (
     <XStack gap="$4" paddingHorizontal="$4" paddingVertical="$2">
       {selectedContacts.map((contact) => (
-        <View alignItems="center" key={contact.id}>
+        <View alignItems="center" key={contact.id} onPress={() => onRemoveContact(contact)}>
           <CAvatar size="$6">
             <CAvatar.Icon placement="bottom-right">
               <X color="$color11" />
             </CAvatar.Icon>
             <CAvatar.Content id="avatar-joseph">
-              <CAvatar.Image src="https://images.unsplash.com/photo-1548142813-c348350df52b?&width=150&height=150&dpr=2&q=80" />
-              <CAvatar.Fallback backgroundColor="$gray6" />
+              {contact.image ? (
+                <CAvatar.Image objectFit="cover" src={contact.image} />
+              ) : (
+                // Fallback to initials if image is not available
+                <Text fontSize="$4" fontWeight="bold" color="$color12">
+                  {contact.initials}
+                </Text>
+              )}
             </CAvatar.Content>
           </CAvatar>
           <Text theme="alt1" maxWidth="$6" numberOfLines={1}>
