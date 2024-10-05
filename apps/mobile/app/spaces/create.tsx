@@ -2,7 +2,7 @@ import useSpaceStore from 'app/store/spaceStore'
 import { SchemaForm, formFields } from 'app/utils/SchemaForm'
 import { Stack, useRouter } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Paragraph, SubmitButton, Theme, YStack, XStack, Button } from 'ui'
+import { SubmitButton, YStack } from 'ui'
 import { z } from 'zod'
 
 import { NewGroupSvg } from '@/components/NewGroupSvg'
