@@ -5,7 +5,19 @@ import { Stack } from 'expo-router'
 import { useState, useEffect, useRef } from 'react'
 import { LayoutAnimation } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { CAvatar, Separator, Text, View, styled, ScrollView, XStack } from 'ui'
+import {
+  CAvatar,
+  Separator,
+  Text,
+  View,
+  styled,
+  ScrollView,
+  XStack,
+  H3,
+  Input,
+  ActionButton,
+  SizableText,
+} from 'ui'
 
 async function fetchContacts() {
   const { status } = await Contacts.requestPermissionsAsync()
@@ -39,6 +51,7 @@ type ContactList = Awaited<ReturnType<typeof fetchContacts>>
 export default function AddContactsScreen() {
   const [contactList, setContactList] = useState<ContactList>([])
   const [selectedContacts, setSelectedContacts] = useState<ContactList>([])
+  const [searchQuery, setSearchQuery] = useState('')
 
   const scrollViewRef = useRef<ScrollView>(null) // Create a ref for ScrollView
 
@@ -73,8 +86,6 @@ export default function AddContactsScreen() {
     }, 100)
   }
 
-  console.log('Selected Contacts', selectedContacts)
-
   const handleRemoveSelectedContact = (contact: ContactList[number]) => {
     // Remove from selectedContacts
     setSelectedContacts((prev) => prev.filter((selected) => selected.id !== contact.id))
@@ -93,11 +104,26 @@ export default function AddContactsScreen() {
     }, 100)
   }
 
+  const filteredContacts = contactList.filter((contact) =>
+    contact.name.toLowerCase().includes(searchQuery.toLowerCase())
+  )
+
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right']}>
       <Stack.Screen
         options={{
-          title: 'Add contacts',
+          headerTitle: () => (
+            <View f={1}>
+              <Input
+                value={searchQuery}
+                onChangeText={setSearchQuery}
+                placeholder="Search contacts..."
+                borderRadius="$10"
+                paddingHorizontal="$4"
+                width="75%"
+              />
+            </View>
+          ),
         }}
       />
       <View>
@@ -110,16 +136,38 @@ export default function AddContactsScreen() {
       </View>
       <View flex={1} paddingHorizontal="$4" paddingVertical="$2">
         <FlashList
-          data={contactList}
+          data={filteredContacts}
+          ListHeaderComponent={<H3>Add Contacts</H3>}
+          ListHeaderComponentStyle={{ paddingVertical: 18 }}
+          ListEmptyComponent={
+            <View ai="center" jc="center" gap="$4">
+              <SizableText theme="alt2" textAlign="center">
+                No results found for &quot;{searchQuery}&quot;
+              </SizableText>
+              <Text theme="alt1" textAlign="center" letterSpacing={0.5}>
+                Search for someone using their name, phone number, or address
+              </Text>
+            </View>
+          }
           renderItem={({ item, index }) => (
             <View gap="$1.5">
               <Item contact={item} onPress={() => handleSelectContact(item)} />
-              {index < contactList.length - 1 && <Separator />}
+              {index < filteredContacts.length - 1 && <Separator />}
             </View>
           )}
           estimatedItemSize={200}
         />
       </View>
+
+      {selectedContacts.length > 0 && (
+        <View padding="$4">
+          <ActionButton
+            themeInverse
+            buttonText="Continue"
+            action={() => console.log('Continue pressed', selectedContacts)}
+          />
+        </View>
+      )}
     </SafeAreaView>
   )
 }
