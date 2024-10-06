@@ -20,6 +20,7 @@ export default function CreateSpaceScreen() {
     <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right']}>
       <Stack.Screen
         options={{
+          headerShadowVisible: false,
           title: 'New space',
         }}
       />
