@@ -19,6 +19,7 @@ export const SubmitButton = (props: ButtonProps) => {
 
   return (
     <Button
+      themeInverse
       theme="teal"
       br="$10"
       iconAfter={

@@ -4,6 +4,8 @@ import { useFormContext } from 'react-hook-form'
 import {
   AddressField,
   AddressSchema,
+  AmountField,
+  AmountSchema,
   PhoneNumberSchema,
   PhoneNumberField,
   BooleanCheckboxField,
@@ -21,7 +23,7 @@ import {
   UploadSchema,
   Theme,
 } from 'ui'
-import { z } from 'zod'
+import { number, z } from 'zod'
 
 export const formFields = {
   text: z.string(),
@@ -52,6 +54,7 @@ export const formFields = {
   address: createUniqueFieldSchema(AddressSchema, 'address'),
   phone_number: createUniqueFieldSchema(PhoneNumberSchema, 'phone_number'),
   upload: createUniqueFieldSchema(UploadSchema, 'upload'),
+  amount: createUniqueFieldSchema(z.number(), 'amount'),
 }
 
 // function createFormSchema<T extends ZodRawShape>(getData: (fields: typeof formFields) => T) {
@@ -69,6 +72,7 @@ const mapping = [
   [formFields.address, AddressField] as const,
   [formFields.phone_number, PhoneNumberField] as const,
   [formFields.upload, UploadField] as const,
+  [formFields.amount, AmountField] as const,
 ] as const
 
 const FormComponent = (props: FormProps) => {

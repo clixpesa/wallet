@@ -1,7 +1,7 @@
 import { FlashList } from '@shopify/flash-list'
 import { X, Check } from '@tamagui/lucide-icons'
 import * as Contacts from 'expo-contacts'
-import { Stack } from 'expo-router'
+import { router, Stack } from 'expo-router'
 import { useState, useEffect, useRef } from 'react'
 import { LayoutAnimation } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -108,10 +108,16 @@ export default function AddContactsScreen() {
     contact.name.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
+  const handleSubmit = () => {
+    console.log('Continue pressed', selectedContacts)
+    router.navigate('spaces/set-goal')
+  }
+
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right']}>
       <Stack.Screen
         options={{
+          headerShadowVisible: false,
           headerTitle: () => (
             <View f={1}>
               <Input
@@ -161,11 +167,7 @@ export default function AddContactsScreen() {
 
       {selectedContacts.length > 0 && (
         <View padding="$4">
-          <ActionButton
-            themeInverse
-            buttonText="Continue"
-            action={() => console.log('Continue pressed', selectedContacts)}
-          />
+          <ActionButton themeInverse buttonText="Continue" action={handleSubmit} />
         </View>
       )}
     </SafeAreaView>
