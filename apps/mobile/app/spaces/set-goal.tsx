@@ -1,7 +1,7 @@
 import { SchemaForm, formFields } from 'app/utils/SchemaForm'
 import { Stack, useRouter } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { SubmitButton, YStack, SizableText, DatePickerExample } from 'ui'
+import { SubmitButton, YStack, SizableText, DatePickerG, View } from 'ui'
 import { z } from 'zod'
 
 export default function SetGoalScreen() {
@@ -33,7 +33,10 @@ export default function SetGoalScreen() {
               <SizableText>Set an amount, contribution and disbursment schedule</SizableText>
             </YStack>
             {Object.values(fields)}
-            <DatePickerExample placeholder="Select Date" />
+            <View gap="$4">
+              <DatePickerG placeholder="Contribution Deadline" />
+              <DatePickerG placeholder="Disbursment Deadline" />
+            </View>
           </>
         )}
       </SchemaForm>

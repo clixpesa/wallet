@@ -109,7 +109,6 @@ const TransactionsSection = () => {
           </Button>
         </Theme>
       </XStack>
-
       <Transactions>
         <Transactions.Items>
           <Transactions.Group $gtSm={{ space: '$2' }}>

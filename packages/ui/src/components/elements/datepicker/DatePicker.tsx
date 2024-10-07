@@ -1,4 +1,4 @@
-import { useDatePickerContext } from '@rehookify/datepicker'
+import { useDatePickerContext, DatePickerProvider } from '@rehookify/datepicker'
 import type { DPDay, DPDayInteger } from '@rehookify/datepicker'
 import { ChevronLeft, ChevronRight } from '@tamagui/lucide-icons'
 import { useEffect, useMemo, useState } from 'react'
@@ -19,7 +19,7 @@ import { useDateAnimation } from './common/datePickerUtils'
 function CalendarHeader() {
   const {
     data: { calendars } = { calendars: [] },
-    propGetters: { subtractOffset },
+    propGetters: { subtractOffset, addOffset },
   } = useDatePickerContext()
   const { type: header, setHeader } = useHeaderType()
   const { year, month } = calendars?.[0] || {}
@@ -53,7 +53,7 @@ function CalendarHeader() {
           <ChevronLeft />
         </Button.Icon>
       </Button>
-      <View flexDirection="column" height={50} alignItems="center">
+      <View flexDirection="column" height={50} alignItems="center" justifyContent="center">
         <SizableText
           onPress={() => setHeader('year')}
           userSelect="auto"
@@ -74,8 +74,7 @@ function CalendarHeader() {
           tabIndex={0}
           size="$6"
           color="$gray12"
-          fontWeight="600"
-          lineHeight="$1"
+          fontWeight="700"
           hoverStyle={{
             color: '$gray10',
           }}
@@ -83,7 +82,7 @@ function CalendarHeader() {
           {month}
         </SizableText>
       </View>
-      <Button circular size="$4" {...swapOnClick(subtractOffset({ months: -1 }))}>
+      <Button circular size="$4" {...swapOnClick(addOffset({ months: 1 }))}>
         <Button.Icon scaleIcon={1.5}>
           <ChevronRight />
         </Button.Icon>
@@ -174,27 +173,7 @@ function DatePickerBody() {
   )
 }
 
-export function DatePickerExample({
-  disabled,
-  placeholderTextColor,
-  value,
-  onChangeText,
-  onBlur,
-  ref,
-  placeholder,
-  id,
-  ...props
-}: {
-  disabled: boolean
-  placeholderTextColor?: string
-  value: string | undefined
-  onChangeText: (dateValue: string) => void
-  onBlur: () => void
-  ref: React.RefObject<HTMLInputElement>
-  placeholder?: string
-  id: string
-  [key: string]: any
-}) {
+export function DatePickerG({ placeholder }: { placeholder?: string }) {
   const [selectedDates, onDatesChange] = useState<Date[]>([])
   const [open, setOpen] = useState(false)
 
@@ -212,7 +191,6 @@ export function DatePickerExample({
     selectedDates,
     onDatesChange: (dates) => {
       onDatesChange(dates)
-      onChangeText(dates[0]?.toISOString().split('T')[0] || '')
     },
     calendar: {
       startDay: 1,
@@ -222,7 +200,8 @@ export function DatePickerExample({
     <DatePicker keepChildrenMounted open={open} onOpenChange={setOpen} config={datePickerConfig}>
       <DatePicker.Trigger>
         <DatePickerInput
-          placeholder="Select Date"
+          size="$4"
+          placeholder={placeholder}
           value={selectedDates[0]?.toDateString() || ''}
           onReset={() => onDatesChange([])}
           onButtonPress={() => setOpen(true)}
@@ -230,7 +209,9 @@ export function DatePickerExample({
       </DatePicker.Trigger>
       <DatePicker.Content>
         <DatePicker.Content.Arrow />
-        <DatePickerBody />
+        <DatePickerProvider config={datePickerConfig}>
+          <DatePickerBody />
+        </DatePickerProvider>
       </DatePicker.Content>
     </DatePicker>
   )
