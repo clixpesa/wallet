@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
-    "@react-native-community/datetimepicker": "7.6.2",
+    "@react-native-community/datetimepicker": "8.0.1",
     "app": "*",
     "expo": "~51.0.31",
     "expo-constants": "~16.0.1",

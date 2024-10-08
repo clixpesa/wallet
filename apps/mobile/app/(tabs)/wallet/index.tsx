@@ -1,11 +1,6 @@
-import { getFontSized } from '@tamagui/get-font-sized'
-import { User2 } from '@tamagui/lucide-icons'
-import { FlatList } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import type { SizeTokens } from 'ui'
-import { ChipsWithIcon, Avatar, View, styled, Text, H3, ActionButton } from 'ui'
-import { type CardProps, Card, H6, H2, Paragraph, Button, XStack, Theme } from 'ui'
-import { router } from 'expo-router'
+import { ChipsWithIcon, Card, H6, H2, Text } from 'ui'
+import { type CardProps } from 'ui'
 
 export default function WalletScreen() {
   return (
@@ -31,7 +26,6 @@ export const OverviewCard = ({ title, value, ...props }: OverviewCardTypes) => {
         <H2 mt="$2">{value}</H2>
         <Text>Heyy again SAm</Text>
       </Card.Header>
-      <Card.Footer></Card.Footer>
     </Card>
   )
 }
