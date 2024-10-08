@@ -1,13 +1,15 @@
 import { SchemaForm, formFields } from 'app/utils/SchemaForm'
-import { Stack, router } from 'expo-router'
+import { Stack, useRouter } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { SubmitButton, YStack, SizableText, DatePickerG, View } from 'ui'
 import { z } from 'zod'
 
-export default function SetGoalScreen() {
+export default function SetPocketScreen() {
+  const router = useRouter()
+
   const handleSubmit = (data) => {
     console.log('data', data)
-    router.navigate('spaces/set-pocket')
+    router.navigate('spaces/space-home')
   }
 
   return (
@@ -15,7 +17,7 @@ export default function SetGoalScreen() {
       <Stack.Screen
         options={{
           headerShadowVisible: false,
-          title: 'Add goal',
+          title: 'Add a pocket',
         }}
       />
       <SchemaForm
@@ -28,12 +30,13 @@ export default function SetGoalScreen() {
         {(fields) => (
           <>
             <YStack ai="center">
-              <SizableText>Set an amount, contribution and disbursment schedule</SizableText>
+              <SizableText>
+                Set an amount, for your saving pockect and deadline for your goal
+              </SizableText>
             </YStack>
             {Object.values(fields)}
             <View gap="$4">
-              {/* <DatePickerG placeholder="Contribution Deadline" /> */}
-              {/* <DatePickerG placeholder="Disbursment Deadline" /> */}
+              <DatePickerG placeholder="Deadline" />
             </View>
           </>
         )}
