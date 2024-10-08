@@ -5753,15 +5753,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/datetimepicker@npm:7.6.2":
-  version: 7.6.2
-  resolution: "@react-native-community/datetimepicker@npm:7.6.2"
-  dependencies:
-    invariant: "npm:^2.2.4"
-  checksum: 10/ca72d1abf4f4caa5828e89907674b781880978a06918c4459f6c3a1ae86621312490443aeee68fbd589637f2f04012450ba948b832b6fb52e3905354a461f581
-  languageName: node
-  linkType: hard
-
 "@react-native-community/datetimepicker@npm:8.0.1":
   version: 8.0.1
   resolution: "@react-native-community/datetimepicker@npm:8.0.1"
@@ -26382,7 +26373,7 @@ __metadata:
     "@babel/core": "npm:^7.24"
     "@expo/vector-icons": "npm:^13.0.0"
     "@react-native-async-storage/async-storage": "npm:1.23.1"
-    "@react-native-community/datetimepicker": "npm:7.6.2"
+    "@react-native-community/datetimepicker": "npm:8.0.1"
     "@react-native-community/slider": "npm:^4.5.0"
     "@storybook/addon-actions": "npm:^7.6.4"
     "@storybook/addon-controls": "npm:^7.6.4"
