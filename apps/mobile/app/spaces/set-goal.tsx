@@ -1,7 +1,7 @@
 import { SchemaForm, formFields } from 'app/utils/SchemaForm'
 import { Stack, router } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { SubmitButton, YStack, SizableText, DatePickerG, View } from 'ui'
+import { SubmitButton, YStack, SizableText, View } from 'ui'
 import { z } from 'zod'
 
 export default function SetGoalScreen() {
