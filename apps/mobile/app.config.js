@@ -4,7 +4,6 @@ const EAS_PROJECT_ID = 'e3d38825-e3c6-4435-a9a3-2322cf8cb517'
 const EAS_APP_OWNER = 'clixpesa'
 
 const IS_DEV = process.env.APP_ENV === 'development'
-
 const getName = () => {
   if (IS_DEV) {
     return 'Clixpesa (Dev)'
