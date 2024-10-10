@@ -11865,6 +11865,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "app@workspace:packages/app"
   dependencies:
+    "@gorhom/bottom-sheet": "npm:4.6.4"
     "@react-native-async-storage/async-storage": "npm:1.23.1"
     "@tamagui/animations-react-native": "npm:^1.113.0"
     "@tamagui/colors": "npm:^1.113.0"
