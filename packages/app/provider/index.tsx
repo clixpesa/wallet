@@ -1,3 +1,4 @@
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 import React from 'react'
 
 import { AuthProvider } from './auth'
@@ -34,5 +35,6 @@ const Providers = compose([
   SafeAreaProvider,
   TamaguiProvider,
   ToastProvider,
+  BottomSheetModalProvider,
   QueryClientProvider,
 ])
