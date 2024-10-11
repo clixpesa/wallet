@@ -32,9 +32,9 @@ const compose = (providers: React.FC<{ children: React.ReactNode }>[]) =>
 
 const Providers = compose([
   UniversalThemeProvider,
+  BottomSheetModalProvider,
   SafeAreaProvider,
   TamaguiProvider,
   ToastProvider,
-  BottomSheetModalProvider,
   QueryClientProvider,
 ])

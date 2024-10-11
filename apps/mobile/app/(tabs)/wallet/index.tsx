@@ -1,8 +1,8 @@
 import { faker } from '@faker-js/faker'
-import { BottomSheetModal, BottomSheetView, BottomSheetModalProvider } from '@gorhom/bottom-sheet'
-import { ChevronDown, PiggyBank, HandCoins, ArrowRight } from '@tamagui/lucide-icons'
+import { BottomSheetModal, BottomSheetView, BottomSheetBackdrop } from '@gorhom/bottom-sheet'
+import { ChevronDown, PiggyBank, HandCoins, ArrowRight, Users, Plus } from '@tamagui/lucide-icons'
 import { router } from 'expo-router'
-import { useState, useCallback, useRef } from 'react'
+import { useCallback, useRef } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {
   ChipsWithIcon,
@@ -20,35 +20,47 @@ import {
   ScrollView,
   ActionButton,
   Theme,
+  useTheme,
 } from 'ui'
 import { type CardProps } from 'ui'
 
 import { ScrollAdapt } from '@/components/home/ScrollAdapt'
 
 export default function WalletScreen() {
+  const theme = useTheme()
   // ref
   const bottomSheetModalRef = useRef<BottomSheetModal>(null)
 
-  // state to track modal open/close status
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const secondaryModalRef = useRef<BottomSheetModal>(null)
 
-  // snap points for the modal
-  // const snapPoints = useMemo(() => ['25%', '50%'], [])
+  const handlePresentModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.present()
+  }, [])
 
-  // function to toggle modal visibility
-  const toggleModal = useCallback(() => {
-    if (isModalOpen) {
-      bottomSheetModalRef.current?.dismiss()
-    } else {
-      bottomSheetModalRef.current?.present()
-    }
-  }, [isModalOpen])
+  const handlePresentSecondaryModalPress = useCallback(() => {
+    console.log('helo')
+    secondaryModalRef.current?.present()
+  }, [])
 
   // callback for modal changes
   const handleSheetChanges = useCallback((index: number) => {
     console.log('handleSheetChanges', index)
-    setIsModalOpen(index !== -1) // update modal state based on index
   }, [])
+
+  // render backdrop
+  const renderBackdrop = useCallback(
+    (props) => (
+      <BottomSheetBackdrop {...props} opacity={0.5} appearsOnIndex={0} disappearsOnIndex={-1} />
+    ),
+    []
+  )
+
+  const renderSecondaryBackdrop = useCallback(
+    (props) => (
+      <BottomSheetBackdrop {...props} opacity={0.8} appearsOnIndex={0} disappearsOnIndex={-1} />
+    ),
+    []
+  )
 
   const groupAddress = faker.finance.ethereumAddress()
   return (
@@ -59,7 +71,7 @@ export default function WalletScreen() {
           title="Actual Balance (KES)"
           value="Ksh 23,300"
           groupAddress={groupAddress}
-          onPress={toggleModal}
+          onPress={handlePresentModalPress}
         />
 
         <YStack m="$4">
@@ -178,10 +190,87 @@ export default function WalletScreen() {
         ref={bottomSheetModalRef}
         onChange={handleSheetChanges}
         enablePanDownToClose
-        snapPoints={['50%']}
+        snapPoints={['40%']}
+        backdropComponent={renderBackdrop}
+        backgroundStyle={{
+          backgroundColor: theme.color2.val,
+        }}
+        handleIndicatorStyle={{
+          backgroundColor: theme.color4.val,
+        }}
       >
-        <BottomSheetView>
-          <Text>Awesome Yay</Text>
+        <BottomSheetView style={{ padding: 20, gap: 20 }}>
+          <YStack gap="$2">
+            <View ai="center" gap="$2">
+              <YStack bg="$teal10" p="$3" br="$10" theme="teal">
+                <Users o={0.8} />
+              </YStack>
+              <SizableText>Maldives Contributions</SizableText>
+              <SizableText size="$4" theme="alt2" numberOfLines={1}>{`${groupAddress.slice(
+                0,
+                6
+              )}...${groupAddress.slice(-4)}`}</SizableText>
+            </View>
+            <ActionButton
+              theme="alt1"
+              buttonText="Manage group"
+              action={() => console.log('Navigate to Manage Space screen')}
+            />
+          </YStack>
+          <YStack>
+            <XStack ai="center" gap="$2" onPress={handlePresentSecondaryModalPress}>
+              <YStack theme="alt1" p="$2" br="$10" bw="$0.5" boc="$color8">
+                <Plus o={0.9} />
+              </YStack>
+              <SizableText theme="alt1" fow="bold">
+                Add group
+              </SizableText>
+            </XStack>
+          </YStack>
+        </BottomSheetView>
+      </BottomSheetModal>
+
+      <BottomSheetModal
+        ref={secondaryModalRef}
+        enablePanDownToClose
+        backgroundStyle={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
+        snapPoints={['30%']}
+        backdropComponent={renderSecondaryBackdrop}
+      >
+        <BottomSheetView style={{ padding: 20 }}>
+          <YStack gap="$4">
+            <View>
+              <View
+                // bg="red"
+                bg="$color2"
+                padding="$4"
+                ai="center"
+                borderTopLeftRadius="$6"
+                borderTopRightRadius="$6"
+              >
+                <SizableText fow="bold" theme="alt1">
+                  Create a new group
+                </SizableText>
+              </View>
+              <Separator />
+              <View
+                bg="$color2"
+                padding="$4"
+                ai="center"
+                borderBottomLeftRadius="$6"
+                borderBottomRightRadius="$6"
+              >
+                <SizableText theme="alt1" fow="bold">
+                  Join a group
+                </SizableText>
+              </View>
+            </View>
+            <View padding="$4" ai="center" br="$6" bg="$color2">
+              <SizableText fow="bold" theme="alt1">
+                Close
+              </SizableText>
+            </View>
+          </YStack>
         </BottomSheetView>
       </BottomSheetModal>
     </SafeAreaView>
