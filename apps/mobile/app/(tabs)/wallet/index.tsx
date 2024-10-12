@@ -62,6 +62,11 @@ export default function WalletScreen() {
     []
   )
 
+  const handleNavigation = () => {
+    bottomSheetModalRef.current?.dismiss()
+    router.navigate('/wallet/manage-group')
+  }
+
   const groupAddress = faker.finance.ethereumAddress()
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['left', 'right']}>
@@ -211,11 +216,7 @@ export default function WalletScreen() {
                 6
               )}...${groupAddress.slice(-4)}`}</SizableText>
             </View>
-            <ActionButton
-              theme="alt1"
-              buttonText="Manage group"
-              action={() => console.log('Navigate to Manage Space screen')}
-            />
+            <ActionButton theme="alt1" buttonText="Manage group" action={handleNavigation} />
           </YStack>
           <YStack>
             <XStack ai="center" gap="$2" onPress={handlePresentSecondaryModalPress}>
