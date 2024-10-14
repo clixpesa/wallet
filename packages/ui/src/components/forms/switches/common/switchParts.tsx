@@ -72,7 +72,7 @@ export const SwitchFrame = styled(View, {
 
     checked: {
       true: {
-        backgroundColor: '$green10',
+        backgroundColor: '$teal10',
       },
       false: {
         backgroundColor: '$red10',
