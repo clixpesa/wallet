@@ -108,12 +108,12 @@ export default function ManageGroupScreen() {
             </Settings.Items>
           </Settings>
 
-          <YStack>
+          <YStack margin="$4" bg="red">
             <View flexDirection="column" gap="$4">
               <SizableText theme="alt2" fontWeight="700">
                 Members
               </SizableText>
-              <View flexDirection="column" gap="$4" bg="$background" margin="$4" br="$4">
+              <View flexDirection="column" gap="$4" bg="$background" br="$4">
                 {data.map((member) => (
                   <Member member={member} key={member.id} />
                 ))}
