@@ -179,11 +179,13 @@ export default function ManageGroupScreen() {
           >
             <BottomSheetView style={{ padding: 20, gap: 20 }}>
               <YStack ai="center" gap="$6">
-                <View bg="$red3" p="$4" br="$10" theme="teal">
-                  <LogOut o={0.8} col="$red11" />
+                <View bg="$red4" p="$4" br="$10" theme="teal">
+                  <LogOut o={0.8} col="$red10" strokeWidth={2} />
                 </View>
                 <View gap="$4">
-                  <SizableText>You are leaving Maldives Contributions Group</SizableText>
+                  <SizableText textAlign="center">
+                    You are leaving <Text color="$red10">Maldives Contributions</Text>
+                  </SizableText>
                   <SizableText size="$2" theme="alt1" textAlign="center">
                     Remove your account from this group. You will need an invite to join again.
                   </SizableText>
@@ -194,13 +196,13 @@ export default function ManageGroupScreen() {
                     w="50%"
                     buttonText="Cancel"
                     theme="alt2"
-                    action={() => console.log('Cancel')}
+                    action={() => bottomSheetModalRef.current?.close()}
                   />
                   <ActionButton
                     theme="red"
                     w="50%"
                     buttonText="Exit"
-                    action={() => console.log('Cancel')}
+                    action={() => console.log('Left Group')}
                   />
                 </XStack>
               </YStack>
