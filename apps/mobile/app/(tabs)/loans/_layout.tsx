@@ -1,7 +1,7 @@
 import { Stack } from 'expo-router'
-import { View, Text } from 'ui'
+import { View } from 'ui'
 
-import { HarakaLogo } from '@/components/haraka/HarakaLogo'
+import { HarakaLogoSvg } from '@/components/haraka/HarakaLogoSvg'
 
 export default function Layout() {
   return (
@@ -12,7 +12,7 @@ export default function Layout() {
         options={{
           headerBackground: () => (
             <View bg="$orange6" h="100%">
-              <HarakaLogo />
+              <HarakaLogoSvg />
             </View>
           ),
           // header: () => (

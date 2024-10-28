@@ -78,6 +78,12 @@ function RootLayout() {
                   title: 'Settings',
                 }}
               />
+              <Stack.Screen
+                name="haraka/index"
+                options={{
+                  title: '',
+                }}
+              />
             </Stack>
           </ErrorBoundary>
           <OfflineBanner />

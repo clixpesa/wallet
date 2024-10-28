@@ -1,6 +1,6 @@
 import { useNumberFieldInfo, useTsController } from '@ts-react/form'
 import { useId } from 'react'
-import { Fieldset, InputProps, Label, Theme, Text, View } from 'tamagui'
+import { Fieldset, InputProps, Label, Theme, Text, View, SizableText } from 'tamagui'
 
 import { FieldError } from '../FieldError'
 import { Shake } from '../Shake'
@@ -25,7 +25,24 @@ export const NumberField = (props: Pick<InputProps, 'size' | 'autoFocus'>) => {
               {label} {isOptional && `(Optional)`}
             </Label>
           )}
-          <Text>Limit: 10 - 10,000 cKES </Text>
+          <View
+            backgroundColor="$color5"
+            borderRadius={100}
+            padding="$1.5"
+            paddingHorizontal="$2"
+            // paddingVertical="$2"
+            // paddingRight={10}
+            // flexDirection="row"
+            // marginLeft="auto"
+            justifyContent="center"
+            alignItems="center"
+            theme="alt1"
+          >
+            <Theme>
+              <SizableText>Limit: 10 - 10,000 cKES </SizableText>
+            </Theme>
+          </View>
+          {/* <Text>Limit: 10 - 10,000 cKES </Text> */}
         </View>
 
         <Shake shakeKey={error?.errorMessage}>
