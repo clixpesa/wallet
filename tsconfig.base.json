@@ -2,11 +2,6 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
-    "paths": {
-      "@clixpesa/*": ["packages/*"],
-      "app/*": ["packages/app/*"],
-      "ui/*": ["packages/ui/*"]
-    },
     "importHelpers": true,
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
@@ -14,35 +9,24 @@
     "esModuleInterop": true,
     "preserveSymlinks": true,
     "incremental": true,
-    "module": "ESNext",
+    "jsx": "react-jsx",
+    "module": "system",
     "moduleResolution": "node",
-    "forceConsistentCasingInFileNames": true,
     "noEmitOnError": false,
     "noImplicitAny": false,
     "noImplicitReturns": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "experimentalDecorators": true,
     "useUnknownInCatchVariables": false,
     "preserveConstEnums": true,
     // DONT DO THIS so jsdoc will remain
     "removeComments": false,
-    "strict": true,
     "skipLibCheck": true,
-    "typeRoots": ["node_modules/@types", "environment.d.ts"],
     "sourceMap": false,
-    "target": "ESNext",
+    "strictNullChecks": true,
+    "target": "es2020",
     "types": ["node"],
-    "jsx": "react-jsx",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "resolveJsonModule": true,
-    "plugins": [
-      {
-        // docs: https://github.com/nderscore/tamagui-typescript-plugin#readme
-        "name": "@nderscore/tamagui-typescript-plugin",
-        "pathToApp": "apps/web"
-      }
-    ]
+    "lib": ["dom", "esnext"]
   },
   "exclude": ["_"],
   "typeAcquisition": {
