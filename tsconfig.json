@@ -1,25 +1,7 @@
 {
-  "files": [],
+  "extends": "./tsconfig.base",
   "compilerOptions": {
-    "outDir": "/tmp",
-    "typeRoots": ["node_modules/@types"],
-    "skipDefaultLibCheck": true,
-    "skipLibCheck": true,
-    "noEmit": true
+    "strict": true
   },
-  "references": [
-    {
-      "path": "apps/mobile"
-    },
-    {
-      "path": "apps/web"
-    },
-    {
-      "path": "packages/app"
-    },
-    {
-      "path": "packages/ui"
-    }
-  ],
-  "extends": "expo/tsconfig.base"
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
 }
