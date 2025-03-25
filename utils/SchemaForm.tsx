@@ -1,14 +1,12 @@
 import {
   FieldError,
-  Form,
-  type FormProps,
   FormWrapper,
   NumberField,
   SelectField,
   TextAreaField,
   TextField,
-  Theme,
 } from 'components'
+import { Theme, Form, type FormProps } from 'tamagui'
 import { DateField, DateSchema } from 'components/FormFields/DateField'
 import {
   ImagePickerField,
@@ -45,7 +43,6 @@ export const formFields = {
   /**
    * example of how to handle more complex fields
    */
-  address: createUniqueFieldSchema(AddressSchema, 'address'),
   date: createUniqueFieldSchema(DateSchema, 'date'),
   image: createUniqueFieldSchema(ImagePickerSchema, 'image'),
 }
@@ -58,18 +55,14 @@ const mapping = [
   [formFields.text, TextField] as const,
   [formFields.textarea, TextAreaField] as const,
   [formFields.number, NumberField] as const,
-  [formFields.boolean, BooleanField] as const,
-  [formFields.boolean_switch, BooleanSwitchField] as const,
-  [formFields.boolean_checkbox, BooleanCheckboxField] as const,
   [formFields.select, SelectField] as const,
-  [formFields.address, AddressField] as const,
   [formFields.date, DateField] as const,
   [formFields.image, ImagePickerField] as const,
 ] as const
 
 const FormComponent = (props: FormProps) => {
   return (
-    <Form asChild {...props} minWidth="100%">
+    <Form asChild {...props} minW="100%">
       <FormWrapper tag="form">{props.children}</FormWrapper>
     </Form>
   )
@@ -91,7 +84,7 @@ export const SchemaForm: typeof _SchemaForm = ({ ...props }) => {
   return (
     <_SchemaForm {...props} renderAfter={renderAfter}>
       {(fields, context) => (
-        <FormWrapper.Body minWidth="100%" $platform-native={{ miw: '100%' }}>
+        <FormWrapper.Body minW="100%" $platform-native={{ minW: '100%' }}>
           {props.children ? props.children(fields, context) : Object.values(fields)}
         </FormWrapper.Body>
       )}

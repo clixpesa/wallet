@@ -10,9 +10,7 @@ import { StatusBar } from 'expo-status-bar'
 import { Provider } from '../provider'
 import { useTheme } from 'tamagui'
 import { OfflineBanner } from 'components/OfflineBanner'
-import { Platform } from 'react-native'
 
-import { useAuthStore } from 'store/userStore'
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
@@ -91,7 +89,15 @@ function RootLayoutNav() {
 
           <Stack.Screen
             name="sign-up"
-            options={{ title: '', headerShown: true, animation: 'fade' }}
+            options={{
+              title: '',
+              headerShown: true,
+              headerShadowVisible: false,
+              headerStyle: {
+                backgroundColor: theme.color2.val,
+              },
+              animation: 'fade',
+            }}
           />
         </Stack>
         <OfflineBanner />
