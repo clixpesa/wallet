@@ -1,6 +1,9 @@
-import { Link, Tabs } from 'expo-router'
+import { Link, Tabs, useSegments, router } from 'expo-router'
+import { useEffect } from 'react'
 import { Button, useTheme, View } from 'tamagui'
 import { LayoutGrid, Home, User, AlertCircle } from '@tamagui/lucide-icons'
+import { Platform } from 'react-native'
+import { useAuthStore } from 'store/userStore'
 
 export const HomeIcons = {
   Home,
@@ -8,8 +11,30 @@ export const HomeIcons = {
   User: User,
 }
 
+// Helper function to replace routes properly on iOS/Android
+const replaceRoute = (href) => {
+  if (Platform.OS === 'ios') {
+    setTimeout(() => router.replace(href), 1)
+  } else {
+    setImmediate(() => router.replace(href))
+  }
+}
+
 export default function TabLayout() {
   const theme = useTheme()
+
+  const user = useAuthStore((state) => state.user)
+  const segments = useSegments()
+
+  useEffect(() => {
+    const inAuthGroup = segments[0] === 'onboarding'
+
+    if (!user && !inAuthGroup) {
+      replaceRoute('/onboarding')
+    } else if (user && inAuthGroup) {
+      replaceRoute('/')
+    }
+  }, [user, segments])
 
   return (
     <Tabs

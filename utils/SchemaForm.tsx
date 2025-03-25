@@ -1,9 +1,4 @@
 import {
-  AddressField,
-  AddressSchema,
-  BooleanCheckboxField,
-  BooleanField,
-  BooleanSwitchField,
   FieldError,
   Form,
   type FormProps,
@@ -14,11 +9,11 @@ import {
   TextField,
   Theme,
 } from 'components'
-import { DateField, DateSchema } from '@my/ui/src/components/FormFields/DateField'
+import { DateField, DateSchema } from 'components/FormFields/DateField'
 import {
   ImagePickerField,
   ImagePickerSchema,
-} from '@my/ui/src/components/FormFields/ImagePickerField'
+} from 'components/FormFields/ImagePickerField'
 import { createTsForm, createUniqueFieldSchema } from '@ts-react/form'
 import type { ComponentProps } from 'react'
 import { useFormContext } from 'react-hook-form'

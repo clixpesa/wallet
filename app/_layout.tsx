@@ -5,12 +5,14 @@ import { useColorScheme } from 'react-native'
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { useFonts } from 'expo-font'
-import { SplashScreen, Stack } from 'expo-router'
+import { SplashScreen, Stack, useSegments, router } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { Provider } from '../provider'
 import { useTheme } from 'tamagui'
 import { OfflineBanner } from 'components/OfflineBanner'
+import { Platform } from 'react-native'
 
+import { useAuthStore } from 'store/userStore'
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
@@ -80,6 +82,16 @@ function RootLayoutNav() {
                 backgroundColor: theme.background.val,
               },
             }}
+          />
+
+          <Stack.Screen
+            name="onboarding"
+            options={{ headerShown: false, animation: 'fade' }}
+          />
+
+          <Stack.Screen
+            name="sign-up"
+            options={{ title: '', headerShown: true, animation: 'fade' }}
           />
         </Stack>
         <OfflineBanner />
