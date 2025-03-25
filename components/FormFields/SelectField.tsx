@@ -11,7 +11,7 @@ import {
   Theme,
   YStack,
 } from 'tamagui'
-import { LinearGradient } from 'tamagui/linear-gradient'
+// import { LinearGradient } from 'tamagui/linear-gradient'
 
 import { FieldError } from '../FieldError'
 
@@ -57,7 +57,7 @@ export const SelectField = ({
           {...props}
           native={!!native}
         >
-          <Select.Trigger minWidth="100%" $md={{ maxWidth: 220 }}>
+          <Select.Trigger minWidth="100%" $md={{ maxW: 220 }}>
             <Select.Value placeholder={placeholder} />
           </Select.Trigger>
 
@@ -75,7 +75,7 @@ export const SelectField = ({
               }}
               snapPointsMode="fit"
             >
-              <Sheet.Frame marginBottom="$12">
+              <Sheet.Frame mb="$12">
                 <Sheet.ScrollView>
                   <Adapt.Contents />
                 </Sheet.ScrollView>
@@ -85,7 +85,7 @@ export const SelectField = ({
                 animation="lazy"
                 enterStyle={{ opacity: 0 }}
                 exitStyle={{ opacity: 0 }}
-                zIndex={0}
+                z={0}
               />
             </Sheet>
           </Adapt>
@@ -116,7 +116,7 @@ export const SelectField = ({
               // animateOnly={['transform', 'opacity']}
               // enterStyle={{ o: 0, y: -10 }}
               // exitStyle={{ o: 0, y: 10 }}
-              minWidth={200}
+              minW={200}
             >
               <Select.Group>
                 <Select.Label>Project Type</Select.Label>
@@ -144,21 +144,21 @@ export const SelectField = ({
 
             <Select.ScrollDownButton
               items="center"
-              justifyContent="center"
+              justify="center"
               position="relative"
               width="100%"
               height="$3"
             >
-              <YStack zIndex={10}>
+              <YStack z={10}>
                 <ChevronDown size={20} />
               </YStack>
-              <LinearGradient
+              {/* <LinearGradient
                 start={[0, 0]}
                 end={[0, 1]}
                 fullscreen
                 colors={['transparent', '$background']}
                 rounded="$4"
-              />
+              /> */}
             </Select.ScrollDownButton>
           </Select.Content>
         </Select>
