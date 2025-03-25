@@ -97,6 +97,7 @@ const generatedThemes = createThemes({
         ...Colors.red,
         ...Colors.yellow,
         ...Colors.orange,
+        ...Colors.gray,
         ...lightShadows,
         ...blackColors,
         ...whiteColors,
@@ -108,6 +109,7 @@ const generatedThemes = createThemes({
         ...Colors.redDark,
         ...Colors.yellowDark,
         ...Colors.orangeDark,
+        ...Colors.grayDark,
         ...darkShadows,
         ...blackColors,
         ...whiteColors,
@@ -135,6 +137,12 @@ const generatedThemes = createThemes({
       palette: {
         dark: Object.values(whiteColors),
         light: Object.values(whiteColors),
+      },
+    },
+    gray: {
+      palette: {
+        dark: Object.values(Colors.grayDark),
+        light: Object.values(Colors.gray),
       },
     },
     teal: {

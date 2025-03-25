@@ -19,6 +19,7 @@ export const SubmitButton = (props: ButtonProps) => {
 
   return (
     <Button
+      size="$5"
       iconAfter={
         <AnimatePresence>
           {isSubmitting && (

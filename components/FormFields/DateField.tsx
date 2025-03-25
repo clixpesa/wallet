@@ -5,7 +5,7 @@ import { z } from 'zod'
 
 import { FieldError } from '../FieldError'
 import { Shake } from '../Shake'
-import { DatePickerExample } from '../elements/datepicker/DatePicker'
+import { DatePickerExample } from 'components'
 
 export const DateSchema = z.object({
   dateValue: z.coerce.date(),
