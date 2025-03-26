@@ -5,6 +5,8 @@ import {
   SelectField,
   TextAreaField,
   TextField,
+  PhoneNumberField,
+  PhoneNumberSchema,
 } from 'components'
 import { Theme, Form, type FormProps } from 'tamagui'
 import { DateField, DateSchema } from 'components/FormFields/DateField'
@@ -43,6 +45,7 @@ export const formFields = {
   /**
    * example of how to handle more complex fields
    */
+  phone_number: createUniqueFieldSchema(PhoneNumberSchema, 'phone_number'),
   date: createUniqueFieldSchema(DateSchema, 'date'),
   image: createUniqueFieldSchema(ImagePickerSchema, 'image'),
 }
@@ -57,6 +60,7 @@ const mapping = [
   [formFields.number, NumberField] as const,
   [formFields.select, SelectField] as const,
   [formFields.date, DateField] as const,
+  [formFields.phone_number, PhoneNumberField] as const,
   [formFields.image, ImagePickerField] as const,
 ] as const
 
