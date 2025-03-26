@@ -40,16 +40,23 @@ export default function SignUpScreen() {
           {(fields) => (
             <>
               <YStack gap="$2" mb="$2">
-                <H1 size="$6" style={{ fontFamily: 'InterRegular', fontWeight: 700 }}>
+                <H1
+                  // size="$6"
+                  // style={{ fontFamily: 'InterRegular', fontWeight: 900 }}
+                  // fontWeight="900"
+                  fontWeight="900"
+                >
                   Let's get you started
                 </H1>
                 <Paragraph
                   color="$color10"
-                  fontFamily="$body"
-                  style={{
-                    fontFamily: 'InterRegular',
-                    fontWeight: '500',
-                  }}
+                  // fontFamily="$body"
+                  // style={{
+                  //   fontFamily: 'InterRegular',
+                  //   // fontWeight: '800',
+                  // }}
+                  fontWeight="bold"
+                  size="$2"
                 >
                   Enter your phone number to get started, we may store and send a
                   verification code to this number
@@ -62,16 +69,22 @@ export default function SignUpScreen() {
       </FormProvider>
 
       <YStack my="$8" mx="$4" gap="$4" justify="space-between">
-        <SizableText
-          size="$2"
-          text="center"
-          style={{ fontFamily: 'InterRegular', fontWeight: '500' }}
-        >
+        <SizableText size="$1" text="center" style={{ fontFamily: 'InterRegular' }}>
           By signing up, you accept Clixpesa’s Terms & Conditions and Privacy Policy.
         </SizableText>
         <View>
-          <Button variant="outlined" rounded="$10" size="$5">
-            I already have an account
+          <Button
+            theme="teal"
+            pressStyle={{
+              bg: '$color6',
+              borderColor: '$color6',
+            }}
+            chromeless
+            bordered
+            borderColor="$color"
+            rounded="$10"
+          >
+            <Button.Text color="$color">I already have an account</Button.Text>
           </Button>
         </View>
       </YStack>

@@ -6,8 +6,28 @@ const fs = require('fs-extra')
 
 const fonts = [
   {
-    id: 'inter',
+    id: 'inter_regular',
     name: 'InterRegular',
+  },
+  {
+    id: 'inter_medium',
+    name: 'InterMedium',
+  },
+  {
+    id: 'inter_bold',
+    name: 'InterBold',
+  },
+  {
+    id: 'inter_semibold',
+    name: 'InterSemiBold',
+  },
+  {
+    id: 'inter_extrabold',
+    name: 'InterExtraBold',
+  },
+  {
+    id: 'inter_light',
+    name: 'InterLight',
   },
 ]
 
