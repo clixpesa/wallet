@@ -1,18 +1,9 @@
-import { SchemaForm, formFields } from 'utils/SchemaForm'
-import { FormProvider, useForm, useWatch } from 'react-hook-form'
-import { H1, Paragraph, View, Theme, YStack, Button, SizableText } from 'tamagui'
+import { H1, Paragraph, YStack, Button, SizableText } from 'tamagui'
 import { OneTimeCodeInputExample } from 'components'
-import { z } from 'zod'
 import { router } from 'expo-router'
 
-const SignUpSchema = z.object({
-  phoneNumber: formFields.phone_number,
-})
-
-export default function DigitCodeScreen() {
-  const form = useForm<z.infer<typeof SignUpSchema>>()
-
-  async function verifyCode({ phoneNumber }: z.infer<typeof SignUpSchema>) {
+export default function VerifyCodeScreen() {
+  async function verifyCode({ code }) {
     // alert('Submit')
     // router.push('/set-password')
   }
