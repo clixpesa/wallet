@@ -28,6 +28,7 @@ export const NumberField = (props: Pick<InputProps, 'size' | 'autoFocus'>) => {
           <Input
             disabled={disabled}
             placeholderTextColor="$color10"
+            size="$5"
             inputMode="numeric"
             value={field.value?.toString() || '0'}
             onChangeText={(text) => {

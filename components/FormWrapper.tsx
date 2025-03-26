@@ -15,15 +15,15 @@ const Wrapper = forwardRef<TamaguiElement, YStackProps>(function Wrapper(props, 
     <YStack
       ref={ref}
       gap="$4"
-      f={1}
-      jc="center"
+      flex={1}
+      justify="center"
       $gtSm={{
         w: '100%',
         maw: 600,
         als: 'center',
       }}
       // $gtSm={{ width: 500, mx: 'auto' }}
-      $sm={{ jc: 'space-between' }}
+      $sm={{ justify: 'space-between' }}
       {...props}
     />
   )
