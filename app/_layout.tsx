@@ -101,6 +101,19 @@ function RootLayoutNav() {
               animation: 'fade',
             }}
           />
+
+          <Stack.Screen
+            name="code"
+            options={{
+              title: '',
+              headerShown: true,
+              headerShadowVisible: false,
+              headerStyle: {
+                backgroundColor: theme.color2.val,
+              },
+              animation: 'fade',
+            }}
+          />
         </Stack>
         <OfflineBanner />
       </ThemeProvider>

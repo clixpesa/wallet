@@ -67,7 +67,7 @@ export const defaultInputGroupStyles = {
 } as const
 
 const InputGroupFrame = styled(XGroup, {
-  justifyContent: 'space-between',
+  justify: 'space-between',
   context: InputContext,
   variants: {
     unstyled: {
@@ -197,8 +197,8 @@ const Button = styled(TButton, {
 // Icon starts
 
 export const InputIconFrame = styled(View, {
-  justifyContent: 'center',
-  alignItems: 'center',
+  justify: 'center',
+  items: 'center',
   context: InputContext,
 
   variants: {

@@ -1,8 +1,8 @@
 import { useTsController, useFieldInfo } from '@ts-react/form'
 import { parsePhoneNumber, getCountryCodeForRegionCode } from 'awesome-phonenumber'
-import { useState, useMemo, useEffect, useId } from 'react'
+import { useState, useEffect, useId } from 'react'
 import type { SizeTokens } from 'tamagui'
-import { View, Theme, Fieldset, Label } from 'tamagui'
+import { View, Theme, Fieldset, Label, Text } from 'tamagui'
 import { z } from 'zod'
 
 import { FieldError } from '../FieldError'
@@ -67,10 +67,13 @@ export const PhoneNumberField = ({ size }: { size?: SizeTokens }) => {
             <Input size={size} gapScale={0.5}>
               <Input.Box self="center" theme={isValid ? 'green' : undefined}>
                 <Input.Section>
+                  <Text>{regionCode}</Text>
+                </Input.Section>
+                <Input.Section>
                   <Input.Area
                     id={id}
                     disabled={disabled}
-                    keyboardType="numeric"
+                    keyboardType="number-pad"
                     value={phoneNumber}
                     onChangeText={handlePhoneNumberChange}
                   />
