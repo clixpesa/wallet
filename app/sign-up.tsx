@@ -13,7 +13,7 @@ export default function SignUpScreen() {
   const form = useForm<z.infer<typeof SignUpSchema>>()
 
   async function signUpWithPhoneNumber({ phoneNumber }: z.infer<typeof SignUpSchema>) {
-    router.push('/code')
+    router.push('/verify-code')
   }
 
   return (

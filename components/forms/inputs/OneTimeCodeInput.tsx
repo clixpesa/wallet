@@ -348,26 +348,27 @@ export function OneTimeCodeInputExample({
 
   const handleResendClick = useCallback(() => {}, [])
 
-  const showCode = activeInterface === 'email' || codeEntered
+  // const showCode = activeInterface === 'email' || codeEntered
 
   return (
     <View items="center" justify="center" gap="$4">
       <View
+        bg="red"
         key="code"
         animation="200ms"
         width="100%"
-        opacity={showCode ? 0 : 1}
-        pointerEvents={showCode ? 'none' : 'auto'}
-        transform={[{ translateX: showCode ? -150 : 0 }]}
+        // opacity={showCode ? 0 : 1}
+        // pointerEvents={showCode ? 'none' : 'auto'}
+        // transform={[{ translateX: showCode ? -150 : 0 }]}
       >
         <YStack
           key="code"
           animation="200ms"
-          exitStyle={{ opacity: 0 }}
+          // exitStyle={{ opacity: 0 }}
           justify="space-between"
           gap="$4"
           width="100%"
-          opacity={code ? 0 : 1}
+          // opacity={code ? 0 : 1}
           height="auto"
         >
           <View px="$4">
