@@ -62,9 +62,12 @@ export default function SignUpScreen() {
       </FormProvider>
 
       <YStack my="$8" mx="$4" gap="$4" justify="space-between">
-        <SizableText size="$2" text="center">
-          By signing up, you accept Clixpesa’s Terms & Conditions and Privacy Policy. Your
-          data will be securely encrypted with TLS.🔒
+        <SizableText
+          size="$2"
+          text="center"
+          style={{ fontFamily: 'InterRegular', fontWeight: '500' }}
+        >
+          By signing up, you accept Clixpesa’s Terms & Conditions and Privacy Policy.
         </SizableText>
         <View>
           <Button variant="outlined" rounded="$10" size="$5">
