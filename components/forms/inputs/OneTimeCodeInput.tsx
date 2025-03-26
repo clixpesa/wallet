@@ -9,22 +9,11 @@ import {
   Paragraph,
   Spinner,
   View,
-  Button,
   XStack,
   YStack,
-  Label,
-  Text,
 } from 'tamagui'
 
-import {
-  CheckCircle2,
-  ChevronLeft,
-  KeySquare,
-  LockKeyhole,
-  Mail,
-  RefreshCcw,
-  Smartphone,
-} from '@tamagui/lucide-icons'
+import { CheckCircle2, RefreshCcw } from '@tamagui/lucide-icons'
 
 interface CodeConfirmationInputProps {
   id: number
@@ -61,7 +50,7 @@ function CodeConfirmationInput({
           value={value}
           maxLength={codeSize}
           // uncomment this for autofocus
-          // autoFocus={id === 0}
+          autoFocus={id === 0}
           selectTextOnFocus
           onChangeText={(code: string) => {
             // Max length is disabled to enable multiple digit paste
@@ -113,18 +102,18 @@ function CodeConfirmationInput({
           autoComplete="one-time-code"
           secureTextEntry={secureTextEntry}
           enterKeyHint={id === codeSize - 1 ? 'done' : 'next'}
-          textAlign="center"
-          fontSize="$8"
-          borderRadius="$5"
-          theme="active"
+          text="center"
+          fontSize="$4"
+          rounded="$8"
+          // theme="active"
           aspectRatio={1}
-          w="100%"
-          h="100%"
+          width="100%"
+          height="100%"
           flex={1}
-          backgroundColor={invalid ? '$red7' : value ? '$color1' : '$color5'}
+          bg={invalid ? '$red7' : value ? '$color1' : '$color5'}
           hoverStyle={{ outlineWidth: 0 }}
           focusStyle={{
-            backgroundColor: invalid ? '$red8' : '$color1',
+            bg: invalid ? '$red8' : '$color1',
             outlineWidth: 0,
           }}
         />
@@ -208,17 +197,18 @@ function CodeConfirmation({
   return (
     <Form
       gap="$2"
-      alignItems="center"
-      minWidth="100%"
-      justifyContent="center"
+      items="center"
+      minW="100%"
+      justify="center"
       x={translateX}
       animation="bouncy"
-      w="100%"
+      width="100%"
       mt="$2"
       flexDirection="row"
       onSubmit={onSubmit}
       mb="$0"
       pb="$0"
+      bg="$teal10"
     >
       {Array(codeSize)
         .fill(null)
@@ -298,16 +288,16 @@ const ResendTimer = ({
   if (!isTimerActive) {
     return (
       <XStack
-        alignItems="center"
-        alignSelf="flex-end"
-        justifyContent="flex-end"
+        items="center"
+        self="flex-end"
+        justify="flex-end"
         gap="$2"
         className="flex"
         cursor="pointer"
         onPress={handleResendClick}
       >
-        <RefreshCcw size={12} color="$blue10" />
-        <Paragraph color="$blue10" textAlign="right" fontSize="$1">
+        <RefreshCcw size={12} color="$teal10" />
+        <Paragraph color="$teal10" text="right" fontSize="$1">
           Resend OTP
         </Paragraph>
       </XStack>
@@ -316,15 +306,15 @@ const ResendTimer = ({
 
   return (
     <XStack
-      alignItems="center"
-      alignSelf="flex-end"
-      justifyContent="flex-end"
+      items="center"
+      self="flex-end"
+      justify="flex-end"
       gap="$2"
       className="flex"
       cursor="default"
     >
       <RefreshCcw size={12} color="$color10" />
-      <Paragraph color="$color10" textAlign="right" fontSize="$1">
+      <Paragraph color="$color10" text="right" fontSize="$1">
         Resend in {seconds} {seconds > 1 ? 'seconds' : 'second'}
       </Paragraph>
     </XStack>
@@ -334,7 +324,7 @@ const ResendTimer = ({
 /** ------ EXAMPLE ------ */
 export function OneTimeCodeInputExample({
   size = '$5',
-  codeSize = 4,
+  codeSize = 6,
   secureText = false,
 }: {
   size?: SizeTokens
@@ -358,311 +348,75 @@ export function OneTimeCodeInputExample({
 
   const handleResendClick = useCallback(() => {}, [])
 
-  useEffect(() => {
-    let timer: NodeJS.Timeout
-    if (code !== undefined) {
-      timer = setTimeout(() => {
-        setCodeEntered(true)
-      }, 2500)
-    }
-
-    return () => clearTimeout(timer)
-  }, [code])
-
-  //NOTE: for testing purposes
-  useEffect(() => {
-    let timer: NodeJS.Timeout
-
-    if (codeEntered === true) {
-      timer = setTimeout(() => {
-        setVerified(false)
-      }, 2000)
-    }
-
-    return () => clearTimeout(timer)
-  }, [codeEntered])
-
   const showCode = activeInterface === 'email' || codeEntered
 
   return (
-    <View alignItems="center" justifyContent="center" gap="$4">
+    <View items="center" justify="center" gap="$4">
       <View
-        minWidth={300}
-        ai="center"
-        jc="center"
-        borderRadius="$8"
-        overflow="hidden"
-        p="$5"
-        borderWidth={1}
-        borderColor="$borderColor"
-        bg="$backgroundColor"
-        //
-        $gtSm={{
-          shadowColor: '$shadowColor',
-          shadowOffset: {
-            width: 0,
-            height: 12,
-          },
-          shadowOpacity: 0.5,
-          shadowRadius: '$6',
-        }}
+        key="code"
+        animation="200ms"
+        width="100%"
+        opacity={showCode ? 0 : 1}
+        pointerEvents={showCode ? 'none' : 'auto'}
+        transform={[{ translateX: showCode ? -150 : 0 }]}
       >
-        <View position="absolute" t="$4" r="$4">
-          {codeEntered ? (
-            <View animation="bouncy" key="success" flexDirection="row" gap="$2">
-              <AnimatePresence>
-                {verified && (
-                  <Paragraph
-                    key="success"
-                    color="$green10"
-                    enterStyle={{ opacity: 0, x: 15 }}
-                    exitStyle={{ opacity: 0, x: 15, scale: 0.5 }}
-                    animation="200ms"
-                  >
-                    Success
-                  </Paragraph>
-                )}
-              </AnimatePresence>
-              <View enterStyle={{ opacity: 0.5, scale: 1.5 }} animation="bouncy">
-                <CheckCircle2 color="$green10" />
-              </View>
-            </View>
-          ) : (
-            <View key="email" enterStyle={{ opacity: 0.5, scale: 1.5 }} animation="100ms">
-              {activeInterface === 'email' ? (
-                <Mail size={16} opacity={0.25} />
-              ) : (
-                <KeySquare size={16} opacity={0.25} />
-              )}
-            </View>
-          )}
-        </View>
-
-        <View
+        <YStack
           key="code"
           animation="200ms"
-          w="100%"
-          opacity={showCode ? 0 : 1}
-          pointerEvents={showCode ? 'none' : 'auto'}
-          transform={[{ translateX: showCode ? -150 : 0 }]}
+          exitStyle={{ opacity: 0 }}
+          justify="space-between"
+          gap="$4"
+          width="100%"
+          opacity={code ? 0 : 1}
+          height="auto"
         >
-          <YStack
-            key="code"
-            animation="200ms"
-            exitStyle={{ opacity: 0 }}
-            justifyContent="space-between"
-            gap="$4"
-            w="100%"
-            opacity={code ? 0 : 1}
-            h="auto"
-          >
-            <View alignItems="center" gap="$2">
-              <Text
-                fontWeight="700"
-                fontSize="$6"
-                $gtMd={{
-                  fontSize: '$8',
-                }}
-                color="$color12"
-              >
-                Code
-              </Text>
-
-              {email ? (
-                <View
-                  flexDirection="row"
-                  alignItems="center"
-                  justifyContent="center"
-                  gap="$2"
-                  w="100%"
-                >
-                  <Mail size="$1" color="$color12" />
-                  <Paragraph size="$4" fontWeight="500" color="$color12">
-                    {email}
-                  </Paragraph>
-                </View>
-              ) : (
-                <View
-                  flexDirection="row"
-                  alignItems="center"
-                  justifyContent="center"
-                  gap="$2"
-                  w="100%"
-                >
-                  <Smartphone size={16} color="$color12" />
-                  <Paragraph size="$4" fontWeight="500" color="$color12">
-                    (•••) ••• ••73
-                  </Paragraph>
-                </View>
-              )}
-            </View>
-
-            <View px="$4" $gtMd={{ px: 0 }}>
-              <YStack gap="$2">
-                <CodeConfirmation
-                  size={size}
-                  codeSize={codeSize}
-                  secureText={secureText}
-                  onEnter={handleEnter}
-                />
-
-                <ResendTimer
-                  onComplete={handleResendComplete}
-                  onResendClick={handleResendClick}
-                />
-              </YStack>
-            </View>
-
-            {!email ? (
-              <XStack
-                borderColor="$transparent"
-                onPress={() => setActiveInterface('email')}
-                gap="$2"
-                ai="center"
-                jc="center"
-                cursor="pointer"
-              >
-                <Mail size={16} color="$color10" />
-                <Paragraph color="$color11">Send code to email</Paragraph>
-              </XStack>
-            ) : null}
-          </YStack>
-
-          {code ? (
-            <View
-              position="absolute"
-              w="100%"
-              h="100%"
-              alignItems="center"
-              justifyContent="center"
-              bg="$backgroundColor"
-            >
-              <Spinner color="$color10" />
-            </View>
-          ) : null}
-        </View>
-
-        <View
-          position="absolute"
-          enterStyle={{ opacity: 0, x: 350 }}
-          exitStyle={{ opacity: 0, x: 0 }}
-          bg="$backgroundColor"
-          items="center"
-          jc="center"
-          w="full"
-          h="100%"
-          $gtMd={{ w: '100%', p: '$5' }}
-          animation={'200ms'}
-          opacity={!showCode ? 0 : 1}
-          pointerEvents={!showCode ? 'none' : 'auto'}
-          transform={[{ translateX: !showCode ? 150 : 0 }]}
-        >
-          <AnimatePresence>
-            {(activeInterface === 'email' || codeEntered) && (
-              <View>
-                {!codeEntered ? (
-                  <EmailInput
-                    setActiveInterface={setActiveInterface}
-                    email={email}
-                    setEmail={setEmail}
-                  />
-                ) : (
-                  <View
-                    width="100%"
-                    height="100%"
-                    justify="space-between"
-                    items="center"
-                    gap="$4"
-                    pt="$6"
-                  >
-                    <YStack
-                      grow={1}
-                      justify="center"
-                      items="center"
-                      width="100%"
-                      gap="$2"
-                    >
-                      <Text fontWeight="bold" fontSize="$6">
-                        Code Verified
-                      </Text>
-
-                      <Paragraph color="$color10" text="center">
-                        Congratulations, successful confirmation
-                      </Paragraph>
-                    </YStack>
-
-                    <Button minW="100%" themeInverse>
-                      Continue
-                    </Button>
-                  </View>
-                )}
-              </View>
-            )}
-          </AnimatePresence>
-        </View>
-      </View>
-      <View flexDirection="row" items="center" gap="$2">
-        <LockKeyhole size={12} color="$color10" />
-        <Paragraph size="$2" color="$color10">
-          Encrypted
-        </Paragraph>
-      </View>
-    </View>
-  )
-}
-
-const EmailInput = ({
-  setActiveInterface,
-  ...props
-}: {
-  setActiveInterface: (_: 'email' | 'code') => void
-  email: string | null
-  setEmail: (_: string | null) => void
-}) => {
-  const [email, setEmail] = useState<string | null>(props.email)
-
-  const onSubmit = () => {
-    setActiveInterface('code')
-    props.setEmail(email)
-  }
-
-  return (
-    <View pt="$3" gap="$4" w="100%" h="100%" jc="space-between">
-      <XStack
-        alignItems="center"
-        hoverStyle={{ cursor: 'pointer' }}
-        animation="200ms"
-        onPress={() => setActiveInterface('code')}
-        alignSelf="flex-start"
-        gap="$1"
-        left={-4}
-      >
-        <ChevronLeft size="$1" color="$white9" />
-
-        <Paragraph size="$4" color="$white9">
-          Back
-        </Paragraph>
-      </XStack>
-
-      <YStack jc="flex-end" flexGrow={1} gap="$4" w="100%">
-        <YStack gap="$0" w="100%">
-          <Label>Email Address</Label>
-          <XStack w="100%" gap="$4" justifyContent="flex-start" alignItems="flex-end">
-            <Input
-              size="$4"
-              keyboardType="email-address"
-              placeholder="Enter your email"
-              textContentType="emailAddress"
-              onChangeText={setEmail}
-              w="100%"
-            />
-          </XStack>
+          <View px="$4">
+            <YStack gap="$4">
+              <CodeConfirmation
+                size={size}
+                codeSize={codeSize}
+                secureText={secureText}
+                onEnter={handleEnter}
+              />
+            </YStack>
+          </View>
         </YStack>
+      </View>
 
-        <Button themeInverse onPress={onSubmit}>
-          Send
-        </Button>
-      </YStack>
+      <View flexDirection="row" items="center" gap="$2">
+        <ResendTimer
+          onComplete={handleResendComplete}
+          onResendClick={handleResendClick}
+        />
+      </View>
+
+      {code && (
+        <View items="center" justify="center">
+          <Spinner color="$color10" />
+        </View>
+      )}
+      <View t="$4" r="$4">
+        {codeEntered && (
+          <View animation="bouncy" key="success" flexDirection="row" gap="$2">
+            <AnimatePresence>
+              {verified && (
+                <Paragraph
+                  key="success"
+                  color="$green10"
+                  enterStyle={{ opacity: 0, x: 15 }}
+                  exitStyle={{ opacity: 0, x: 15, scale: 0.5 }}
+                  animation="200ms"
+                >
+                  Success
+                </Paragraph>
+              )}
+            </AnimatePresence>
+            <View enterStyle={{ opacity: 0.5, scale: 1.5 }} animation="bouncy">
+              <CheckCircle2 color="$green10" />
+            </View>
+          </View>
+        )}
+      </View>
     </View>
   )
 }

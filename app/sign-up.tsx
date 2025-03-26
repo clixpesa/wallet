@@ -3,6 +3,7 @@ import { FormProvider, useForm, useWatch } from 'react-hook-form'
 import { H1, Paragraph, View, Theme, YStack, Button, SizableText } from 'tamagui'
 import { SubmitButton } from 'components'
 import { number, z } from 'zod'
+import { router } from 'expo-router'
 
 const SignUpSchema = z.object({
   phoneNumber: formFields.phone_number,
@@ -12,7 +13,7 @@ export default function SignUpScreen() {
   const form = useForm<z.infer<typeof SignUpSchema>>()
 
   async function signUpWithPhoneNumber({ phoneNumber }: z.infer<typeof SignUpSchema>) {
-    alert('Submit')
+    router.push('/code')
   }
 
   return (
@@ -43,13 +44,7 @@ export default function SignUpScreen() {
                 <H1 size="$6" fontWeight="700">
                   Let's get you started
                 </H1>
-                <Paragraph
-                  fontSize="$4"
-                  py="$1"
-                  color="$color10"
-                  fontFamily="$body"
-                  style={{ fontFamily: 'InterRegular', fontWeight: '700' }}
-                >
+                <Paragraph fontSize="$4" py="$1" color="$color10">
                   Enter your phone number to get started, we may store and send a
                   verification code to this number
                 </Paragraph>
@@ -60,7 +55,7 @@ export default function SignUpScreen() {
         </SchemaForm>
       </FormProvider>
 
-      <YStack my="$8" mx="$4" gap="$4" justify="space-between">
+      {/* <YStack my="$8" mx="$4" gap="$4" justify="space-between">
         <SizableText size="$2" text="center">
           By signing up, you accept Clixpesa’s Terms & Conditions and Privacy Policy. Your
           data will be securely encrypted with TLS.🔒
@@ -70,7 +65,7 @@ export default function SignUpScreen() {
             I already have an account
           </Button>
         </View>
-      </YStack>
+      </YStack> */}
     </YStack>
   )
 }
