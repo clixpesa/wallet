@@ -1,5 +1,5 @@
-import { H1, Paragraph, YStack, Button, SizableText } from 'tamagui'
-import { OneTimeCodeInputExample } from 'components'
+import { H1, Paragraph, YStack, Button, SizableText, View } from 'tamagui'
+import { OneTimeCodeInput } from 'components'
 import { router } from 'expo-router'
 
 export default function VerifyCodeScreen() {
@@ -18,7 +18,10 @@ export default function VerifyCodeScreen() {
           We've sent it to +254 706 394 600
         </Paragraph>
 
-        <OneTimeCodeInputExample />
+        <View mt="$5">
+          <OneTimeCodeInput />
+        </View>
+        <Button onPress={() => router.push('/set-password')}>Set Password</Button>
       </YStack>
     </YStack>
   )
