@@ -1,8 +1,9 @@
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
 import { SchemaForm, formFields } from 'utils/SchemaForm'
 import { FormProvider, useForm, useWatch } from 'react-hook-form'
 import { H1, Paragraph, View, Theme, YStack, Button, SizableText } from 'tamagui'
 import { SubmitButton } from 'components'
-import { number, z } from 'zod'
+import { z } from 'zod'
 import { router } from 'expo-router'
 
 const SignUpSchema = z.object({
@@ -14,6 +15,42 @@ export default function SignUpScreen() {
 
   async function signUpWithPhoneNumber({ phoneNumber }: z.infer<typeof SignUpSchema>) {
     router.push('/verify-code')
+  }
+
+  async function signInWithGoogle() {
+    try {
+      GoogleSignin.configure({
+        // Add clixpesa web client id
+        iosClientId: process.env.GOOGLE_IOS_CLIENT_ID,
+        webClientId: process.env.GOOGLE_WEB_CLIENT_ID,
+      })
+
+      await GoogleSignin.hasPlayServices()
+
+      const response = await GoogleSignin.signIn()
+      const token = response?.data?.idToken
+
+      if (token) {
+        console.log('token', token)
+        // if (error) {
+        //   throw new Error('error', error)
+        // }
+
+        router.replace('/')
+      } else {
+        throw new Error('no ID token present!')
+      }
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (e.g. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
+      }
+    }
   }
 
   return (
@@ -32,7 +69,7 @@ export default function SignUpScreen() {
             <>
               <Theme inverse>
                 <SubmitButton onPress={() => submit()} rounded="$10" theme="teal">
-                  Continue
+                  Continue with phone
                 </SubmitButton>
               </Theme>
             </>
@@ -50,6 +87,19 @@ export default function SignUpScreen() {
                 </Paragraph>
               </YStack>
               {Object.values(fields)}
+              <Button
+                onPress={() => signInWithGoogle()}
+                scaleIcon={1}
+                borderWidth={1}
+                borderColor="$color10"
+                gap="$1.5"
+                bg="transparent"
+                pressStyle={{ bg: 'transparent', o: 0.6, bw: '$0' }}
+                animation="200ms"
+                size="$5"
+              >
+                Sign in with Google
+              </Button>
             </>
           )}
         </SchemaForm>
