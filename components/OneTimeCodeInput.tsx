@@ -2,18 +2,9 @@ import { useEffect, useState, useRef, useCallback } from 'react'
 import type { Control, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 import { Controller, useForm } from 'react-hook-form'
 import type { SizeTokens } from 'tamagui'
-import {
-  AnimatePresence,
-  Form,
-  Input,
-  Paragraph,
-  Spinner,
-  View,
-  XStack,
-  YStack,
-} from 'tamagui'
+import { Form, Input, Paragraph, Spinner, View, XStack, Theme } from 'tamagui'
 
-import { CheckCircle2, RefreshCcw } from '@tamagui/lucide-icons'
+import { RefreshCcw } from '@tamagui/lucide-icons'
 
 interface CodeConfirmationInputProps {
   id: number
@@ -103,8 +94,8 @@ function CodeConfirmationInput({
           secureTextEntry={secureTextEntry}
           enterKeyHint={id === codeSize - 1 ? 'done' : 'next'}
           text="center"
-          fontSize="$4"
-          rounded="$8"
+          fontSize="$6"
+          rounded="$6"
           // theme="active"
           aspectRatio={1}
           width="100%"
@@ -203,12 +194,10 @@ function CodeConfirmation({
       x={translateX}
       animation="bouncy"
       width="100%"
-      mt="$2"
       flexDirection="row"
       onSubmit={onSubmit}
       mb="$0"
       pb="$0"
-      bg="$teal10"
     >
       {Array(codeSize)
         .fill(null)
@@ -321,8 +310,7 @@ const ResendTimer = ({
   )
 }
 
-/** ------ EXAMPLE ------ */
-export function OneTimeCodeInputExample({
+export function OneTimeCodeInput({
   size = '$5',
   codeSize = 6,
   secureText = false,
@@ -348,75 +336,31 @@ export function OneTimeCodeInputExample({
 
   const handleResendClick = useCallback(() => {}, [])
 
-  // const showCode = activeInterface === 'email' || codeEntered
-
   return (
-    <View items="center" justify="center" gap="$4">
-      <View
-        bg="red"
-        key="code"
-        animation="200ms"
-        width="100%"
-        // opacity={showCode ? 0 : 1}
-        // pointerEvents={showCode ? 'none' : 'auto'}
-        // transform={[{ translateX: showCode ? -150 : 0 }]}
-      >
-        <YStack
-          key="code"
-          animation="200ms"
-          // exitStyle={{ opacity: 0 }}
-          justify="space-between"
-          gap="$4"
-          width="100%"
-          // opacity={code ? 0 : 1}
-          height="auto"
-        >
-          <View px="$4">
-            <YStack gap="$4">
-              <CodeConfirmation
-                size={size}
-                codeSize={codeSize}
-                secureText={secureText}
-                onEnter={handleEnter}
-              />
-            </YStack>
-          </View>
-        </YStack>
-      </View>
-
-      <View flexDirection="row" items="center" gap="$2">
-        <ResendTimer
-          onComplete={handleResendComplete}
-          onResendClick={handleResendClick}
+    <View items="center" gap="$8">
+      <View key="code" width="100%">
+        <CodeConfirmation
+          size={size}
+          codeSize={codeSize}
+          secureText={secureText}
+          onEnter={handleEnter}
         />
       </View>
 
       {code && (
-        <View items="center" justify="center">
-          <Spinner color="$color10" />
-        </View>
+        <XStack items="center" justify="center" gap="$2">
+          <Theme name="teal_alt2">
+            <Spinner />
+            <Paragraph>Verifying your code</Paragraph>
+          </Theme>
+        </XStack>
       )}
-      <View t="$4" r="$4">
-        {codeEntered && (
-          <View animation="bouncy" key="success" flexDirection="row" gap="$2">
-            <AnimatePresence>
-              {verified && (
-                <Paragraph
-                  key="success"
-                  color="$green10"
-                  enterStyle={{ opacity: 0, x: 15 }}
-                  exitStyle={{ opacity: 0, x: 15, scale: 0.5 }}
-                  animation="200ms"
-                >
-                  Success
-                </Paragraph>
-              )}
-            </AnimatePresence>
-            <View enterStyle={{ opacity: 0.5, scale: 1.5 }} animation="bouncy">
-              <CheckCircle2 color="$green10" />
-            </View>
-          </View>
-        )}
+
+      <View items="center" gap="$4">
+        <ResendTimer
+          onComplete={handleResendComplete}
+          onResendClick={handleResendClick}
+        />
       </View>
     </View>
   )

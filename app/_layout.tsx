@@ -103,7 +103,20 @@ function RootLayoutNav() {
           />
 
           <Stack.Screen
-            name="code"
+            name="verify-code"
+            options={{
+              title: '',
+              headerShown: true,
+              headerShadowVisible: false,
+              headerStyle: {
+                backgroundColor: theme.color2.val,
+              },
+              animation: 'fade',
+            }}
+          />
+
+          <Stack.Screen
+            name="set-password"
             options={{
               title: '',
               headerShown: true,
