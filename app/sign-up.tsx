@@ -1,6 +1,7 @@
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
 import { SchemaForm, formFields } from 'utils/SchemaForm'
 import { FormProvider, useForm } from 'react-hook-form'
+import { openBrowserAsync } from 'expo-web-browser'
 import {
   H1,
   Paragraph,
@@ -115,20 +116,38 @@ export default function SignUpScreen() {
                   Continue
                 </SubmitButton>
               </Theme>
+              <SizableText size="$1" color="$color10">
+                By signing up, I accept Clixpesa's{' '}
+                <SizableText
+                  size="$1"
+                  color="$teal11"
+                  textDecorationLine="underline"
+                  onPress={() =>
+                    openBrowserAsync('https://clixpesa.com/terms-conditions/')
+                  }
+                >
+                  Terms
+                </SizableText>{' '}
+                &{' '}
+                <SizableText
+                  size="$1"
+                  color="$teal11"
+                  textDecorationLine="underline"
+                  onPress={() => openBrowserAsync('https://clixpesa.com/privacy-policy/')}
+                >
+                  Privacy Policy
+                </SizableText>
+                .
+              </SizableText>
             </>
           )}
         >
           {(fields) => (
             <>
-              <YStack gap="$2" mb="$6">
-                <H1 size="$6" fontWeight="700">
-                  Let's get you started
+              <YStack gap="$2" mb="$4">
+                <H1 size="$5" fontWeight="700">
+                  Let's get started
                 </H1>
-                <Paragraph fontSize="$4" color="$color10">
-                  {useEmail
-                    ? 'Enter your email to get started, we may store and send a verification code to this email'
-                    : 'Enter your phone number to get started, we may store and send a verification code to this number'}
-                </Paragraph>
               </YStack>
 
               {useEmail ? fields.email : fields.phoneNumber}
@@ -145,11 +164,6 @@ export default function SignUpScreen() {
                   {useEmail ? 'Use phone' : 'Use email'}
                 </SizableText>
               </XStack>
-
-              {/* <SizableText size="$2" text="center">
-                By signing up, you accept Clixpesa’s Terms & Conditions and Privacy
-                Policy.
-              </SizableText> */}
             </>
           )}
         </SchemaForm>
