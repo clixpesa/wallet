@@ -19,6 +19,9 @@ export const SubmitButton = (props: ButtonProps) => {
 
   return (
     <Button
+      disabledStyle={{
+        opacity: 0.6,
+      }}
       size="$5"
       iconAfter={
         <AnimatePresence>
