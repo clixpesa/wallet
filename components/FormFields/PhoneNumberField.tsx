@@ -1,8 +1,8 @@
-import { useTsController, useFieldInfo } from '@ts-react/form'
+import { useTsController } from '@ts-react/form'
 import { parsePhoneNumber, getCountryCodeForRegionCode } from 'awesome-phonenumber'
 import { useState, useEffect, useId } from 'react'
 import type { SizeTokens } from 'tamagui'
-import { View, Theme, Fieldset, Label, Text } from 'tamagui'
+import { Theme, Text } from 'tamagui'
 import { z } from 'zod'
 
 import { FieldError } from '../FieldError'
@@ -23,8 +23,6 @@ export const PhoneNumberField = ({ size }: { size?: SizeTokens }) => {
     error,
     formState: { isSubmitting },
   } = useTsController<z.infer<typeof PhoneNumberSchema>>()
-
-  const { label, isOptional } = useFieldInfo()
 
   const id = useId()
   const disabled = isSubmitting
@@ -55,35 +53,26 @@ export const PhoneNumberField = ({ size }: { size?: SizeTokens }) => {
     field.onChange({ ...field.value, phone_number: newPhoneNumber })
   }
   return (
-    <Fieldset>
-      {!!label && (
-        <Label theme="alt1" size={props.size || '$3'} htmlFor={id}>
-          {label} {isOptional && `(Optional)`}
-        </Label>
-      )}
-      <Theme name={error?.phone_number ? 'red' : null} forceClassName>
-        <View flexDirection="column" height={100}>
-          <Shake shakeKey={error?.phone_number?.errorMessage}>
-            <Input size={size} gapScale={0.5}>
-              <Input.Box self="center" theme={isValid ? 'green' : undefined}>
-                <Input.Section>
-                  <Text>{regionCode}</Text>
-                </Input.Section>
-                <Input.Section>
-                  <Input.Area
-                    id={id}
-                    disabled={disabled}
-                    keyboardType="number-pad"
-                    value={phoneNumber}
-                    onChangeText={handlePhoneNumberChange}
-                  />
-                </Input.Section>
-              </Input.Box>
-            </Input>
-          </Shake>
-          <FieldError message={error?.phone_number?.errorMessage} />
-        </View>
-      </Theme>
-    </Fieldset>
+    <Theme name={error?.phone_number ? 'red' : null} forceClassName>
+      <Shake shakeKey={error?.phone_number?.errorMessage}>
+        <Input size={size} gapScale={0.5}>
+          <Input.Box self="center" theme={isValid ? 'green' : undefined}>
+            <Input.Section>
+              <Text>{regionCode}</Text>
+            </Input.Section>
+            <Input.Section>
+              <Input.Area
+                id={id}
+                disabled={disabled}
+                keyboardType="number-pad"
+                value={phoneNumber}
+                onChangeText={handlePhoneNumberChange}
+              />
+            </Input.Section>
+          </Input.Box>
+        </Input>
+      </Shake>
+      <FieldError message={error?.phone_number?.errorMessage} />
+    </Theme>
   )
 }

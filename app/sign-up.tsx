@@ -1,17 +1,53 @@
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
 import { SchemaForm, formFields } from 'utils/SchemaForm'
-import { FormProvider, useForm, useWatch } from 'react-hook-form'
-import { H1, Paragraph, View, Theme, YStack, Button, SizableText } from 'tamagui'
-import { SubmitButton } from 'components'
+import { FormProvider, useForm } from 'react-hook-form'
+import {
+  H1,
+  Paragraph,
+  View,
+  Theme,
+  YStack,
+  Button,
+  SizableText,
+  Separator,
+  XStack,
+} from 'tamagui'
+
+import { SubmitButton, IconGoogle } from 'components'
 import { z } from 'zod'
 import { router } from 'expo-router'
+import { useState } from 'react'
 
 const SignUpSchema = z.object({
   phoneNumber: formFields.phone_number,
+  email: formFields.text.email(),
 })
 
 export default function SignUpScreen() {
+  const [useEmail, setUseEmail] = useState(false)
   const form = useForm<z.infer<typeof SignUpSchema>>()
+
+  const activeFieldValue = form.watch(useEmail ? 'email' : 'phoneNumber')
+  const isDisabled = !activeFieldValue?.toString()
+
+  const handleSubmit = async (data: z.infer<typeof SignUpSchema>) => {
+    if (useEmail) {
+      if (!data.email) {
+        form.setError('email', { message: 'Email is required' })
+        return
+      }
+      // Handle email submission
+      router.push('/verify-code')
+    } else {
+      if (!data.phoneNumber) {
+        form.setError('phoneNumber', { message: 'Phone number is required' })
+        return
+      }
+      // Handle phone submission
+      router.push('/verify-code')
+    }
+    router.push('/verify-code')
+  }
 
   async function signUpWithPhoneNumber({ phoneNumber }: z.infer<typeof SignUpSchema>) {
     router.push('/verify-code')
@@ -31,11 +67,10 @@ export default function SignUpScreen() {
       const token = response?.data?.idToken
 
       if (token) {
-        console.log('token', token)
+        // console.log('token', token)
         // if (error) {
         //   throw new Error('error', error)
         // }
-
         router.replace('/')
       } else {
         throw new Error('no ID token present!')
@@ -59,17 +94,25 @@ export default function SignUpScreen() {
         <SchemaForm
           form={form}
           schema={SignUpSchema}
-          onSubmit={signUpWithPhoneNumber}
+          onSubmit={handleSubmit}
           props={{
             phoneNumber: {
+              size: '$5',
+            },
+            email: {
               size: '$5',
             },
           }}
           renderAfter={({ submit }) => (
             <>
               <Theme inverse>
-                <SubmitButton onPress={() => submit()} rounded="$10" theme="teal">
-                  Continue with phone
+                <SubmitButton
+                  onPress={submit}
+                  rounded="$10"
+                  theme="teal"
+                  disabled={isDisabled}
+                >
+                  Continue
                 </SubmitButton>
               </Theme>
             </>
@@ -77,45 +120,65 @@ export default function SignUpScreen() {
         >
           {(fields) => (
             <>
-              <YStack gap="$2" mb="$2">
+              <YStack gap="$2" mb="$6">
                 <H1 size="$6" fontWeight="700">
                   Let's get you started
                 </H1>
-                <Paragraph fontSize="$4" py="$1" color="$color10">
-                  Enter your phone number to get started, we may store and send a
-                  verification code to this number
+                <Paragraph fontSize="$4" color="$color10">
+                  {useEmail
+                    ? 'Enter your email to get started, we may store and send a verification code to this email'
+                    : 'Enter your phone number to get started, we may store and send a verification code to this number'}
                 </Paragraph>
               </YStack>
-              {Object.values(fields)}
-              <Button
-                onPress={() => signInWithGoogle()}
-                scaleIcon={1}
-                borderWidth={1}
-                borderColor="$color10"
-                gap="$1.5"
-                bg="transparent"
-                pressStyle={{ bg: 'transparent', o: 0.6, bw: '$0' }}
-                animation="200ms"
-                size="$5"
-              >
-                Sign in with Google
-              </Button>
+
+              {useEmail ? fields.email : fields.phoneNumber}
+
+              <XStack justify="space-between" mt="$2">
+                <Paragraph color="$color10" text="right">
+                  {useEmail ? 'Prefer phone number sign up?' : 'Prefer email sign up?'}
+                </Paragraph>
+                <SizableText
+                  onPress={() => setUseEmail(!useEmail)}
+                  color="$teal10"
+                  textDecorationLine="underline"
+                >
+                  {useEmail ? 'Use phone' : 'Use email'}
+                </SizableText>
+              </XStack>
+
+              {/* <SizableText size="$2" text="center">
+                By signing up, you accept Clixpesa’s Terms & Conditions and Privacy
+                Policy.
+              </SizableText> */}
             </>
           )}
         </SchemaForm>
       </FormProvider>
 
-      {/* <YStack my="$8" mx="$4" gap="$4" justify="space-between">
-        <SizableText size="$2" text="center">
-          By signing up, you accept Clixpesa’s Terms & Conditions and Privacy Policy. Your
-          data will be securely encrypted with TLS.🔒
-        </SizableText>
-        <View>
-          <Button variant="outlined" rounded="$10" size="$5">
-            I already have an account
-          </Button>
-        </View>
-      </YStack> */}
+      <YStack mb="$4" mx="$4">
+        <Theme name="teal">
+          <View flexDirection="column" gap="$4" width="100%" self="center">
+            <View flexDirection="row" width="100%" items="center" gap="$4">
+              <Separator />
+              <Paragraph>OR</Paragraph>
+              <Separator />
+            </View>
+            <Button
+              onPress={() => signInWithGoogle()}
+              icon={IconGoogle}
+              scaleIcon={1.2}
+              gap="$1.5"
+              rounded="$10"
+              bg="$color1"
+              pressStyle={{ bg: '$teal1', opacity: 0.6 }}
+              animation="200ms"
+              size="$5"
+            >
+              Sign in with Google
+            </Button>
+          </View>
+        </Theme>
+      </YStack>
     </YStack>
   )
 }

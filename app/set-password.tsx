@@ -10,10 +10,10 @@ import { useState } from 'react'
 
 const SetPasswordSchema = z
   .object({
-    password: formFields.text.min(6).describe('Create Password // Atleast 6 characters'),
+    password: formFields.text.min(6).describe('Create Passcode // Atleast 6 characters'),
     passwordConfirm: formFields.text
       .min(6)
-      .describe('Confirm Password // Repeat your password'),
+      .describe('Confirm Passcode // Repeat your passcode'),
   })
   .superRefine(({ passwordConfirm, password }, ctx) => {
     if (passwordConfirm !== password) {
