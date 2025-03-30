@@ -61,7 +61,19 @@ export default {
       output: 'static',
       favicon: './assets/images/favicon.png',
     },
-    plugins: ['expo-router'],
+    plugins: [
+      'expo-router',
+      [
+        'expo-build-properties',
+        {
+          android: {
+            minSdkVersion: 26,
+          },
+        },
+      ],
+      '@react-native-firebase/app',
+      'expo-secure-store',
+    ],
     experiments: {
       typedRoutes: true,
     },
