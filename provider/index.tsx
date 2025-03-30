@@ -1,7 +1,7 @@
 import { SafeAreaProvider } from './safe-area'
 import { TamaguiProvider } from './tamagui'
 import { ToastProvider } from './toast'
-
+import { AuthProvider } from './auth'
 export function Provider({
   children,
 }: {
@@ -22,4 +22,9 @@ const compose = (providers: React.FC<{ children: React.ReactNode }>[]) =>
     return Provider
   })
 
-const Providers = compose([SafeAreaProvider, TamaguiProvider, ToastProvider])
+const Providers = compose([
+  SafeAreaProvider,
+  TamaguiProvider,
+  ToastProvider,
+  AuthProvider,
+])

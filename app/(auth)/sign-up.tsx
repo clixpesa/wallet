@@ -15,8 +15,9 @@ import {
 import { GoogleSignIn } from 'google/GoogleSignIn'
 import { SubmitButton } from 'components'
 import { router } from 'expo-router'
-import React, { useState } from 'react'
 import { z } from 'zod'
+import { useState } from 'react'
+import { useAuth } from '../../provider/auth'
 
 const SignUpSchema = z.object({
   phoneNumber: formFields.phone_number.optional(),
