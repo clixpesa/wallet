@@ -1,7 +1,13 @@
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
+import BottomSheet, {
+  BottomSheetScrollView,
+  BottomSheetBackdrop,
+} from '@gorhom/bottom-sheet'
 import { SchemaForm, formFields } from 'utils/SchemaForm'
 import { FormProvider, useForm } from 'react-hook-form'
 import { openBrowserAsync } from 'expo-web-browser'
+import { StyleSheet } from 'react-native'
+import { Text } from 'tamagui'
 import {
   H1,
   Paragraph,
@@ -17,7 +23,7 @@ import {
 import { SubmitButton, IconGoogle } from 'components'
 import { z } from 'zod'
 import { router } from 'expo-router'
-import { useState } from 'react'
+import { useState, useMemo, useEffect, useId, useRef, useCallback } from 'react'
 
 const SignUpSchema = z.object({
   phoneNumber: formFields.phone_number,
@@ -26,6 +32,7 @@ const SignUpSchema = z.object({
 
 export default function SignUpScreen() {
   const [useEmail, setUseEmail] = useState(false)
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false)
   const form = useForm<z.infer<typeof SignUpSchema>>()
 
   // const activeFieldValue = form.watch(useEmail ? 'email' : 'phoneNumber')
@@ -73,6 +80,50 @@ export default function SignUpScreen() {
       }
     }
   }
+
+  // hooks
+  const sheetRef = useRef<BottomSheet>(null)
+
+  // variables
+  const data = useMemo(
+    () =>
+      Array(50)
+        .fill(0)
+        .map((_, index) => `index-${index}`),
+    []
+  )
+  const snapPoints = useMemo(() => ['25%', '50%', '90%'], [])
+
+  // callbacks
+  const handleSheetChange = useCallback((index) => {
+    console.log('handleSheetChange', index)
+  }, [])
+  const handleSnapPress = useCallback((index) => {
+    sheetRef.current?.snapToIndex(index)
+  }, [])
+  const handleClosePress = useCallback(() => {
+    sheetRef.current?.close()
+  }, [])
+
+  const openSheet = useCallback(() => {
+    // sheetRef.current?.snapToIndex(-1.5) // Open to full screen (index 2 = '100%')
+    setIsBottomSheetOpen(true)
+  }, [])
+
+  const closeSheet = useCallback(() => {
+    sheetRef.current?.close()
+    setIsBottomSheetOpen(false)
+  }, [])
+
+  // render
+  const renderItem = useCallback(
+    (item) => (
+      <View key={item} style={styles.itemContainer}>
+        <Text>{item}</Text>
+      </View>
+    ),
+    []
+  )
 
   return (
     <YStack flex={1} bg="$color2">
@@ -178,6 +229,34 @@ export default function SignUpScreen() {
           </View>
         </Theme>
       </YStack>
+      <Button onPress={() => handleSnapPress(2)}>Snap To 90%</Button>
+      <BottomSheet
+        ref={sheetRef}
+        index={0}
+        enablePanDownToClose
+        snapPoints={snapPoints}
+        enableDynamicSizing={false}
+        onChange={handleSheetChange}
+      >
+        <BottomSheetScrollView contentContainerStyle={styles.contentContainer}>
+          {data.map(renderItem)}
+        </BottomSheetScrollView>
+      </BottomSheet>
     </YStack>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 200,
+  },
+  contentContainer: {
+    backgroundColor: 'white',
+  },
+  itemContainer: {
+    padding: 8,
+    marginHorizontal: 16,
+    backgroundColor: '#eee',
+  },
+})
