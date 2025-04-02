@@ -1,27 +1,17 @@
-import { Globe2, Search, X } from '@tamagui/lucide-icons'
+import { Search, X } from '@tamagui/lucide-icons'
 import { RovingFocusGroup } from '@tamagui/roving-focus'
 import { useTsController } from '@ts-react/form'
 import {
   getSupportedRegionCodes,
   parsePhoneNumber,
   getCountryCodeForRegionCode,
-  getSupportedCallingCodes,
-  getExample,
 } from 'awesome-phonenumber'
-import { useState, useMemo, useEffect, useId } from 'react'
+import { useState, useMemo, useEffect, useId, useRef, useCallback } from 'react'
 import type { SizeTokens } from 'tamagui'
-import {
-  Adapt,
-  Avatar,
-  Image,
-  Popover,
-  ScrollView,
-  Spinner,
-  Text,
-  View,
-  isWeb,
-  Theme,
-} from 'tamagui'
+import { ScrollView, Spinner, Text, View, isWeb, Theme } from 'tamagui'
+
+import { StyleSheet } from 'react-native'
+
 import { z } from 'zod'
 
 import { FieldError } from '../FieldError'
@@ -201,75 +191,74 @@ function RegionFilterInput(props: RegionFilterInputProps) {
 type RegionSelectBoxProps = {
   regionCode: string
   setRegionCode: (regionCode: string) => void
-  containerWidth?: number
+  // containerWidth?: number
 }
 
-function RegionSelectBox(props: RegionSelectBoxProps) {
-  const { regionCode, setRegionCode, containerWidth } = props
+// function RegionSelectBox(props: RegionSelectBoxProps) {
+//   const { regionCode, setRegionCode } = props
 
-  const [open, setOpen] = useState(false)
+//   const [open, setOpen] = useState(false)
 
-  const selectedItem = useMemo(
-    () => phoneCodes.find((item) => item.regionCode === regionCode)!,
-    [regionCode]
-  )
+//   const selectedItem = useMemo(
+//     () => phoneCodes.find((item) => item.regionCode === regionCode)!,
+//     [regionCode]
+//   )
 
-  return (
-    <Popover
-      offset={{
-        mainAxis: 5,
-      }}
-      open={open}
-      onOpenChange={setOpen}
-      allowFlip
-      placement="bottom-start"
-      keepChildrenMounted
-      {...props}
-    >
-      <Popover.Trigger>
-        <Input.XGroup.Item>
-          <Input.Button px="$4" onPress={() => setOpen(true)}>
-            <Text>+254</Text>
-            {/* {+254} */}
-          </Input.Button>
-        </Input.XGroup.Item>
-      </Popover.Trigger>
-      <Adapt when="sm" platform="touch">
-        <Popover.Sheet modal dismissOnSnapToBottom>
-          <Popover.Sheet.Frame p="$4">
-            <Adapt.Contents />
-          </Popover.Sheet.Frame>
-          <Popover.Sheet.Overlay
-            animation="quick"
-            enterStyle={{ opacity: 0 }}
-            exitStyle={{ opacity: 0 }}
-          />
-        </Popover.Sheet>
-      </Adapt>
+//   return (
+//     <Popover
+//       offset={{
+//         mainAxis: 5,
+//       }}
+//       open={open}
+//       onOpenChange={setOpen}
+//       allowFlip
+//       placement="bottom-start"
+//       keepChildrenMounted
+//       {...props}
+//     >
+//       <Popover.Trigger>
+//         <Input.XGroup.Item>
+//           <Input.Button px="$4" onPress={() => setOpen(true)}>
+//             <Text>+254</Text>
+//             {/* {+254} */}
+//           </Input.Button>
+//         </Input.XGroup.Item>
+//       </Popover.Trigger>
+//       <Adapt when="sm" platform="touch">
+//         <Popover.Sheet modal dismissOnSnapToBottom>
+//           <Popover.Sheet.Frame p="$4">
+//             <Adapt.Contents />
+//           </Popover.Sheet.Frame>
+//           <Popover.Sheet.Overlay
+//             animation="quick"
+//             enterStyle={{ opacity: 0 }}
+//             exitStyle={{ opacity: 0 }}
+//           />
+//         </Popover.Sheet>
+//       </Adapt>
 
-      <Popover.Content
-        width={containerWidth}
-        borderWidth={1}
-        height={300}
-        borderColor="$borderColor"
-        enterStyle={{ y: -10, opacity: 0 }}
-        exitStyle={{ y: -10, opacity: 0 }}
-        elevate
-        animation={[
-          'quick',
-          {
-            opacity: {
-              overshootClamping: true,
-            },
-          },
-        ]}
-        p={0}
-      >
-        <RegionFilterInput open={open} setOpen={setOpen} setRegionCode={setRegionCode} />
-      </Popover.Content>
-    </Popover>
-  )
-}
+//       <Popover.Content
+//         borderWidth={1}
+//         height={300}
+//         borderColor="$borderColor"
+//         enterStyle={{ y: -10, opacity: 0 }}
+//         exitStyle={{ y: -10, opacity: 0 }}
+//         elevate
+//         animation={[
+//           'quick',
+//           {
+//             opacity: {
+//               overshootClamping: true,
+//             },
+//           },
+//         ]}
+//         p={0}
+//       >
+//         <RegionFilterInput open={open} setOpen={setOpen} setRegionCode={setRegionCode} />
+//       </Popover.Content>
+//     </Popover>
+//   )
+// }
 
 export const PhoneNumberField = ({ size }: { size?: SizeTokens }) => {
   const {
@@ -284,6 +273,7 @@ export const PhoneNumberField = ({ size }: { size?: SizeTokens }) => {
   const [phoneNumber, setPhoneNumber] = useState(field.value?.phone_number)
   const [isValid, setIsValid] = useState(false)
   const [containerWidth, setContainerWidth] = useState<number>()
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false)
 
   useEffect(() => {
     if (regionCode) {
@@ -306,6 +296,7 @@ export const PhoneNumberField = ({ size }: { size?: SizeTokens }) => {
 
     field.onChange({ ...field.value, phone_number: newPhoneNumber })
   }
+
   return (
     <Theme name={error?.phone_number ? 'red' : null} forceClassName>
       <View flexDirection="column">
@@ -319,11 +310,14 @@ export const PhoneNumberField = ({ size }: { size?: SizeTokens }) => {
               theme={isValid ? 'green' : undefined}
             >
               <Input.Section>
-                <RegionSelectBox
-                  containerWidth={containerWidth}
+                <Input.Button px="$2" onPress={() => handleSnapPress(2)}>
+                  {regionCode}
+                </Input.Button>
+                {/* <RegionSelectBox
+                  // containerWidth={containerWidth}
                   regionCode={regionCode}
                   setRegionCode={setRegionCode}
-                />
+                /> */}
               </Input.Section>
               <Input.Section>
                 <Input.Area
