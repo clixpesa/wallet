@@ -5,6 +5,8 @@ import {
   getSupportedRegionCodes,
   parsePhoneNumber,
   getCountryCodeForRegionCode,
+  getSupportedCallingCodes,
+  getExample,
 } from 'awesome-phonenumber'
 import { useState, useMemo, useEffect, useId } from 'react'
 import type { SizeTokens } from 'tamagui'
@@ -35,14 +37,16 @@ export const PhoneNumberSchema = z.object({
 })
 
 interface PhoneCode {
-  name: string
-  flag: string
+  regionCode: string
+  countryCode: number
 }
 
 const phoneCodes: PhoneCode[] = getSupportedRegionCodes().map((code) => {
+  const countryCode = getCountryCodeForRegionCode(code)
+
   return {
-    name: code,
-    flag: `https://flagsapi.com/${code}/flat/64.png`,
+    regionCode: code,
+    countryCode,
   }
 })
 
@@ -75,7 +79,7 @@ function RegionFilterInput(props: RegionFilterInputProps) {
 
   const phoneCodesFiltered = useMemo(() => {
     return phoneCodes.filter((item) => {
-      return item.name.toLowerCase().includes(filter.toLowerCase())
+      return item.regionCode.toLowerCase().includes(filter.toLowerCase())
     })
   }, [filter])
 
@@ -124,11 +128,11 @@ function RegionFilterInput(props: RegionFilterInputProps) {
               {phoneCodesFiltered.map((item) => {
                 return (
                   <RovingFocusGroup.Item
-                    key={item.name}
+                    key={item.regionCode}
                     {...(isWeb && {
                       onKeyDown: (e: KeyboardEvent) => {
                         if (e.key === 'Enter') {
-                          setRegionCode(item.name)
+                          setRegionCode(item.regionCode)
                           setOpen(false)
                         }
                       },
@@ -145,6 +149,7 @@ function RegionFilterInput(props: RegionFilterInputProps) {
                       gap="$3"
                       px="$4"
                       py="$2"
+                      justify="space-between"
                       borderWidth={0}
                       borderBottomWidth={1}
                       borderColor="$borderColor"
@@ -156,17 +161,10 @@ function RegionFilterInput(props: RegionFilterInputProps) {
                         bg: '$gray2',
                       }}
                       onPress={() => {
-                        setRegionCode(item.name)
+                        setRegionCode(item.regionCode)
                         setOpen(false)
                       }}
                     >
-                      <Avatar size="$1.5" rounded={5}>
-                        <Avatar.Image
-                          accessibilityLabel="Profile image"
-                          src={item.flag}
-                        />
-                        <Avatar.Fallback backgroundColor="$color5" />
-                      </Avatar>
                       <Text
                         color="$gray10"
                         $group-item-hover={{
@@ -174,7 +172,17 @@ function RegionFilterInput(props: RegionFilterInputProps) {
                         }}
                         mr="auto"
                       >
-                        {item.name}
+                        {item.regionCode}
+                      </Text>
+
+                      <Text
+                        color="$gray10"
+                        $group-item-hover={{
+                          color: '$gray12',
+                        }}
+                        mr="auto"
+                      >
+                        {item.countryCode}
                       </Text>
                     </View>
                   </RovingFocusGroup.Item>
@@ -202,7 +210,7 @@ function RegionSelectBox(props: RegionSelectBoxProps) {
   const [open, setOpen] = useState(false)
 
   const selectedItem = useMemo(
-    () => phoneCodes.find((item) => item.name === regionCode)!,
+    () => phoneCodes.find((item) => item.regionCode === regionCode)!,
     [regionCode]
   )
 
@@ -220,16 +228,9 @@ function RegionSelectBox(props: RegionSelectBoxProps) {
     >
       <Popover.Trigger>
         <Input.XGroup.Item>
-          <Input.Button px="$2" onPress={() => setOpen(true)}>
-            {regionCode ? (
-              <>
-                <Image source={{ uri: selectedItem.flag }} width={20} height={20} />
-              </>
-            ) : (
-              <>
-                <Globe2 color="$gray10" width={20} height={20} />
-              </>
-            )}
+          <Input.Button px="$4" onPress={() => setOpen(true)}>
+            <Text>+254</Text>
+            {/* {+254} */}
           </Input.Button>
         </Input.XGroup.Item>
       </Popover.Trigger>
