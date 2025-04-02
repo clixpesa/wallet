@@ -28,25 +28,10 @@ export default function SignUpScreen() {
   const [useEmail, setUseEmail] = useState(false)
   const form = useForm<z.infer<typeof SignUpSchema>>()
 
-  const activeFieldValue = form.watch(useEmail ? 'email' : 'phoneNumber')
-  const isDisabled = !activeFieldValue?.toString()
+  // const activeFieldValue = form.watch(useEmail ? 'email' : 'phoneNumber')
+  // const isDisabled = !activeFieldValue?.toString()
 
   const handleSubmit = async (data: z.infer<typeof SignUpSchema>) => {
-    if (useEmail) {
-      if (!data.email) {
-        form.setError('email', { message: 'Email is required' })
-        return
-      }
-      // Handle email submission
-      router.push('/verify-code')
-    } else {
-      if (!data.phoneNumber) {
-        form.setError('phoneNumber', { message: 'Phone number is required' })
-        return
-      }
-      // Handle phone submission
-      router.push('/verify-code')
-    }
     router.push('/verify-code')
   }
 
@@ -108,10 +93,10 @@ export default function SignUpScreen() {
             <>
               <Theme inverse>
                 <SubmitButton
-                  onPress={submit}
+                  onPress={() => submit()}
                   rounded="$10"
                   theme="teal"
-                  disabled={isDisabled}
+                  // disabled={isDisabled}
                 >
                   Continue
                 </SubmitButton>

@@ -116,7 +116,7 @@ function RootLayoutNav() {
           />
 
           <Stack.Screen
-            name="set-password"
+            name="set-passcode"
             options={{
               title: '',
               headerShown: true,

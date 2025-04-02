@@ -68,7 +68,7 @@ export default function SetPasswordScreen() {
           <>
             <YStack gap="$2" mb="$2">
               <H1 size="$6" fontWeight="700">
-                Set wallet password
+                Set wallet passcode
               </H1>
               <Paragraph fontSize="$4" py="$1" color="$color10">
                 Set a password to manage your wallet. Note that we don't store your
