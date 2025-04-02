@@ -1,16 +1,11 @@
-import { Search, X } from '@tamagui/lucide-icons'
-import { RovingFocusGroup } from '@tamagui/roving-focus'
 import { useTsController } from '@ts-react/form'
 import {
   getSupportedRegionCodes,
   parsePhoneNumber,
   getCountryCodeForRegionCode,
 } from 'awesome-phonenumber'
-import { useState, useMemo, useEffect, useId, useRef, useCallback } from 'react'
-import type { SizeTokens } from 'tamagui'
-import { ScrollView, Spinner, Text, View, isWeb, Theme } from 'tamagui'
-
-import { StyleSheet } from 'react-native'
+import { useState, useEffect, useId } from 'react'
+import { View, Theme, type SizeTokens, Text } from 'tamagui'
 
 import { z } from 'zod'
 
@@ -46,221 +41,10 @@ type RegionFilterInputProps = {
   open: boolean
 }
 
-function RegionFilterInput(props: RegionFilterInputProps) {
-  const { setRegionCode, setOpen, open } = props
-  const [filter, setFilter] = useState('')
-  const [reset, setReset] = useState(0)
-  const [loaded, setLoaded] = useState(false)
-
-  // TODO: Fix Maximum update depth exceeded
-  useEffect(() => {
-    let timeoutId
-    if (open) {
-      timeoutId = setTimeout(() => {
-        setLoaded(true)
-      }, 200)
-    } else setLoaded(false)
-    return () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId)
-      }
-    }
-  }, [open])
-
-  const phoneCodesFiltered = useMemo(() => {
-    return phoneCodes.filter((item) => {
-      return item.regionCode.toLowerCase().includes(filter.toLowerCase())
-    })
-  }, [filter])
-
-  return (
-    <RovingFocusGroup
-      flexDirection="column"
-      gap="$3"
-      pt="$4"
-      height="100%"
-      width="100%"
-      bg="$gray1"
-    >
-      <Input mx="$3" size="$2">
-        <Input.Box>
-          <Input.Area
-            // Note: when key changes, the input remounts and the value will be reset
-            // we can achive better performance using this approach instead binding the value to state
-            key={reset}
-            width="100%"
-            rounded={0}
-            placeholder="Search"
-            defaultValue={filter}
-            onChangeText={setFilter}
-          />
-          <Input.Icon
-            onPress={() => {
-              setFilter('')
-              setReset(reset === 0 ? 1 : 0)
-            }}
-            pointerEvents="auto"
-            z={10}
-            theme="alt1"
-          >
-            {filter ? <X /> : <Search />}
-          </Input.Icon>
-        </Input.Box>
-      </Input>
-
-      {open && (
-        <ScrollView
-          height="100%"
-          contentContainerStyle={{ justify: loaded ? 'flex-start' : 'center' }}
-        >
-          {loaded ? (
-            <>
-              {phoneCodesFiltered.map((item) => {
-                return (
-                  <RovingFocusGroup.Item
-                    key={item.regionCode}
-                    {...(isWeb && {
-                      onKeyDown: (e: KeyboardEvent) => {
-                        if (e.key === 'Enter') {
-                          setRegionCode(item.regionCode)
-                          setOpen(false)
-                        }
-                      },
-                    })}
-                    focusStyle={{
-                      outlineColor: '$outlineColor',
-                      outlineOffset: -2,
-                    }}
-                  >
-                    <View
-                      group
-                      flexDirection="row"
-                      items="center"
-                      gap="$3"
-                      px="$4"
-                      py="$2"
-                      justify="space-between"
-                      borderWidth={0}
-                      borderBottomWidth={1}
-                      borderColor="$borderColor"
-                      cursor="pointer"
-                      hoverStyle={{
-                        bg: '$gray2',
-                      }}
-                      focusStyle={{
-                        bg: '$gray2',
-                      }}
-                      onPress={() => {
-                        setRegionCode(item.regionCode)
-                        setOpen(false)
-                      }}
-                    >
-                      <Text
-                        color="$gray10"
-                        $group-item-hover={{
-                          color: '$gray12',
-                        }}
-                        mr="auto"
-                      >
-                        {item.regionCode}
-                      </Text>
-
-                      <Text
-                        color="$gray10"
-                        $group-item-hover={{
-                          color: '$gray12',
-                        }}
-                        mr="auto"
-                      >
-                        {item.countryCode}
-                      </Text>
-                    </View>
-                  </RovingFocusGroup.Item>
-                )
-              })}
-            </>
-          ) : (
-            <Spinner size="large" />
-          )}
-        </ScrollView>
-      )}
-    </RovingFocusGroup>
-  )
-}
-
-type RegionSelectBoxProps = {
-  regionCode: string
-  setRegionCode: (regionCode: string) => void
-  // containerWidth?: number
-}
-
-// function RegionSelectBox(props: RegionSelectBoxProps) {
-//   const { regionCode, setRegionCode } = props
-
-//   const [open, setOpen] = useState(false)
-
-//   const selectedItem = useMemo(
-//     () => phoneCodes.find((item) => item.regionCode === regionCode)!,
-//     [regionCode]
-//   )
-
-//   return (
-//     <Popover
-//       offset={{
-//         mainAxis: 5,
-//       }}
-//       open={open}
-//       onOpenChange={setOpen}
-//       allowFlip
-//       placement="bottom-start"
-//       keepChildrenMounted
-//       {...props}
-//     >
-//       <Popover.Trigger>
-//         <Input.XGroup.Item>
-//           <Input.Button px="$4" onPress={() => setOpen(true)}>
-//             <Text>+254</Text>
-//             {/* {+254} */}
-//           </Input.Button>
-//         </Input.XGroup.Item>
-//       </Popover.Trigger>
-//       <Adapt when="sm" platform="touch">
-//         <Popover.Sheet modal dismissOnSnapToBottom>
-//           <Popover.Sheet.Frame p="$4">
-//             <Adapt.Contents />
-//           </Popover.Sheet.Frame>
-//           <Popover.Sheet.Overlay
-//             animation="quick"
-//             enterStyle={{ opacity: 0 }}
-//             exitStyle={{ opacity: 0 }}
-//           />
-//         </Popover.Sheet>
-//       </Adapt>
-
-//       <Popover.Content
-//         borderWidth={1}
-//         height={300}
-//         borderColor="$borderColor"
-//         enterStyle={{ y: -10, opacity: 0 }}
-//         exitStyle={{ y: -10, opacity: 0 }}
-//         elevate
-//         animation={[
-//           'quick',
-//           {
-//             opacity: {
-//               overshootClamping: true,
-//             },
-//           },
-//         ]}
-//         p={0}
-//       >
-//         <RegionFilterInput open={open} setOpen={setOpen} setRegionCode={setRegionCode} />
-//       </Popover.Content>
-//     </Popover>
-//   )
-// }
-
-export const PhoneNumberField = ({ size }: { size?: SizeTokens }) => {
+export const PhoneNumberField = ({
+  size,
+  onRegionSelect,
+}: { size?: SizeTokens; onRegionSelect?: () => void }) => {
   const {
     field,
     error,
@@ -272,8 +56,6 @@ export const PhoneNumberField = ({ size }: { size?: SizeTokens }) => {
   const [regionCode, setRegionCode] = useState('KE')
   const [phoneNumber, setPhoneNumber] = useState(field.value?.phone_number)
   const [isValid, setIsValid] = useState(false)
-  const [containerWidth, setContainerWidth] = useState<number>()
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false)
 
   useEffect(() => {
     if (regionCode) {
@@ -302,24 +84,16 @@ export const PhoneNumberField = ({ size }: { size?: SizeTokens }) => {
       <View flexDirection="column">
         <Shake shakeKey={error?.phone_number?.errorMessage}>
           <Input size={size} gapScale={0.5}>
-            <Input.Box
-              onLayout={(e) => {
-                setContainerWidth(e.nativeEvent.layout.width)
-              }}
-              self="center"
-              theme={isValid ? 'green' : undefined}
-            >
-              <Input.Section>
-                <Input.Button px="$2" onPress={() => handleSnapPress(2)}>
+            <Input.Box self="center" theme={isValid ? 'green' : undefined}>
+              {/* <Input.Section>
+                <Input.Button px="$2" onPress={onRegionSelect}>
                   {regionCode}
                 </Input.Button>
-                {/* <RegionSelectBox
-                  // containerWidth={containerWidth}
-                  regionCode={regionCode}
-                  setRegionCode={setRegionCode}
-                /> */}
-              </Input.Section>
+              </Input.Section> */}
               <Input.Section>
+                {/* <Input.Button px="$2" onPress={onRegionSelect}> */}
+                <Text>{regionCode}</Text>
+                {/* </Input.Button> */}
                 <Input.Area
                   id={id}
                   disabled={disabled}
