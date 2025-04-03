@@ -5,7 +5,8 @@ import {
   getCountryCodeForRegionCode,
 } from 'awesome-phonenumber'
 import { useState, useEffect, useId } from 'react'
-import { View, Theme, type SizeTokens, Text } from 'tamagui'
+import { View, Theme, type SizeTokens, Text, Separator } from 'tamagui'
+import { ChevronDown } from '@tamagui/lucide-icons'
 
 import { z } from 'zod'
 
@@ -43,8 +44,8 @@ type RegionFilterInputProps = {
 
 export const PhoneNumberField = ({
   size,
-  onRegionSelect,
-}: { size?: SizeTokens; onRegionSelect?: () => void }) => {
+  onValidChange,
+}: { size?: SizeTokens; onValidChange?: (valid: boolean) => void }) => {
   const {
     field,
     error,
@@ -57,15 +58,24 @@ export const PhoneNumberField = ({
   const [phoneNumber, setPhoneNumber] = useState(field.value?.phone_number)
   const [isValid, setIsValid] = useState(false)
 
+  const countryCode = getCountryCodeForRegionCode(regionCode)
+
   useEffect(() => {
     if (regionCode) {
-      setPhoneNumber('+' + getCountryCodeForRegionCode(regionCode) + ' ')
+      setPhoneNumber('+' + countryCode + ' ')
     }
   }, [regionCode])
+
+  useEffect(() => {
+    if (onValidChange) {
+      onValidChange(isValid)
+    }
+  }, [isValid, onValidChange])
 
   const handlePhoneNumberChange = (text: string) => {
     text = !phoneNumber && text !== '+' ? `+${text}` : text
     const parsed = parsePhoneNumber(text)
+
     // Note: parsed object has a lot of info about the number
     if (parsed.regionCode) {
       setRegionCode(parsed.regionCode)
@@ -85,15 +95,12 @@ export const PhoneNumberField = ({
         <Shake shakeKey={error?.phone_number?.errorMessage}>
           <Input size={size} gapScale={0.5}>
             <Input.Box self="center" theme={isValid ? 'green' : undefined}>
-              {/* <Input.Section>
-                <Input.Button px="$2" onPress={onRegionSelect}>
-                  {regionCode}
-                </Input.Button>
-              </Input.Section> */}
               <Input.Section>
-                {/* <Input.Button px="$2" onPress={onRegionSelect}> */}
-                <Text>{regionCode}</Text>
-                {/* </Input.Button> */}
+                <Input.Button px="$2" iconAfter={ChevronDown}>
+                  <Text>{countryCode}</Text>
+                </Input.Button>
+              </Input.Section>
+              <Input.Section>
                 <Input.Area
                   id={id}
                   disabled={disabled}
