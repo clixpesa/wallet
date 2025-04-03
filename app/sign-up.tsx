@@ -19,20 +19,33 @@ import React, { useState } from 'react'
 import { z } from 'zod'
 
 const SignUpSchema = z.object({
-  phoneNumber: formFields.phone_number,
-  email: formFields.text.email(),
+  phoneNumber: formFields.phone_number.optional(),
+  email: formFields.text.email().optional(),
 })
 
 export default function SignUpScreen() {
   const [useEmail, setUseEmail] = useState(false)
+  const [isPhoneValid, setIsPhoneValid] = useState(false)
+
   const form = useForm<z.infer<typeof SignUpSchema>>()
 
   const handleSubmit = async (data: z.infer<typeof SignUpSchema>) => {
+    console.log('data', data)
     router.push('/verify-code')
   }
 
   async function signUpWithPhoneNumber({ phoneNumber }: z.infer<typeof SignUpSchema>) {
     router.push('/verify-code')
+  }
+
+  const activeFieldValue = form.watch(useEmail ? 'email' : 'phoneNumber')
+
+  const isDisabled = useEmail
+    ? !activeFieldValue?.toString()
+    : !activeFieldValue?.toString() || !isPhoneValid
+
+  const handlePhoneValidityChange = (valid: boolean) => {
+    setIsPhoneValid(valid)
   }
 
   return (
@@ -44,7 +57,8 @@ export default function SignUpScreen() {
           onSubmit={handleSubmit}
           props={{
             phoneNumber: {
-              // size: '$5',
+              size: '$5',
+              onValidChange: handlePhoneValidityChange,
             },
             email: {
               size: '$5',
@@ -57,7 +71,7 @@ export default function SignUpScreen() {
                   onPress={() => submit()}
                   rounded="$10"
                   theme="teal"
-                  // disabled={isDisabled}
+                  disabled={isDisabled}
                 >
                   Continue
                 </SubmitButton>
