@@ -1,5 +1,5 @@
 {
-  "name": "clixpesa-app",
+  "name": "@clixpesa/wallet",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "packageManager": "yarn@4.7.0",
