@@ -1,4 +1,13 @@
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
+
+// import {
+//   GoogleOneTapSignIn,
+//   statusCodes,
+//   isErrorWithCode,
+//   isSuccessResponse,
+//   isNoSavedCredentialFoundResponse,
+// } from '@react-native-google-signin/google-signin';
+
 import { router } from 'expo-router'
 import { Button } from 'tamagui'
 import React from 'react'
@@ -14,6 +23,7 @@ export const GoogleSignIn = React.memo(() => {
       const token = response?.data?.idToken
 
       console.log('response', response)
+      console.log('token', token)
 
       if (token) {
         // console.log('token', token)
