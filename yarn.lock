@@ -1186,6 +1186,7 @@ __metadata:
     "@ts-react/form": "npm:^1.8.3"
     "@types/react": "npm:~18.3.12"
     "@types/react-native": "npm:^0.73.0"
+    "@types/react-native-get-random-values": "npm:^1"
     awesome-phonenumber: "npm:^7.4.0"
     babel-preset-expo: "npm:~12.0.0"
     burnt: "npm:^0.12.2"
@@ -1211,6 +1212,7 @@ __metadata:
     react-native-clean-project: "npm:^4.0.3"
     react-native-dotenv: "npm:^3.4.11"
     react-native-gesture-handler: "npm:~2.20.2"
+    react-native-get-random-values: "npm:1.11.0"
     react-native-mmkv: "npm:^3.2.0"
     react-native-reanimated: "npm:~3.16.1"
     react-native-safe-area-context: "npm:4.12.0"
@@ -12964,7 +12966,11 @@ __metadata:
   languageName: node
   linkType: hard
 
+<<<<<<< HEAD
 "react-native-get-random-values@npm:^1.11.0":
+=======
+"react-native-get-random-values@npm:1.11.0":
+>>>>>>> b9127c0 (configure google signin package)
   version: 1.11.0
   resolution: "react-native-get-random-values@npm:1.11.0"
   dependencies:
