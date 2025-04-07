@@ -1,10 +1,11 @@
 {
-  "name": "clixpesa-app",
+  "name": "@clixpesa/wallet",
   "main": "index.js",
   "version": "1.0.0",
   "packageManager": "yarn@4.7.0",
   "private": true,
   "scripts": {
+    "clean": "react-native-clean-project",
     "upgrade:tamagui": "yarn up '*tamagui*'@latest '@tamagui/*'@latest",
     "upgrade:tamagui:canary": "yarn up '*tamagui*'@canary '@tamagui/*'@canary",
     "check:tamagui": "tamagui check",
@@ -55,6 +56,7 @@
     "react-dropzone": "^14.3.8",
     "react-hook-form": "^7.54.2",
     "react-native": "0.76.7",
+    "react-native-dotenv": "^3.4.11",
     "react-native-gesture-handler": "~2.20.2",
     "react-native-get-random-values": "^1.11.0",
     "react-native-mmkv": "^3.2.0",
@@ -81,6 +83,7 @@
     "@types/react-native-get-random-values": "^1",
     "babel-plugin-module-resolver": "^5.0.2",
     "tsx": "^4.19.3",
+    "react-native-clean-project": "^4.0.3",
     "typescript": "^5.5.2"
   }
 }

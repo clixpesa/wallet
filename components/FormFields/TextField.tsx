@@ -18,7 +18,7 @@ export const TextField = (
   const disabled = isSubmitting
 
   return (
-    <Theme name={error ? 'red' : null} forceClassName>
+    <Theme name={error ? 'red' : 'teal'} forceClassName>
       <Fieldset>
         <Shake shakeKey={error?.errorMessage}>
           <Input>
