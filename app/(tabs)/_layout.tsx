@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { Button, useTheme, View } from 'tamagui'
 import { LayoutGrid, Home, User, AlertCircle } from '@tamagui/lucide-icons'
 import { Platform } from 'react-native'
-import { useAuthStore } from 'store/userStore'
+import { useAuth } from '../../provider/auth'
 
 export const HomeIcons = {
   Home,
@@ -23,16 +23,17 @@ const replaceRoute = (href) => {
 export default function TabLayout() {
   const theme = useTheme()
 
-  const user = useAuthStore((state) => state.user)
+  const user = useAuth().user
+
   const segments = useSegments()
 
   useEffect(() => {
-    const inAuthGroup = segments[0] === 'onboarding'
+    const inAuthGroup = segments[0] === '(auth)'
 
     if (!user && !inAuthGroup) {
       replaceRoute('/onboarding')
     } else if (user && inAuthGroup) {
-      replaceRoute('/')
+      replaceRoute('/home')
     }
   }, [user, segments])
 
@@ -52,7 +53,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => <HomeIcons.Home color={color as any} />,

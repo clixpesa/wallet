@@ -88,45 +88,6 @@ function RootLayoutNav() {
             name="onboarding"
             options={{ headerShown: false, animation: 'fade' }}
           />
-
-          <Stack.Screen
-            name="sign-up"
-            options={{
-              title: '',
-              headerShown: true,
-              headerShadowVisible: false,
-              headerStyle: {
-                backgroundColor: theme.color2.val,
-              },
-              animation: 'fade',
-            }}
-          />
-
-          <Stack.Screen
-            name="verify-code"
-            options={{
-              title: '',
-              headerShown: true,
-              headerShadowVisible: false,
-              headerStyle: {
-                backgroundColor: theme.color2.val,
-              },
-              animation: 'fade',
-            }}
-          />
-
-          <Stack.Screen
-            name="set-passcode"
-            options={{
-              title: '',
-              headerShown: true,
-              headerShadowVisible: false,
-              headerStyle: {
-                backgroundColor: theme.color2.val,
-              },
-              animation: 'fade',
-            }}
-          />
         </Stack>
         <OfflineBanner />
       </ThemeProvider>

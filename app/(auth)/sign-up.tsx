@@ -10,27 +10,57 @@ import {
   SizableText,
   Separator,
   XStack,
+  Input,
+  Spacer,
 } from 'tamagui'
+import { SubmitButton, IconGoogle } from 'components'
+import { z } from 'zod'
 
 import { GoogleSignIn } from 'google/GoogleSignIn'
 import { SubmitButton } from 'components'
 import { router } from 'expo-router'
+import { useState, useEffect } from 'react'
 import { z } from 'zod'
 import { useState } from 'react'
 import { useAuth } from '../../provider/auth'
 
+/*
 const SignUpSchema = z.object({
+  phoneNumber: formFields.phone_number,
+  email: formFields.text.email(),
+})*/
   phoneNumber: formFields.phone_number.optional(),
   email: formFields.text.email().optional(),
 })
 
 export default function SignUpScreen() {
+  const auth = useAuth()
   const [useEmail, setUseEmail] = useState(false)
-  const [isPhoneValid, setIsPhoneValid] = useState(false)
-
-  const form = useForm<z.infer<typeof SignUpSchema>>()
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [error, setError] = useState('')
+  //const form = useForm<z.infer<typeof SignUpSchema>>()
 
   const handleSubmit = async (data: z.infer<typeof SignUpSchema>) => {
+    if (useEmail) {
+      if (!email) {
+        setError('Email is required')
+        return
+      }
+      // Handle email submission
+      console.log('Sending Email OTP')
+      router.push('/verify-code')
+    } else {
+      if (!phone) {
+        setError('Phone number is required')
+        return
+      }
+      // Handle phone submission
+      console.log('Sending Phone OTP')
+      //await auth.sendPhoneOtp(phoneNumber.phone_number)
+      router.push('/verify-code')
+    }
+    //router.push('/verify-code')
     console.log('data', data)
     router.push('/verify-code')
   }
@@ -130,11 +160,11 @@ export default function SignUpScreen() {
         </SchemaForm>
       </FormProvider>
       <SocialSignInSection />
-    </YStack>
+      </YStack>
   )
 }
 
-const SocialSignInSection = React.memo(() => (
+      const SocialSignInSection = React.memo(() => (
   <YStack mb="$4" mx="$4">
     <Theme name="teal">
       <View flexDirection="column" gap="$4" width="100%" self="center">

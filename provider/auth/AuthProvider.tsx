@@ -125,25 +125,7 @@ export function useProtectedRoute(user: FirebaseAuthTypes.User | null) {
       router.replace('/onboarding')
     } else if (user && inAuthGroup) {
       // Redirect away from the sign-in page.
-      router.replace('/')
+      router.replace('/home')
     }
   }, [user, segments])
 }
-
-/**
- * temporary fix
- *
- * see https://github.com/expo/router/issues/740
- * see https://github.com/expo/router/issues/745
- *  
-const replaceRoute = (href: string) => {
-  if (Platform.OS === 'ios') {
-    setTimeout(() => {
-      router.replace(href)
-    }, 1)
-  } else {
-    setImmediate(() => {
-      router.replace(href)
-    })
-  }
-} */
