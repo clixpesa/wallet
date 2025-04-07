@@ -7,16 +7,13 @@ import { IconGoogle } from 'components'
 export const GoogleSignIn = React.memo(() => {
   const signInWithGoogle = async () => {
     try {
-      GoogleSignin.configure({
-        // Add clixpesa web client id
-        iosClientId: process.env.GOOGLE_IOS_CLIENT_ID,
-        webClientId: process.env.GOOGLE_WEB_CLIENT_ID,
-      })
-
+      GoogleSignin.configure()
       await GoogleSignin.hasPlayServices()
 
       const response = await GoogleSignin.signIn()
       const token = response?.data?.idToken
+
+      console.log('response', response)
 
       if (token) {
         // console.log('token', token)

@@ -63,16 +63,10 @@ export default {
     },
     plugins: [
       'expo-router',
-      [
-        'expo-build-properties',
-        {
-          android: {
-            minSdkVersion: 26,
-          },
-        },
-      ],
-      '@react-native-firebase/app',
       'expo-secure-store',
+      '@react-native-google-signin/google-signin',
+      '@react-native-firebase/app',
+      '@react-native-firebase/auth',
     ],
     experiments: {
       typedRoutes: true,

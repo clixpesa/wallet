@@ -94,7 +94,11 @@ export const PhoneNumberField = ({
       <View flexDirection="column">
         <Shake shakeKey={error?.phone_number?.errorMessage}>
           <Input size={size} gapScale={0.5}>
-            <Input.Box self="center" theme={isValid ? 'green' : undefined}>
+            <Input.Box
+              self="center"
+              theme={isValid ? 'green' : undefined}
+              focusStyle={{ borderColor: '$teal10', borderWidth: 1 }}
+            >
               <Input.Section>
                 <Input.Button px="$2" iconAfter={ChevronDown}>
                   <Text>{countryCode}</Text>
