@@ -19,16 +19,12 @@ import { z } from 'zod'
 import { GoogleSignIn } from 'google/GoogleSignIn'
 import { SubmitButton } from 'components'
 import { router } from 'expo-router'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { z } from 'zod'
 import { useState } from 'react'
 import { useAuth } from '../../provider/auth'
 
-/*
 const SignUpSchema = z.object({
-  phoneNumber: formFields.phone_number,
-  email: formFields.text.email(),
-})*/
   phoneNumber: formFields.phone_number.optional(),
   email: formFields.text.email().optional(),
 })
@@ -39,7 +35,10 @@ export default function SignUpScreen() {
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [error, setError] = useState('')
-  //const form = useForm<z.infer<typeof SignUpSchema>>()
+  const form = useForm<z.infer<typeof SignUpSchema>>()
+
+  const activeFieldValue = form.watch(useEmail ? 'email' : 'phoneNumber')
+  const isDisabled = !activeFieldValue?.toString()
 
   const handleSubmit = async (data: z.infer<typeof SignUpSchema>) => {
     if (useEmail) {
@@ -160,11 +159,11 @@ export default function SignUpScreen() {
         </SchemaForm>
       </FormProvider>
       <SocialSignInSection />
-      </YStack>
+    </YStack>
   )
 }
 
-      const SocialSignInSection = React.memo(() => (
+const SocialSignInSection = React.memo(() => (
   <YStack mb="$4" mx="$4">
     <Theme name="teal">
       <View flexDirection="column" gap="$4" width="100%" self="center">
