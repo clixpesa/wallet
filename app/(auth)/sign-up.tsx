@@ -10,18 +10,13 @@ import {
   SizableText,
   Separator,
   XStack,
-  Input,
-  Spacer,
 } from 'tamagui'
-import { SubmitButton, IconGoogle } from 'components'
-import { z } from 'zod'
+import { SubmitButton } from 'components'
 
 import { GoogleSignIn } from 'google/GoogleSignIn'
-import { SubmitButton } from 'components'
 import { router } from 'expo-router'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { z } from 'zod'
-import { useState } from 'react'
 import { useAuth } from '../../provider/auth'
 
 const SignUpSchema = z.object({
@@ -35,10 +30,9 @@ export default function SignUpScreen() {
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [error, setError] = useState('')
-  const form = useForm<z.infer<typeof SignUpSchema>>()
+  const [isPhoneValid, setIsPhoneValid] = useState(false)
 
-  const activeFieldValue = form.watch(useEmail ? 'email' : 'phoneNumber')
-  const isDisabled = !activeFieldValue?.toString()
+  const form = useForm<z.infer<typeof SignUpSchema>>()
 
   const handleSubmit = async (data: z.infer<typeof SignUpSchema>) => {
     if (useEmail) {
