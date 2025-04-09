@@ -35,7 +35,6 @@ export default function SignUpScreen() {
   const form = useForm<z.infer<typeof SignUpSchema>>()
 
   const handleSubmit = async (data: z.infer<typeof SignUpSchema>) => {
-<<<<<<< HEAD:app/(auth)/sign-up.tsx
     if (useEmail) {
       if (!email) {
         setError('Email is required')
@@ -56,8 +55,6 @@ export default function SignUpScreen() {
     }
     //router.push('/verify-code')
     console.log('data', data)
-=======
->>>>>>> 88a3d31 (enable signin using GoogleOneTapSignIn):app/sign-up.tsx
     router.push('/verify-code')
   }
 
