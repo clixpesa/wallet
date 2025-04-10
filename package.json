@@ -1,6 +1,6 @@
 {
   "name": "@clixpesa/wallet",
-  "main": "expo-router/entry",
+  "main": "index.js",
   "version": "1.0.0",
   "packageManager": "yarn@4.7.0",
   "private": true,
