@@ -9,7 +9,6 @@ const getName = () => {
   if (IS_DEV) {
     return 'Clixpesa (Dev)'
   }
-
   return 'Clixpesa'
 }
 
@@ -17,16 +16,14 @@ const getBundleId = () => {
   if (IS_DEV) {
     return `${APP_ID_PREFIX}.test`
   }
-
   return APP_ID_PREFIX
 }
 
 const googleServices = () => {
   if (IS_DEV) {
-    return './google/google-services-test.json'
+    return './google-services.test.json'
   }
-
-  return './google/google-services-prod.json'
+  return './google-services.prod.json'
 }
 
 export default {

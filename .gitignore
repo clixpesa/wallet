@@ -43,6 +43,9 @@ node_modules
 .env.test.localp
 .env.production.local
 
+google-services.prod.json
+google-services.test.json
+
 .expo
 ios
 android
