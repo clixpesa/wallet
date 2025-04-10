@@ -1,5 +1,6 @@
 import { Stack } from 'expo-router'
-import { Button, useTheme, View } from 'tamagui'
+import { useTheme } from 'tamagui'
+
 export default function Layout() {
   const theme = useTheme()
   return (
