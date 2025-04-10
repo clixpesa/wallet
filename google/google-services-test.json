@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "609904908445-9f4mffbbju3t7lh03fv1kj83gdhhmakm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.clixpesa.app.test",
+            "certificate_hash": "39a214482f495b3b0849f99d9b1f6fa5d0e2b1b5"
+          }
+        },
+        {
+          "client_id": "609904908445-i395nj12m3vmmpvr4jii2for07cvp60u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.clixpesa.app.test",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
           "client_id": "609904908445-5340eo46g1auut2d6nmdhqfbpf0fp5h5.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -50,6 +66,50 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "609904908445-5340eo46g1auut2d6nmdhqfbpf0fp5h5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTh36qoQ7_IpWoea7DrjlW4Zn9ErhL_RU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "609904908445-5340eo46g1auut2d6nmdhqfbpf0fp5h5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "609904908445-64qfuk5l10mfgjboudlbgp59abrdv9m0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kachdn.authdapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609904908445:android:17ebca3f4a67b05b551c74",
+        "android_client_info": {
+          "package_name": "com.playground.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "609904908445-nt50o8ns97mtnfbnsfmvdun9169slsve.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.playground.com",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
         {
           "client_id": "609904908445-5340eo46g1auut2d6nmdhqfbpf0fp5h5.apps.googleusercontent.com",
           "client_type": 3

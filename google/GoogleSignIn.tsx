@@ -1,41 +1,65 @@
-import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
+import {
+  GoogleOneTapSignIn,
+  isErrorWithCode,
+  isNoSavedCredentialFoundResponse,
+  isSuccessResponse,
+  statusCodes,
+} from '@react-native-google-signin/google-signin'
+
 import { router } from 'expo-router'
+
 import { Button } from 'tamagui'
-import React from 'react'
+
+import { getUrlSafeNonce } from 'utils/auth/getNonce'
 import { IconGoogle } from 'components'
 
-export const GoogleSignIn = React.memo(() => {
+export const GoogleSignIn = () => {
   const signInWithGoogle = async () => {
     try {
-      GoogleSignin.configure({
-        // Add clixpesa web client id
-        iosClientId: process.env.GOOGLE_IOS_CLIENT_ID,
-        webClientId: process.env.GOOGLE_WEB_CLIENT_ID,
+      GoogleOneTapSignIn.configure({
+        webClientId: 'autoDetect',
       })
+      await GoogleOneTapSignIn.checkPlayServices()
+      const response = await GoogleOneTapSignIn.signIn()
 
-      await GoogleSignin.hasPlayServices()
-
-      const response = await GoogleSignin.signIn()
-      const token = response?.data?.idToken
-
-      if (token) {
-        // console.log('token', token)
-        // if (error) {
-        //   throw new Error('error', error)
-        // }
-        router.replace('/')
-      } else {
-        throw new Error('no ID token present!')
+      if (isSuccessResponse(response)) {
+        // read user's info
+      } else if (isNoSavedCredentialFoundResponse(response)) {
+        // Android and Apple only.
+        // No saved credential found (user has not signed in yet, or they revoked access)
+        // call `createAccount()`
+        const createResponse = await GoogleOneTapSignIn.createAccount({
+          nonce: getUrlSafeNonce(),
+        })
+        console.log('createResponse', createResponse)
+      } else if (isNoSavedCredentialFoundResponse(response)) {
+        // Android and Apple only.
+        // No saved credential found (user has not signed in yet, or they revoked access)
+        // call `createAccount()`
+        const explicitResponse = await GoogleOneTapSignIn.presentExplicitSignIn({
+          nonce: getUrlSafeNonce(),
+        })
+        console.log('explicitResponse', explicitResponse)
       }
     } catch (error) {
-      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        // user cancelled the login flow
-      } else if (error.code === statusCodes.IN_PROGRESS) {
-        // operation (e.g. sign in) is in progress already
-      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        // play services not available or outdated
+      console.error(error)
+      if (isErrorWithCode(error)) {
+        switch (error.code) {
+          case statusCodes.ONE_TAP_START_FAILED:
+            // Android-only, you probably have hit rate limiting.
+            // You can still call `presentExplicitSignIn` in this case.
+            break
+          case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
+            // Android: play services not available or outdated.
+            // Get more details from `error.userInfo`.
+            // Web: when calling an unimplemented api (requestAuthorization)
+            // or when the Google Client Library is not loaded yet.
+            break
+          default:
+          // something else happened
+        }
       } else {
-        // some other error happened
+        // an error that's not related to google sign in occurred
       }
     }
   }
@@ -55,4 +79,4 @@ export const GoogleSignIn = React.memo(() => {
       Sign in with Google
     </Button>
   )
-})
+}
