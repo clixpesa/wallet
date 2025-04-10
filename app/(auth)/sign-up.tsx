@@ -11,12 +11,13 @@ import {
   Separator,
   XStack,
 } from 'tamagui'
+import { SubmitButton } from 'components'
 
 import { GoogleSignIn } from 'google/GoogleSignIn'
-import { SubmitButton } from 'components'
 import { router } from 'expo-router'
 import React, { useState } from 'react'
 import { z } from 'zod'
+import { useAuth } from 'provider/auth'
 
 const SignUpSchema = z.object({
   phoneNumber: formFields.phone_number.optional(),
@@ -24,12 +25,35 @@ const SignUpSchema = z.object({
 })
 
 export default function SignUpScreen() {
+  const auth = useAuth()
   const [useEmail, setUseEmail] = useState(false)
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [error, setError] = useState('')
   const [isPhoneValid, setIsPhoneValid] = useState(false)
 
   const form = useForm<z.infer<typeof SignUpSchema>>()
 
   const handleSubmit = async (data: z.infer<typeof SignUpSchema>) => {
+    if (useEmail) {
+      if (!email) {
+        setError('Email is required')
+        return
+      }
+      // Handle email submission
+      console.log('Sending Email OTP')
+      router.push('/verify-code')
+    } else {
+      if (!phone) {
+        setError('Phone number is required')
+        return
+      }
+      // Handle phone submission
+      console.log('Sending Phone OTP')
+      //await auth.sendPhoneOtp(phoneNumber.phone_number)
+      router.push('/verify-code')
+    }
+    //router.push('/verify-code')
     console.log('data', data)
     router.push('/verify-code')
   }

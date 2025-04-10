@@ -1,11 +1,10 @@
 import '../tamagui-web.css'
 
-import { useEffect } from 'react'
 import { useColorScheme } from 'react-native'
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { useFonts } from 'expo-font'
-import { SplashScreen, Stack, useSegments, router } from 'expo-router'
+import { SplashScreen, Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { Provider } from '../provider'
 import { useTheme } from 'tamagui'
@@ -81,50 +80,6 @@ function RootLayoutNav() {
               contentStyle: {
                 backgroundColor: theme.background.val,
               },
-            }}
-          />
-
-          <Stack.Screen
-            name="onboarding"
-            options={{ headerShown: false, animation: 'fade' }}
-          />
-
-          <Stack.Screen
-            name="sign-up"
-            options={{
-              title: '',
-              headerShown: true,
-              headerShadowVisible: false,
-              headerStyle: {
-                backgroundColor: theme.color2.val,
-              },
-              animation: 'fade',
-            }}
-          />
-
-          <Stack.Screen
-            name="verify-code"
-            options={{
-              title: '',
-              headerShown: true,
-              headerShadowVisible: false,
-              headerStyle: {
-                backgroundColor: theme.color2.val,
-              },
-              animation: 'fade',
-            }}
-          />
-
-          <Stack.Screen
-            name="set-passcode"
-            options={{
-              title: '',
-              headerShown: true,
-              headerShadowVisible: false,
-              headerStyle: {
-                backgroundColor: theme.color2.val,
-              },
-              animation: 'fade',
             }}
           />
         </Stack>

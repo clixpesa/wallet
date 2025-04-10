@@ -61,7 +61,13 @@ export default {
       output: 'static',
       favicon: './assets/images/favicon.png',
     },
-    plugins: ['expo-router'],
+    plugins: [
+      'expo-router',
+      'expo-secure-store',
+      '@react-native-google-signin/google-signin',
+      '@react-native-firebase/app',
+      '@react-native-firebase/auth',
+    ],
     experiments: {
       typedRoutes: true,
     },
