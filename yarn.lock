@@ -1194,17 +1194,17 @@ __metadata:
     burnt: "npm:^0.12.2"
     expo: "npm:~52.0.44"
     expo-build-properties: "npm:~0.13.2"
-    expo-dev-client: "npm:~5.0.15"
+    expo-dev-client: "npm:~5.0.19"
     expo-document-picker: "npm:~13.0.3"
     expo-font: "npm:~13.0.4"
     expo-haptics: "npm:~14.0.1"
     expo-image-picker: "npm:~16.0.6"
     expo-linking: "npm:~7.0.5"
-    expo-router: "npm:~4.0.19"
+    expo-router: "npm:~4.0.20"
     expo-secure-store: "npm:~14.0.1"
     expo-splash-screen: "npm:~0.29.22"
     expo-status-bar: "npm:~2.0.1"
-    expo-system-ui: "npm:~4.0.8"
+    expo-system-ui: "npm:~4.0.9"
     expo-updates: "npm:~0.27.4"
     expo-web-browser: "npm:~14.0.2"
     react: "npm:18.3.1"
@@ -8216,7 +8216,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-dev-client@npm:~5.0.15":
+"expo-dev-client@npm:~5.0.19":
   version: 5.0.20
   resolution: "expo-dev-client@npm:5.0.20"
   dependencies:
@@ -8403,7 +8403,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-router@npm:~4.0.19":
+"expo-router@npm:~4.0.20":
   version: 4.0.20
   resolution: "expo-router@npm:4.0.20"
   dependencies:
@@ -8476,7 +8476,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-system-ui@npm:~4.0.8":
+"expo-system-ui@npm:~4.0.9":
   version: 4.0.9
   resolution: "expo-system-ui@npm:4.0.9"
   dependencies:
