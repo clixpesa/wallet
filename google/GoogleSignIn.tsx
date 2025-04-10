@@ -5,9 +5,7 @@ import {
   isSuccessResponse,
   statusCodes,
 } from '@react-native-google-signin/google-signin'
-
 import { router } from 'expo-router'
-
 import { Button } from 'tamagui'
 
 import { getUrlSafeNonce } from 'utils/auth/getNonce'

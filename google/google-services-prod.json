@@ -12,7 +12,12 @@
           "package_name": "com.clixpesa.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "416347899564-618f73she6a1grjqntj84bjregrjb81t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA5MTy5p1dwPUSEpEvKSqI44q4oBdfgbTU"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "416347899564-618f73she6a1grjqntj84bjregrjb81t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     },
@@ -31,7 +41,20 @@
           "package_name": "com.clixpesa.mvp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "416347899564-toi5l7a7t5iukb75r3jtg3bfc4jes550.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.clixpesa.mvp",
+            "certificate_hash": "3270b4cb28953c70af16e6b44b6009fd91775046"
+          }
+        },
+        {
+          "client_id": "416347899564-618f73she6a1grjqntj84bjregrjb81t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA5MTy5p1dwPUSEpEvKSqI44q4oBdfgbTU"
@@ -39,7 +62,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "416347899564-618f73she6a1grjqntj84bjregrjb81t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
