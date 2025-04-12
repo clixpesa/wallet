@@ -19,11 +19,12 @@ const getBundleId = () => {
   return APP_ID_PREFIX
 }
 
-const googleServices = () => {
-  if (IS_DEV) {
-    return './google-services.test.json'
-  }
-  return './google-services.prod.json'
+const getGoogleServicesFile = () => {
+  // Use environment variable if set, otherwise fall back to local files
+  return (
+    process.env.GOOGLE_SERVICES_JSON ||
+    (IS_DEV ? './google-services.test.json' : './google-services.prod.json')
+  )
 }
 
 export default {
@@ -51,7 +52,7 @@ export default {
         backgroundColor: '#ffffff',
       },
       package: getBundleId(),
-      googleServicesFile: googleServices(),
+      googleServicesFile: getGoogleServicesFile(),
     },
     web: {
       bundler: 'metro',
