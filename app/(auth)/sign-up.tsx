@@ -36,26 +36,17 @@ export default function SignUpScreen() {
 
   const handleSubmit = async (data: z.infer<typeof SignUpSchema>) => {
     if (useEmail) {
-      if (!email) {
-        setError('Email is required')
-        return
-      }
       // Handle email submission
       console.log('Sending Email OTP')
+      console.log('data', data)
       router.push('/verify-code')
     } else {
-      if (!phone) {
-        setError('Phone number is required')
-        return
-      }
       // Handle phone submission
+      console.log('data', data)
       console.log('Sending Phone OTP')
       //await auth.sendPhoneOtp(phoneNumber.phone_number)
       router.push('/verify-code')
     }
-    //router.push('/verify-code')
-    console.log('data', data)
-    router.push('/verify-code')
   }
 
   async function signUpWithPhoneNumber({ phoneNumber }: z.infer<typeof SignUpSchema>) {
