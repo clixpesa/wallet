@@ -21,7 +21,6 @@ export default function VerifyCodeScreen() {
         <View mt="$5">
           <OneTimeCodeInput />
         </View>
-        <Button onPress={() => router.push('/set-password')}>Set Passcode</Button>
       </YStack>
     </YStack>
   )
