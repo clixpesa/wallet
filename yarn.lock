@@ -1194,6 +1194,7 @@ __metadata:
     babel-preset-expo: "npm:~12.0.0"
     burnt: "npm:^0.12.2"
     expo: "npm:~52.0.42"
+    expo-application: "npm:~6.0.2"
     expo-build-properties: "npm:~0.13.2"
     expo-dev-client: "npm:~5.0.19"
     expo-document-picker: "npm:~13.0.3"
@@ -8549,6 +8550,15 @@ __metadata:
     signal-exit: "npm:^3.0.3"
     strip-final-newline: "npm:^2.0.0"
   checksum: 10/8ada91f2d70f7dff702c861c2c64f21dfdc1525628f3c0454fd6f02fce65f7b958616cbd2b99ca7fa4d474e461a3d363824e91b3eb881705231abbf387470597
+  languageName: node
+  linkType: hard
+
+"expo-application@npm:~6.0.2":
+  version: 6.0.2
+  resolution: "expo-application@npm:6.0.2"
+  peerDependencies:
+    expo: "*"
+  checksum: 10/10160e71c1ee2a3726df626477b8ad1fd572a5ef82a911c0a107ac74d26af718f9d2652d65e451a438649632c1fa189dd40dd78437a6557de4dcfa2e3aa4cb1f
   languageName: node
   linkType: hard
 
