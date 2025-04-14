@@ -72,13 +72,15 @@ function RootLayoutNav() {
           <Stack.Screen
             name="modal"
             options={{
-              title: 'Tamagui + Expo',
+              title: 'Notifications',
               presentation: 'modal',
-              animation: 'slide_from_bottom',
+              headerTitleAlign: 'center',
+              animation: 'slide_from_right',
               gestureEnabled: true,
               gestureDirection: 'horizontal',
-              contentStyle: {
-                backgroundColor: theme.background.val,
+              headerShadowVisible: false,
+              headerStyle: {
+                backgroundColor: theme.color2.val,
               },
             }}
           />
