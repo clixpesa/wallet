@@ -1,6 +1,6 @@
 import { Link, Tabs } from 'expo-router'
 import { Button, useTheme, View } from 'tamagui'
-import { LayoutGrid, Home, User, AlertCircle } from '@tamagui/lucide-icons'
+import { LayoutGrid, Home, User, AlertCircle, Bell } from '@tamagui/lucide-icons'
 
 export const HomeIcons = {
   Home,
@@ -33,9 +33,9 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <HomeIcons.Home color={color as any} />,
           headerRight: () => (
             <Link href="/modal" asChild>
-              <Button mr="$4" bg="$green8" color="$green12">
-                Hello!
-              </Button>
+              <View px="$4">
+                <Bell size={22} />
+              </View>
             </Link>
           ),
         }}
@@ -45,6 +45,21 @@ export default function TabLayout() {
         options={{
           title: 'Spaces',
           tabBarIcon: ({ color }) => <HomeIcons.Spaces color={color as any} />,
+          headerRight: () => (
+            <Link href="/modal" asChild>
+              <View px="$4">
+                <AlertCircle size={22} />
+              </View>
+            </Link>
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ color }) => <HomeIcons.User color={color as any} />,
           headerRight: () => (
             <Link href="/modal" asChild>
               <View px="$4">

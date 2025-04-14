@@ -5,8 +5,8 @@ import {
   isSuccessResponse,
   statusCodes,
 } from '@react-native-google-signin/google-signin'
-import { router } from 'expo-router'
 import { Button } from 'tamagui'
+import auth from '@react-native-firebase/auth'
 
 import { getUrlSafeNonce } from 'utils/auth/getNonce'
 import { IconGoogle } from 'components'
@@ -21,23 +21,28 @@ export const GoogleSignIn = () => {
       const response = await GoogleOneTapSignIn.signIn()
 
       if (isSuccessResponse(response)) {
-        // read user's info
+        const idToken = response.data?.idToken
+        const googleCredential = auth.GoogleAuthProvider.credential(idToken)
+        return auth().signInWithCredential(googleCredential)
       } else if (isNoSavedCredentialFoundResponse(response)) {
+        console.log('response', response.data)
         // Android and Apple only.
         // No saved credential found (user has not signed in yet, or they revoked access)
         // call `createAccount()`
         const createResponse = await GoogleOneTapSignIn.createAccount({
           nonce: getUrlSafeNonce(),
         })
-        console.log('createResponse', createResponse)
+        const idToken = createResponse.data?.idToken
+        const googleCredential = auth.GoogleAuthProvider.credential(idToken)
+        return auth().signInWithCredential(googleCredential)
       } else if (isNoSavedCredentialFoundResponse(response)) {
-        // Android and Apple only.
-        // No saved credential found (user has not signed in yet, or they revoked access)
-        // call `createAccount()`
+        /// last resort: explicit sign in
         const explicitResponse = await GoogleOneTapSignIn.presentExplicitSignIn({
           nonce: getUrlSafeNonce(),
         })
-        console.log('explicitResponse', explicitResponse)
+        const idToken = explicitResponse.data?.idToken
+        const googleCredential = auth.GoogleAuthProvider.credential(idToken)
+        return auth().signInWithCredential(googleCredential)
       }
     } catch (error) {
       console.error(error)
