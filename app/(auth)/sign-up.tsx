@@ -13,7 +13,7 @@ import {
 } from 'tamagui'
 import { SubmitButton } from 'components'
 
-import { GoogleSignIn } from 'google/GoogleSignIn'
+import { GoogleSignIn } from 'features/auth/components/GoogleSignIn'
 import { router } from 'expo-router'
 import React, { useState } from 'react'
 import { z } from 'zod'
