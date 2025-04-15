@@ -59,14 +59,8 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: 'Profile',
+          headerTitle: '',
           tabBarIcon: ({ color }) => <HomeIcons.User color={color as any} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <View px="$4">
-                <AlertCircle size={22} />
-              </View>
-            </Link>
-          ),
         }}
       />
     </Tabs>

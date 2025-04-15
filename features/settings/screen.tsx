@@ -1,4 +1,4 @@
-import * as Application from 'expo-application'
+// import * as Application from 'expo-application'
 import { Link } from 'expo-router'
 import { Paragraph, ScrollView, Separator, YStack, isWeb, useMedia } from 'tamagui'
 import { Book, Cog, Info, Lock, LogOut, Mail, Moon, Twitter } from '@tamagui/lucide-icons'
@@ -69,9 +69,9 @@ export const SettingsScreen = () => {
         </Settings>
       </ScrollView>
 
-      <Paragraph py="$2" text="center" theme="alt2">
+      {/* <Paragraph py="$2" text="center" theme="alt2">
         v{Application.nativeApplicationVersion} ({Application.nativeBuildVersion})
-      </Paragraph>
+      </Paragraph> */}
     </YStack>
   )
 }
