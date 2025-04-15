@@ -8,7 +8,7 @@ import { z } from 'zod'
 import { FullscreenSpinner, SubmitButton } from 'components'
 // import { UploadAvatar } from 'features/settings/components/upload-avatar'
 
-const params = useLocalSearchParams<{ edit_name?: '1'; edit_about?: '1' }>()
+
 
 export const EditProfileScreen = () => {
   return <Text>Hello</Text>
@@ -37,6 +37,7 @@ const EditProfileForm = ({
   userId: string
 }) => {
   const toast = useToastController()
+  const params = useLocalSearchParams<{ edit_name?: '1'; edit_about?: '1' }>()
 
   const router = useRouter()
 
@@ -62,7 +63,7 @@ const EditProfileForm = ({
     >
       {(fields) => (
         <>
-          <YStack mb="$4" ai="center">
+          <YStack mb="$4" items="center">
             <View>
               {/* <UploadAvatar>
                 <UserAvatar />

@@ -59,7 +59,7 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: 'Profile',
-          headerTitle: '',
+          headerShown: false,
           tabBarIcon: ({ color }) => <HomeIcons.User color={color as any} />,
         }}
       />
