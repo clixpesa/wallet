@@ -140,7 +140,6 @@ const AvatarContent = forwardRef<GetProps<typeof TAvatar>, any>((props, ref) => 
       borderColor="$color2"
       elevation={5}
       size={size}
-      ref={ref}
       circular
       {...props}
     />

@@ -1,6 +1,6 @@
 export * from './AchievementCard'
 export * from './ActionBanner'
-export * from './Avatar'
+export * from './CAvatar'
 export * from './CustomToast'
 export * from './FieldError'
 export * from './FormFields'

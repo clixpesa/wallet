@@ -1,15 +1,16 @@
 import { Link, Tabs } from 'expo-router'
-import { Button, useTheme, View } from 'tamagui'
-import { LayoutGrid, Home, User, AlertCircle, Bell } from '@tamagui/lucide-icons'
-
+import { useTheme, View } from 'tamagui'
+import { LayoutGrid, Home, AlertCircle, Bell, User } from '@tamagui/lucide-icons'
+import { useAuth } from 'provider/auth'
+import { CAvatar } from 'components'
 export const HomeIcons = {
   Home,
   Spaces: LayoutGrid,
-  User: User,
 }
 
 export default function TabLayout() {
   const theme = useTheme()
+  const { user } = useAuth()
 
   return (
     <Tabs
@@ -24,13 +25,33 @@ export default function TabLayout() {
           borderBottomColor: theme.borderColor.val,
         },
         headerTintColor: theme.color.val,
+        headerShadowVisible: false,
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
+          headerTitle: 'Welcome',
           tabBarIcon: ({ color }) => <HomeIcons.Home color={color as any} />,
+          headerLeft: () => (
+            <Link href="/profile" asChild>
+              <View px="$4">
+                <CAvatar size="$4" theme="teal">
+                  <CAvatar.Content>
+                    <CAvatar.Image src={user?.photoURL} />
+                    <CAvatar.Fallback
+                      backgroundColor="$background"
+                      items="center"
+                      justifyContent="center"
+                    >
+                      <User size={20} />
+                    </CAvatar.Fallback>
+                  </CAvatar.Content>
+                </CAvatar>
+              </View>
+            </Link>
+          ),
           headerRight: () => (
             <Link href="/modal" asChild>
               <View px="$4">
@@ -52,15 +73,6 @@ export default function TabLayout() {
               </View>
             </Link>
           ),
-        }}
-      />
-
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: 'Profile',
-          headerShown: false,
-          tabBarIcon: ({ color }) => <HomeIcons.User color={color as any} />,
         }}
       />
     </Tabs>
