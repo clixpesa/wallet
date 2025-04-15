@@ -8,8 +8,6 @@ import { z } from 'zod'
 import { FullscreenSpinner, SubmitButton } from 'components'
 // import { UploadAvatar } from 'features/settings/components/upload-avatar'
 
-
-
 export const EditProfileScreen = () => {
   return <Text>Hello</Text>
   // const { profile, user } = useUser()
