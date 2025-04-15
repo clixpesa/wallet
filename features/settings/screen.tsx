@@ -55,7 +55,7 @@ export const SettingsScreen = () => {
             <Settings.Group>
               <Settings.Item
                 icon={Twitter}
-                onPress={() => redirect('https://twitter.com/tamagui_js')}
+                onPress={() => redirect('https://x.com/clixpesa')}
                 accentTheme="alt2"
               >
                 Our Twitter

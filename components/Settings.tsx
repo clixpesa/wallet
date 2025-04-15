@@ -1,11 +1,11 @@
 import {
-  H2,
-  Separator,
+
   XStack,
   YGroup,
   YStack,
   withStaticProperties,
   styled,
+  SizableText,
 } from 'tamagui'
 
 import { SettingItem } from './SettingItem'
@@ -33,19 +33,20 @@ const SettingsGroup = styled(YGroup, {
   '$platform-native': {
     separator: (
       <XStack>
-        <YStack w={20} bg="$color2" />
-        <Separator borderColor="$color4" borderWidth="$0.25" />
+        <YStack width={20} bg="$color2" />
+        {/* <Separator borderColor="$color4" borderWidth="$0.25" /> */}
       </XStack>
     ),
   },
 })
 
-const SettingsTitle = styled(H2, {
+const SettingsTitle = styled(SizableText, {
   '$platform-web': {
     mx: '$6',
   },
-  mx: '$4',
-  py: '$4',
+  fontWeight: '700',
+  mx: '$2',
+  theme: 'alt2',
 })
 
 export const Settings = withStaticProperties(SettingsFrame, {

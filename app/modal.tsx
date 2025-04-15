@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 export default function ModalScreen() {
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right']}>
-      <View flex={1} items="center" justify="center" bg="red" px="$4">
+      <View flex={1} items="center" justify="center" px="$4">
         <XStack gap="$2">
           <Paragraph text="center">
             You're all caught up! We'll notify you when there's something new

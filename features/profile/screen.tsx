@@ -1,73 +1,186 @@
+import { Cog, LogOut, Users , Banknote, KeyRound, SquareAsterisk, Fingerprint, BookKey, MessageSquareHeart, MessageCircleQuestion, LockKeyhole, BookOpen,} from '@tamagui/lucide-icons'
+import { useAuth } from 'provider/auth'
+import { useSafeAreaInsets } from 'utils/useSafeAreaInsets'
+import {  Link, router } from 'expo-router'
 import {
   Avatar,
+  Button,
+  H4,
+  H2,
   Paragraph,
+  ScrollView,
   XStack,
   YStack,
   getTokens,
   Image,
-  useWindowDimensions,
+  H6,
+  SizableStack,
+  SizableText,
 } from 'tamagui'
-import { Box, Cog, Milestone, ShoppingCart, User, Users } from '@tamagui/lucide-icons'
-import { useSafeAreaInsets } from 'utils/useSafeAreaInsets'
-// import { useUser } from 'app/utils/useUser'
 import { Settings } from 'components'
-import { Link } from 'expo-router'
 
-export function ProfileScreen() {
-  // const { profile, avatarUrl } = useUser()
-  const name = 'sam'
+export default function ProfileScreen() {
+  const {user} = useAuth()
+  const name = user?.displayName
+  const phoneNumber = user?.phoneNumber
+  const photoURL = user?.photoURL
+
   const insets = useSafeAreaInsets()
-  const height = useWindowDimensions().height
 
   return (
-    <YStack
-      maxW={600}
-      mx="auto"
-      width="100%"
-      flex={1}
-      height={height - insets.bottom - insets.top}
-      py="$4"
-      pb="$2"
-    >
-      <XStack gap="$4" mb="$7" mt="auto" items="center" px="$4">
-        <Avatar circular size="$3">
-          <Image
-            // src={avatarUrl}
-            alt="your avatar"
-            width={getTokens().size['3'].val}
-            height={getTokens().size['3'].val}
-          />
-        </Avatar>
-        <Paragraph text="center" ml="$-1.5">
-          {name ?? 'No Name'}
-        </Paragraph>
-      </XStack>
-      <Settings>
-        <Settings.Items>
-          <Settings.Group>
-            <Link href="/profile/edit" asChild>
-              <Settings.Item icon={User} accentTheme="teal">
-                Edit profile
-              </Settings.Item>
-            </Link>
-            <Settings.Item icon={Box} accentTheme="green">
-              Wallet Address
-            </Settings.Item>
-            <Settings.Item icon={Users} accentTheme="orange">
-              Invite
-            </Settings.Item>
-            <Settings.Item icon={Milestone} accentTheme="gray">
-              Theme
-            </Settings.Item>
-            <Settings.Item icon={ShoppingCart} accentTheme="yellow">
-              Local Currency
-            </Settings.Item>
-            <Link href="/settings">
-              <Settings.Item icon={Cog}>Settings</Settings.Item>
-            </Link>
-          </Settings.Group>
-        </Settings.Items>
-      </Settings>
-    </YStack>
+  
+      <ScrollView>
+        <YStack
+          maxW={600}
+          mx="auto"
+          width="100%"
+          flex={1}
+          bg='$background'
+          gap="$4"
+          pb={insets.bottom + 20}
+          pt={insets.top + 10}
+        >
+          <XStack gap="$4"  px='$4' items='center' >
+            <XStack gap="$2" justify="center" $sm={{ mt: '$8' }}>
+              <Avatar circular size="$6" bg="$accentColor">
+                <Image
+                  src={photoURL}
+                  alt="your avatar"
+                  width={getTokens().size['6'].val}
+                  height={getTokens().size['6'].val}
+                />
+              </Avatar>
+            </XStack>
+            <YStack  items='flex-start'>
+              {name ? (
+                <SizableText size='$4' fontWeight='bold'>{name}</SizableText>
+              ) : (
+                <Link href="/profile/edit?edit_name=1">
+                  <H2 text="center">No Name</H2>
+                </Link>
+              )}
+
+              {/* {!!phoneNumber && ( */}
+                <Paragraph theme="alt2" text="center" size="$4">
+                  +254 706 394 600
+                  {phoneNumber}
+                </Paragraph>
+              {/* )} */}
+            </YStack>
+              <Button
+            rounded="$10"
+            mx="$4"
+            onPress={() => router.push('/profile/edit')}
+            theme="teal"
+            themeInverse
+          >
+            Edit Profile
+          </Button>
+          </XStack>
+    
+
+          <Settings>
+            <Settings.Items>
+                <Settings.Title>General</Settings.Title>
+              <Settings.Group>
+                <Settings.Item icon={Users} accentTheme="teal">
+                  Wallet Address
+                </Settings.Item>
+                <Settings.Item
+                  onPress={() => router.push('/settings')}
+                  icon={Cog}
+                  accentTheme="teal"
+                >
+                  Invite
+                </Settings.Item>
+        
+              </Settings.Group>
+              <Settings.Title>Preferences</Settings.Title>
+              <Settings.Group>
+                <Settings.Item
+                  onPress={() => router.push('/settings')}
+                  icon={Cog}
+                  accentTheme="teal"
+                >
+                  Theme
+                </Settings.Item>
+            
+                <Settings.Item icon={Banknote} accentTheme="teal">
+                  Local currency
+                </Settings.Item>
+              </Settings.Group>
+
+              <Settings.Title>Security</Settings.Title>
+              <Settings.Group>
+
+                <Settings.Item icon={Fingerprint} accentTheme="teal">
+                  Biometrics
+                </Settings.Item>
+                <Settings.Item
+                  onPress={() => router.push('/settings')}
+                  icon={SquareAsterisk}
+                  accentTheme="teal"
+                >
+                  Change Passcode
+                </Settings.Item>
+              
+                <Settings.Item icon={KeyRound} accentTheme="teal">
+                  Recovery phrase
+                </Settings.Item>
+
+                <Settings.Item icon={BookKey} accentTheme="teal">
+                  Google Drive backup
+                </Settings.Item>
+
+              </Settings.Group>
+
+              <Settings.Title>Support</Settings.Title>
+
+              <Settings.Group>
+                <Settings.Item icon={MessageSquareHeart} accentTheme="teal">
+                  Share feedback
+                </Settings.Item>
+                <Settings.Item
+                  onPress={() => router.push('/settings')}
+                  icon={MessageCircleQuestion}
+                  accentTheme="teal"
+                >
+                  Help and Support
+                </Settings.Item>
+    
+              </Settings.Group>
+
+              <Settings.Title>About</Settings.Title>
+
+              <Settings.Group>
+                <Settings.Item icon={LockKeyhole} accentTheme="teal"
+                >
+                  Privacy Policy
+                </Settings.Item>
+                <Settings.Item
+                  onPress={() => router.push('/settings')}
+                  icon={BookOpen}
+                  accentTheme="teal"
+                
+                >
+                  Terms of Service
+                </Settings.Item>
+    
+              </Settings.Group>
+            </Settings.Items>
+          </Settings>
+        </YStack>
+      </ScrollView>
   )
 }
+
+
+// const SettingsItemLogoutAction = () => {
+//   const { signOut } = useAuth()
+
+//   return (
+//     <Settings.Item icon={LogOut} accentTheme="red" onPress={() => signOut()}>
+//       Log Out
+//     </Settings.Item>
+//   )
+// }
