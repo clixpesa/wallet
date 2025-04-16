@@ -13,7 +13,7 @@ export const UploadAvatar = ({ children }: { children: React.ReactNode }) => {
       base64: true,
     })
 
-    console.log('result', result)
+    // console.log('result', result)
 
     // uploadImage(result)
   }
