@@ -11,6 +11,7 @@ type AuthContextType = {
   confirmOtp: (code: string) => Promise<void>
   signOut: () => Promise<void>
   confirmation: FirebaseAuthTypes.ConfirmationResult | null
+  verifyGoogleIdToken: (idToken: string) => Promise<FirebaseAuthTypes.UserCredential>
 }
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType)
@@ -81,6 +82,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  const verifyGoogleIdToken = async (idToken: string) => {
+    try {
+      setLoading(true)
+      setError(null)
+
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken)
+      const userCredential = await auth().signInWithCredential(googleCredential)
+
+      const currentUser = userCredential?.user
+
+      if (currentUser) {
+        await setItem('user', currentUser.toJSON())
+      }
+
+      return userCredential
+    } catch (error) {
+      setError(error as Error)
+      throw error
+    } finally {
+      setLoading(false)
+    }
+  }
+
   const signOut = async () => {
     try {
       await auth().signOut()
@@ -95,12 +119,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     <AuthContext.Provider
       value={{
         user,
-        loading,
         error,
-        sendPhoneOtp,
-        confirmOtp,
         signOut,
+        loading,
+        confirmOtp,
         confirmation,
+        sendPhoneOtp,
+        verifyGoogleIdToken,
       }}
     >
       {children}
