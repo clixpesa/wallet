@@ -1,12 +1,12 @@
-// import * as Application from 'expo-application'
-import { Link } from 'expo-router'
-import { ScrollView, YStack, useMedia } from 'tamagui'
 import { Book, Cog, Info, Lock, LogOut, Twitter } from '@tamagui/lucide-icons'
+import { ScrollView, YStack, useMedia, Paragraph } from 'tamagui'
+import * as Application from 'expo-application'
+import { Link } from 'expo-router'
+
+import { usePathname } from 'utils/usePathname'
+import { redirect } from 'utils/redirect'
 
 import { useAuth } from 'provider/auth'
-
-import { redirect } from 'utils/redirect'
-import { usePathname } from 'utils/usePathname'
 import { Settings } from 'components'
 
 export const SettingsScreen = () => {
@@ -69,9 +69,9 @@ export const SettingsScreen = () => {
         </Settings>
       </ScrollView>
 
-      {/* <Paragraph py="$2" text="center" theme="alt2">
+      <Paragraph py="$2" text="center" theme="alt2">
         v{Application.nativeApplicationVersion} ({Application.nativeBuildVersion})
-      </Paragraph> */}
+      </Paragraph>
     </YStack>
   )
 }
