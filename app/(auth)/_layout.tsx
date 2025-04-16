@@ -5,7 +5,7 @@ export default function Layout() {
   const theme = useTheme()
   return (
     <>
-      <Stack.Screen options={{ headerShown: false}} />
+      <Stack.Screen options={{ headerShown: false }} />
       <Stack>
         <Stack.Screen
           name="onboarding"

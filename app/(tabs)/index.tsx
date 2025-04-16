@@ -1,5 +1,4 @@
-import { ExternalLink } from '@tamagui/lucide-icons'
-import { Anchor, H2, Paragraph, XStack, YStack, Button } from 'tamagui'
+import { XStack, YStack } from 'tamagui'
 
 export default function HomeScreen() {
   return (
