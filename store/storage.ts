@@ -2,7 +2,7 @@ import { MMKV } from 'react-native-mmkv'
 import * as SecureStore from 'expo-secure-store'
 import * as aesjs from 'aes-js'
 
-const storage = new MMKV()
+export const storage = new MMKV()
 
 async function _encrypt(key: string, value: string) {
   const encryptionKey = crypto.getRandomValues(new Uint8Array(256 / 8))

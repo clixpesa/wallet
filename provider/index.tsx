@@ -1,3 +1,4 @@
+import { UniversalThemeProvider } from './theme'
 import { SafeAreaProvider } from './safe-area'
 import { TamaguiProvider } from './tamagui'
 import { ToastProvider } from './toast'
@@ -8,7 +9,11 @@ export function Provider({
 }: {
   children: React.ReactNode
 }) {
-  return <Providers>{children}</Providers>
+  return (
+    <AuthProvider>
+      <Providers>{children}</Providers>
+    </AuthProvider>
+  )
 }
 
 const compose = (providers: React.FC<{ children: React.ReactNode }>[]) =>
@@ -24,8 +29,8 @@ const compose = (providers: React.FC<{ children: React.ReactNode }>[]) =>
   })
 
 const Providers = compose([
+  UniversalThemeProvider,
   SafeAreaProvider,
   TamaguiProvider,
   ToastProvider,
-  AuthProvider,
 ])
