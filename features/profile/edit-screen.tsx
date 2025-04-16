@@ -1,22 +1,22 @@
+import { Pencil, UserRound } from '@tamagui/lucide-icons'
 import { useToastController } from '@tamagui/toast'
-import { Theme, View, YStack, getTokens } from 'tamagui'
-import { SchemaForm, formFields } from 'utils/SchemaForm'
-import { useLocalSearchParams } from 'expo-router'
-import { useRouter } from 'expo-router'
+import { useRouter, useLocalSearchParams } from 'expo-router'
+import { View, YStack, getTokens } from 'tamagui'
 import { z } from 'zod'
 
-import { FullscreenSpinner, SubmitButton } from 'components'
 import { UploadAvatar } from 'features/settings/components/upload-avatar'
+import { FullscreenSpinner, SubmitButton, CAvatar } from 'components'
+import { SchemaForm, formFields } from 'utils/SchemaForm'
+
+import type { User } from 'provider/auth/firebase'
 import { useAuth } from 'provider/auth'
-import { CAvatar } from 'components'
-import { Pencil, UserRound, UserRoundPen } from '@tamagui/lucide-icons'
 
 export const EditProfileScreen = () => {
   const { user } = useAuth()
   if (!user?.uid) {
     return <FullscreenSpinner />
   }
-  return <EditProfileForm userId={user.uid} initial={{ name: 'Sam' }} />
+  return <EditProfileForm user={user} initial={{ name: user.displayName }} />
 }
 
 const ProfileSchema = z.object({
@@ -25,18 +25,26 @@ const ProfileSchema = z.object({
 
 const EditProfileForm = ({
   initial,
-  userId,
+  user,
 }: {
   initial: { name: string | null }
-  userId: string
+  user: User
 }) => {
+  const router = useRouter()
   const toast = useToastController()
   const params = useLocalSearchParams<{ edit_name?: '1' }>()
 
-  const router = useRouter()
-
-  const handleSubmit = () => {
-    console.log('Update Form')
+  const handleSubmit = async (data: z.infer<typeof ProfileSchema>) => {
+    try {
+      await user?.updateProfile({
+        displayName: data.name,
+      })
+      toast.show('Successfully updated!')
+      router.back()
+    } catch (error) {
+      console.error('Error updating profile', error)
+      toast.show('Failed to update profile')
+    }
   }
 
   return (
@@ -52,11 +60,9 @@ const EditProfileForm = ({
       }}
       onSubmit={handleSubmit}
       renderAfter={({ submit }) => (
-        <Theme inverse>
-          <SubmitButton rounded="$10" theme="teal" onPress={() => submit()}>
-            Save
-          </SubmitButton>
-        </Theme>
+        <SubmitButton rounded="$10" theme="teal" onPress={() => submit()} themeInverse>
+          Save
+        </SubmitButton>
       )}
     >
       {(fields) => (
@@ -84,7 +90,7 @@ const UserAvatar = () => {
       </CAvatar.Icon>
       <CAvatar.Content>
         <CAvatar.Image
-          src={user?.photoURL}
+          src={user?.photoURL || ''}
           alt="your avatar"
           width={getTokens().size['8'].val}
           height={getTokens().size['8'].val}

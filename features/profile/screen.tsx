@@ -42,7 +42,7 @@ export default function ProfileScreen() {
           <XStack gap="$2" justify="center" $sm={{ mt: '$8' }}>
             <Avatar circular size="$8" bg="$accentColor">
               <Image
-                src={photoURL}
+                src={photoURL || ''}
                 alt="your avatar"
                 width={getTokens().size['8'].val}
                 height={getTokens().size['8'].val}

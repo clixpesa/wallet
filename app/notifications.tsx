@@ -1,12 +1,11 @@
 import { Paragraph, View, XStack } from 'tamagui'
 
-export default function Modal() {
+export default function Notifications() {
   return (
     <View flex={1} items="center" justify="center" px="$4">
       <XStack gap="$2">
         <Paragraph text="center">
-          This is a modal screen. You can use it to display additional information or
-          actions related to the current context.
+          You're all caught up! We'll notify you when there's something new
         </Paragraph>
       </XStack>
     </View>

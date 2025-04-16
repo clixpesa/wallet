@@ -70,9 +70,25 @@ function RootLayoutNav() {
           />
 
           <Stack.Screen
-            name="modal"
+            name="notifications"
             options={{
               title: 'Notifications',
+              presentation: 'modal',
+              headerTitleAlign: 'center',
+              animation: 'slide_from_right',
+              gestureEnabled: true,
+              gestureDirection: 'horizontal',
+              headerShadowVisible: false,
+              headerStyle: {
+                backgroundColor: theme.color2.val,
+              },
+            }}
+          />
+
+          <Stack.Screen
+            name="modal"
+            options={{
+              title: '',
               presentation: 'modal',
               headerTitleAlign: 'center',
               animation: 'slide_from_right',
