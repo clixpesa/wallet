@@ -13,6 +13,7 @@ import { useAuth } from 'provider/auth'
 
 export const EditProfileScreen = () => {
   const { user } = useAuth()
+
   if (!user?.uid) {
     return <FullscreenSpinner />
   }
@@ -83,6 +84,7 @@ const EditProfileForm = ({
 
 const UserAvatar = () => {
   const { user } = useAuth()
+
   return (
     <CAvatar size="$8" theme="teal">
       <CAvatar.Icon placement="bottom-right">
