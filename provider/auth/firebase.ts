@@ -4,6 +4,7 @@ type BooleanPredicate = () => boolean
 type VoidAsyncFn = () => Promise<void>
 type AsyncGetter<T> = () => Promise<T>
 type AuthStateCallback = (user: FirebaseAuthTypes.User | null) => void
+export type User = FirebaseAuthTypes.User | null
 
 const signOut: VoidAsyncFn = () => auth().signOut()
 

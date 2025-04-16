@@ -54,7 +54,7 @@ export default function TabLayout() {
             </Link>
           ),
           headerRight: () => (
-            <Link href="/modal" asChild>
+            <Link href="/notifications" asChild>
               <View px="$4">
                 <Bell size={22} />
               </View>
