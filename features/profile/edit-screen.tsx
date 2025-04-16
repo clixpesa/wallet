@@ -1,43 +1,43 @@
 import { useToastController } from '@tamagui/toast'
-import { Avatar, Theme, View, YStack, Image, Text } from 'tamagui'
+import { Theme, View, YStack, getTokens } from 'tamagui'
 import { SchemaForm, formFields } from 'utils/SchemaForm'
 import { useLocalSearchParams } from 'expo-router'
 import { useRouter } from 'expo-router'
 import { z } from 'zod'
 
 import { FullscreenSpinner, SubmitButton } from 'components'
-// import { UploadAvatar } from 'features/settings/components/upload-avatar'
+import { UploadAvatar } from 'features/settings/components/upload-avatar'
+import { useAuth } from 'provider/auth'
+import { CAvatar } from 'components'
+import { Pencil, UserRound, UserRoundPen } from '@tamagui/lucide-icons'
 
 export const EditProfileScreen = () => {
-  return <Text>Hello</Text>
-  // const { profile, user } = useUser()
-  // if (!profile || !user?.id) {
-  //   return <FullscreenSpinner />
-  // }
-  // return (
-  //   // <EditProfileForm
-  //   // userId={user.id}
-  //   // initial={{ name: 'Sam' }}
-  //   // />
-  // )
+  const { user } = useAuth()
+  if (!user?.uid) {
+    return <FullscreenSpinner />
+  }
+  return <EditProfileForm userId={user.uid} initial={{ name: 'Sam' }} />
 }
 
 const ProfileSchema = z.object({
   name: formFields.text.describe('Name // John Doe'),
-  about: formFields.textarea.describe('About // Tell us a bit about yourself'),
 })
 
 const EditProfileForm = ({
   initial,
   userId,
 }: {
-  initial: { name: string | null; about: string | null }
+  initial: { name: string | null }
   userId: string
 }) => {
   const toast = useToastController()
-  const params = useLocalSearchParams<{ edit_name?: '1'; edit_about?: '1' }>()
+  const params = useLocalSearchParams<{ edit_name?: '1' }>()
 
   const router = useRouter()
+
+  const handleSubmit = () => {
+    console.log('Update Form')
+  }
 
   return (
     <SchemaForm
@@ -47,15 +47,15 @@ const EditProfileForm = ({
           autoFocus: !!params?.edit_name,
         },
       }}
-      defaultValues={
-        {
-          // name: initial.name ?? '',
-        }
-      }
-      // onSubmit={(values) => mutation.mutate(values)}
+      defaultValues={{
+        name: initial.name ?? '',
+      }}
+      onSubmit={handleSubmit}
       renderAfter={({ submit }) => (
         <Theme inverse>
-          <SubmitButton onPress={() => submit()}>Update Profile</SubmitButton>
+          <SubmitButton rounded="$10" theme="teal" onPress={() => submit()}>
+            Save
+          </SubmitButton>
         </Theme>
       )}
     >
@@ -63,9 +63,9 @@ const EditProfileForm = ({
         <>
           <YStack mb="$4" items="center">
             <View>
-              {/* <UploadAvatar>
+              <UploadAvatar>
                 <UserAvatar />
-              </UploadAvatar> */}
+              </UploadAvatar>
             </View>
           </YStack>
           {Object.values(fields)}
@@ -76,10 +76,27 @@ const EditProfileForm = ({
 }
 
 const UserAvatar = () => {
-  // const { avatarUrl } = useUser()
+  const { user } = useAuth()
   return (
-    <Avatar circular size={128}>
-      <Image alt="your avatar" width={128} height={128} />
-    </Avatar>
+    <CAvatar size="$8" theme="teal">
+      <CAvatar.Icon placement="bottom-right">
+        <Pencil />
+      </CAvatar.Icon>
+      <CAvatar.Content>
+        <CAvatar.Image
+          src={user?.photoURL}
+          alt="your avatar"
+          width={getTokens().size['8'].val}
+          height={getTokens().size['8'].val}
+        />
+        <CAvatar.Fallback
+          backgroundColor="$background"
+          items="center"
+          justifyContent="center"
+        >
+          <UserRound size={38} />
+        </CAvatar.Fallback>
+      </CAvatar.Content>
+    </CAvatar>
   )
 }

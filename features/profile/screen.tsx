@@ -1,7 +1,5 @@
 import {
-  Cog,
   LogOut,
-  Users,
   Banknote,
   KeyRound,
   SquareAsterisk,
@@ -11,6 +9,9 @@ import {
   MessageCircleQuestion,
   LockKeyhole,
   BookOpen,
+  Wallet2,
+  Share,
+  SunMoon,
 } from '@tamagui/lucide-icons'
 import { useAuth } from 'provider/auth'
 import { Link, router } from 'expo-router'
@@ -36,15 +37,7 @@ export default function ProfileScreen() {
 
   return (
     <ScrollView>
-      <YStack
-        maxW={600}
-        mx="auto"
-        width="100%"
-        flex={1}
-        gap="$4"
-        // bg='$color2'
-        pb="$4"
-      >
+      <YStack maxW={600} mx="auto" width="100%" flex={1} gap="$4" pb="$4">
         <YStack gap="$2" p="$4" items="center">
           <XStack gap="$2" justify="center" $sm={{ mt: '$8' }}>
             <Avatar circular size="$8" bg="$accentColor">
@@ -89,12 +82,12 @@ export default function ProfileScreen() {
           <Settings.Items>
             <Settings.Title>General</Settings.Title>
             <Settings.Group>
-              <Settings.Item icon={Users} accentTheme="teal">
+              <Settings.Item icon={Wallet2} accentTheme="teal">
                 Wallet Address
               </Settings.Item>
               <Settings.Item
                 onPress={() => router.push('/settings')}
-                icon={Cog}
+                icon={Share}
                 accentTheme="teal"
               >
                 Invite
@@ -104,7 +97,7 @@ export default function ProfileScreen() {
             <Settings.Group>
               <Settings.Item
                 onPress={() => router.push('/settings')}
-                icon={Cog}
+                icon={SunMoon}
                 accentTheme="teal"
               >
                 Theme
