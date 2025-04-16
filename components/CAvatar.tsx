@@ -26,7 +26,7 @@ const AvatarIconFrame = styled(View, {
   context: AvatarContext,
   rounded: 1000_000_000,
   z: 100,
-  borderWidth: '$1',
+  borderWidth: '$0.5',
   borderColor: '$color1',
   position: 'absolute',
   bg: '$color5',
@@ -136,7 +136,7 @@ const AvatarContent = forwardRef<GetProps<typeof TAvatar>, any>((props, ref) => 
   return (
     <TAvatar
       backgroundColor="$background"
-      borderWidth="$1"
+      borderWidth="$0.5"
       borderColor="$color2"
       elevation={5}
       size={size}

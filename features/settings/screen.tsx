@@ -1,7 +1,7 @@
 // import * as Application from 'expo-application'
 import { Link } from 'expo-router'
-import { Paragraph, ScrollView, Separator, YStack, isWeb, useMedia } from 'tamagui'
-import { Book, Cog, Info, Lock, LogOut, Mail, Moon, Twitter } from '@tamagui/lucide-icons'
+import { ScrollView, YStack, useMedia } from 'tamagui'
+import { Book, Cog, Info, Lock, LogOut, Twitter } from '@tamagui/lucide-icons'
 
 import { useAuth } from 'provider/auth'
 

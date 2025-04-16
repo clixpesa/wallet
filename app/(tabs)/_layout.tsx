@@ -3,6 +3,7 @@ import { useTheme, View } from 'tamagui'
 import { LayoutGrid, Home, AlertCircle, Bell, User } from '@tamagui/lucide-icons'
 import { useAuth } from 'provider/auth'
 import { CAvatar } from 'components'
+
 export const HomeIcons = {
   Home,
   Spaces: LayoutGrid,

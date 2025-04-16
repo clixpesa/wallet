@@ -1,93 +1,89 @@
-// import { YStack } from 'tamagui'
-// import { Upload } from '@tamagui/lucide-icons'
-// import * as ImagePicker from 'expo-image-picker'
-// import type React from 'react'
+import { YStack, Circle } from 'tamagui'
+import * as ImagePicker from 'expo-image-picker'
+import type React from 'react'
 
-// export const UploadAvatar = ({ children }: { children: React.ReactNode }) => {
-//   // const { user, updateProfile } = useUser()
+export const UploadAvatar = ({ children }: { children: React.ReactNode }) => {
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: 'images',
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+      base64: true,
+    })
 
-//   const pickImage = async () => {
-//     // No permissions request is necessary for launching the image library
-//     const result = await ImagePicker.launchImageLibraryAsync({
-//       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-//       allowsEditing: true,
-//       aspect: [1, 1],
-//       quality: 1,
-//       base64: true,
-//     })
+    console.log('result', result)
 
-//     uploadImage(result)
-//   }
+    // uploadImage(result)
+  }
 
-//   const uploadImage = async (pickerResult: ImagePicker.ImagePickerResult) => {
-//     try {
-//       if (pickerResult.canceled) {
-//         // upload canceled
-//       } else {
-//         if (!user) return
-//         const image = pickerResult.assets[0]
-//         if (!image) {
-//           throw new Error('No image provided.')
-//         }
+  // const uploadImage = async (pickerResult: ImagePicker.ImagePickerResult) => {
+  //   try {
+  //     if (pickerResult.canceled) {
+  //       // upload canceled
+  //     } else {
+  //       if (!user) return
+  //       const image = pickerResult.assets[0]
+  //       if (!image) {
+  //         throw new Error('No image provided.')
+  //       }
 
-//         const base64Image = image.base64
+  //       const base64Image = image.base64
 
-//         if (!base64Image) {
-//           throw new Error('No image provided.')
-//         }
+  //       if (!base64Image) {
+  //         throw new Error('No image provided.')
+  //       }
 
-//         const base64Str = base64Image.includes('base64,')
-//           ? base64Image.substring(base64Image.indexOf('base64,') + 'base64,'.length)
-//           : base64Image
-//         const res = decode(base64Str)
+  //       const base64Str = base64Image.includes('base64,')
+  //         ? base64Image.substring(base64Image.indexOf('base64,') + 'base64,'.length)
+  //         : base64Image
+  //       const res = decode(base64Str)
 
-//         if (!(res.byteLength > 0)) {
-//           console.error('ArrayBuffer is null')
-//           return null
-//         }
-//         const result = await supabase.storage
-//           .from('avatars')
-//           .upload(`${user.id}/${Number(new Date())}.jpeg`, res, {
-//             contentType: 'image/jpeg',
-//             upsert: true,
-//           })
-//         if (result.error) {
-//           console.error(result.error)
-//           throw new Error(result.error.message)
-//         }
+  //       if (!(res.byteLength > 0)) {
+  //         console.error('ArrayBuffer is null')
+  //         return null
+  //       }
+  //       const result = await supabase.storage
+  //         .from('avatars')
+  //         .upload(`${user.id}/${Number(new Date())}.jpeg`, res, {
+  //           contentType: 'image/jpeg',
+  //           upsert: true,
+  //         })
+  //       if (result.error) {
+  //         console.error(result.error)
+  //         throw new Error(result.error.message)
+  //       }
 
-//         const publicUrlRes = await supabase.storage
-//           .from('avatars')
-//           .getPublicUrl(result.data.path.replace(`avatars/`, ''))
+  //       const publicUrlRes = await supabase.storage
+  //         .from('avatars')
+  //         .getPublicUrl(result.data.path.replace(`avatars/`, ''))
 
-//         await supabase
-//           .from('profiles')
-//           .update({ avatar_url: publicUrlRes.data.publicUrl })
-//           .eq('id', user.id)
-//         await updateProfile()
-//       }
-//     } catch (e) {
-//       console.error(e)
+  //       await supabase
+  //         .from('profiles')
+  //         .update({ avatar_url: publicUrlRes.data.publicUrl })
+  //         .eq('id', user.id)
+  //       await updateProfile()
+  //     }
+  //   } catch (e) {
+  //     console.error(e)
 
-//       alert(
-//         `Upload failed.${
-//           process.env.NODE_ENV !== 'production'
-//             ? ' NOTE: Make sure you have created a public bucket with name `avatars`. You can do it either from your Supabase dashboard (http://localhost:54323/project/default/storage/buckets/avatars) or using the seed.sql file.'
-//             : ''
-//         }`
-//       )
-//     }
-//   }
+  //     alert(
+  //       `Upload failed.${
+  //         process.env.NODE_ENV !== 'production'
+  //           ? ' NOTE: Make sure you have created a public bucket with name `avatars`. You can do it either from your Supabase dashboard (http://localhost:54323/project/default/storage/buckets/avatars) or using the seed.sql file.'
+  //           : ''
+  //       }`
+  //     )
+  //   }
+  // }
 
-//   return (
-//     <YStack position="relative" self="flex-start" fs={1} onPress={() => pickImage()}>
-//       {children}
-//       <YStack fullscreen justify="center" items="center" z={100}>
-//         <YStack bg="black" opacity={0.3} rounded="$10" fullscreen />
-//         <YStack fullscreen justify="center" items="center">
-//           <Upload color="white" />
-//         </YStack>
-//       </YStack>
-//     </YStack>
-//   )
-// }
+  return (
+    <YStack position="relative" self="flex-start" onPress={() => pickImage()}>
+      {children}
+      <YStack fullscreen justify="center" items="center" z={100}>
+        <Circle bg="black" fullscreen opacity={0} />
+      </YStack>
+    </YStack>
+  )
+}
