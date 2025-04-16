@@ -40,7 +40,7 @@ export default function TabLayout() {
               <View px="$4">
                 <CAvatar size="$4" theme="teal">
                   <CAvatar.Content>
-                    <CAvatar.Image src={user?.photoURL} />
+                    <CAvatar.Image src={user?.photoURL || ''} />
                     <CAvatar.Fallback
                       backgroundColor="$background"
                       items="center"
