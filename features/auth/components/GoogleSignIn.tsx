@@ -6,12 +6,14 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin'
 import { Button } from 'tamagui'
-import auth from '@react-native-firebase/auth'
 
 import { getUrlSafeNonce } from 'utils/auth/getNonce'
 import { IconGoogle } from 'components'
+import { useAuth } from 'provider/auth'
 
 export const GoogleSignIn = () => {
+  const { verifyGoogleIdToken } = useAuth()
+
   const signInWithGoogle = async () => {
     try {
       GoogleOneTapSignIn.configure({
@@ -22,10 +24,8 @@ export const GoogleSignIn = () => {
 
       if (isSuccessResponse(response)) {
         const idToken = response.data?.idToken
-        const googleCredential = auth.GoogleAuthProvider.credential(idToken)
-        return auth().signInWithCredential(googleCredential)
+        await verifyGoogleIdToken(idToken)
       } else if (isNoSavedCredentialFoundResponse(response)) {
-        console.log('response', response.data)
         // Android and Apple only.
         // No saved credential found (user has not signed in yet, or they revoked access)
         // call `createAccount()`
@@ -33,16 +33,18 @@ export const GoogleSignIn = () => {
           nonce: getUrlSafeNonce(),
         })
         const idToken = createResponse.data?.idToken
-        const googleCredential = auth.GoogleAuthProvider.credential(idToken)
-        return auth().signInWithCredential(googleCredential)
+        if (idToken) {
+          await verifyGoogleIdToken(idToken)
+        }
       } else if (isNoSavedCredentialFoundResponse(response)) {
         /// last resort: explicit sign in
         const explicitResponse = await GoogleOneTapSignIn.presentExplicitSignIn({
           nonce: getUrlSafeNonce(),
         })
         const idToken = explicitResponse.data?.idToken
-        const googleCredential = auth.GoogleAuthProvider.credential(idToken)
-        return auth().signInWithCredential(googleCredential)
+        if (idToken) {
+          await verifyGoogleIdToken(idToken)
+        }
       }
     } catch (error) {
       console.error(error)
