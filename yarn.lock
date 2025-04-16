@@ -1182,6 +1182,7 @@ __metadata:
     "@tamagui/font-inter": "npm:^1.125.35"
     "@tamagui/lucide-icons": "npm:^1.125.35"
     "@tamagui/metro-plugin": "npm:^1.125.35"
+    "@tamagui/next-theme": "npm:^1.125.35"
     "@tamagui/toast": "npm:^1.125.35"
     "@ts-react/form": "npm:^1.8.3"
     "@types/aes-js": "npm:^3"
@@ -5154,6 +5155,18 @@ __metadata:
     metro-transform-worker: "npm:*"
     react-native-css-interop: "npm:^0.1.22"
   checksum: 10/e89cf2bd02673889d56ed4261fe70ee1401c7015d74b5207197e006b97bafe4fedbdb20f03fc574a247e2129179870eaaf04611874c2c217609b756911551526
+  languageName: node
+  linkType: hard
+
+"@tamagui/next-theme@npm:^1.125.35":
+  version: 1.125.35
+  resolution: "@tamagui/next-theme@npm:1.125.35"
+  dependencies:
+    "@tamagui/constants": "npm:1.125.35"
+    "@tamagui/use-event": "npm:1.125.35"
+  peerDependencies:
+    react: "*"
+  checksum: 10/00574355a3babe9f33bb128788ba87c624180348e34d28e1a1ff397dddac4df69c88725a86010945530ea8a3ee6989db4b8bd7f4a5b7a9866e424e7c1a4c7a0b
   languageName: node
   linkType: hard
 
