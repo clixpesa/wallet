@@ -21,6 +21,7 @@ import { Link, router } from 'expo-router'
 import { usePathname } from 'utils/usePathname'
 import { redirect } from 'utils/redirect'
 
+import { useThemeSetting } from 'provider/theme'
 import { useAuth } from 'provider/auth'
 import { Settings } from 'components'
 
@@ -33,20 +34,14 @@ export const SettingsScreen = () => {
         <Settings my="$4">
           <Settings.Items>
             <Settings.Title>Preferences</Settings.Title>
-
             <Settings.Group>
-              <Settings.Item icon={SunMoon} accentTheme="teal">
-                Theme
-              </Settings.Item>
-              {/* <SettingsThemeAction /> */}
-
+              <SettingsThemeAction />
               <Settings.Item icon={Banknote} accentTheme="teal">
                 Local currency
               </Settings.Item>
             </Settings.Group>
 
             <Settings.Title>Security</Settings.Title>
-
             <Settings.Group>
               <Settings.Item icon={Fingerprint} accentTheme="teal">
                 Biometrics
@@ -70,9 +65,7 @@ export const SettingsScreen = () => {
                 Google Drive backup
               </Settings.Item>
             </Settings.Group>
-
             <Settings.Title>Support</Settings.Title>
-
             <Settings.Group>
               <Settings.Item icon={MessageSquareHeart} accentTheme="teal">
                 Share feedback
@@ -85,9 +78,7 @@ export const SettingsScreen = () => {
                 Help and Support
               </Settings.Item>
             </Settings.Group>
-
             <Settings.Title>About</Settings.Title>
-
             <Settings.Group>
               <Settings.Item
                 icon={LockKeyhole}
@@ -104,7 +95,6 @@ export const SettingsScreen = () => {
                 Terms of Service
               </Settings.Item>
             </Settings.Group>
-
             <Settings.Group>
               <Settings.Item
                 icon={Twitter}
@@ -114,7 +104,6 @@ export const SettingsScreen = () => {
                 Our Twitter
               </Settings.Item>
             </Settings.Group>
-
             <Settings.Group>
               <SettingsItemLogoutAction />
             </Settings.Group>
@@ -129,10 +118,15 @@ export const SettingsScreen = () => {
 }
 
 const SettingsThemeAction = () => {
-  // const { toggle, current } = useThemeSetting()
+  const { toggle, current } = useThemeSetting()
 
   return (
-    <Settings.Item icon={Moon} accentTheme="teal" onPress={toggle} rightLabel={current}>
+    <Settings.Item
+      icon={SunMoon}
+      accentTheme="teal"
+      onPress={toggle}
+      rightLabel={current}
+    >
       Theme
     </Settings.Item>
   )
