@@ -6,7 +6,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { useFonts } from 'expo-font'
 import { SplashScreen, Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
-import { Provider } from '../provider'
+import { Provider } from 'provider'
 import { useTheme } from 'tamagui'
 import { OfflineBanner } from 'components/OfflineBanner'
 
@@ -42,25 +42,22 @@ export default function RootLayout() {
   //   return null
   // }
 
-  return (
-    <Providers>
-      <RootLayoutNav />
-    </Providers>
-  )
+  return <RootLayoutNav />
 }
 
-const Providers = ({ children }: { children: React.ReactNode }) => {
-  return <Provider>{children}</Provider>
-}
+// const Providers = ({ children }: { children: React.ReactNode }) => {
+//   return <Provider>{children}</Provider>
+// }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme()
-  const theme = useTheme()
+  // const colorScheme = useColorScheme()
+  // const theme = useTheme()
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <StatusBar style="auto" />
+      {/* <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <StatusBar style="auto" /> */}
+      <Provider>
         <Stack>
           <Stack.Screen
             name="(tabs)"
@@ -79,9 +76,9 @@ function RootLayoutNav() {
               gestureEnabled: true,
               gestureDirection: 'horizontal',
               headerShadowVisible: false,
-              headerStyle: {
-                backgroundColor: theme.color2.val,
-              },
+              // headerStyle: {
+              //   backgroundColor: theme.color2.val,
+              // },
             }}
           />
 
@@ -95,14 +92,15 @@ function RootLayoutNav() {
               gestureEnabled: true,
               gestureDirection: 'horizontal',
               headerShadowVisible: false,
-              headerStyle: {
-                backgroundColor: theme.color2.val,
-              },
+              // headerStyle: {
+              //   backgroundColor: theme.color2.val,
+              // },
             }}
           />
         </Stack>
         <OfflineBanner />
-      </ThemeProvider>
+      </Provider>
+      {/* </ThemeProvider> */}
     </GestureHandlerRootView>
   )
 }
