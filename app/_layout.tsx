@@ -4,12 +4,16 @@ import { useColorScheme } from 'react-native'
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { useFonts } from 'expo-font'
-import { SplashScreen, Stack } from 'expo-router'
+import { Slot, SplashScreen, Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { Provider } from 'provider'
-import { useTheme } from 'tamagui'
+import { useTheme, View } from 'tamagui'
 import { OfflineBanner } from 'components/OfflineBanner'
-
+import { useEffect, useCallback, useState } from 'react'
+import { useAuth } from 'provider/auth'
+import type { User } from 'provider/auth/firebase'
+import { getItem, setItem, removeItem } from 'store/storage'
+import auth from '@react-native-firebase/auth'
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
@@ -27,80 +31,63 @@ export default function RootLayout() {
   SplashScreen.hideAsync()
 
   // const [interLoaded, interError] = useFonts({
-  //   Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
-  //   InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
+  //   'Inter-Bold': require('../assets/fonts/Inter-Bold.ttf'),
+  //   'Inter-Medium': require('../assets/fonts/Inter-Medium.ttf'),
+  //   'Inter-Regular': require('../assets/fonts/Inter-Regular.ttf'),
+  //   'Inter-SemiBold': require('../assets/fonts/Inter-SemiBold.ttf'),
   // })
-
-  // useEffect(() => {
-  //   if (interLoaded || interError) {
-  //     // Hide the splash screen after the fonts have loaded (or an error was returned) and the UI is ready.
-  //     SplashScreen.hideAsync()
-  //   }
-  // }, [interLoaded, interError])
-
-  // if (!interLoaded && !interError) {
-  //   return null
-  // }
-
-  return <RootLayoutNav />
-}
-
-// const Providers = ({ children }: { children: React.ReactNode }) => {
-//   return <Provider>{children}</Provider>
-// }
-
-function RootLayoutNav() {
-  // const colorScheme = useColorScheme()
-  // const theme = useTheme()
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      {/* <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <StatusBar style="auto" /> */}
+      {/* <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}> */}
+      {/* <StatusBar style="auto" /> */}
       <Provider>
-        <Stack>
-          <Stack.Screen
-            name="(tabs)"
-            options={{
-              headerShown: false,
-            }}
-          />
+        <View style={{ flex: 1 }}>
+          <Stack>
+            <Stack.Screen
+              name="(tabs)"
+              options={{
+                headerShown: false,
+              }}
+            />
 
-          <Stack.Screen
-            name="notifications"
-            options={{
-              title: 'Notifications',
-              presentation: 'modal',
-              headerTitleAlign: 'center',
-              animation: 'slide_from_right',
-              gestureEnabled: true,
-              gestureDirection: 'horizontal',
-              headerShadowVisible: false,
-              // headerStyle: {
-              //   backgroundColor: theme.color2.val,
-              // },
-            }}
-          />
+            <Stack.Screen
+              name="notifications"
+              options={{
+                title: 'Notifications',
+                presentation: 'modal',
+                headerTitleAlign: 'center',
+                animation: 'slide_from_right',
+                gestureEnabled: true,
+                gestureDirection: 'horizontal',
+                headerShadowVisible: false,
+                // headerStyle: {
+                //   backgroundColor: theme.color2.val,
+                // },
+              }}
+            />
 
-          <Stack.Screen
-            name="modal"
-            options={{
-              title: '',
-              presentation: 'modal',
-              headerTitleAlign: 'center',
-              animation: 'slide_from_right',
-              gestureEnabled: true,
-              gestureDirection: 'horizontal',
-              headerShadowVisible: false,
-              // headerStyle: {
-              //   backgroundColor: theme.color2.val,
-              // },
-            }}
-          />
-        </Stack>
-        <OfflineBanner />
+            <Stack.Screen
+              name="modal"
+              options={{
+                title: '',
+                presentation: 'modal',
+                headerTitleAlign: 'center',
+                animation: 'slide_from_right',
+                gestureEnabled: true,
+                gestureDirection: 'horizontal',
+                headerShadowVisible: false,
+                // headerStyle: {
+                //   backgroundColor: theme.color2.val,
+                // },
+              }}
+            />
+          </Stack>
+          <OfflineBanner />
+          {/* </Provider> */}
+          {/* </ThemeProvider> */}
+        </View>
       </Provider>
-      {/* </ThemeProvider> */}
     </GestureHandlerRootView>
   )
 }

@@ -77,11 +77,13 @@ export default function ProfileScreen() {
                   Invite friends
                 </Settings.Item>
 
-                <Link href="/settings" asChild>
-                  <Settings.Item icon={Cog} accentTheme="teal">
-                    Settings
-                  </Settings.Item>
-                </Link>
+                <Settings.Item
+                  icon={Cog}
+                  accentTheme="teal"
+                  onPress={() => router.push('/settings')}
+                >
+                  Settings
+                </Settings.Item>
               </Settings.Group>
             </Settings.Items>
           </Settings>
