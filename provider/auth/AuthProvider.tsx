@@ -23,7 +23,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [confirmation, setConfirmation] =
     useState<FirebaseAuthTypes.ConfirmationResult | null>(null)
   //Redirect
-  useProtectedRoute(user)
+  useProtectedRoute(user, loading)
   // Handle user state changes
   function onAuthStateChanged(user: FirebaseAuthTypes.User | null) {
     setUser(user)
@@ -135,11 +135,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
 export const useAuth = () => useContext(AuthContext)
 
-export function useProtectedRoute(user: FirebaseAuthTypes.User | null) {
+export function useProtectedRoute(user: FirebaseAuthTypes.User | null, loading: boolean) {
   const segments = useSegments()
 
   useEffect(() => {
     const inAuthGroup = segments[0] === '(auth)'
+
+    if (loading) return
 
     if (
       // If the user is not signed in and the initial segment is not anything in the auth group.
@@ -152,5 +154,5 @@ export function useProtectedRoute(user: FirebaseAuthTypes.User | null) {
       // Redirect away from the sign-in page.
       router.replace('/')
     }
-  }, [user, segments])
+  }, [user, segments, loading])
 }

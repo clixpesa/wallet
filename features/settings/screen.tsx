@@ -16,7 +16,7 @@ import {
 import { ScrollView, YStack, Paragraph } from 'tamagui'
 import { openBrowserAsync } from 'expo-web-browser'
 import * as Application from 'expo-application'
-import { Link, router } from 'expo-router'
+import { router } from 'expo-router'
 
 import { usePathname } from 'utils/usePathname'
 import { redirect } from 'utils/redirect'
@@ -47,15 +47,14 @@ export const SettingsScreen = () => {
                 Biometrics
               </Settings.Item>
 
-              <Link href="/settings/change-password" asChild>
-                <Settings.Item
-                  icon={SquareAsterisk}
-                  accentTheme="teal"
-                  isActive={pathname === '/settings/change-password'}
-                >
-                  Change Passcode
-                </Settings.Item>
-              </Link>
+              <Settings.Item
+                icon={SquareAsterisk}
+                accentTheme="teal"
+                isActive={pathname === '/settings/change-password'}
+                onPress={() => router.push('/settings/change-password')}
+              >
+                Change Passcode
+              </Settings.Item>
 
               <Settings.Item icon={KeyRound} accentTheme="teal">
                 Recovery phrase
