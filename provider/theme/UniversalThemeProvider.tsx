@@ -1,13 +1,9 @@
-import { useIsomorphicLayoutEffect } from 'tamagui'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native'
-import type {
-  ThemeProviderProps,
-  useThemeSetting as next_useThemeSetting,
-} from '@tamagui/next-theme'
+import { ThemeProviderProps, useThemeSetting as next_useThemeSetting } from '@tamagui/next-theme'
 import { StatusBar } from 'expo-status-bar'
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useContext, useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import { Appearance, useColorScheme } from 'react-native'
+import { storage } from 'store/storage'
 
 type ThemeContextValue = (ThemeProviderProps & { current?: string | null }) | null
 export const ThemeContext = createContext<ThemeContextValue>(null)
@@ -16,26 +12,20 @@ type ThemeName = 'light' | 'dark' | 'system'
 
 // start early
 let persistedTheme: ThemeName | null = null
-export const loadThemePromise = AsyncStorage.getItem('@preferred_theme')
-loadThemePromise.then((val) => {
-  persistedTheme = val as ThemeName
-})
+export const loadTheme = storage.getString('@preferred_theme')
+persistedTheme = loadTheme as ThemeName
 
 export const UniversalThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [current, setCurrent] = useState<ThemeName | null>(null) // Start with null
+  const [current, setCurrent] = useState<ThemeName>(persistedTheme ?? 'system')
   const systemTheme = useColorScheme() || 'system'
 
-  useIsomorphicLayoutEffect(() => {
-    async function main() {
-      await loadThemePromise
-      setCurrent(persistedTheme ?? 'system') // Set theme after loading
-    }
-    main()
+  useLayoutEffect(() => {
+    setCurrent(persistedTheme as ThemeName)
   }, [])
 
   useEffect(() => {
     if (current) {
-      AsyncStorage.setItem('@preferred_theme', current)
+      storage.set('@preferred_theme', current)
     }
   }, [current])
 
@@ -45,14 +35,10 @@ export const UniversalThemeProvider = ({ children }: { children: React.ReactNode
       onChangeTheme: (next: string) => {
         setCurrent(next as ThemeName)
       },
-      current: current ?? 'system', // Default to 'system' if current is null
+      current,
       systemTheme,
     } satisfies ThemeContextValue
   }, [current, systemTheme])
-
-  if (current === null) {
-    return null // Render nothing until theme is loaded
-  }
 
   return (
     <ThemeContext.Provider value={themeContext}>
@@ -87,7 +73,7 @@ export const useThemeSetting: typeof next_useThemeSetting = () => {
   }
 
   const resolvedTheme =
-    context.current === 'system' ? context.systemTheme : (context.current ?? 'system')
+    context.current === 'system' ? context.systemTheme : context.current ?? 'system'
 
   const outputContext: ReturnType<typeof next_useThemeSetting> = {
     ...context,
@@ -113,8 +99,5 @@ export const useThemeSetting: typeof next_useThemeSetting = () => {
 
 export const useRootTheme = () => {
   const context = useThemeSetting()
-  return [
-    context.current === 'system' ? context.systemTheme : context.current,
-    context.set,
-  ]
+  return [context.current === 'system' ? context.systemTheme : context.current, context.set]
 }

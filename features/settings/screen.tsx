@@ -98,9 +98,9 @@ export const SettingsScreen = () => {
               <Settings.Item
                 icon={Twitter}
                 onPress={() => redirect('https://x.com/clixpesa')}
-                accentTheme="alt2"
+                accentTheme="teal"
               >
-                Our Twitter
+                Follow us on X
               </Settings.Item>
             </Settings.Group>
             <Settings.Group>
@@ -135,7 +135,7 @@ const SettingsItemLogoutAction = () => {
   const { signOut } = useAuth()
 
   return (
-    <Settings.Item icon={LogOut} accentTheme="red" onPress={() => signOut()}>
+    <Settings.Item icon={LogOut} accentTheme="red" onPress={() => signOut()} >
       Log Out
     </Settings.Item>
   )
