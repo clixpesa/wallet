@@ -24,10 +24,10 @@ export const SettingItem = ({
   return (
     <YGroup.Item>
       <SettingItemFrame isActive={!!isActive} {...props}>
-        {/* <YStack  bg="$background" p="$1" rounded="$3"> */}
-          <Icon opacity={0.7} size={24} />
-        {/* </YStack> */}
-        <SizableText size='$5' flex={1}>{children}</SizableText>
+        <YStack theme={accentTheme}>
+          <Icon opacity={0.8} size={24} />
+        </YStack>
+        <SizableText size='$5' flex={1} >{children}</SizableText>
         {!!rightLabel && (
           <XStack rounded="$10" bg="$backgroundPress" px="$3" py="$1.5">
             <SizableText size="$1" textTransform="capitalize">
