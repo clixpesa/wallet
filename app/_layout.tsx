@@ -1,7 +1,6 @@
 import '../tamagui-web.css'
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import { useFonts } from 'expo-font'
 import { SplashScreen, Stack } from 'expo-router'
 import { Provider } from 'provider'
 import { OfflineBanner } from 'components/OfflineBanner'
@@ -18,17 +17,9 @@ export const unstable_settings = {
 }
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync()
+// SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
-  SplashScreen.hideAsync()
-  // const [interLoaded, interError] = useFonts({
-  //   'Inter-Bold': require('../assets/fonts/Inter-Bold.ttf'),
-  //   'Inter-Medium': require('../assets/fonts/Inter-Medium.ttf'),
-  //   'Inter-Regular': require('../assets/fonts/Inter-Regular.ttf'),
-  //   'Inter-SemiBold': require('../assets/fonts/Inter-SemiBold.ttf'),
-  // })
-
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Provider>

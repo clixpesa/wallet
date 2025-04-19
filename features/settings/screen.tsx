@@ -120,12 +120,7 @@ const SettingsThemeAction = () => {
   const { toggle, current } = useThemeSetting()
 
   return (
-    <Settings.Item
-      icon={SunMoon}
-      accentTheme="teal"
-      onPress={toggle}
-      rightLabel={current}
-    >
+    <Settings.Item icon={SunMoon} accentTheme="teal" onPress={toggle} rightLabel={current}>
       Theme
     </Settings.Item>
   )
@@ -135,7 +130,7 @@ const SettingsItemLogoutAction = () => {
   const { signOut } = useAuth()
 
   return (
-    <Settings.Item icon={LogOut} accentTheme="red" onPress={() => signOut()} >
+    <Settings.Item icon={LogOut} accentTheme="red" onPress={() => signOut()}>
       Log Out
     </Settings.Item>
   )
