@@ -63,11 +63,7 @@ export default function SignUpScreen() {
           onSubmit={handleSubmit}
           props={{
             phoneNumber: {
-              // size: '$5',
               onValidChange: handlePhoneValidityChange,
-            },
-            email: {
-              // size: '$5',
             },
           }}
           renderAfter={({ submit }) => (
