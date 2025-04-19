@@ -1174,6 +1174,7 @@ __metadata:
     "@react-native-firebase/app": "npm:^21.12.2"
     "@react-native-firebase/auth": "npm:^21.12.2"
     "@react-native-google-signin/google-signin": "npm:^20.0.0"
+    "@react-native-masked-view/masked-view": "npm:0.3.2"
     "@react-navigation/native": "npm:^7.0.14"
     "@rehookify/datepicker": "npm:^6.6.8"
     "@tamagui/babel-plugin": "npm:^1.126.1"
@@ -3268,6 +3269,16 @@ __metadata:
     react-native: "*"
     react-native-macos: "*"
   checksum: 10/b2fcb4d5079dc091b10eacae85ffe7e8a1ab6ec7502ed98e74a1b91a24fe0b8ba44eb43de2107596ac449ee0e0f0d2452030dee9a56eb9f24a3c01609f3ab27e
+  languageName: node
+  linkType: hard
+
+"@react-native-masked-view/masked-view@npm:0.3.2":
+  version: 0.3.2
+  resolution: "@react-native-masked-view/masked-view@npm:0.3.2"
+  peerDependencies:
+    react: ">=16"
+    react-native: ">=0.57"
+  checksum: 10/04ffbc01083aa563ca1e2d7ef6759e7b326b8129f5bb1aa5f3142348adab06d5e321a400cf70a5434324dfa906add383f8214640697c48c9e5311b30bfea03d9
   languageName: node
   linkType: hard
 
