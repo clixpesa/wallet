@@ -2,7 +2,7 @@ import '../tamagui-web.css'
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { useFonts } from 'expo-font'
-import {  SplashScreen, Stack } from 'expo-router'
+import { SplashScreen, Stack } from 'expo-router'
 import { Provider } from 'provider'
 import { OfflineBanner } from 'components/OfflineBanner'
 import { useEffect, useCallback, useState } from 'react'
