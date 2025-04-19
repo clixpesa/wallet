@@ -1,7 +1,7 @@
 import { EditProfileScreen } from 'features/profile/edit-screen'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Stack } from 'expo-router'
-import { useTheme } from 'tamagui'
+import { useTheme, Text } from 'tamagui'
 
 export default function Screen() {
   const theme = useTheme()
@@ -10,7 +10,11 @@ export default function Screen() {
       <Stack.Screen
         name="edit"
         options={{
-          title: 'Edit Profile',
+          headerTitle: () => (
+            <Text fontSize={20} fontWeight="700">
+              Edit Profile
+            </Text>
+          ),
           headerTitleAlign: 'center',
           gestureEnabled: true,
           gestureDirection: 'horizontal',

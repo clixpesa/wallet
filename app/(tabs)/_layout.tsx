@@ -1,5 +1,5 @@
 import { Link, Tabs } from 'expo-router'
-import { useTheme, View } from 'tamagui'
+import { useTheme, View, Text } from 'tamagui'
 import { LayoutGrid, Home, AlertCircle, Bell, User } from '@tamagui/lucide-icons'
 import { useAuth } from 'provider/auth'
 import { CAvatar } from 'components'
@@ -33,7 +33,11 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Home',
-          headerTitle: 'Welcome',
+          headerTitle: () => (
+            <Text fontSize={20} fontWeight="700">
+              Welcome
+            </Text>
+          ),
           tabBarIcon: ({ color }) => <HomeIcons.Home color={color as any} />,
           headerLeft: () => (
             <Link href="/profile" asChild>
@@ -66,6 +70,11 @@ export default function TabLayout() {
         name="spaces"
         options={{
           title: 'Spaces',
+          headerTitle: () => (
+            <Text fontSize={20} fontWeight="700">
+              Spaces
+            </Text>
+          ),
           tabBarIcon: ({ color }) => <HomeIcons.Spaces color={color as any} />,
           headerRight: () => (
             <Link href="/modal" asChild>

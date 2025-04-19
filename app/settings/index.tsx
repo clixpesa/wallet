@@ -1,7 +1,7 @@
 import { SettingsScreen } from 'features/settings/screen'
 import { Stack } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useTheme } from 'tamagui'
+import { useTheme, Text } from 'tamagui'
 
 export default function Settings() {
   const theme = useTheme()
@@ -9,7 +9,11 @@ export default function Settings() {
     <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right']}>
       <Stack.Screen
         options={{
-          title: 'Settings',
+          headerTitle: () => (
+            <Text fontSize={20} fontWeight="700">
+              Settings
+            </Text>
+          ),
           headerShadowVisible: false,
           headerTitleAlign: 'center',
           animation: 'slide_from_right',
