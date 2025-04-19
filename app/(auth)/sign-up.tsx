@@ -1,16 +1,7 @@
 import { SchemaForm, formFields } from 'utils/SchemaForm'
 import { FormProvider, useForm } from 'react-hook-form'
 import { openBrowserAsync } from 'expo-web-browser'
-import {
-  H1,
-  Paragraph,
-  View,
-  Theme,
-  YStack,
-  SizableText,
-  Separator,
-  XStack,
-} from 'tamagui'
+import { H1, Paragraph, View, Theme, YStack, SizableText, Separator, XStack } from 'tamagui'
 import { SubmitButton } from 'components'
 
 import { GoogleSignIn } from 'features/auth/components/GoogleSignIn'
@@ -72,11 +63,11 @@ export default function SignUpScreen() {
           onSubmit={handleSubmit}
           props={{
             phoneNumber: {
-              size: '$5',
+              // size: '$5',
               onValidChange: handlePhoneValidityChange,
             },
             email: {
-              size: '$5',
+              // size: '$5',
             },
           }}
           renderAfter={({ submit }) => (
@@ -97,9 +88,7 @@ export default function SignUpScreen() {
                   size="$1"
                   color="$teal11"
                   textDecorationLine="underline"
-                  onPress={() =>
-                    openBrowserAsync('https://clixpesa.com/terms-conditions/')
-                  }
+                  onPress={() => openBrowserAsync('https://clixpesa.com/terms-conditions/')}
                 >
                   Terms
                 </SizableText>{' '}
@@ -120,11 +109,8 @@ export default function SignUpScreen() {
           {(fields) => (
             <>
               <YStack gap="$2" mb="$4">
-                <H1 size="$5" fontWeight="700">
-                  Let's get started
-                </H1>
+                <H1 size="$2">Let's get started</H1>
               </YStack>
-
               {useEmail ? fields.email : fields.phoneNumber}
 
               <XStack justify="space-between" mt="$2">

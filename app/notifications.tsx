@@ -1,4 +1,4 @@
-import { View, SizableText, YStack, Text } from 'tamagui'
+import { View, SizableText, YStack, Text, H6 } from 'tamagui'
 import { Bell } from '@tamagui/lucide-icons'
 
 export default function Notifications() {
@@ -8,11 +8,11 @@ export default function Notifications() {
         <View theme="teal" bg="$background" p="$4" rounded="$8">
           <Bell opacity={0.8} size={32} />
         </View>
-        <YStack items="center">
-          <Text fontWeight="bold" fontSize={20}>
+        <YStack items="center" gap="$2">
+          <H6 size="$1" fontWeight="700">
             No notifications yet
-          </Text>
-          <SizableText size="$3" text="center" theme="alt1">
+          </H6>
+          <SizableText size="$2" text="center" theme="alt1">
             You're all caught up! We'll notify you when there's something new
           </SizableText>
         </YStack>

@@ -40,12 +40,11 @@ export const StepContent = ({
         exitStyle={{ scale: 0.95, y: 4, opacity: 0 }}
         opacity={1}
         scale={1}
-        size="$10"
+        size="$2"
         color="$color10"
-        selectable={false}
         text="center"
         $md={{
-          size: '$10',
+          size: '$4',
           mt: '$4',
           color: '$color10',
         }}
@@ -62,8 +61,8 @@ export const StepContent = ({
         exitStyle={{ scale: 0.95, y: -2, opacity: 0 }}
         opacity={1}
         scale={1}
-        size="$6"
-        lineHeight="$8"
+        size="$4"
+        // lineHeight="$4"
         text="center"
         color="$color9"
         // selectable={false}

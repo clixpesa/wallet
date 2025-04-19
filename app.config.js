@@ -61,6 +61,12 @@ export default {
     },
     plugins: [
       'expo-router',
+      [
+        'expo-font',
+        {
+          fonts: ['./assets/fonts/Inter-Medium.ttf', './assets/fonts/Inter-Regular.ttf'],
+        },
+      ],
       'expo-secure-store',
       '@react-native-google-signin/google-signin',
       '@react-native-firebase/app',
