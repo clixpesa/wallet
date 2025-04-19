@@ -5,6 +5,7 @@ import { SplashScreen, Stack } from 'expo-router'
 import { Provider } from 'provider'
 import { OfflineBanner } from 'components/OfflineBanner'
 import { useEffect, useCallback, useState } from 'react'
+import { Text } from 'tamagui'
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -34,7 +35,11 @@ export default function RootLayout() {
           <Stack.Screen
             name="notifications"
             options={{
-              title: 'Notifications',
+              headerTitle: () => (
+                <Text fontSize={20} fontWeight="700">
+                  Notifications
+                </Text>
+              ),
               presentation: 'modal',
               headerTitleAlign: 'center',
               animation: 'slide_from_right',
