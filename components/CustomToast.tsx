@@ -19,10 +19,8 @@ export function CustomToast() {
       animation="quick"
     >
       <YStack items="center" p="$2" gap="$2">
-        <Toast.Title fontWeight="bold">{currentToast.title}</Toast.Title>
-        {!!currentToast.message && (
-          <Toast.Description>{currentToast.message}</Toast.Description>
-        )}
+        <Toast.Title fontWeight="700">{currentToast.title}</Toast.Title>
+        {!!currentToast.message && <Toast.Description>{currentToast.message}</Toast.Description>}
       </YStack>
     </Toast>
   )
