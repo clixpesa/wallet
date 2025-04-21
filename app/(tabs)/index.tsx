@@ -1,5 +1,8 @@
-import { Plus, Send, Minus } from '@tamagui/lucide-icons'
-import { Button, XStack, YStack, styled, Card, H2, SizableText } from 'tamagui'
+import { Plus, Send, Minus, User2 } from '@tamagui/lucide-icons'
+import { Button, XStack, YStack, styled, Card, H2, H4, Paragraph, SizableText, View } from 'tamagui'
+
+import { Transactions } from 'components/Transactions'
+import { Banner } from 'components/Banner'
 
 export default function HomeScreen() {
   return (
@@ -10,7 +13,7 @@ export default function HomeScreen() {
             Your Balance
           </SizableText>
           <H2 mt="$2" size="$2" fontWeight="700">
-            KES 500.12
+            KES 5000
           </H2>
         </Card.Header>
       </Card>
@@ -36,6 +39,34 @@ export default function HomeScreen() {
           <Button.Text fontWeight="700">Send</Button.Text>
         </CustomButton>
       </XStack>
+
+      <View m="$4">
+        <Banner>
+          <H4 fontWeight="700" fontSize={16}>
+            Invite friends and earn $$$
+          </H4>
+          <Paragraph size="$2" mt="$2" theme="alt1">
+            Refer Clixpesa to your friends and earn 500cKES as a reward on their first sign up.
+          </Paragraph>
+        </Banner>
+      </View>
+
+      <Transactions>
+        <Transactions.Title>Activity</Transactions.Title>
+        <Transactions.Items>
+          <Transactions.Group>
+            <Transactions.Item icon={User2} accentTheme="teal" transactionId="1">
+              Bought BTC with cKES
+            </Transactions.Item>
+            <Transactions.Item icon={User2} accentTheme="teal" transactionId="1">
+              Received cKES
+            </Transactions.Item>
+            <Transactions.Item icon={User2} accentTheme="teal" transactionId="1">
+              Sent cKES
+            </Transactions.Item>
+          </Transactions.Group>
+        </Transactions.Items>
+      </Transactions>
     </YStack>
   )
 }
@@ -51,6 +82,7 @@ const CustomButton = styled(Button, {
   bg: '$teal2',
   color: '$teal10',
   theme: 'teal',
+
   pressStyle: {
     bg: '$backgroundPress',
   },
