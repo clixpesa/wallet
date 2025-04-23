@@ -10,7 +10,7 @@ export default function HomeScreen() {
       <Card rounded="$0" bg="transparent" minW={180} px="$4" mt="$4">
         <Card.Header justify="space-between" pl="$0" pt="$1" $platform-native={{ pb: '$0' }}>
           <SizableText size="$3" theme="alt2">
-            Your Balance
+            Total Balance
           </SizableText>
           <H2 mt="$2" size="$2" fontWeight="700">
             KES 5000
