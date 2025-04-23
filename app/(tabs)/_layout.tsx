@@ -69,20 +69,13 @@ export default function TabLayout() {
       <Tabs.Screen
         name="spaces"
         options={{
-          title: 'Spaces',
+          headerShown: false,
           headerTitle: () => (
             <Text fontSize={20} fontWeight="700">
               Spaces
             </Text>
           ),
           tabBarIcon: ({ color }) => <HomeIcons.Spaces color={color as any} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <View px="$4">
-                <AlertCircle size={22} />
-              </View>
-            </Link>
-          ),
         }}
       />
     </Tabs>

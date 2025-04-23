@@ -9,7 +9,7 @@ const useRedirectAfterSignOut = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged((user) => {
       if (!user) {
-        // router.replace('/sign-in')
+        router.replace('/sign-up')
       }
     })
     return () => {
