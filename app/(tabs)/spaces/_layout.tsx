@@ -4,7 +4,7 @@ import { Stack, Link } from 'expo-router'
 
 export default function Layout() {
   return (
-    <Stack>
+    <Stack screenOptions={{ headerShadowVisible: false }}>
       <Stack.Screen
         name="index"
         options={{
@@ -15,7 +15,7 @@ export default function Layout() {
               </View>
             </Link>
           ),
-          headerTitle: 'Spaces',
+          headerTitle: '',
 
           // headerSearchBarOptions: {
           //   headerIconColor: tabBarTintColor,
@@ -28,6 +28,14 @@ export default function Layout() {
           //     });
           //   },
           // },
+        }}
+      />
+
+      <Stack.Screen
+        name="create"
+        options={{
+          headerTitle: '',
+          headerTitleAlign: 'center',
         }}
       />
     </Stack>

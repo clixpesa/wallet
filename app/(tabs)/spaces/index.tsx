@@ -1,11 +1,18 @@
-import { Text, View } from 'tamagui'
+import { YStack, Button, View } from 'tamagui'
+import { Link, useRouter } from 'expo-router'
+import { SpaceBalanceCard } from 'components/SpaceBalanceCard'
 
 export default function Spaces() {
+  const router = useRouter()
+
   return (
-    <View flex={1} items="center" justify="center" bg="$background">
-      <Text fontSize={20} color="$teal10">
-        Spaces Screeen
-      </Text>
-    </View>
+    <YStack items="center" flex={1}>
+      <SpaceBalanceCard
+        title="Total balance"
+        value="KES 0.00"
+        badgeText="Create space"
+        onPress={() => router.navigate('/spaces/create')}
+      />
+    </YStack>
   )
 }
