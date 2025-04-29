@@ -3,16 +3,22 @@ import { createFont, isAndroid } from '@tamagui/core'
 // Font weights
 const INTER_WEIGHT = '400'
 const MEDIUM_WEIGHT = '500'
+const SEMIBOLD_WEIGHT = '600'
+const BOLD_WEIGHT = '700'
 
 // Font families
 const fontFamily = {
   inter: 'Inter-Regular',
   medium: 'Inter-Medium',
+  semibold: 'Inter-SemiBold',
+  bold: 'Inter-Bold',
 }
 
 const androidFace = {
   [INTER_WEIGHT]: { normal: fontFamily.inter },
   [MEDIUM_WEIGHT]: { normal: fontFamily.medium },
+  [SEMIBOLD_WEIGHT]: { normal: fontFamily.semibold },
+  [BOLD_WEIGHT]: { normal: fontFamily.bold },
 }
 
 const getFontProps = (family: string, weight: string) => ({
@@ -25,34 +31,34 @@ const getFontProps = (family: string, weight: string) => ({
 
 export const fonts = {
   heading1: {
-    family: fontFamily.inter,
+    family: fontFamily.bold,
     size: 52,
     lineHeight: 52 * 0.96,
-    weight: INTER_WEIGHT,
+    weight: BOLD_WEIGHT,
   },
   heading2: {
-    family: fontFamily.inter,
+    family: fontFamily.bold,
     size: 36,
     lineHeight: 40,
-    weight: INTER_WEIGHT,
+    weight: BOLD_WEIGHT,
   },
   heading3: {
-    family: fontFamily.inter,
+    family: fontFamily.bold,
     size: 24,
     lineHeight: 24 * 1.2,
-    weight: INTER_WEIGHT,
+    weight: BOLD_WEIGHT,
   },
   subheading1: {
-    family: fontFamily.inter,
+    family: fontFamily.semibold,
     size: 18,
     lineHeight: 24,
-    weight: INTER_WEIGHT,
+    weight: SEMIBOLD_WEIGHT,
   },
   subheading2: {
-    family: fontFamily.inter,
+    family: fontFamily.semibold,
     size: 16,
     lineHeight: 20,
-    weight: INTER_WEIGHT,
+    weight: SEMIBOLD_WEIGHT,
   },
   body1: {
     family: fontFamily.inter,
@@ -79,33 +85,33 @@ export const fonts = {
     weight: INTER_WEIGHT,
   },
   buttonLabel1: {
-    family: fontFamily.medium,
+    family: fontFamily.semibold,
     size: 18,
     lineHeight: 18 * 1.15,
-    weight: MEDIUM_WEIGHT,
+    weight: SEMIBOLD_WEIGHT,
   },
   buttonLabel2: {
-    family: fontFamily.medium,
+    family: fontFamily.semibold,
     size: 16,
     lineHeight: 16 * 1.15,
-    weight: MEDIUM_WEIGHT,
+    weight: SEMIBOLD_WEIGHT,
   },
   buttonLabel3: {
-    family: fontFamily.medium,
+    family: fontFamily.semibold,
     size: 14,
     lineHeight: 14 * 1.15,
-    weight: MEDIUM_WEIGHT,
+    weight: SEMIBOLD_WEIGHT,
   },
   buttonLabel4: {
-    family: fontFamily.medium,
+    family: fontFamily.semibold,
     size: 12,
     lineHeight: 12 * 1.15,
-    weight: MEDIUM_WEIGHT,
+    weight: SEMIBOLD_WEIGHT,
   },
 } as const
 
 export const headingFont = createFont({
-  ...getFontProps(fontFamily.inter, INTER_WEIGHT),
+  ...getFontProps(fontFamily.bold, BOLD_WEIGHT),
   size: {
     1: fonts.heading3.size,
     2: fonts.heading2.size,
@@ -121,13 +127,12 @@ export const headingFont = createFont({
 })
 
 export const subHeadingFont = createFont({
-  ...getFontProps(fontFamily.inter, INTER_WEIGHT),
+  ...getFontProps(fontFamily.semibold, SEMIBOLD_WEIGHT),
   size: {
     1: fonts.subheading2.size,
     2: fonts.subheading1.size,
     true: fonts.subheading1.size,
   },
-
   lineHeight: {
     1: fonts.subheading2.lineHeight,
     2: fonts.subheading1.lineHeight,
@@ -154,7 +159,7 @@ export const bodyFont = createFont({
 })
 
 export const buttonFont = createFont({
-  ...getFontProps(fontFamily.medium, MEDIUM_WEIGHT),
+  ...getFontProps(fontFamily.semibold, SEMIBOLD_WEIGHT),
   size: {
     1: fonts.buttonLabel4.size,
     2: fonts.buttonLabel3.size,

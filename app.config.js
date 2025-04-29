@@ -64,7 +64,12 @@ export default {
       [
         'expo-font',
         {
-          fonts: ['./assets/fonts/Inter-Medium.ttf', './assets/fonts/Inter-Regular.ttf'],
+          fonts: [
+            './assets/fonts/Inter-Medium.ttf',
+            './assets/fonts/Inter-Regular.ttf',
+            './assets/fonts/Inter-SemiBold.ttf',
+            './assets/fonts/Inter-Bold.ttf',
+          ],
         },
       ],
       'expo-secure-store',

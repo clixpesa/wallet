@@ -1,5 +1,5 @@
 import { PlusCircle } from '@tamagui/lucide-icons'
-import { type CardProps, Card, H6, H4, Button, XStack, Theme } from 'tamagui'
+import { type CardProps, Card, H2, SizableText, Button, XStack, Theme } from 'tamagui'
 
 export type SpaceBalanceCardTypes = {
   title: string
@@ -16,17 +16,21 @@ export const SpaceBalanceCard = ({
   ...props
 }: SpaceBalanceCardTypes) => {
   return (
-    <Card borderRadius="$8" bg="$color1" minW="100%" {...props}>
+    <Card bg="$color1" minW="100%" {...props}>
       <Card.Header>
-        <H4 fontWeight="700">{value}</H4>
-        <H6 size="$4" fontWeight="$2" theme="alt2">
-          {title}
-        </H6>
+        <H2 size="$1" fontWeight="700">
+          KES 5000
+        </H2>
+        <SizableText mt="$2" size="$3" theme="alt2">
+          Total Balance
+        </SizableText>
         <XStack mt="$4">
           {!!badgeText && (
             <Theme name="teal_alt1">
-              <Button onPress={onPress} icon={PlusCircle} rounded="$8" scaleIcon={1.5}>
-                {badgeText}
+              <Button onPress={onPress} icon={PlusCircle} rounded="$12" scaleIcon={1.2}>
+                <Button.Text size="$3" fontFamily="$button">
+                  {badgeText}
+                </Button.Text>
               </Button>
             </Theme>
           )}
