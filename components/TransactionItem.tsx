@@ -33,14 +33,14 @@ export const TransactionItem = ({
       </YStack>
 
       <YStack flex={1} gap="$1.5">
-        <SizableText fontWeight="700">{children}</SizableText>
+        <SizableText fontWeight="500">{children}</SizableText>
         <SizableText size="$2" theme="alt2">
           20 April 2025, 11:59
         </SizableText>
       </YStack>
 
       <YStack items="flex-end" gap="$1.5">
-        <SizableText fontWeight="700" textTransform="capitalize" color="$teal9">
+        <SizableText fontWeight="500" textTransform="capitalize" color="$teal9">
           +50000ks
         </SizableText>
         <SizableText size="$2" textTransform="capitalize" theme="alt2">

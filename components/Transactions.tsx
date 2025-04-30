@@ -18,7 +18,7 @@ const TransactionsGroup = styled(YGroup, {
 
 const TransactionsTitle = styled(H2, {
   mx: '$4',
-  fontWeight: '700',
+  fontWeight: '600',
   fontSize: 16,
 })
 

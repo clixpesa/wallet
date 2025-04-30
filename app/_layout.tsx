@@ -61,6 +61,14 @@ export default function RootLayout() {
               headerShadowVisible: false,
             }}
           />
+
+          <Stack.Screen
+            name="space/customize"
+            options={{
+              title: '',
+              headerTransparent: true,
+            }}
+          />
         </Stack>
         <OfflineBanner />
       </Provider>

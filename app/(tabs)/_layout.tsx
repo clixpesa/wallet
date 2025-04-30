@@ -34,7 +34,7 @@ export default function TabLayout() {
         options={{
           title: 'Home',
           headerTitle: () => (
-            <Text fontSize={20} fontWeight="700">
+            <Text fontSize={20} fontWeight="600">
               Welcome
             </Text>
           ),
@@ -70,11 +70,6 @@ export default function TabLayout() {
         name="spaces"
         options={{
           headerShown: false,
-          headerTitle: () => (
-            <Text fontSize={20} fontWeight="700">
-              Spaces
-            </Text>
-          ),
           tabBarIcon: ({ color }) => <HomeIcons.Spaces color={color as any} />,
         }}
       />

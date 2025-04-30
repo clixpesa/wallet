@@ -6,9 +6,11 @@ import { useRouter } from 'expo-router'
 export default function CreateSpace() {
   return (
     <YStack bg="$background" minH="100%" gap="$2" flex={1}>
-      <View mb="$6" mx="$4">
-        <Title>Spaces</Title>
-        <SizableText fontFamily="$subHeading" theme="alt1" size="$1">
+      <View mb="$6" mx="$4" gap="$2">
+        <H2 fontFamily="$heading" size="$2">
+          Spaces
+        </H2>
+        <SizableText theme="alt1" fontWeight="500">
           Get started with spaces, save personally or as a group and reach your goals
         </SizableText>
       </View>
@@ -17,14 +19,7 @@ export default function CreateSpace() {
   )
 }
 
-const Title = styled(H2, {
-  size: '$2',
-  my: '$4',
-  fontWeight: '500',
-})
-
 export const Card = styled(View, {
-  cursor: 'pointer',
   width: '100%',
   rounded: '$4',
   p: '$3',
@@ -85,7 +80,7 @@ function Item({
 
   // Find a waut to use the LINK component from one
   const navigateToCustomize = () => {
-    // router.push('/spaces/customize')
+    router.push('/space/customize')
   }
 
   return (
@@ -98,7 +93,7 @@ function Item({
         <View flex={1} gap="$1">
           <View flexDirection="row" gap="$2">
             <View flexDirection="row" items="center" gap="$2">
-              <Label fontWeight="700" lineHeight="$4" htmlFor={id}>
+              <Label fontWeight="600" lineHeight="$4" htmlFor={id}>
                 {title}
               </Label>
             </View>

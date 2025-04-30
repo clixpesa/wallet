@@ -1,13 +1,21 @@
 import { AlertCircle } from '@tamagui/lucide-icons'
-import { View } from 'tamagui'
+import { View, Text, useTheme } from 'tamagui'
 import { Stack, Link } from 'expo-router'
 
 export default function Layout() {
+  const theme = useTheme()
+
   return (
     <Stack screenOptions={{ headerShadowVisible: false }}>
       <Stack.Screen
         name="index"
         options={{
+          headerTitle: () => (
+            <Text fontSize={20} fontWeight="600">
+              Spaces
+            </Text>
+          ),
+
           headerRight: () => (
             <Link href="/modal" asChild>
               <View px="$4">
@@ -15,7 +23,6 @@ export default function Layout() {
               </View>
             </Link>
           ),
-          headerTitle: '',
 
           // headerSearchBarOptions: {
           //   headerIconColor: tabBarTintColor,
@@ -35,7 +42,6 @@ export default function Layout() {
         name="create"
         options={{
           headerTitle: '',
-          headerTitleAlign: 'center',
         }}
       />
     </Stack>
