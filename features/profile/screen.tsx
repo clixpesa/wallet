@@ -40,7 +40,7 @@ export default function ProfileScreen() {
             </XStack>
             <YStack items="center">
               {name ? (
-                <SizableText size="$4" fontWeight="700">
+                <SizableText size="$4" fontWeight="600">
                   {name}
                 </SizableText>
               ) : (

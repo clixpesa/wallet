@@ -1,12 +1,4 @@
-import {
-
-  XStack,
-  YGroup,
-  YStack,
-  withStaticProperties,
-  styled,
-  SizableText,
-} from 'tamagui'
+import { XStack, YGroup, YStack, withStaticProperties, styled, SizableText } from 'tamagui'
 
 import { SettingItem } from './SettingItem'
 
@@ -44,7 +36,7 @@ const SettingsTitle = styled(SizableText, {
   '$platform-web': {
     mx: '$6',
   },
-  fontWeight: '700',
+  fontWeight: '600',
   mx: '$2',
   theme: 'alt2',
 })

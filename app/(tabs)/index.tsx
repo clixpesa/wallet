@@ -13,7 +13,7 @@ export default function HomeScreen() {
             Total Balance
           </SizableText>
           <H2 mt="$2" size="$2" fontWeight="700">
-            KES 5000
+            KES 6000
           </H2>
         </Card.Header>
       </Card>
@@ -22,27 +22,27 @@ export default function HomeScreen() {
           <Button.Icon>
             <Plus size={24} />
           </Button.Icon>
-          <Button.Text fontWeight="700">Deposit</Button.Text>
+          <Button.Text fontWeight="600">Deposit</Button.Text>
         </CustomButton>
 
         <CustomButton>
           <Button.Icon>
             <Minus size={24} />
           </Button.Icon>
-          <Button.Text fontWeight="700">Withdraw</Button.Text>
+          <Button.Text fontWeight="600">Withdraw</Button.Text>
         </CustomButton>
 
         <CustomButton>
           <Button.Icon>
             <Send size={24} />
           </Button.Icon>
-          <Button.Text fontWeight="700">Send</Button.Text>
+          <Button.Text fontWeight="600">Send</Button.Text>
         </CustomButton>
       </XStack>
 
       <View m="$4">
         <Banner>
-          <H4 fontWeight="700" fontSize={16}>
+          <H4 fontWeight="600" fontSize={16}>
             Invite friends and earn $$$
           </H4>
           <Paragraph size="$2" mt="$2" theme="alt1">
