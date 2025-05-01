@@ -1,10 +1,11 @@
 import '../tamagui-web.css'
 
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { SplashScreen, Stack } from 'expo-router'
+
 import { Provider } from 'provider'
 import { OfflineBanner } from 'components/OfflineBanner'
-import { useEffect, useCallback, useState } from 'react'
 import { Text } from 'tamagui'
 
 export {
