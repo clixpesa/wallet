@@ -10,16 +10,15 @@ export default function Layout() {
       <Stack.Screen
         name="index"
         options={{
-          // headerTitle: () => (
-          //   <Text fontSize={20} fontWeight="600">
-          //     Spaces
-          //   </Text>
-          // ),
-          headerTitle: '',
+          headerTitle: () => (
+            <Text fontSize={20} fontWeight="600">
+              Spaces
+            </Text>
+          ),
 
           headerRight: () => (
-            <Link href="/modal" asChild>
-              <View px="$4">
+            <Link href="/notifications" asChild>
+              <View px="$2">
                 <AlertCircle size={22} />
               </View>
             </Link>
