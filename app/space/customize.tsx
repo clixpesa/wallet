@@ -1,9 +1,9 @@
 import { FormProvider, useForm } from 'react-hook-form'
-import { View, useTheme, H2, Theme, Text, Button, SizableText } from 'tamagui'
+import { View, useTheme, H2, Theme, SizableText } from 'tamagui'
 import { CircleCheck } from '@tamagui/lucide-icons'
 import { z } from 'zod'
 import { useMemo, useRef, useCallback } from 'react'
-import { StyleSheet, Text as Text2 } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { BottomSheetView, BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet'
 
 import Animated from 'react-native-reanimated'

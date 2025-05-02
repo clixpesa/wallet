@@ -38,7 +38,7 @@ export default function RootLayout() {
               name="notifications"
               options={{
                 headerTitle: () => (
-                  <Text fontSize={20} fontWeight="700">
+                  <Text fontSize={20} fontWeight="600">
                     Notifications
                   </Text>
                 ),

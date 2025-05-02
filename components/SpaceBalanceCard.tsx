@@ -19,7 +19,7 @@ export const SpaceBalanceCard = ({
     <Card bg="$color1" minW="100%" {...props}>
       <Card.Header>
         <H2 size="$1" fontWeight="700">
-          KES 5000
+          {value}
         </H2>
         <SizableText mt="$2" size="$3" theme="alt2">
           Total Balance
@@ -28,7 +28,7 @@ export const SpaceBalanceCard = ({
           {!!badgeText && (
             <Theme name="teal_alt1">
               <Button onPress={onPress} icon={PlusCircle} rounded="$12" scaleIcon={1.2}>
-                <Button.Text size="$3" fontFamily="$button">
+                <Button.Text size="$3" fontWeight="500">
                   {badgeText}
                 </Button.Text>
               </Button>
