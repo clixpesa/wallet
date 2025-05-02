@@ -10,11 +10,12 @@ export default function Layout() {
       <Stack.Screen
         name="index"
         options={{
-          headerTitle: () => (
-            <Text fontSize={20} fontWeight="600">
-              Spaces
-            </Text>
-          ),
+          // headerTitle: () => (
+          //   <Text fontSize={20} fontWeight="600">
+          //     Spaces
+          //   </Text>
+          // ),
+          headerTitle: '',
 
           headerRight: () => (
             <Link href="/modal" asChild>
