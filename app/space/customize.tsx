@@ -2,9 +2,9 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { View, useTheme, H2, Theme, Text, Button, SizableText } from 'tamagui'
 import { CircleCheck } from '@tamagui/lucide-icons'
 import { z } from 'zod'
-import { useMemo, useRef, useState, useCallback } from 'react'
+import { useMemo, useRef, useCallback } from 'react'
 import { StyleSheet, Text as Text2 } from 'react-native'
-import BottomSheet, { BottomSheetView, BottomSheetBackdrop } from '@gorhom/bottom-sheet'
+import { BottomSheetView, BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet'
 
 import Animated from 'react-native-reanimated'
 import { SubmitButton, Chip } from 'components'
@@ -19,24 +19,29 @@ const SpaceSchema = z.object({
 export default function Customize() {
   const theme = useTheme()
   const form = useForm<z.infer<typeof SpaceSchema>>()
-  const bottomSheetModalRef = useRef<BottomSheet>(null)
-  const [showBottomSheet, setShowBottomSheet] = useState(false)
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null)
   const snapPoints = useMemo(() => ['30%'], [])
 
   const activeFieldValue = form.watch('space')
   const isDisabled = !activeFieldValue?.toString()
 
+  // Custom backdrop component
+  const renderBackdrop = useCallback(
+    (props) => (
+      <BottomSheetBackdrop
+        {...props}
+        disappearsOnIndex={-1}
+        appearsOnIndex={0}
+        pressBehavior="close"
+        an
+      />
+    ),
+    []
+  )
   const handleSpaceCreation = ({ space }) => {
     // Show bottom sheet when form is submitted
-    setShowBottomSheet(true)
-    // bottomSheetRef.current?.expand()
-    console.log('space', space)
+    bottomSheetModalRef.current?.present()
   }
-
-  const handlePresentModalPress = useCallback(() => {
-    console.log('pressed')
-    bottomSheetModalRef.current?.expand()
-  }, [])
 
   const handleSheetChanges = useCallback((index: number) => {
     console.log('handleSheetChanges', index)
@@ -111,26 +116,25 @@ export default function Customize() {
         </SchemaForm>
       </FormProvider>
 
-      {showBottomSheet && (
-        <BottomSheet
-          ref={bottomSheetModalRef}
-          onChange={handleSheetChanges}
-          detached
-          bottomInset={46}
-          snapPoints={snapPoints}
-          style={styles.sheetContainer}
-          enableContentPanningGesture={false}
-          enableHandlePanningGesture={false}
-          backdropComponent={BottomSheetBackdrop}
-        >
-          <BottomSheetView style={styles.contentContainer}>
-            <CircleCheck size="$10" strokeWidth={0.5} color="$teal8" />
-            <SizableText fontWeight="600" text="center" lineHeight="$4">
-              Your `New Dog` space was successfully created
-            </SizableText>
-          </BottomSheetView>
-        </BottomSheet>
-      )}
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        onChange={handleSheetChanges}
+        index={0}
+        detached
+        bottomInset={46}
+        snapPoints={snapPoints}
+        style={styles.sheetContainer}
+        enableContentPanningGesture={false}
+        enableHandlePanningGesture={false}
+        backdropComponent={renderBackdrop}
+      >
+        <BottomSheetView style={styles.contentContainer}>
+          <CircleCheck size="$10" strokeWidth={0.5} color="$teal8" />
+          <SizableText fontWeight="600" text="center" lineHeight="$4">
+            Your `{activeFieldValue}` space was successfully created
+          </SizableText>
+        </BottomSheetView>
+      </BottomSheetModal>
     </View>
   )
 }
@@ -144,6 +148,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     gap: 20,
-    // padding: 8,
   },
 })

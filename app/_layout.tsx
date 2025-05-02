@@ -25,53 +25,55 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Provider>
-        <Stack>
-          <Stack.Screen
-            name="(tabs)"
-            options={{
-              headerShown: false,
-            }}
-          />
+        <BottomSheetModalProvider>
+          <Stack>
+            <Stack.Screen
+              name="(tabs)"
+              options={{
+                headerShown: false,
+              }}
+            />
 
-          <Stack.Screen
-            name="notifications"
-            options={{
-              headerTitle: () => (
-                <Text fontSize={20} fontWeight="700">
-                  Notifications
-                </Text>
-              ),
-              presentation: 'modal',
-              headerTitleAlign: 'center',
-              animation: 'slide_from_right',
-              gestureEnabled: true,
-              gestureDirection: 'horizontal',
-              headerShadowVisible: false,
-            }}
-          />
+            <Stack.Screen
+              name="notifications"
+              options={{
+                headerTitle: () => (
+                  <Text fontSize={20} fontWeight="700">
+                    Notifications
+                  </Text>
+                ),
+                presentation: 'modal',
+                headerTitleAlign: 'center',
+                animation: 'slide_from_right',
+                gestureEnabled: true,
+                gestureDirection: 'horizontal',
+                headerShadowVisible: false,
+              }}
+            />
 
-          <Stack.Screen
-            name="modal"
-            options={{
-              title: '',
-              presentation: 'modal',
-              headerTitleAlign: 'center',
-              animation: 'slide_from_right',
-              gestureEnabled: true,
-              gestureDirection: 'horizontal',
-              headerShadowVisible: false,
-            }}
-          />
+            <Stack.Screen
+              name="modal"
+              options={{
+                title: '',
+                presentation: 'modal',
+                headerTitleAlign: 'center',
+                animation: 'slide_from_right',
+                gestureEnabled: true,
+                gestureDirection: 'horizontal',
+                headerShadowVisible: false,
+              }}
+            />
 
-          <Stack.Screen
-            name="space/customize"
-            options={{
-              title: '',
-              headerTransparent: true,
-            }}
-          />
-        </Stack>
-        <OfflineBanner />
+            <Stack.Screen
+              name="space/customize"
+              options={{
+                title: '',
+                headerTransparent: true,
+              }}
+            />
+          </Stack>
+          <OfflineBanner />
+        </BottomSheetModalProvider>
       </Provider>
     </GestureHandlerRootView>
   )
