@@ -53,8 +53,8 @@ export default function Customize() {
       <Animated.View
         style={[
           {
-            height: 250,
-            paddingTop: 50,
+            height: 300,
+            paddingTop: 60,
             paddingHorizontal: 16,
             marginBottom: 16,
             overflow: 'hidden',

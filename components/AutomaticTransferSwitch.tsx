@@ -24,7 +24,7 @@ export function AutomaticTransferSwitch() {
         </YStack>
 
         <View flexDirection="column">
-          <Label size="$1.5" htmlFor={uniqueId + 'switch'} fontWeight="bold">
+          <Label size="$1.5" htmlFor={uniqueId + 'switch'} fontWeight="600">
             Spare Change
           </Label>
           <Text theme="alt1">~Ksh 300 / month</Text>
@@ -55,10 +55,10 @@ export function AutomaticTransferSwitch() {
         </YStack>
 
         <View flexDirection="column">
-          <Label size="$1.5" htmlFor={uniqueId2 + 'switch'} fontWeight="bold">
+          <Label size="$1.5" htmlFor={uniqueId2 + 'switch'} fontWeight="600">
             Recurring transfer
           </Label>
-          <Text theme="alt1">Ksh 300 / month</Text>
+          <Text theme="alt1">~Ksh 300 / month</Text>
         </View>
         <Switch
           id={uniqueId2 + 'switch'}

@@ -1,5 +1,5 @@
-import { YStack, View, SizableText, H2 } from 'tamagui'
-import { useRouter } from 'expo-router'
+import { YStack, View, SizableText } from 'tamagui'
+import { Link, useRouter } from 'expo-router'
 
 import { SpaceBalanceCard, Spaces as SpacesList } from 'components'
 
@@ -42,12 +42,22 @@ export default function Spaces() {
           <SpacesList.Items>
             <SpacesList.Group>
               {spaces.map((space) => (
-                <SpacesList.Item
+                <Link
+                  href={{
+                    pathname: '/space/[spaceId]',
+                    params: { spaceId: space.id, name: space.name, amount: space.amount },
+                  }}
+                  push
+                  asChild
                   key={space.id}
-                  rightLabel={`Kshs ${space.amount.toLocaleString()}`}
                 >
-                  {space.name}
-                </SpacesList.Item>
+                  <SpacesList.Item
+                    key={space.id}
+                    rightLabel={`Kshs ${space.amount.toLocaleString()}`}
+                  >
+                    {space.name}
+                  </SpacesList.Item>
+                </Link>
               ))}
             </SpacesList.Group>
           </SpacesList.Items>
