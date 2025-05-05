@@ -1,6 +1,6 @@
 import { Link, useLocalSearchParams, useNavigation } from 'expo-router'
 import { View, useTheme, Text } from 'tamagui'
-import { Platform, StyleSheet, useColorScheme } from 'react-native'
+import { Platform, useColorScheme } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Animated, {
   useSharedValue,

@@ -16,7 +16,7 @@ export const SpaceBalanceCard = ({
   ...props
 }: SpaceBalanceCardTypes) => {
   return (
-    <Card bg="$color1" minW="100%" {...props}>
+    <Card bg="$color1" minW="100%" {...props} rounded="$8">
       <Card.Header>
         <H2 size="$1" fontWeight="700">
           {value}
