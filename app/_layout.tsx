@@ -79,6 +79,13 @@ export default function RootLayout() {
                 headerTransparent: true,
               }}
             />
+            <Stack.Screen
+              name="space/settings"
+              options={{
+                title: '',
+                headerTransparent: true,
+              }}
+            />
           </Stack>
           <OfflineBanner />
         </BottomSheetModalProvider>

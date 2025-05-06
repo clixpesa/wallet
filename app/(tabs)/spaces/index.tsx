@@ -38,7 +38,7 @@ export default function Spaces() {
         </View>
       ) : (
         <SpacesList mt="$4">
-          <SpacesList.Title>Spaces</SpacesList.Title>
+          <SpacesList.Title>Your Spaces</SpacesList.Title>
           <SpacesList.Items>
             <SpacesList.Group>
               {spaces.map((space) => (
