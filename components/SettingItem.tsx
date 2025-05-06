@@ -36,9 +36,7 @@ export const SettingItem = ({
         <YStack theme={accentTheme}>
           <Icon opacity={0.8} size={24} />
         </YStack>
-        <SizableText size="$4" flex={1}>
-          {children}
-        </SizableText>
+        <SizableText flex={1}>{children}</SizableText>
         {!!rightLabel && (
           <XStack rounded="$10" bg="$backgroundPress" px="$3" py="$1.5">
             <SizableText size="$1" textTransform="capitalize">
