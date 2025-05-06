@@ -1,7 +1,5 @@
-import { Settings, Plus, Minus, Cog, Goal } from '@tamagui/lucide-icons'
-import { useHeaderHeight } from '@react-navigation/elements'
 import { View, useTheme, H2, SizableText, styled, Button, XStack, YStack } from 'tamagui'
-import { Link, useLocalSearchParams } from 'expo-router'
+import { useLocalSearchParams } from 'expo-router'
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
@@ -14,12 +12,12 @@ import Animated, {
   type SharedValue,
 } from 'react-native-reanimated'
 
-import { ActionBanner } from 'components'
-import { AutomaticTransferSwitch } from 'components/AutomaticTransferSwitch'
+import { SpaceSettings } from 'components'
+import { PencilLine, Plus, Pencil } from '@tamagui/lucide-icons'
 
 const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView)
 
-export default function SpaceDetail() {
+export default function spaceSettings() {
   const theme = useTheme()
   const params = useLocalSearchParams()
   const insets = useSafeAreaInsets()
@@ -78,69 +76,27 @@ export default function SpaceDetail() {
             },
             headerStyle,
           ]}
-        >
-          <YStack gap="$4" mt="$8">
-            <SizableText fontWeight="500">{params.name}</SizableText>
-            <H2 fontFamily="$heading" size="$2">
-              {`Kshs ${params.amount.toLocaleString()}`}
-            </H2>
+        ></Animated.View>
 
-            <XStack gap="$2">
-              <CustomButton>
-                <Button.Icon>
-                  <Plus size={24} />
-                </Button.Icon>
-                Add cash
-              </CustomButton>
+        <YStack mx="$4" gap="$8"></YStack>
 
-              <CustomButton>
-                <Button.Icon>
-                  <Minus size={24} />
-                </Button.Icon>
-                Withdraw
-              </CustomButton>
-
-              <Link href="/space/settings" asChild push>
-                <CustomButton>
-                  <Button.Icon>
-                    <Settings size={24} />
-                  </Button.Icon>
-                  Settings
-                </CustomButton>
-              </Link>
-            </XStack>
-          </YStack>
-        </Animated.View>
-
-        <YStack mx="$4" gap="$8">
-          <ActionBanner icon={Goal} title="It's easier with a goal" />
-          <AutomaticTransferSwitch />
-        </YStack>
+        <SpaceSettings my="$4">
+          <SpaceSettings.Items>
+            <SpaceSettings.Title>Your space</SpaceSettings.Title>
+            <SpaceSettings.Group>
+              <SpaceSettings.Item icon={PencilLine} rightLabel="New Dog">
+                Name
+              </SpaceSettings.Item>
+              <SpaceSettings.Item icon={Plus} rightLabel="Add goal">
+                Add goal
+              </SpaceSettings.Item>
+              <SpaceSettings.Item icon={Plus} rightLabel="Add deadline">
+                Deadline
+              </SpaceSettings.Item>
+            </SpaceSettings.Group>
+          </SpaceSettings.Items>
+        </SpaceSettings>
       </AnimatedScrollView>
-
-      {/* {Platform.OS === 'android' ? (
-        <HeaderBackgroundAndroid scrollTranslationY={translationY} />
-      ) : (
-        <HeaderBackgroundIOS scrollTranslationY={translationY} />
-      )} */}
     </View>
   )
 }
-
-const CustomButton = styled(Button, {
-  flexDirection: 'column',
-  items: 'flex-start',
-  justify: 'center',
-  width: 100,
-  height: 80,
-  px: '$3',
-  rounded: '$6',
-  bg: '$teal2',
-  fontWeight: 600,
-  color: '$teal10',
-  theme: 'teal',
-
-  pressStyle: {
-    bg: '$backgroundPress',
-  },
-})

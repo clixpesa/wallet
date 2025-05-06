@@ -1,6 +1,6 @@
 import { Coins, CalendarClock } from '@tamagui/lucide-icons'
 import { useId, useState } from 'react'
-import { Button, Label, Switch, Text, View, YStack, YGroup, Circle } from 'tamagui'
+import { Button, Label, Switch, Text, View, YStack, YGroup } from 'tamagui'
 
 export function AutomaticTransferSwitch() {
   const uniqueId = useId()
@@ -9,14 +9,14 @@ export function AutomaticTransferSwitch() {
   const [checked2, setChecked2] = useState(false)
 
   return (
-    <YGroup rounded="$6">
+    <YGroup rounded="$8">
       <Button
         flexDirection="row"
         maxW="100%"
         py="$3"
         gap="$1.5"
         height="auto"
-        bg="$color1"
+        bg="$accent12"
         onPress={() => setChecked(!checked)}
       >
         <YStack theme="teal" bg="$teal2" p="$2.5" rounded="$10">
@@ -46,8 +46,8 @@ export function AutomaticTransferSwitch() {
         py="$3"
         height="auto"
         items="center"
-        bg="$color1"
         gap="$1.5"
+        bg="$accent12"
         onPress={() => setChecked2(!checked2)}
       >
         <YStack theme="teal" bg="$teal2" p="$2.5" rounded="$10">

@@ -10,12 +10,12 @@ export const Banner = ({
   colors?: ColorTokens[]
 } & CardProps) => {
   return (
-    <Card {...props} rounded="$6" bordered>
+    <Card {...props} rounded="$8" bordered>
       <Card.Header animation="bouncy" gap="$2">
         {children}
       </Card.Header>
       <Card.Background>
-        <Card.Background rounded="$6">
+        <Card.Background rounded="$8">
           <LinearGradient
             scale={4}
             x={50}
