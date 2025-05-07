@@ -1,15 +1,20 @@
-import ChangePasswordScreen from 'features/settings/change-password-screen'
+import AddGoalScreen from 'features/spaces/add-goal-screen'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { useTheme, Text } from 'tamagui'
 import { Stack } from 'expo-router'
-import { useTheme } from 'tamagui'
 
 export default function Screen() {
   const theme = useTheme()
+
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right']}>
       <Stack.Screen
         options={{
-          title: 'Change Password',
+          headerTitle: () => (
+            <Text fontSize={20} fontWeight="600">
+              Goal
+            </Text>
+          ),
           headerShadowVisible: false,
           headerTitleAlign: 'center',
           animation: 'slide_from_right',
@@ -18,7 +23,7 @@ export default function Screen() {
           },
         }}
       />
-      <ChangePasswordScreen />
+      <AddGoalScreen />
     </SafeAreaView>
   )
 }
