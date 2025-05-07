@@ -93,12 +93,14 @@ export default function SpaceDetail() {
                 Add cash
               </CustomButton>
 
-              <CustomButton>
-                <Button.Icon>
-                  <Minus size={24} />
-                </Button.Icon>
-                Withdraw
-              </CustomButton>
+              <Link href="/space/add-goal" asChild push>
+                <CustomButton>
+                  <Button.Icon>
+                    <Minus size={24} />
+                  </Button.Icon>
+                  Withdraw
+                </CustomButton>
+              </Link>
 
               <Link href="/space/settings" asChild push>
                 <CustomButton>

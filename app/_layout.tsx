@@ -65,14 +65,6 @@ export default function RootLayout() {
             />
 
             <Stack.Screen
-              name="space/customize"
-              options={{
-                title: '',
-                headerTransparent: true,
-              }}
-            />
-
-            <Stack.Screen
               name="space/[spaceId]"
               options={{
                 title: '',
