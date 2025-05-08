@@ -1,5 +1,5 @@
 import type { IconProps } from '@tamagui/helpers-icon'
-import { SizableText, XStack, YGroup, YStack, type YStackProps, styled, View, Theme } from 'tamagui'
+import { SizableText, XStack, YGroup, YStack, type YStackProps, styled, Theme } from 'tamagui'
 
 export type SpaceSettingItemProps = YStackProps & {
   icon: React.FC<IconProps>
@@ -19,7 +19,7 @@ export const SpaceSettingItem = ({
   return (
     <YGroup.Item>
       <SpaceSettingItemFrame isActive={!!isActive} {...props}>
-        <SizableText flex={1} fontWeight="500">
+        <SizableText flex={1} fontWeight="500" theme="alt2">
           {children}
         </SizableText>
         {!!rightLabel && (
@@ -38,9 +38,8 @@ export const SpaceSettingItem = ({
 const SpaceSettingItemFrame = styled(XStack, {
   bg: '$accent12',
   items: 'center',
-  justify: 'center',
   p: '$3',
-  gap: '$6',
+  gap: '$4',
 
   variants: {
     isActive: {

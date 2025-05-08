@@ -16,6 +16,7 @@ export default function Screen() {
               Edit Profile
             </Text>
           ),
+
           headerTitleAlign: 'center',
           gestureEnabled: true,
           gestureDirection: 'horizontal',

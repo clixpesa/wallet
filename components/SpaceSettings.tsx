@@ -1,12 +1,4 @@
-import {
-  XStack,
-  YGroup,
-  YStack,
-  withStaticProperties,
-  styled,
-  SizableText,
-  Separator,
-} from 'tamagui'
+import { YGroup, YStack, withStaticProperties, styled, SizableText } from 'tamagui'
 
 import { SpaceSettingItem } from './SpaceSettingItem'
 
@@ -36,8 +28,7 @@ const SpaceSettingsTitle = styled(SizableText, {
     mx: '$6',
   },
   fontWeight: '600',
-  mx: '$2',
-  theme: 'alt2',
+  mx: '$-1',
 })
 
 export const SpaceSettings = withStaticProperties(SpaceSettingsFrame, {
