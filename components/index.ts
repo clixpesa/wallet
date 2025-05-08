@@ -1,5 +1,6 @@
 export * from './AchievementCard'
 export * from './ActionBanner'
+export * from './Actions'
 export * from './CAvatar'
 export * from './CustomToast'
 export * from './Chip'

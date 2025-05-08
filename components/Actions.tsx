@@ -1,14 +1,13 @@
 import { XStack, YGroup, YStack, withStaticProperties, styled, SizableText } from 'tamagui'
 
-import { SettingItem } from './SettingItem'
+import { ActionItem } from './ActionItem'
 
-const SettingsFrame = styled(YStack, {
+const ActionsFrame = styled(YStack, {
   borderColor: '$color4',
-  gap: '$5',
   flex: 1,
 })
 
-const SettingsItems = styled(YStack, {
+const ActionsItems = styled(YStack, {
   gap: '$4',
   mx: '$4',
 
@@ -19,8 +18,9 @@ const SettingsItems = styled(YStack, {
   },
 })
 
-const SettingsGroup = styled(YGroup, {
+const ActionsGroup = styled(YGroup, {
   bg: 'transparent',
+  // rounded: '$6',
 
   '$platform-native': {
     separator: (
@@ -32,18 +32,17 @@ const SettingsGroup = styled(YGroup, {
   },
 })
 
-const SettingsTitle = styled(SizableText, {
+const ActionsTitle = styled(SizableText, {
   '$platform-web': {
     mx: '$6',
   },
   fontWeight: '600',
-  mx: '$2',
-  theme: 'alt2',
+  mx: '$-1',
 })
 
-export const Settings = withStaticProperties(SettingsFrame, {
-  Item: SettingItem,
-  Items: SettingsItems,
-  Group: SettingsGroup,
-  Title: SettingsTitle,
+export const Actions = withStaticProperties(ActionsFrame, {
+  Item: ActionItem,
+  Items: ActionsItems,
+  Group: ActionsGroup,
+  Title: ActionsTitle,
 })

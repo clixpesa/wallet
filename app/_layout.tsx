@@ -63,21 +63,6 @@ export default function RootLayout() {
                 headerShadowVisible: false,
               }}
             />
-
-            <Stack.Screen
-              name="space/[spaceId]"
-              options={{
-                title: '',
-                headerTransparent: true,
-              }}
-            />
-            <Stack.Screen
-              name="space/settings"
-              options={{
-                title: '',
-                headerTransparent: true,
-              }}
-            />
           </Stack>
           <OfflineBanner />
         </BottomSheetModalProvider>
