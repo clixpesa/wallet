@@ -15,7 +15,7 @@ import Animated, {
 
 import { Actions, SpaceSettings } from 'components'
 import { PencilLine, Plus, UsersRound } from '@tamagui/lucide-icons'
-import { useHeaderHeight } from '@react-navigation/elements'
+// import { useHeaderHeight } from '@react-navigation/elements'
 
 const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView)
 
