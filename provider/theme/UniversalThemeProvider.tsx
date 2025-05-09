@@ -59,7 +59,7 @@ const InnerProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <ThemeProvider value={resolvedTheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <StatusBar style={resolvedTheme === 'dark' ? 'light' : 'dark'} />
+      <StatusBar style={resolvedTheme === 'dark' ? 'light' : 'dark'} hidden />
       {children}
     </ThemeProvider>
   )
@@ -73,7 +73,7 @@ export const useThemeSetting: typeof next_useThemeSetting = () => {
   }
 
   const resolvedTheme =
-    context.current === 'system' ? context.systemTheme : context.current ?? 'system'
+    context.current === 'system' ? context.systemTheme : (context.current ?? 'system')
 
   const outputContext: ReturnType<typeof next_useThemeSetting> = {
     ...context,

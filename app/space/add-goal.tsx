@@ -1,4 +1,4 @@
-import { EditProfileScreen } from 'features/profile/edit-screen'
+import { AddGoalScreen } from 'features/spaces/add-goal-screen'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Stack } from 'expo-router'
 import { useTheme, Text } from 'tamagui'
@@ -13,7 +13,7 @@ export default function Screen() {
         options={{
           headerTitle: () => (
             <Text fontSize={20} fontWeight="600">
-              Edit Profile
+              Goal
             </Text>
           ),
 
@@ -26,7 +26,7 @@ export default function Screen() {
           },
         }}
       />
-      <EditProfileScreen />
+      <AddGoalScreen />
     </SafeAreaView>
   )
 }
