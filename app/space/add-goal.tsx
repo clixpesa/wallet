@@ -16,7 +16,6 @@ export default function Screen() {
               Goal
             </Text>
           ),
-
           headerTitleAlign: 'center',
           gestureEnabled: true,
           gestureDirection: 'horizontal',
