@@ -7,9 +7,9 @@ import { z } from 'zod'
 import { UploadAvatar } from 'features/settings/components/upload-avatar'
 import { FullscreenSpinner, SubmitButton, CAvatar } from 'components'
 import { SchemaForm, formFields } from 'utils/SchemaForm'
-
 import type { User } from 'provider/auth/firebase'
 import { useAuth } from 'provider/auth'
+import { FormProvider, useForm } from 'react-hook-form'
 
 export const EditProfileScreen = () => {
   const { user } = useAuth()
@@ -34,6 +34,7 @@ const EditProfileForm = ({
   const router = useRouter()
   const toast = useToastController()
   const params = useLocalSearchParams<{ edit_name?: '1' }>()
+  const form = useForm<z.infer<typeof ProfileSchema>>()
 
   const handleSubmit = async (data: z.infer<typeof ProfileSchema>) => {
     try {
@@ -49,36 +50,38 @@ const EditProfileForm = ({
   }
 
   return (
-    <SchemaForm
-      schema={ProfileSchema}
-      props={{
-        name: {
-          autoFocus: !!params?.edit_name,
-        },
-      }}
-      defaultValues={{
-        name: initial.name ?? '',
-      }}
-      onSubmit={handleSubmit}
-      renderAfter={({ submit }) => (
-        <SubmitButton rounded="$10" theme="teal" onPress={() => submit()} themeInverse>
-          Save
-        </SubmitButton>
-      )}
-    >
-      {(fields) => (
-        <>
-          <YStack mb="$4" items="center">
-            <View>
-              <UploadAvatar>
-                <UserAvatar />
-              </UploadAvatar>
-            </View>
-          </YStack>
-          {Object.values(fields)}
-        </>
-      )}
-    </SchemaForm>
+    <FormProvider {...form}>
+      <SchemaForm
+        schema={ProfileSchema}
+        props={{
+          name: {
+            autoFocus: !!params?.edit_name,
+          },
+        }}
+        defaultValues={{
+          name: initial.name ?? '',
+        }}
+        onSubmit={handleSubmit}
+        renderAfter={({ submit }) => (
+          <SubmitButton rounded="$10" theme="teal" onPress={() => submit()} themeInverse>
+            Save
+          </SubmitButton>
+        )}
+      >
+        {(fields) => (
+          <>
+            <YStack mb="$4" items="center">
+              <View>
+                <UploadAvatar>
+                  <UserAvatar />
+                </UploadAvatar>
+              </View>
+            </YStack>
+            {Object.values(fields)}
+          </>
+        )}
+      </SchemaForm>
+    </FormProvider>
   )
 }
 
@@ -97,11 +100,7 @@ const UserAvatar = () => {
           width={getTokens().size['8'].val}
           height={getTokens().size['8'].val}
         />
-        <CAvatar.Fallback
-          backgroundColor="$background"
-          items="center"
-          justifyContent="center"
-        >
+        <CAvatar.Fallback backgroundColor="$background" items="center" justifyContent="center">
           <UserRound size={38} />
         </CAvatar.Fallback>
       </CAvatar.Content>

@@ -22,7 +22,7 @@ export const SubmitButton = (props: ButtonProps) => {
       disabledStyle={{
         opacity: 0.6,
       }}
-      size="$5"
+      size="$4"
       iconAfter={
         <AnimatePresence>
           {isSubmitting && (

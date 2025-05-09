@@ -69,7 +69,7 @@ export default function SpaceSettingsScreen() {
         <Animated.View
           style={[
             {
-              height: 300,
+              height: 250,
               paddingTop: 50,
               paddingHorizontal: 16,
               marginBottom: 16,
@@ -89,7 +89,7 @@ export default function SpaceSettingsScreen() {
               <SpaceSettings.Item
                 icon={Plus}
                 rightLabel="Add goal"
-                onPress={() => router.push('/profile/edit')}
+                onPress={() => router.push('/space/add-goal')}
               >
                 Add goal
               </SpaceSettings.Item>
@@ -120,6 +120,7 @@ export default function SpaceSettingsScreen() {
           </Actions.Items>
         </Actions>
       </AnimatedScrollView>
+
       {Platform.OS === 'android' ? (
         <HeaderBackgroundAndroid scrollTranslationY={translationY} />
       ) : (
