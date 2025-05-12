@@ -11,8 +11,7 @@ export const NumberField = (props: Pick<InputProps, 'size' | 'autoFocus'>) => {
     error,
     formState: { isSubmitting },
   } = useTsController<number>()
-  const { label, defaultValue, isOptional, placeholder, minValue, maxValue } =
-    useNumberFieldInfo()
+  const { label, defaultValue, isOptional, placeholder, minValue, maxValue } = useNumberFieldInfo()
   const id = useId()
   const disabled = isSubmitting
 
@@ -26,10 +25,15 @@ export const NumberField = (props: Pick<InputProps, 'size' | 'autoFocus'>) => {
         )}
         <Shake shakeKey={error?.errorMessage}>
           <Input
+            inputMode="numeric"
+            keyboardType="number-pad"
+            text="center"
+            fontSize={44}
+            fontWeight="700"
+            height="90%"
+            borderWidth={0}
             disabled={disabled}
             placeholderTextColor="$color10"
-            size="$5"
-            inputMode="numeric"
             value={field.value?.toString() || '0'}
             onChangeText={(text) => {
               const num = Number(text)
