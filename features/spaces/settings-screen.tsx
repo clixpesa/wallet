@@ -1,5 +1,5 @@
 import { View, useTheme } from 'tamagui'
-import { router, useLocalSearchParams } from 'expo-router'
+import { Link, useLocalSearchParams } from 'expo-router'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Platform } from 'react-native'
@@ -83,20 +83,21 @@ export default function SpaceSettingsScreen() {
           <SpaceSettings.Items>
             <SpaceSettings.Title>Your Space</SpaceSettings.Title>
             <SpaceSettings.Group>
-              <SpaceSettings.Item icon={PencilLine} rightLabel="New Dog">
-                Name
-              </SpaceSettings.Item>
-              <SpaceSettings.Item
-                icon={Plus}
-                rightLabel="Add goal"
-                onPress={() => router.push('/space/add-goal')}
-              >
-                Add goal
-              </SpaceSettings.Item>
-
-              <SpaceSettings.Item icon={Plus} rightLabel="Add deadline">
-                Deadline
-              </SpaceSettings.Item>
+              <Link href="/space/edit-space" asChild push>
+                <SpaceSettings.Item icon={PencilLine} rightLabel="New Dog">
+                  Name
+                </SpaceSettings.Item>
+              </Link>
+              <Link href="/space/add-goal" asChild push>
+                <SpaceSettings.Item icon={Plus} rightLabel="Add goal">
+                  Add goal
+                </SpaceSettings.Item>
+              </Link>
+              <Link href="/space/add-goal" asChild push>
+                <SpaceSettings.Item icon={Plus} rightLabel="Add deadline">
+                  Deadline
+                </SpaceSettings.Item>
+              </Link>
             </SpaceSettings.Group>
           </SpaceSettings.Items>
         </SpaceSettings>
