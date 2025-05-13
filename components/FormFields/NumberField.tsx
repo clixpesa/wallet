@@ -30,7 +30,7 @@ export const NumberField = (props: Pick<InputProps, 'size' | 'autoFocus'>) => {
             text="center"
             fontSize={44}
             fontWeight="700"
-            height="90%"
+            height="100%"
             borderWidth={0}
             disabled={disabled}
             placeholderTextColor="$color10"
