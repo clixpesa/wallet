@@ -1,21 +1,11 @@
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker'
 import { SchemaForm, formFields } from 'utils/SchemaForm'
-import {
-  // type Control,
-  // type UseFormRegister,
-  // type UseFormSetValue,
-  FormProvider,
-  Controller,
-  useForm,
-} from 'react-hook-form'
-import { SubmitButton, CAvatar } from 'components'
-import { Button, SizableText, XStack, YStack, Input } from 'tamagui'
-import type { Control, UseFormRegister, UseFormSetValue } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
+import { SubmitButton } from 'components'
+import { Button, SizableText, XStack, YStack } from 'tamagui'
 import { Calendar } from '@tamagui/lucide-icons'
 import { useState } from 'react'
 import { z } from 'zod'
-
-import type { SizeTokens } from 'tamagui'
 
 const GoalSchema = z.object({
   amount: formFields.number,
@@ -83,7 +73,7 @@ export const AddGoalScreen = () => {
         {(fields) => (
           <YStack mt="30%">
             {Object.values(fields)}
-            <SizableText size="$4" theme="alt2" text="center" fontWeight="400">
+            <SizableText size="$4" theme="alt2" text="center">
               {date ? `Deadline ${formatDate(date)}` : 'No Deadline'}
             </SizableText>
           </YStack>

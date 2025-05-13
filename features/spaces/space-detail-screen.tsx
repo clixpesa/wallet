@@ -84,7 +84,7 @@ export default function SpaceDetailScreen() {
             </H2>
 
             <XStack gap="$2">
-              <Link href="/profile/edit" asChild push>
+              <Link href="/space/add-money" asChild push>
                 <CustomButton>
                   <Button.Icon>
                     <Plus size={24} />
