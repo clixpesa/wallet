@@ -9,3 +9,7 @@ Then tap the notification that appears.
 ![image](https://github.com/user-attachments/assets/5b24dd91-8306-4b89-b6d6-84e7d07ec5c3)
 
 Install and make money moves. 
+
+OR
+
+[Downloan the App](https://expo.dev/artifacts/eas/dhgXjAL3o5hfavTC76344c.apk)
