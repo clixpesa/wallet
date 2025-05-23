@@ -12,4 +12,4 @@ Install and make money moves.
 
 OR
 
-[Downloan the App](https://expo.dev/artifacts/eas/dhgXjAL3o5hfavTC76344c.apk)
+[Download the App](https://expo.dev/artifacts/eas/dhgXjAL3o5hfavTC76344c.apk)
